@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-11-19T13:10:58.547836+00:00",
+  "verdict": "PASS_FOR_FINAL_REVIEW",
+  "unique_test_cases_with_pass_evidence": 39,
+  "execution_note": "38 passed/1 skipped in ordinary suite; skipped case separately passed with temporary administrator approval. Not a single 39-pass suite execution.",
+  "ordinary_suite": "tests.json",
+  "file_symlink_test": "symlink-elevated.json",
+  "original_counterexamples": "edge-results.json",
+  "fresh_npm_wrappers": "shim-generation.json",
+  "project_manifest_items_matched": 68,
+  "project_manifest_sha256": "ca4015a217659be7f84b8967308b260f1a841c791dd5920693b43a175a298ef3",
+  "source_modified_by_reviewer": false,
+  "published_by_reviewer": false,
+  "remaining_scope_limits": [
+    "Real Claude distribution",
+    "Real WSL distributions",
+    "Other Windows/Python/architecture combinations",
+    "Physical disconnection",
+    "Wheel installation",
+    "Hard links and concurrent malicious replacement"
+  ]
+}

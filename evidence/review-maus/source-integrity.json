@@ -1,0 +1,7 @@
+{
+  "original_manifest_items_matched": 68,
+  "original_manifest_sha256": "ca4015a217659be7f84b8967308b260f1a841c791dd5920693b43a175a298ef3",
+  "original_development_snapshot_unchanged": true,
+  "python_and_fixture_files_byte_identical": 26,
+  "public_changes": "Documentation and review evidence only; runtime/test source unchanged"
+}

@@ -1,0 +1,247 @@
+{
+  "schema_version": "1.0",
+  "doctor_version": "0.1.0",
+  "generated_at": "2026-11-19T13:15:03+00:00",
+  "language": "en",
+  "summary": {
+    "pass": 7,
+    "warn": 1,
+    "error": 0,
+    "unknown": 3,
+    "skipped": 5
+  },
+  "privacy": {
+    "paths": "opaque_references",
+    "raw_output": false,
+    "config_values": false,
+    "credentials_read": false
+  },
+  "findings": [
+    {
+      "id": "system.platform",
+      "target": "system",
+      "status": "pass",
+      "summary": "Current OS; only the current process environment is inspected.",
+      "evidence": {
+        "os": "Windows",
+        "python": "3.12.10",
+        "windows_target": true
+      },
+      "recommendation": "Verify the effective environment in official documentation and the tool's own status view.",
+      "recheck": "Verify the effective environment in official documentation and the tool's own status view."
+    },
+    {
+      "id": "codex.path",
+      "target": "codex",
+      "status": "pass",
+      "summary": "Entries are ordered by PATH; wrappers for one installation share a group.",
+      "evidence": {
+        "entries": [
+          {
+            "path": "<PATH:1>",
+            "command_name": "codex.cmd",
+            "installation_group": 1,
+            "kind": "npm-js",
+            "path_access": "checked",
+            "existence_verified": true
+          },
+          {
+            "path": "<PATH:2>",
+            "command_name": "codex.ps1",
+            "installation_group": 1,
+            "kind": "npm-js",
+            "path_access": "checked",
+            "existence_verified": true
+          },
+          {
+            "path": "<PATH:3>",
+            "command_name": "codex",
+            "installation_group": 1,
+            "kind": "npm-js",
+            "path_access": "checked",
+            "existence_verified": true
+          }
+        ],
+        "installation_groups": 1,
+        "cmd_path_candidate": "<PATH:1>",
+        "powershell_path_candidate": "<PATH:2>",
+        "resolution_model": "PATH+PATHEXT; excludes CWD, aliases and functions",
+        "scan_limited": false
+      },
+      "recommendation": "In the original terminal inspect Get-Command codex,claude -All and where.exe codex / where.exe claude; report path references contain no original paths.",
+      "recheck": "In the original terminal inspect Get-Command codex,claude -All and where.exe codex / where.exe claude; report path references contain no original paths."
+    },
+    {
+      "id": "codex.install",
+      "target": "codex",
+      "status": "pass",
+      "summary": "Installation type is inferred from local layout; unknown entries are not executed.",
+      "evidence": {
+        "kind": "npm-js",
+        "publisher_verified": false
+      },
+      "recommendation": "In the original terminal inspect Get-Command codex,claude -All and where.exe codex / where.exe claude; report path references contain no original paths.",
+      "recheck": "In the original terminal inspect Get-Command codex,claude -All and where.exe codex / where.exe claude; report path references contain no original paths."
+    },
+    {
+      "id": "codex.dependency",
+      "target": "codex",
+      "status": "unknown",
+      "summary": "Runtime checks depend on the identified entry; native programs do not universally require Node.js.",
+      "evidence": {
+        "runtime": "node",
+        "node_found": true,
+        "node_path_check": "found",
+        "documented_package_engine": ">=16",
+        "reason": "version_probe_disabled"
+      },
+      "recommendation": "First verify the preferred entry is trusted, then manually query --version; do not auto-upgrade based on this check.",
+      "recheck": "First verify the preferred entry is trusted, then manually query --version; do not auto-upgrade based on this check."
+    },
+    {
+      "id": "codex.version",
+      "target": "codex",
+      "status": "skipped",
+      "summary": "Only a complete matching version response is accepted; raw output is discarded.",
+      "evidence": {
+        "reason": "disabled"
+      },
+      "recommendation": "First verify the preferred entry is trusted, then manually query --version; do not auto-upgrade based on this check.",
+      "recheck": "First verify the preferred entry is trusted, then manually query --version; do not auto-upgrade based on this check."
+    },
+    {
+      "id": "codex.config.user",
+      "target": "codex",
+      "status": "pass",
+      "summary": "Syntax only for the named configuration file; login, model service, keys and effective values are not validated.",
+      "evidence": {
+        "layer": "user",
+        "location_source": "default_home",
+        "path": "<PATH:4>",
+        "format": "TOML",
+        "syntax": "valid"
+      },
+      "recommendation": "Review syntax at the corresponding configuration layer in a local editor; do not upload the full file containing secrets.",
+      "recheck": "Review syntax at the corresponding configuration layer in a local editor; do not upload the full file containing secrets."
+    },
+    {
+      "id": "claude.path",
+      "target": "claude",
+      "status": "warn",
+      "summary": "No callable entry in the current PATH; this does not prove the tool is absent from the machine.",
+      "evidence": {
+        "entries": [],
+        "installation_groups": 0,
+        "cmd_path_candidate": null,
+        "powershell_path_candidate": null,
+        "resolution_model": "PATH+PATHEXT; excludes CWD, aliases and functions",
+        "scan_limited": false
+      },
+      "recommendation": "In the original terminal inspect Get-Command codex,claude -All and where.exe codex / where.exe claude; report path references contain no original paths.",
+      "recheck": "In the original terminal inspect Get-Command codex,claude -All and where.exe codex / where.exe claude; report path references contain no original paths."
+    },
+    {
+      "id": "claude.install",
+      "target": "claude",
+      "status": "unknown",
+      "summary": "Installation type is inferred from local layout; unknown entries are not executed.",
+      "evidence": {
+        "kind": "not_found",
+        "publisher_verified": false
+      },
+      "recommendation": "In the original terminal inspect Get-Command codex,claude -All and where.exe codex / where.exe claude; report path references contain no original paths.",
+      "recheck": "In the original terminal inspect Get-Command codex,claude -All and where.exe codex / where.exe claude; report path references contain no original paths."
+    },
+    {
+      "id": "claude.dependency",
+      "target": "claude",
+      "status": "unknown",
+      "summary": "Runtime checks depend on the identified entry; native programs do not universally require Node.js.",
+      "evidence": {
+        "runtime": "unknown"
+      },
+      "recommendation": "First verify the preferred entry is trusted, then manually query --version; do not auto-upgrade based on this check.",
+      "recheck": "First verify the preferred entry is trusted, then manually query --version; do not auto-upgrade based on this check."
+    },
+    {
+      "id": "claude.version",
+      "target": "claude",
+      "status": "skipped",
+      "summary": "Only a complete matching version response is accepted; raw output is discarded.",
+      "evidence": {
+        "reason": "disabled"
+      },
+      "recommendation": "First verify the preferred entry is trusted, then manually query --version; do not auto-upgrade based on this check.",
+      "recheck": "First verify the preferred entry is trusted, then manually query --version; do not auto-upgrade based on this check."
+    },
+    {
+      "id": "claude.config.user",
+      "target": "claude",
+      "status": "pass",
+      "summary": "Syntax only for the named configuration file; login, model service, keys and effective values are not validated.",
+      "evidence": {
+        "layer": "user",
+        "location_source": "default_home",
+        "path": "<PATH:5>",
+        "format": "JSON",
+        "syntax": "valid"
+      },
+      "recommendation": "Review syntax at the corresponding configuration layer in a local editor; do not upload the full file containing secrets.",
+      "recheck": "Review syntax at the corresponding configuration layer in a local editor; do not upload the full file containing secrets."
+    },
+    {
+      "id": "wsl.launcher",
+      "target": "wsl",
+      "status": "pass",
+      "summary": "Only the system WSL launcher is checked; presence does not prove component or distribution availability.",
+      "evidence": {
+        "present": true,
+        "component_health": "not_checked"
+      },
+      "recommendation": "If needed, manually run wsl.exe --list --verbose; diagnose Windows and WSL separately.",
+      "recheck": "If needed, manually run wsl.exe --list --verbose; diagnose Windows and WSL separately."
+    },
+    {
+      "id": "wsl.inventory",
+      "target": "wsl",
+      "status": "pass",
+      "summary": "Observe only the count of registered distributions for this user; no internal files are read.",
+      "evidence": {
+        "registered_count": 0,
+        "reason": "registration_key_absent"
+      },
+      "recommendation": "If needed, manually run wsl.exe --list --verbose; diagnose Windows and WSL separately.",
+      "recheck": "If needed, manually run wsl.exe --list --verbose; diagnose Windows and WSL separately."
+    },
+    {
+      "id": "wsl.running",
+      "target": "wsl",
+      "status": "skipped",
+      "summary": "Running state comes only from an explicitly enabled read-only list query; WSL is not executed by default.",
+      "evidence": {
+        "reason": "not_requested",
+        "running_count": null
+      },
+      "recommendation": "If needed, manually run wsl.exe --list --verbose; diagnose Windows and WSL separately.",
+      "recheck": "If needed, manually run wsl.exe --list --verbose; diagnose Windows and WSL separately."
+    },
+    {
+      "id": "wsl.internal",
+      "target": "wsl",
+      "status": "skipped",
+      "summary": "Commands and configuration inside distributions were not inspected; no distribution was launched.",
+      "evidence": {},
+      "recommendation": "If needed, manually run wsl.exe --list --verbose; diagnose Windows and WSL separately.",
+      "recheck": "If needed, manually run wsl.exe --list --verbose; diagnose Windows and WSL separately."
+    },
+    {
+      "id": "scope.unchecked",
+      "target": "system",
+      "status": "skipped",
+      "summary": "Merged configuration is not computed; project ancestors, profiles, managed policy, aliases and shell execution policy are outside v0.1 scope.",
+      "evidence": {},
+      "recommendation": "Verify the effective environment in official documentation and the tool's own status view.",
+      "recheck": "Verify the effective environment in official documentation and the tool's own status view."
+    }
+  ]
+}

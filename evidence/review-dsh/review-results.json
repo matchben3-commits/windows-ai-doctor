@@ -1,0 +1,267 @@
+{
+  "generated_at": "2026-11-19T13:06:07.689579+00:00",
+  "result": "PASS",
+  "project_mutated": false,
+  "manifest_before": {
+    "matched": 68,
+    "mismatch": [],
+    "unlisted": [],
+    "listed_missing": []
+  },
+  "manifest_after": {
+    "matched": 68,
+    "mismatch": [],
+    "unlisted": [],
+    "listed_missing": []
+  },
+  "original_edge_script_byte_identical": true,
+  "runs": [
+    {
+      "name": "tests",
+      "exit_code": 0
+    },
+    {
+      "name": "original_edges",
+      "exit_code": 0
+    },
+    {
+      "name": "demo",
+      "exit_code": 0
+    },
+    {
+      "name": "host",
+      "exit_code": 0
+    }
+  ],
+  "tests": {
+    "tests_run": 39,
+    "passed": 38,
+    "skipped": 1,
+    "failures": 0,
+    "errors": 0
+  },
+  "original_edges": {
+    "broken_wrapper": {
+      "actual_exit_code": 7,
+      "doctor_install": "unknown",
+      "doctor_version_status": "unknown",
+      "doctor_version": null
+    },
+    "real_junction": {
+      "config_read_blocked": true,
+      "native_read_followed_junction": false,
+      "native_classification": false
+    }
+  },
+  "original_edges_expected": true,
+  "bilingual_statuses_equal": true,
+  "report_marker_issues": [],
+  "host_config_bytes_unchanged": true,
+  "parent_environment_unchanged": true,
+  "reports": [
+    {
+      "file": "demo/en/report.en.json",
+      "summary": {
+        "pass": 6,
+        "warn": 2,
+        "error": 1,
+        "unknown": 6,
+        "skipped": 4
+      },
+      "schema": "1.0",
+      "versions": {
+        "codex.version": null,
+        "claude.version": null
+      },
+      "statuses": {
+        "system.platform": "pass",
+        "codex.path": "warn",
+        "codex.install": "unknown",
+        "codex.dependency": "unknown",
+        "codex.version": "unknown",
+        "codex.config.user": "pass",
+        "codex.config.project": "pass",
+        "claude.path": "warn",
+        "claude.install": "unknown",
+        "claude.dependency": "unknown",
+        "claude.version": "unknown",
+        "claude.config.user": "pass",
+        "claude.config.project": "skipped",
+        "claude.config.local": "error",
+        "wsl.launcher": "pass",
+        "wsl.inventory": "pass",
+        "wsl.running": "skipped",
+        "wsl.internal": "skipped",
+        "scope.unchecked": "skipped"
+      }
+    },
+    {
+      "file": "demo/zh/report.zh.json",
+      "summary": {
+        "pass": 6,
+        "warn": 2,
+        "error": 1,
+        "unknown": 6,
+        "skipped": 4
+      },
+      "schema": "1.0",
+      "versions": {
+        "codex.version": null,
+        "claude.version": null
+      },
+      "statuses": {
+        "system.platform": "pass",
+        "codex.path": "warn",
+        "codex.install": "unknown",
+        "codex.dependency": "unknown",
+        "codex.version": "unknown",
+        "codex.config.user": "pass",
+        "codex.config.project": "pass",
+        "claude.path": "warn",
+        "claude.install": "unknown",
+        "claude.dependency": "unknown",
+        "claude.version": "unknown",
+        "claude.config.user": "pass",
+        "claude.config.project": "skipped",
+        "claude.config.local": "error",
+        "wsl.launcher": "pass",
+        "wsl.inventory": "pass",
+        "wsl.running": "skipped",
+        "wsl.internal": "skipped",
+        "scope.unchecked": "skipped"
+      }
+    },
+    {
+      "file": "host/normal/en/report.en.json",
+      "summary": {
+        "pass": 9,
+        "warn": 1,
+        "error": 0,
+        "unknown": 3,
+        "skipped": 3
+      },
+      "schema": "1.0",
+      "versions": {
+        "codex.version": "0.169.0",
+        "claude.version": null
+      },
+      "statuses": {
+        "system.platform": "pass",
+        "codex.path": "pass",
+        "codex.install": "pass",
+        "codex.dependency": "pass",
+        "codex.version": "pass",
+        "codex.config.user": "pass",
+        "claude.path": "warn",
+        "claude.install": "unknown",
+        "claude.dependency": "unknown",
+        "claude.version": "unknown",
+        "claude.config.user": "pass",
+        "wsl.launcher": "pass",
+        "wsl.inventory": "pass",
+        "wsl.running": "skipped",
+        "wsl.internal": "skipped",
+        "scope.unchecked": "skipped"
+      }
+    },
+    {
+      "file": "host/normal/zh/report.zh.json",
+      "summary": {
+        "pass": 9,
+        "warn": 1,
+        "error": 0,
+        "unknown": 3,
+        "skipped": 3
+      },
+      "schema": "1.0",
+      "versions": {
+        "codex.version": "0.169.0",
+        "claude.version": null
+      },
+      "statuses": {
+        "system.platform": "pass",
+        "codex.path": "pass",
+        "codex.install": "pass",
+        "codex.dependency": "pass",
+        "codex.version": "pass",
+        "codex.config.user": "pass",
+        "claude.path": "warn",
+        "claude.install": "unknown",
+        "claude.dependency": "unknown",
+        "claude.version": "unknown",
+        "claude.config.user": "pass",
+        "wsl.launcher": "pass",
+        "wsl.inventory": "pass",
+        "wsl.running": "skipped",
+        "wsl.internal": "skipped",
+        "scope.unchecked": "skipped"
+      }
+    },
+    {
+      "file": "host/offline-audit/en/report.en.json",
+      "summary": {
+        "pass": 7,
+        "warn": 1,
+        "error": 0,
+        "unknown": 3,
+        "skipped": 5
+      },
+      "schema": "1.0",
+      "versions": {
+        "codex.version": null,
+        "claude.version": null
+      },
+      "statuses": {
+        "system.platform": "pass",
+        "codex.path": "pass",
+        "codex.install": "pass",
+        "codex.dependency": "unknown",
+        "codex.version": "skipped",
+        "codex.config.user": "pass",
+        "claude.path": "warn",
+        "claude.install": "unknown",
+        "claude.dependency": "unknown",
+        "claude.version": "skipped",
+        "claude.config.user": "pass",
+        "wsl.launcher": "pass",
+        "wsl.inventory": "pass",
+        "wsl.running": "skipped",
+        "wsl.internal": "skipped",
+        "scope.unchecked": "skipped"
+      }
+    },
+    {
+      "file": "host/offline-audit/zh/report.zh.json",
+      "summary": {
+        "pass": 7,
+        "warn": 1,
+        "error": 0,
+        "unknown": 3,
+        "skipped": 5
+      },
+      "schema": "1.0",
+      "versions": {
+        "codex.version": null,
+        "claude.version": null
+      },
+      "statuses": {
+        "system.platform": "pass",
+        "codex.path": "pass",
+        "codex.install": "pass",
+        "codex.dependency": "unknown",
+        "codex.version": "skipped",
+        "codex.config.user": "pass",
+        "claude.path": "warn",
+        "claude.install": "unknown",
+        "claude.dependency": "unknown",
+        "claude.version": "skipped",
+        "claude.config.user": "pass",
+        "wsl.launcher": "pass",
+        "wsl.inventory": "pass",
+        "wsl.running": "skipped",
+        "wsl.internal": "skipped",
+        "scope.unchecked": "skipped"
+      }
+    }
+  ]
+}

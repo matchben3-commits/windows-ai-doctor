@@ -1,0 +1,15 @@
+{
+  "broken_wrapper": {
+    "actual_exit_code": 7,
+    "doctor_install": "unknown",
+    "doctor_version_status": "unknown",
+    "doctor_version": null
+  },
+  "real_junction": {
+    "config_read_blocked": true,
+    "native_read_followed_junction": false,
+    "native_classification": false
+  },
+  "generated_at": "2026-11-19T13:15:26.709146+00:00",
+  "exit_code": 0
+}

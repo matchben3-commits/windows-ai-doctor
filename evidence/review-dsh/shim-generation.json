@@ -1,0 +1,48 @@
+{
+  "local_cmd_shim_version": "8.0.0",
+  "result": "PASS",
+  "cases": [
+    {
+      "type": "node",
+      "suffix": ".cmd",
+      "generator_exit_code": 0,
+      "fixture_matches_with_newlines_normalized": true,
+      "fresh_generated_wrapper_recognized": true
+    },
+    {
+      "type": "node",
+      "suffix": ".ps1",
+      "generator_exit_code": 0,
+      "fixture_matches_with_newlines_normalized": true,
+      "fresh_generated_wrapper_recognized": true
+    },
+    {
+      "type": "node",
+      "suffix": "sh",
+      "generator_exit_code": 0,
+      "fixture_matches_with_newlines_normalized": true,
+      "fresh_generated_wrapper_recognized": true
+    },
+    {
+      "type": "native",
+      "suffix": ".cmd",
+      "generator_exit_code": 0,
+      "fixture_matches_with_newlines_normalized": true,
+      "fresh_generated_wrapper_recognized": true
+    },
+    {
+      "type": "native",
+      "suffix": ".ps1",
+      "generator_exit_code": 0,
+      "fixture_matches_with_newlines_normalized": true,
+      "fresh_generated_wrapper_recognized": true
+    },
+    {
+      "type": "native",
+      "suffix": "sh",
+      "generator_exit_code": 0,
+      "fixture_matches_with_newlines_normalized": true,
+      "fresh_generated_wrapper_recognized": true
+    }
+  ]
+}

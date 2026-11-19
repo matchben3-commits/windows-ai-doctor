@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "windows-ai-doctor"
+version = "0.1.0"
+description = "Offline, privacy-first Windows diagnostics for Codex and Claude Code CLI"
+readme = "README.en.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = []
+classifiers = ["Programming Language :: Python :: 3", "Operating System :: Microsoft :: Windows"]
+
+[project.scripts]
+windows-ai-doctor = "windows_ai_doctor.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["windows_ai_doctor*"]

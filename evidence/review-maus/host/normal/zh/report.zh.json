@@ -1,0 +1,252 @@
+{
+  "schema_version": "1.0",
+  "doctor_version": "0.1.0",
+  "generated_at": "2026-11-19T13:15:02+00:00",
+  "language": "zh",
+  "summary": {
+    "pass": 9,
+    "warn": 1,
+    "error": 0,
+    "unknown": 3,
+    "skipped": 3
+  },
+  "privacy": {
+    "paths": "opaque_references",
+    "raw_output": false,
+    "config_values": false,
+    "credentials_read": false
+  },
+  "findings": [
+    {
+      "id": "system.platform",
+      "target": "system",
+      "status": "pass",
+      "summary": "当前操作系统；仅检查当前进程可见环境。",
+      "evidence": {
+        "os": "Windows",
+        "python": "3.12.10",
+        "windows_target": true
+      },
+      "recommendation": "请在工具官方文档及自身状态页面核实实际生效环境。",
+      "recheck": "请在工具官方文档及自身状态页面核实实际生效环境。"
+    },
+    {
+      "id": "codex.path",
+      "target": "codex",
+      "status": "pass",
+      "summary": "按 PATH 顺序列出入口；同一安装的包装入口合并计数。",
+      "evidence": {
+        "entries": [
+          {
+            "path": "<PATH:1>",
+            "command_name": "codex.cmd",
+            "installation_group": 1,
+            "kind": "npm-js",
+            "path_access": "checked",
+            "existence_verified": true
+          },
+          {
+            "path": "<PATH:2>",
+            "command_name": "codex.ps1",
+            "installation_group": 1,
+            "kind": "npm-js",
+            "path_access": "checked",
+            "existence_verified": true
+          },
+          {
+            "path": "<PATH:3>",
+            "command_name": "codex",
+            "installation_group": 1,
+            "kind": "npm-js",
+            "path_access": "checked",
+            "existence_verified": true
+          }
+        ],
+        "installation_groups": 1,
+        "cmd_path_candidate": "<PATH:1>",
+        "powershell_path_candidate": "<PATH:2>",
+        "resolution_model": "PATH+PATHEXT; excludes CWD, aliases and functions",
+        "scan_limited": false
+      },
+      "recommendation": "在原终端手动查看 Get-Command codex,claude -All 及 where.exe codex / where.exe claude；本报告的路径代号不含原路径。",
+      "recheck": "在原终端手动查看 Get-Command codex,claude -All 及 where.exe codex / where.exe claude；本报告的路径代号不含原路径。"
+    },
+    {
+      "id": "codex.install",
+      "target": "codex",
+      "status": "pass",
+      "summary": "安装方式仅由本地文件结构推断；未知入口不执行。",
+      "evidence": {
+        "kind": "npm-js",
+        "publisher_verified": false
+      },
+      "recommendation": "在原终端手动查看 Get-Command codex,claude -All 及 where.exe codex / where.exe claude；本报告的路径代号不含原路径。",
+      "recheck": "在原终端手动查看 Get-Command codex,claude -All 及 where.exe codex / where.exe claude；本报告的路径代号不含原路径。"
+    },
+    {
+      "id": "codex.dependency",
+      "target": "codex",
+      "status": "pass",
+      "summary": "只检查所识别入口的运行时依赖；原生程序不统一要求 Node.js。",
+      "evidence": {
+        "runtime": "node",
+        "node_found": true,
+        "node_path_check": "found",
+        "documented_package_engine": ">=16",
+        "version": "24.19.0",
+        "probe_reason": "ok"
+      },
+      "recommendation": "先确认优先入口可信，再在终端手动查询 --version；不要依据此项自动升级。",
+      "recheck": "先确认优先入口可信，再在终端手动查询 --version；不要依据此项自动升级。"
+    },
+    {
+      "id": "codex.version",
+      "target": "codex",
+      "status": "pass",
+      "summary": "仅接受完整匹配的版本响应；未保留原始输出。",
+      "evidence": {
+        "reason": "version_parsed",
+        "returncode": 0,
+        "version": "0.169.0",
+        "captured_bytes": 18,
+        "timeout_seconds": 3.0
+      },
+      "recommendation": "先确认优先入口可信，再在终端手动查询 --version；不要依据此项自动升级。",
+      "recheck": "先确认优先入口可信，再在终端手动查询 --version；不要依据此项自动升级。"
+    },
+    {
+      "id": "codex.config.user",
+      "target": "codex",
+      "status": "pass",
+      "summary": "仅检查指定配置文件的语法；不验证登录、模型服务、键名或最终生效值。",
+      "evidence": {
+        "layer": "user",
+        "location_source": "default_home",
+        "path": "<PATH:4>",
+        "format": "TOML",
+        "syntax": "valid"
+      },
+      "recommendation": "在本机编辑器中复核对应层的配置语法；不要将包含密钥的全文上传。",
+      "recheck": "在本机编辑器中复核对应层的配置语法；不要将包含密钥的全文上传。"
+    },
+    {
+      "id": "claude.path",
+      "target": "claude",
+      "status": "warn",
+      "summary": "当前 PATH 未发现可调用入口；不等于机器上完全未安装。",
+      "evidence": {
+        "entries": [],
+        "installation_groups": 0,
+        "cmd_path_candidate": null,
+        "powershell_path_candidate": null,
+        "resolution_model": "PATH+PATHEXT; excludes CWD, aliases and functions",
+        "scan_limited": false
+      },
+      "recommendation": "在原终端手动查看 Get-Command codex,claude -All 及 where.exe codex / where.exe claude；本报告的路径代号不含原路径。",
+      "recheck": "在原终端手动查看 Get-Command codex,claude -All 及 where.exe codex / where.exe claude；本报告的路径代号不含原路径。"
+    },
+    {
+      "id": "claude.install",
+      "target": "claude",
+      "status": "unknown",
+      "summary": "安装方式仅由本地文件结构推断；未知入口不执行。",
+      "evidence": {
+        "kind": "not_found",
+        "publisher_verified": false
+      },
+      "recommendation": "在原终端手动查看 Get-Command codex,claude -All 及 where.exe codex / where.exe claude；本报告的路径代号不含原路径。",
+      "recheck": "在原终端手动查看 Get-Command codex,claude -All 及 where.exe codex / where.exe claude；本报告的路径代号不含原路径。"
+    },
+    {
+      "id": "claude.dependency",
+      "target": "claude",
+      "status": "unknown",
+      "summary": "只检查所识别入口的运行时依赖；原生程序不统一要求 Node.js。",
+      "evidence": {
+        "runtime": "unknown"
+      },
+      "recommendation": "先确认优先入口可信，再在终端手动查询 --version；不要依据此项自动升级。",
+      "recheck": "先确认优先入口可信，再在终端手动查询 --version；不要依据此项自动升级。"
+    },
+    {
+      "id": "claude.version",
+      "target": "claude",
+      "status": "unknown",
+      "summary": "仅接受完整匹配的版本响应；未保留原始输出。",
+      "evidence": {
+        "reason": "unrecognized_or_missing_runtime"
+      },
+      "recommendation": "先确认优先入口可信，再在终端手动查询 --version；不要依据此项自动升级。",
+      "recheck": "先确认优先入口可信，再在终端手动查询 --version；不要依据此项自动升级。"
+    },
+    {
+      "id": "claude.config.user",
+      "target": "claude",
+      "status": "pass",
+      "summary": "仅检查指定配置文件的语法；不验证登录、模型服务、键名或最终生效值。",
+      "evidence": {
+        "layer": "user",
+        "location_source": "default_home",
+        "path": "<PATH:5>",
+        "format": "JSON",
+        "syntax": "valid"
+      },
+      "recommendation": "在本机编辑器中复核对应层的配置语法；不要将包含密钥的全文上传。",
+      "recheck": "在本机编辑器中复核对应层的配置语法；不要将包含密钥的全文上传。"
+    },
+    {
+      "id": "wsl.launcher",
+      "target": "wsl",
+      "status": "pass",
+      "summary": "只检查系统 WSL 启动器；存在不等于组件或发行版可用。",
+      "evidence": {
+        "present": true,
+        "component_health": "not_checked"
+      },
+      "recommendation": "如需确认，手动运行 wsl.exe --list --verbose；Windows 与 WSL 需要分别体检。",
+      "recheck": "如需确认，手动运行 wsl.exe --list --verbose；Windows 与 WSL 需要分别体检。"
+    },
+    {
+      "id": "wsl.inventory",
+      "target": "wsl",
+      "status": "pass",
+      "summary": "只观察当前用户已注册发行版数量，不读取内部文件。",
+      "evidence": {
+        "registered_count": 0,
+        "reason": "registration_key_absent"
+      },
+      "recommendation": "如需确认，手动运行 wsl.exe --list --verbose；Windows 与 WSL 需要分别体检。",
+      "recheck": "如需确认，手动运行 wsl.exe --list --verbose；Windows 与 WSL 需要分别体检。"
+    },
+    {
+      "id": "wsl.running",
+      "target": "wsl",
+      "status": "skipped",
+      "summary": "运行状态只由显式启用的只读列表查询判断；默认不执行 WSL。",
+      "evidence": {
+        "reason": "not_requested",
+        "running_count": null
+      },
+      "recommendation": "如需确认，手动运行 wsl.exe --list --verbose；Windows 与 WSL 需要分别体检。",
+      "recheck": "如需确认，手动运行 wsl.exe --list --verbose；Windows 与 WSL 需要分别体检。"
+    },
+    {
+      "id": "wsl.internal",
+      "target": "wsl",
+      "status": "skipped",
+      "summary": "未检查发行版内部命令或配置；没有启动发行版。",
+      "evidence": {},
+      "recommendation": "如需确认，手动运行 wsl.exe --list --verbose；Windows 与 WSL 需要分别体检。",
+      "recheck": "如需确认，手动运行 wsl.exe --list --verbose；Windows 与 WSL 需要分别体检。"
+    },
+    {
+      "id": "scope.unchecked",
+      "target": "system",
+      "status": "skipped",
+      "summary": "未计算合并配置；项目祖先、配置档、管理策略、别名与终端执行策略不在首版范围。",
+      "evidence": {},
+      "recommendation": "请在工具官方文档及自身状态页面核实实际生效环境。",
+      "recheck": "请在工具官方文档及自身状态页面核实实际生效环境。"
+    }
+  ]
+}
