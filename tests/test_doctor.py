@@ -28,7 +28,8 @@ def finding(report, id):
 class DoctorFixture(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix="ai-doctor-test-")
-        self.root = Path(self.temp.name)
+        # Windows TEMP may use an 8.3 alias; fixture containment uses resolved paths.
+        self.root = Path(self.temp.name).resolve()
         self.home = self.root / "private user 用户"
         self.home.mkdir()
         self.env = {k: v for k, v in os.environ.items() if k.upper() in {"SYSTEMROOT", "WINDIR", "SYSTEMDRIVE"}}

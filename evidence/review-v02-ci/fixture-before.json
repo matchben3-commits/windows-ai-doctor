@@ -1,0 +1,37 @@
+{
+  "summary": {
+    "alias_differs": true,
+    "tests": 5,
+    "failures": 5,
+    "errors": 0,
+    "skipped": 0,
+    "passed": false
+  },
+  "cases": [
+    {
+      "test": "test_boundaries.BoundaryTests.test_real_junction_blocks_config_native_discovery_and_node_before_leaf",
+      "outcome": "FAIL",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_real_junction_package_metadata_and_bin_never_followed",
+      "outcome": "FAIL",
+      "seconds": 0.016
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_real_junction_rejected_even_if_leaf_missing",
+      "outcome": "FAIL",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_real_junction_runtime_does_not_fall_through_to_later_node",
+      "outcome": "FAIL",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_v02.CompareJunctionTests.test_report_ancestor_junction_is_rejected_before_descendant_access",
+      "outcome": "FAIL",
+      "seconds": 0.0
+    }
+  ]
+}

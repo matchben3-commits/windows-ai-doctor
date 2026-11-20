@@ -1,0 +1,294 @@
+{
+  "generated_at": "2026-11-20T14:34:43.345209+00:00",
+  "python": "3.12.10",
+  "command": "python tests/run_tests.py --evidence evidence/tests.json",
+  "exit_code": 0,
+  "tests_run": 56,
+  "passed": 54,
+  "skipped": 2,
+  "failures": 0,
+  "errors": 0,
+  "seconds": 7.297,
+  "cases": [
+    {
+      "test": "test_boundaries.BoundaryTests.test_all_wrapper_variants_reject_marker_only_and_added_commands",
+      "outcome": "PASS",
+      "seconds": 0.094
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_broken_first_node_does_not_use_later_runtime",
+      "outcome": "PASS",
+      "seconds": 0.015
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_broken_marker_wrapper_exit7_never_queries_package",
+      "outcome": "PASS",
+      "seconds": 0.047
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_demo_relative_destination_survives_clean_child_cwd",
+      "outcome": "PASS",
+      "seconds": 0.735
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_host_relative_destination_and_default_no_wsl_execution",
+      "outcome": "PASS",
+      "seconds": 0.515
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_node_shim_cannot_be_reinterpreted_as_native_target",
+      "outcome": "PASS",
+      "seconds": 0.016
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_package_bin_parent_or_absolute_escape_is_unknown",
+      "outcome": "PASS",
+      "seconds": 0.031
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_real_junction_blocks_config_native_discovery_and_node_before_leaf",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_real_junction_native_package_target_is_unknown",
+      "outcome": "PASS",
+      "seconds": 0.047
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_real_junction_package_metadata_and_bin_never_followed",
+      "outcome": "PASS",
+      "seconds": 0.031
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_real_junction_rejected_even_if_leaf_missing",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_real_junction_runtime_does_not_fall_through_to_later_node",
+      "outcome": "PASS",
+      "seconds": 0.032
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_six_golden_wrappers_from_real_cmd_shim",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_boundaries.BoundaryTests.test_unsupported_paths_do_not_query_metadata",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_claude_native_and_npm_native_without_node",
+      "outcome": "PASS",
+      "seconds": 0.312
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_clean_environment_excludes_tokens_and_config_override",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_cli_invalid_args_and_export_errors_hide_paths",
+      "outcome": "PASS",
+      "seconds": 0.453
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_config_link_to_auth_is_not_read",
+      "outcome": "SKIP",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_custom_home_overrides_invalid_default_and_both_config_errors_continue",
+      "outcome": "PASS",
+      "seconds": 0.125
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_distinct_installations_shadow_in_path_order",
+      "outcome": "PASS",
+      "seconds": 0.031
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_existing_reports_preserved_and_clean_cwd_start",
+      "outcome": "PASS",
+      "seconds": 0.313
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_json_strictness_and_large_or_non_utf8_config",
+      "outcome": "PASS",
+      "seconds": 0.016
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_missing_both_cli_and_bilingual_status_ids",
+      "outcome": "PASS",
+      "seconds": 0.203
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_native_cli_with_spaces_does_not_require_node",
+      "outcome": "PASS",
+      "seconds": 0.297
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_npm_missing_or_incompatible_node_is_conditional_error",
+      "outcome": "PASS",
+      "seconds": 0.109
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_oversized_cli_output_still_completes_other_checks",
+      "outcome": "PASS",
+      "seconds": 0.203
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_project_layer_syntax_and_no_auth_or_history_reads",
+      "outcome": "PASS",
+      "seconds": 0.016
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_real_cli_with_network_audit_denied",
+      "outcome": "PASS",
+      "seconds": 0.187
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_real_npm_query_in_chinese_space_directory_and_wrapper_dedup",
+      "outcome": "PASS",
+      "seconds": 0.203
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_relative_override_not_silently_replaced",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_reparse_guard_without_symlink_privilege",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_runner_caps_output_and_terminates_process_tree",
+      "outcome": "PASS",
+      "seconds": 0.657
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_runner_child_exit_also_removes_descendants",
+      "outcome": "PASS",
+      "seconds": 0.062
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_sensitive_markers_never_reach_json_markdown_stdout_stderr",
+      "outcome": "PASS",
+      "seconds": 0.438
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_socket_denied_offline_bilingual_reports",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_timeout_and_nonzero_continue_reports",
+      "outcome": "PASS",
+      "seconds": 0.687
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_unknown_wrapper_is_never_executed",
+      "outcome": "PASS",
+      "seconds": 0.016
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_version_allowlist_rejects_noise_or_urls",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_doctor.DoctorTests.test_wsl_default_never_executes_and_synthetic_visibility",
+      "outcome": "PASS",
+      "seconds": 0.156
+    },
+    {
+      "test": "test_v02.CompareJunctionTests.test_nonlocal_report_rejected_before_metadata",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_v02.CompareJunctionTests.test_report_ancestor_junction_is_rejected_before_descendant_access",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_v02.CompareJunctionTests.test_report_file_symlink_is_rejected_without_reading_target",
+      "outcome": "SKIP",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_v02.V02Tests.test_all_and_html_formats_bilingual_keep_both_contract",
+      "outcome": "PASS",
+      "seconds": 0.891
+    },
+    {
+      "test": "test_v02.V02Tests.test_compare_conflicting_options_and_abbreviations_exit_2",
+      "outcome": "PASS",
+      "seconds": 0.015
+    },
+    {
+      "test": "test_v02.V02Tests.test_compare_ignores_language_time_path_and_all_arbitrary_text",
+      "outcome": "PASS",
+      "seconds": 0.047
+    },
+    {
+      "test": "test_v02.V02Tests.test_compare_never_invokes_diagnostics_or_follows_embedded_paths",
+      "outcome": "PASS",
+      "seconds": 0.016
+    },
+    {
+      "test": "test_v02.V02Tests.test_compare_versions_groups_limits_and_status_transitions",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_v02.V02Tests.test_export_interrupt_cleans_created_files_and_exits_130",
+      "outcome": "PASS",
+      "seconds": 0.015
+    },
+    {
+      "test": "test_v02.V02Tests.test_export_preserves_existing_and_cleans_partial_files",
+      "outcome": "PASS",
+      "seconds": 0.11
+    },
+    {
+      "test": "test_v02.V02Tests.test_guidance_distinguishes_missing_blocked_and_unsupported_node",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_v02.V02Tests.test_html_escapes_dynamic_text_and_has_no_active_resource_tags",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "test_v02.V02Tests.test_import_node_string_budgets_apply_to_ignored_fields",
+      "outcome": "PASS",
+      "seconds": 0.031
+    },
+    {
+      "test": "test_v02.V02Tests.test_import_rejects_duplicate_keys_deep_huge_and_nonfinite_json",
+      "outcome": "PASS",
+      "seconds": 0.047
+    },
+    {
+      "test": "test_v02.V02Tests.test_import_rejects_invalid_shapes_ids_status_and_count",
+      "outcome": "PASS",
+      "seconds": 0.062
+    },
+    {
+      "test": "test_v02.V02Tests.test_import_version_tags_are_not_exported",
+      "outcome": "PASS",
+      "seconds": 0.016
+    },
+    {
+      "test": "test_v02.V02Tests.test_read_old_v01_report_without_guidance",
+      "outcome": "PASS",
+      "seconds": 0.0
+    }
+  ]
+}
