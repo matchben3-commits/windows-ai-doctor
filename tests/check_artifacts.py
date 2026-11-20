@@ -1,6 +1,7 @@
 """Read-only delivery checks plus a sanitized result/manifest, no dependencies."""
 import hashlib
 import json
+import os
 import re
 import sys
 from datetime import datetime, timezone
@@ -10,9 +11,16 @@ sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def delivery_files():
+    for folder, dirs, names in os.walk(ROOT):
+        dirs[:] = [d for d in dirs if d not in (".git", ".task-build", "build") and not d.endswith(".egg-info")]
+        for name in names:
+            yield Path(folder) / name
+
+
 def main():
     issues = []
-    files = sorted(p for p in ROOT.rglob("*") if p.is_file())
+    files = sorted(delivery_files())
     source_count = 0
     for path in files:
         if path.suffix == ".py":
@@ -27,7 +35,7 @@ def main():
                     continue
                 if not (path.parent / target.split("#")[0]).exists():
                     issues.append("broken_local_document_link")
-    report_files = [p for p in files if p.suffix in (".json", ".md") and
+    report_files = [p for p in files if p.suffix in (".json", ".md", ".html") and
                     (p.is_relative_to(ROOT / "examples") or p.is_relative_to(ROOT / "evidence"))]
     for path in report_files:
         text = path.read_text(encoding="utf-8")
@@ -42,7 +50,7 @@ def main():
             for f in report["findings"]:
                 if not all(k in f for k in ("id", "target", "status", "summary", "evidence", "recommendation", "recheck")):
                     issues.append("finding_missing_field")
-    if any(p.name == "__pycache__" for p in ROOT.rglob("*")):
+    if any("__pycache__" in p.relative_to(ROOT).parts for p in files):
         issues.append("bytecode_cache_present")
     record = {"generated_at": datetime.now(timezone.utc).isoformat(), "exit_code": 0 if not issues else 1,
               "python_sources_compiled_in_memory": source_count,
@@ -51,7 +59,7 @@ def main():
               "issues": sorted(set(issues))}
     (ROOT / "evidence/artifact-check.json").write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
     # Exclude the manifest itself to avoid a recursive checksum dependency.
-    files = sorted(p for p in ROOT.rglob("*") if p.is_file() and p.name != "SHA256SUMS.txt")
+    files = sorted(p for p in delivery_files() if p.name != "SHA256SUMS.txt")
     manifest = [hashlib.sha256(p.read_bytes()).hexdigest() + "  " + p.relative_to(ROOT).as_posix() for p in files]
     (ROOT / "SHA256SUMS.txt").write_text("\n".join(manifest) + "\n", encoding="utf-8")
     print(f"artifact_check={'PASS' if not issues else 'FAIL'}; sources={source_count}; reports={len(report_files)}; issues={len(issues)}")

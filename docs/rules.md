@@ -1,11 +1,14 @@
 # 规则依据与适用边界 / Rules and scope
 
-核对日期：2026-11-19（北京时间）。依据为本轮实际打开的官方文档和 OpenAI 仓库源文件；网页可能继续变化。适用范围为 v0.1 的有限本地观察，不承诺覆盖全部上游版本。
+核对日期：2026-11-19（北京时间）。第二版本轮重新打开并核对 Codex npm package.json、Codex config basics、Claude setup/CLI reference、微软 WSL/Get-Command、GitHub Actions 定义及 Python 打包资料。下表其余规则沿用同日首版核对，网页可能继续变化。适用范围为 v0.2 的有限本地观察，不承诺覆盖全部上游版本。
 
 ## 官方来源
 
 | 来源 | 本次用于确认的事实 | 适用范围 |
 | --- | --- | --- |
+| [GitHub Python CI](https://docs.github.com/en/actions/tutorials/build-and-test-code/python)、[setup-python v6](https://github.com/actions/setup-python/blob/v6/action.yml)、[checkout v6](https://github.com/actions/checkout/blob/v6/action.yml)、[setup-node v6](https://github.com/actions/setup-node/blob/v6/action.yml) | Windows runner、矩阵、指定 Python/Node 的动作及存在的 v6 定义 | 提供 Windows Python 3.11/3.14、Node 24 检查定义；本地未运行 GitHub 托管矩阵，不将定义存在当作 CI 通过 |
+| [PyPA packaging](https://packaging.python.org/en/latest/tutorials/packaging-projects/)、[Python NuGet](https://docs.python.org/3.12/using/windows.html#the-nuget-org-packages) | sdist/wheel 构建流程；NuGet 可用于 CI 的局部 Python | 本地以临时完整 Python 创建 builder/安装环境，不改原 Python；没有上传包 |
+| [Microsoft Get-Command](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-command?view=powershell-7.5) | Name 数组及 -All 可列出同名命令 | 排障中固定的 Get-Command codex,claude -All / node -All；命令仅建议，不自动执行 |
 | [OpenAI Codex README](https://github.com/openai/codex/blob/main/README.md) | 存在 Windows 原生/独立安装途径 | 原生入口，不将 Node 视为通用依赖 |
 | [Codex npm package.json](https://github.com/openai/codex/blob/main/codex-cli/package.json) | `@openai/codex`、`bin/codex.js`、当前 `engines.node >=16` | 已识别 npm JS 包；实现优先读取本地包引擎字段，只有简单 `>=major[.minor[.patch]]` 范围才判断版本 |
 | [Codex npm launcher](https://github.com/openai/codex/blob/main/codex-cli/bin/codex.js) | JS 包入口再定位平台程序 | 直接通过 Node 调用入口，避免运行 shell 包装器 |
@@ -56,3 +59,7 @@ OpenAI 文档本轮部分重定向至 `learn.chatgpt.com/docs/...`；上表保�
 ## 本机版本覆盖
 
 本轮实际安装覆盖为 Windows 上的 Codex npm JS 启动器 `0.169.0`（Node `24.19.0`）。Claude CLI 的本机 PATH 无入口；Claude 原生和 npm-native 只用合成程序验证识别与调用机制，不能称为真实发行包兼容测试。详细实跑记录见 [validation.md](validation.md)。
+
+## v0.2 比较与建议
+
+比较策略、结构限额和未知字段处置是本项目实现策略，不是上游工具故障规则，见 [comparison.md](comparison.md)。排障中的运行时缺失、路径受限、低版本和查询超时分别选择固定文案；不根据任意配置值拼接命令。官方安装/配置链接只以文字给出，用户自行核对后人工操作。

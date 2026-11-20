@@ -87,7 +87,7 @@ def main():
             and results.get("real_junction", {}).get("native_classification") is False
             and results.get("real_junction", {}).get("config_read_blocked") is True)
     results.update(generated_at=datetime.now(timezone.utc).isoformat(), exit_code=0 if good else 1)
-    (OUT / "rework-edges.json").write_text(json.dumps(results, indent=2) + "\n", encoding="utf-8")
+    (OUT / "v02-edges.json").write_text(json.dumps(results, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(results))
     return results["exit_code"]
 

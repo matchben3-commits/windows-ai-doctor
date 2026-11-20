@@ -40,15 +40,16 @@ def main():
             for lang in ("zh", "en"):
                 output = destination / mode / lang
                 command = [sys.executable, str(script), "--lang", lang,
-                           "--timeout", "3", *extras, "--output-dir", str(output)]
+                           "--timeout", "3", "--format", "all", *extras, "--output-dir", str(output)]
                 proc = subprocess.run(command, cwd=clean, capture_output=True, timeout=30)
                 path = output / f"report.{lang}.json"
                 report = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else None
                 runs.append({"mode": mode, "language": lang, "exit_code": proc.returncode,
                              "clean_cwd": True,
-                             "command": "python <checkout>/" + str(script.relative_to(ROOT)).replace("\\", "/") + " --lang " + lang + " --timeout 3 " + " ".join(extras) + " --output-dir <new-report-directory>",
+                             "command": "python <checkout>/" + str(script.relative_to(ROOT)).replace("\\", "/") + " --lang " + lang + " --timeout 3 --format all " + " ".join(extras) + " --output-dir <new-report-directory>",
                              "summary": report["summary"] if report else None,
-                             "json_and_markdown_exist": path.is_file() and (output / f"report.{lang}.md").is_file()})
+                             "json_and_markdown_exist": path.is_file() and (output / f"report.{lang}.md").is_file(),
+                             "html_exists": (output / f"report.{lang}.html").is_file()})
     unchanged = before == snapshot()
     env_unchanged = env_before == dict(os.environ)
     record = {"generated_at": datetime.now(timezone.utc).isoformat(),
@@ -60,7 +61,7 @@ def main():
               "runs": runs}
     destination.mkdir(parents=True, exist_ok=True)
     (destination / "runs.json").write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
-    good = unchanged and env_unchanged and all(r["exit_code"] in (0, 1) and r["json_and_markdown_exist"] for r in runs)
+    good = unchanged and env_unchanged and all(r["exit_code"] in (0, 1) and r["json_and_markdown_exist"] and r["html_exists"] for r in runs)
     print("host_check=" + ("PASS" if good else "FAIL") + "; config/environment comparison=" + str(unchanged and env_unchanged))
     return 0 if good else 1
 

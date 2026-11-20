@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;">
+<title>Windows AI Doctor · Comparison</title><style>
+:root{color-scheme:light;font-family:system-ui,'Segoe UI',sans-serif;color:#17243a;background:#f2f5fa}
+*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:32px 24px}
+header{margin-bottom:24px}h1{font-size:clamp(1.6rem,5vw,2.5rem);margin:0 0 12px}
+h2{font-size:1.15rem}p,li,pre,h2{overflow-wrap:anywhere}p,li{line-height:1.65}
+.muted{color:#526078}.counts{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}
+.count,article,.priority{border:1px solid #cdd6e4;background:white;border-radius:12px;padding:18px}
+.count{min-width:115px;flex:1}.count strong{font-size:1.8rem;display:block}
+article{margin:16px 0}article h2{margin:0 0 12px}.badge{font-weight:700}
+.error{border-left:5px solid #b42318}.warn{border-left:5px solid #906400}
+.unknown{border-left:5px solid #5d478b}.pass{border-left:5px solid #167345}
+pre{white-space:pre-wrap;word-break:break-word;font-size:.86rem;background:#f4f6fa;padding:14px;border-radius:8px}
+ol{padding-left:24px}.priority{border-left:5px solid #315cc9}footer{margin-top:32px}
+@media(max-width:480px){main{padding:20px 12px}.count{min-width:90px;padding:12px}article{padding:14px}}
+</style></head><body><main>
+<header><h1>Windows AI Doctor · Comparison</h1><p class="muted">v0.2.0 · schema 1.0 · 2026-11-19T14:01:33+00:00</p></header>
+<section class="counts" aria-label="Status counts">
+<div class="count"><span>Added</span><strong>0</strong></div>
+<div class="count"><span>Removed</span><strong>0</strong></div>
+<div class="count"><span>Changed</span><strong>1</strong></div>
+</section>
+<p class="priority">Confirm that both reports cover the same environment and scope; path references have no identity across runs. A pass covers this check now only; unknown, skipped and removed checks do not establish a fix. Only numeric versions, installation-group counts and scan limits are compared; other evidence is not compared.</p><p>Unchanged checks: 18</p>
+<article><h2>claude.config.local · Changed</h2><p>error → pass</p><p>This check passes now.</p><pre>{}</pre></article>
+<footer class="muted"><p>Offline report · Original paths, configuration values and raw program output are not saved.</p></footer></main></body></html>

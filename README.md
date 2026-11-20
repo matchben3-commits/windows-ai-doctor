@@ -1,10 +1,26 @@
 # Windows AI Doctor
 
-[English](README.en.md) · v0.1.0 · Python 3.11+ · Windows 优先 · 运行时仅标准库
+[English](README.en.md) · v0.2.0 · Python 3.11+ · Windows 优先 · 运行时仅标准库
 
-检查 Codex CLI 和 Claude Code CLI 的 PATH 入口、重复安装线索、版本、按入口区分的运行时依赖、配置语法和 Windows/WSL 可见状态。导出中文或英文 Markdown / JSON 报告，路径使用不含原值的代号。
+检查 Codex CLI 和 Claude Code CLI 的 PATH 入口、重复安装线索、版本、按入口区分的运行时依赖、配置语法和 Windows/WSL 可见状态。导出中文或英文 Markdown / JSON / 离线 HTML 报告，比较两次结果，并按观察提供手动排障步骤。路径使用不含原值的代号。
 
-这是功能范围有限的 v0.1 首版。默认只诊断，不安装、升级、修复、登录或调用模型 API。
+这是功能范围有限的 v0.2 第二版。默认只诊断，不安装、升级、修复、登录或调用模型 API。
+
+## 第二版新增
+
+```powershell
+python .\doctor.py --format all --output-dir .\reports\before
+python .\doctor.py --format html --output-dir .\reports\html-only
+python .\doctor.py --compare .\reports\before\report.zh.json .\reports\after\report.zh.json --format all --output-dir .\reports\comparison
+```
+
+HTML 为内嵌样式的单文件，无脚本或外部资源；手动打开即可离线查看。先手动调整环境、再用相同检查范围生成 `after` 报告；对比本身只读两个输入，不运行诊断，也不访问输入内路径。对比文件名为 `comparison.zh.md/json/html`；完成比较退出 0，即使旧报告有异常。参数/输入/导出失败 2、中断 130。
+
+对比兼容 v0.1/v0.2 schema 1.0，只比较已知检查 ID、状态、纯数字三段版本、安装组数量及扫描限制。时间、语言和路径代号不同不产生噪声。路径代号跨次不能确认身份；两份报告是否来自相同环境须人工确认。未知、未检查、移除、范围受限不代表修复；通过只代表此项本次通过。拒绝重复键/编号、未知 ID/状态/schema、链接文件及超限数据；不复制任意输入文案。完整边界见 [比较契约](docs/comparison.md)。
+
+`--compare` 与 `--tools/--home/--project/--timeout/--no-version/--wsl-list` 冲突，不接受参数缩写。无输出目录时 `both/all` 打印 Markdown，单一格式打印对应内容。
+
+诊断开头按异常、提醒、未知列出处理顺序。各检查包含现象、依据、固定的手动复查步骤及限制；官方说明作为文字供手动查看，不自动打开链接或执行建议。
 
 ## 直接运行
 
@@ -35,7 +51,7 @@ python .\doctor.py --timeout 2 --wsl-list --output-dir .\reports\wsl-list
 ```
 
 - `--tools codex claude`：默认两种工具；可只选一种。
-- `--lang zh|en`、`--format both|md|json`：语言和格式。
+- `--lang zh|en`、`--format both|md|json|html|all`：语言和格式；both 仍为 MD+JSON，all 为三种。
 - `--home`：指定诊断目标用户目录，默认当前 Python 用户主目录。`CODEX_HOME` / `CLAUDE_CONFIG_DIR` 环境变量分别优先于默认 `.codex` / `.claude`。请使用绝对本地路径；相对、远程或链接配置记为无法判断，不悄悄回退。
 - `--project`：额外检查**明确指定的项目根目录**中的 `.codex/config.toml`、`.claude/settings.json`、`.claude/settings.local.json`；不向上遍历项目或计算最终合并值。
 - `--timeout`：每次版本/列表查询 0.1–30 秒，默认 3 秒，最多两次版本查询/工具（工具自身及必要的 Node）。捕获输出最多 16 KiB + 1 字节溢出检测。超时或输出过长后继续生成其他检查。
@@ -80,16 +96,16 @@ python .\tests\run_tests.py --evidence .\evidence\tests-rerun.json
 python .\tests\offline_check.py --format json
 ```
 
-演示只在临时目录创建合成配置、损坏的 npm 包装器和 Windows junction，包含一个故意损坏的配置，因此两种语言的子命令退出 `1` 是预期结果；示例生成器成功退出 `0`。临时目录自动清理。修订报告见 [中文](examples/review-fixes/zh/report.zh.md)、[English](examples/review-fixes/en/report.en.md)。
+演示只在临时目录创建合成配置、损坏的 npm 包装器和 Windows junction。调整前故意损坏配置，诊断退出 1；仅修正临时合成配置后，第二次诊断和对比退出 0；生成器成功退出 0 并清理临时目录。新版样例：[中文诊断](examples/v02-complete/zh/report.zh.html)、[English diagnosis](examples/v02-complete/en/report.en.html)、[中文对比](examples/v02-complete/comparison/zh/comparison.zh.html)、[English comparison](examples/v02-complete/comparison/en/comparison.en.html)。这不是对用户主机的修复结果。
 
-测试运行器只需标准库。真实 npm JS 入口测试借用已存在的 Node；Windows 原生样例借用系统已有的 .NET Framework C# 编译器，不会安装它们。缺少可选条件时如实 `SKIP`。具体实跑数量、退出码及覆盖边界见 [验收记录](docs/validation.md) 和 [机器证据](evidence/tests.json)。`offline_check.py` 在真实 CLI 进程内禁止 Python 网络操作，不等同于禁用主机网卡。
+测试运行器只需标准库。真实 npm JS 入口测试借用已存在的 Node；Windows 原生样例借用系统已有的 .NET Framework C# 编译器，不会安装它们。缺少可选条件时如实 `SKIP`。具体实跑数量、退出码及覆盖边界见 [验收记录](docs/validation.md) 和 [本轮机器证据](evidence/v02-tests.json)。`offline_check.py` 在真实 CLI 进程内禁止 Python 网络操作，不等同于禁用主机网卡。
 
 ## 规则与限制
 
-[官方规则依据](docs/rules.md) · [隐私说明](docs/privacy.md) · [验收与未覆盖范围](docs/validation.md) · [发布审查](docs/release-review.md)
+[官方规则依据](docs/rules.md) · [隐私说明](docs/privacy.md) · [验收与未覆盖范围](docs/validation.md) · [发布审查](docs/release-review-v0.2.md)
 
-首版不检查完整配置 schema、配置档/祖先层/管理策略、账户/服务可用性、CLI 功能任务、IDE/桌面版本、WSL 内部环境、所有包管理器 shim 或发布者签名。只识别明确布局，不针对历史 Issue 推断普遍故障。实际产品版本变化可能需要更新规则。
+第二版仍不检查完整配置 schema、配置档/祖先层/管理策略、账户/服务可用性、CLI 功能任务、IDE/桌面版本、WSL 内部环境、所有包管理器 shim 或发布者签名。只识别明确布局，不针对历史 Issue 推断普遍故障。实际产品版本变化可能需要更新规则。
 
-采用 [MIT 许可证](LICENSE)，npm 包装模板的 ISC 许可见 [第三方声明](THIRD_PARTY_NOTICES.md)。可选 Python 打包元数据已提供；源码直接运行已验收，wheel/pip 安装路径尚未验收。
+采用 [MIT 许可证](LICENSE)，npm 包装模板的 ISC 许可见 [第三方声明](THIRD_PARTY_NOTICES.md)。本轮已实际构建源码包和 wheel，并分别在干净临时虚拟环境验证命令入口、中英文导出、对比及卸载；见 [构建安装记录](evidence/build-install.json)。用户可在自己的虚拟环境用 `python -m pip install <wheel文件>` 安装，或直接运行源码。运行时无第三方依赖；构建需要临时的 build/setuptools/wheel。
 
-发布审查：常规全套 38 通过、1 跳过；该跳过项已由 dsh 在用户授权后单独补测通过，39 个不同测试项均有通过记录，并非一次全套 39 通过。终审另复跑常规全套得到 38 通过、1 跳过。详见 [发布审查与证据](docs/release-review.md)。
+v0.2 本轮整套 56 项为 54 通过、2 跳过、0 失败/错误，退出 0；两个文件符号链接项另经用户授权单独运行得到 2 通过、0 跳过、退出 0。不是一次整套 56 通过。详见 [交接](HANDOFF.md)、[本轮验证](docs/validation.md)及[显示核验](docs/html-validation.md)。2026-11-20 独立复核再次得到 54 通过、2 跳过；另有 13 项独立扩展检查全部通过。两项文件链接今日仍因权限跳过，昨日同哈希补测记录保留原日期。托管 Windows/Python 3.11、3.14 检查及发布状态见 [v0.2 发布审查](docs/release-review-v0.2.md) 与 [版本页](https://github.com/matchben3-commits/windows-ai-doctor/releases)。原 [v0.1 发布审查](docs/release-review.md) 仅为历史证据。

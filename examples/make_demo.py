@@ -47,7 +47,7 @@ def main():
         try:
             for lang in ("zh", "en"):
                 command = [sys.executable, str(ROOT / "doctor.py"), "--home", str(home), "--project", str(project),
-                           "--lang", lang, "--output-dir", str(destination / lang)]
+                           "--lang", lang, "--format", "all", "--output-dir", str(destination / lang)]
                 result = subprocess.run(command, env=env, cwd=temp, capture_output=True, timeout=15)
                 report_path = destination / lang / f"report.{lang}.json"
                 report = json.loads(report_path.read_text(encoding="utf-8"))
@@ -56,13 +56,30 @@ def main():
                              "expected_exit_code": 1, "synthetic": True,
                              "broken_npm_wrapper_unknown": versions[0]["status"] == "unknown",
                              "real_junction_fixture": junction is not None})
+            # Repair only the temporary synthetic config, then run diagnostics
+            # again. Neither report is hand-edited and no host config changes.
+            (project / ".claude/settings.local.json").write_text('{}', encoding="utf-8")
+            for lang in ("zh", "en"):
+                after = destination / "after" / lang
+                result = subprocess.run([sys.executable, str(ROOT / "doctor.py"), "--home", str(home),
+                                         "--project", str(project), "--lang", lang, "--format", "all",
+                                         "--output-dir", str(after)], env=env, cwd=temp, capture_output=True, timeout=15)
+                comparison = subprocess.run([sys.executable, str(ROOT / "doctor.py"), "--compare",
+                    str(destination / lang / f"report.{lang}.json"), str(after / f"report.{lang}.json"),
+                    "--format", "all", "--lang", lang, "--output-dir", str(destination / "comparison" / lang)],
+                    env=env, cwd=temp, capture_output=True, timeout=15)
+                if result.returncode != 0 or comparison.returncode != 0:
+                    raise ValueError("synthetic_comparison_failed")
+                runs.append({"language": lang, "exit_code": result.returncode, "expected_exit_code": 0,
+                             "synthetic": True, "stage": "after_synthetic_config_fix", "comparison_exit_code": comparison.returncode,
+                             "broken_npm_wrapper_unknown": True, "real_junction_fixture": junction is not None})
         finally:
             if junction is not None:
                 junction.rmdir()
         destination.mkdir(parents=True, exist_ok=True)
         (destination / "runs.json").write_text(json.dumps(runs, indent=2) + "\n", encoding="utf-8")
         print("Synthetic demo reports generated; expected diagnostic exit code is 1.")
-        return 0 if all(r["exit_code"] == 1 and r["broken_npm_wrapper_unknown"] for r in runs) else 1
+        return 0 if all(r["exit_code"] == r["expected_exit_code"] and r["broken_npm_wrapper_unknown"] for r in runs) else 1
 
 
 if __name__ == "__main__":

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;">
+<title>Windows AI Doctor</title><style>
+:root{color-scheme:light;font-family:system-ui,'Segoe UI',sans-serif;color:#17243a;background:#f2f5fa}
+*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:32px 24px}
+header{margin-bottom:24px}h1{font-size:clamp(1.6rem,5vw,2.5rem);margin:0 0 12px}
+h2{font-size:1.15rem}p,li,pre,h2{overflow-wrap:anywhere}p,li{line-height:1.65}
+.muted{color:#526078}.counts{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}
+.count,article,.priority{border:1px solid #cdd6e4;background:white;border-radius:12px;padding:18px}
+.count{min-width:115px;flex:1}.count strong{font-size:1.8rem;display:block}
+article{margin:16px 0}article h2{margin:0 0 12px}.badge{font-weight:700}
+.error{border-left:5px solid #b42318}.warn{border-left:5px solid #906400}
+.unknown{border-left:5px solid #5d478b}.pass{border-left:5px solid #167345}
+pre{white-space:pre-wrap;word-break:break-word;font-size:.86rem;background:#f4f6fa;padding:14px;border-radius:8px}
+ol{padding-left:24px}.priority{border-left:5px solid #315cc9}footer{margin-top:32px}
+@media(max-width:480px){main{padding:20px 12px}.count{min-width:90px;padding:12px}article{padding:14px}}
+</style></head><body><main>
+<header><h1>Windows AI Doctor</h1><p class="muted">v0.2.0 · schema 1.0 · 2026-11-19T14:00:56+00:00</p></header>
+<section class="counts" aria-label="Status counts">
+<div class="count"><span>Pass</span><strong>9</strong></div>
+<div class="count"><span>Warning</span><strong>1</strong></div>
+<div class="count"><span>Error</span><strong>0</strong></div>
+<div class="count"><span>Unknown</span><strong>3</strong></div>
+<div class="count"><span>Not checked</span><strong>3</strong></div>
+</section>
+<section class="priority"><h2>Review first: errors → warnings → unknown</h2><p>claude.path, claude.install, claude.dependency, claude.version</p></section>
+<article class="pass"><h2>system.platform · <span class="badge">Pass</span></h2><p>Current OS; only the current process environment is inspected.</p><pre>{
+  &quot;os&quot;: &quot;Windows&quot;,
+  &quot;python&quot;: &quot;3.12.10&quot;,
+  &quot;windows_target&quot;: true
+}</pre>
+<h3>Observation</h3><p>This is an observation within a limited scope.</p><p>Basis: The report retains the check&#x27;s specific status and evidence.</p><h3>Manual recheck</h3><ol><li>Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.</li></ol><p class="muted">Limitations: Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked.</p>
+</article>
+<article class="pass"><h2>codex.path · <span class="badge">Pass</span></h2><p>Entries are ordered by PATH; wrappers for one installation share a group.</p><pre>{
+  &quot;entries&quot;: [
+    {
+      &quot;path&quot;: &quot;&lt;PATH:1&gt;&quot;,
+      &quot;command_name&quot;: &quot;codex.cmd&quot;,
+      &quot;installation_group&quot;: 1,
+      &quot;kind&quot;: &quot;npm-js&quot;,
+      &quot;path_access&quot;: &quot;checked&quot;,
+      &quot;existence_verified&quot;: true
+    },
+    {
+      &quot;path&quot;: &quot;&lt;PATH:2&gt;&quot;,
+      &quot;command_name&quot;: &quot;codex.ps1&quot;,
+      &quot;installation_group&quot;: 1,
+      &quot;kind&quot;: &quot;npm-js&quot;,
+      &quot;path_access&quot;: &quot;checked&quot;,
+      &quot;existence_verified&quot;: true
+    },
+    {
+      &quot;path&quot;: &quot;&lt;PATH:3&gt;&quot;,
+      &quot;command_name&quot;: &quot;codex&quot;,
+      &quot;installation_group&quot;: 1,
+      &quot;kind&quot;: &quot;npm-js&quot;,
+      &quot;path_access&quot;: &quot;checked&quot;,
+      &quot;existence_verified&quot;: true
+    }
+  ],
+  &quot;installation_groups&quot;: 1,
+  &quot;cmd_path_candidate&quot;: &quot;&lt;PATH:1&gt;&quot;,
+  &quot;powershell_path_candidate&quot;: &quot;&lt;PATH:2&gt;&quot;,
+  &quot;resolution_model&quot;: &quot;PATH+PATHEXT; excludes CWD, aliases and functions&quot;,
+  &quot;scan_limited&quot;: false
+}</pre>
+<h3>Observation</h3><p>This is an observation within a limited scope.</p><p>Basis: The report retains the check&#x27;s specific status and evidence.</p><h3>Manual recheck</h3><ol><li>Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.</li><li>Official guidance (open manually): https://github.com/openai/codex/blob/main/README.md</li></ol><p class="muted">Limitations: Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked.</p>
+</article>
+<article class="pass"><h2>codex.install · <span class="badge">Pass</span></h2><p>Installation type is inferred from local layout; unknown entries are not executed.</p><pre>{
+  &quot;kind&quot;: &quot;npm-js&quot;,
+  &quot;publisher_verified&quot;: false
+}</pre>
+<h3>Observation</h3><p>This is an observation within a limited scope.</p><p>Basis: The report retains the check&#x27;s specific status and evidence.</p><h3>Manual recheck</h3><ol><li>Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.</li><li>Official guidance (open manually): https://github.com/openai/codex/blob/main/README.md</li></ol><p class="muted">Limitations: Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked.</p>
+</article>
+<article class="pass"><h2>codex.dependency · <span class="badge">Pass</span></h2><p>Runtime checks depend on the identified entry; native programs do not universally require Node.js.</p><pre>{
+  &quot;runtime&quot;: &quot;node&quot;,
+  &quot;node_found&quot;: true,
+  &quot;node_path_check&quot;: &quot;found&quot;,
+  &quot;documented_package_engine&quot;: &quot;&gt;=16&quot;,
+  &quot;version&quot;: &quot;24.19.0&quot;,
+  &quot;probe_reason&quot;: &quot;ok&quot;
+}</pre>
+<h3>Observation</h3><p>This is an observation within a limited scope.</p><p>Basis: The report retains the check&#x27;s specific status and evidence.</p><h3>Manual recheck</h3><ol><li>Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.</li><li>Official guidance (open manually): https://github.com/openai/codex/blob/main/README.md</li></ol><p class="muted">Limitations: Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked.</p>
+</article>
+<article class="pass"><h2>codex.version · <span class="badge">Pass</span></h2><p>Only a complete matching version response is accepted; raw output is discarded.</p><pre>{
+  &quot;reason&quot;: &quot;version_parsed&quot;,
+  &quot;returncode&quot;: 0,
+  &quot;version&quot;: &quot;0.169.0&quot;,
+  &quot;captured_bytes&quot;: 18,
+  &quot;timeout_seconds&quot;: 3.0
+}</pre>
+<h3>Observation</h3><p>Version observations have a limited scope.</p><p>Basis: Only short complete version responses are accepted; disabled or unknown responses do not pass.</p><h3>Manual recheck</h3><ol><li>After manually confirming the entry, run codex --version or claude --version.</li><li>Official guidance (open manually): https://github.com/openai/codex/blob/main/README.md</li></ol><p class="muted">Limitations: A pass covers this version query only, not service, login or task availability.</p>
+</article>
+<article class="pass"><h2>codex.config.user · <span class="badge">Pass</span></h2><p>Syntax only for the named configuration file; login, model service, keys and effective values are not validated.</p><pre>{
+  &quot;layer&quot;: &quot;user&quot;,
+  &quot;location_source&quot;: &quot;default_home&quot;,
+  &quot;path&quot;: &quot;&lt;PATH:4&gt;&quot;,
+  &quot;format&quot;: &quot;TOML&quot;,
+  &quot;syntax&quot;: &quot;valid&quot;
+}</pre>
+<h3>Observation</h3><p>Configuration checks cover syntax only.</p><p>Basis: syntax distinguishes valid, absent, unreadable, safety_limit and other observations.</p><h3>Manual recheck</h3><ol><li>Manually confirm that the user or explicit project layer is the intended scope.</li><li>Consult official configuration guidance before making changes, then recheck.</li><li>Official guidance (open manually): https://developers.openai.com/codex/config-basic/</li></ol><p class="muted">Limitations: Files can be optional; valid syntax does not establish effective configuration or service availability; restricted files are not read further.</p>
+</article>
+<article class="warn"><h2>claude.path · <span class="badge">Warning</span></h2><p>No callable entry in the current PATH; this does not prove the tool is absent from the machine.</p><pre>{
+  &quot;entries&quot;: [],
+  &quot;installation_groups&quot;: 0,
+  &quot;cmd_path_candidate&quot;: null,
+  &quot;powershell_path_candidate&quot;: null,
+  &quot;resolution_model&quot;: &quot;PATH+PATHEXT; excludes CWD, aliases and functions&quot;,
+  &quot;scan_limited&quot;: false
+}</pre>
+<h3>Observation</h3><p>No selectable PATH entry was found.</p><p>Basis: No CMD/PATHEXT candidate was selected in this scan.</p><h3>Manual recheck</h3><ol><li>Run Get-Command codex,claude -All in your actual PowerShell to inspect entries.</li><li>Manually review installation locations using the official setup guide; open a new terminal before rechecking.</li><li>Official guidance (open manually): https://code.claude.com/docs/en/setup</li></ol><p class="muted">Limitations: No disk search is performed; absence from PATH does not prove absence of installation.</p>
+</article>
+<article class="unknown"><h2>claude.install · <span class="badge">Unknown</span></h2><p>Installation type is inferred from local layout; unknown entries are not executed.</p><pre>{
+  &quot;kind&quot;: &quot;not_found&quot;,
+  &quot;publisher_verified&quot;: false
+}</pre>
+<h3>Observation</h3><p>This is an observation within a limited scope.</p><p>Basis: The report retains the check&#x27;s specific status and evidence.</p><h3>Manual recheck</h3><ol><li>Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.</li><li>Official guidance (open manually): https://code.claude.com/docs/en/setup</li></ol><p class="muted">Limitations: Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked.</p>
+</article>
+<article class="unknown"><h2>claude.dependency · <span class="badge">Unknown</span></h2><p>Runtime checks depend on the identified entry; native programs do not universally require Node.js.</p><pre>{
+  &quot;runtime&quot;: &quot;unknown&quot;
+}</pre>
+<h3>Observation</h3><p>The Node dependency cannot be determined.</p><p>Basis: The entry, Node path, version response or engine range could not be fully confirmed.</p><h3>Manual recheck</h3><ol><li>Run Get-Command node -All to inspect shell entries.</li><li>Manually review restricted paths or the package engine range, then recheck.</li><li>Official guidance (open manually): https://code.claude.com/docs/en/setup</li></ol><p class="muted">Limitations: Restricted paths, disabled probes and unknown responses do not establish that Node is missing.</p>
+</article>
+<article class="unknown"><h2>claude.version · <span class="badge">Unknown</span></h2><p>Only a complete matching version response is accepted; raw output is discarded.</p><pre>{
+  &quot;reason&quot;: &quot;unrecognized_or_missing_runtime&quot;
+}</pre>
+<h3>Observation</h3><p>Version observations have a limited scope.</p><p>Basis: Only short complete version responses are accepted; disabled or unknown responses do not pass.</p><h3>Manual recheck</h3><ol><li>After manually confirming the entry, run codex --version or claude --version.</li><li>Official guidance (open manually): https://code.claude.com/docs/en/setup</li></ol><p class="muted">Limitations: A pass covers this version query only, not service, login or task availability.</p>
+</article>
+<article class="pass"><h2>claude.config.user · <span class="badge">Pass</span></h2><p>Syntax only for the named configuration file; login, model service, keys and effective values are not validated.</p><pre>{
+  &quot;layer&quot;: &quot;user&quot;,
+  &quot;location_source&quot;: &quot;default_home&quot;,
+  &quot;path&quot;: &quot;&lt;PATH:5&gt;&quot;,
+  &quot;format&quot;: &quot;JSON&quot;,
+  &quot;syntax&quot;: &quot;valid&quot;
+}</pre>
+<h3>Observation</h3><p>Configuration checks cover syntax only.</p><p>Basis: syntax distinguishes valid, absent, unreadable, safety_limit and other observations.</p><h3>Manual recheck</h3><ol><li>Manually confirm that the user or explicit project layer is the intended scope.</li><li>Consult official configuration guidance before making changes, then recheck.</li><li>Official guidance (open manually): https://code.claude.com/docs/en/settings</li></ol><p class="muted">Limitations: Files can be optional; valid syntax does not establish effective configuration or service availability; restricted files are not read further.</p>
+</article>
+<article class="pass"><h2>wsl.launcher · <span class="badge">Pass</span></h2><p>Only the system WSL launcher is checked; presence does not prove component or distribution availability.</p><pre>{
+  &quot;present&quot;: true,
+  &quot;component_health&quot;: &quot;not_checked&quot;
+}</pre>
+<h3>Observation</h3><p>The WSL internal environment is not checked.</p><p>Basis: Windows launcher and registration counts are external observations; internal checks always remain skipped.</p><h3>Manual recheck</h3><ol><li>If you use tools inside WSL, inspect installation separately inside the distribution you select yourself.</li><li>To inspect the Windows registration list only, manually run wsl --list --quiet.</li><li>Official guidance (open manually): https://learn.microsoft.com/en-us/windows/wsl/basic-commands</li></ol><p class="muted">Limitations: This tool does not start distributions or treat absence of WSL as an AI tool failure.</p>
+</article>
+<article class="pass"><h2>wsl.inventory · <span class="badge">Pass</span></h2><p>Observe only the count of registered distributions for this user; no internal files are read.</p><pre>{
+  &quot;registered_count&quot;: 0,
+  &quot;reason&quot;: &quot;registration_key_absent&quot;
+}</pre>
+<h3>Observation</h3><p>The WSL internal environment is not checked.</p><p>Basis: Windows launcher and registration counts are external observations; internal checks always remain skipped.</p><h3>Manual recheck</h3><ol><li>If you use tools inside WSL, inspect installation separately inside the distribution you select yourself.</li><li>To inspect the Windows registration list only, manually run wsl --list --quiet.</li><li>Official guidance (open manually): https://learn.microsoft.com/en-us/windows/wsl/basic-commands</li></ol><p class="muted">Limitations: This tool does not start distributions or treat absence of WSL as an AI tool failure.</p>
+</article>
+<article class="skipped"><h2>wsl.running · <span class="badge">Not checked</span></h2><p>Running state comes only from an explicitly enabled read-only list query; WSL is not executed by default.</p><pre>{
+  &quot;reason&quot;: &quot;not_requested&quot;,
+  &quot;running_count&quot;: null
+}</pre>
+<h3>Observation</h3><p>The WSL internal environment is not checked.</p><p>Basis: Windows launcher and registration counts are external observations; internal checks always remain skipped.</p><h3>Manual recheck</h3><ol><li>If you use tools inside WSL, inspect installation separately inside the distribution you select yourself.</li><li>To inspect the Windows registration list only, manually run wsl --list --quiet.</li><li>Official guidance (open manually): https://learn.microsoft.com/en-us/windows/wsl/basic-commands</li></ol><p class="muted">Limitations: This tool does not start distributions or treat absence of WSL as an AI tool failure.</p>
+</article>
+<article class="skipped"><h2>wsl.internal · <span class="badge">Not checked</span></h2><p>Commands and configuration inside distributions were not inspected; no distribution was launched.</p><pre>{}</pre>
+<h3>Observation</h3><p>The WSL internal environment is not checked.</p><p>Basis: Windows launcher and registration counts are external observations; internal checks always remain skipped.</p><h3>Manual recheck</h3><ol><li>If you use tools inside WSL, inspect installation separately inside the distribution you select yourself.</li><li>To inspect the Windows registration list only, manually run wsl --list --quiet.</li><li>Official guidance (open manually): https://learn.microsoft.com/en-us/windows/wsl/basic-commands</li></ol><p class="muted">Limitations: This tool does not start distributions or treat absence of WSL as an AI tool failure.</p>
+</article>
+<article class="skipped"><h2>scope.unchecked · <span class="badge">Not checked</span></h2><p>Merged configuration is not computed; project ancestors, profiles, managed policy, aliases and shell execution policy are outside v0.1 scope.</p><pre>{}</pre>
+<h3>Observation</h3><p>This is an observation within a limited scope.</p><p>Basis: The report retains the check&#x27;s specific status and evidence.</p><h3>Manual recheck</h3><ol><li>Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.</li></ol><p class="muted">Limitations: Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked.</p>
+</article>
+<footer class="muted"><p>Offline report · Original paths, configuration values and raw program output are not saved.</p></footer></main></body></html>

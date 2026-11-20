@@ -1,5 +1,15 @@
 # 隐私与执行边界 / Privacy and execution boundaries
 
+## v0.2 新增边界 / New in v0.2
+
+离线比较只读两个显式 JSON，不实例化诊断器，不执行版本/WSL/网络，也不访问输入中路径。2 MiB、16 层、20,000 节点、64 findings 限额及重复键/编号验证作用于整个输入；白名单仅保留已知 ID、状态和有限数字观察。任意 summary、recommendation、evidence 字符串、路径、URL 和自定义版本标签不复制到比较输出。输入文件同样逐级拒绝链接/重解析点，详见 [比较契约](comparison.md)。
+
+HTML 使用转义后的文本、固定内嵌 CSS，无 JavaScript 和动态 URL/属性，设限制性 CSP。排障里的官方 URL 是固定文字，不加载资源。MD/JSON/HTML 导出先检查同名冲突，并用独占创建；失败/中断删除本次创建的文件，保留原文件；若清理失败会固定提示，不回显路径或异常。输出目录由调用者选择；不承诺输出路径没有链接或并发变动。
+
+Comparison projects untrusted reports onto known IDs and limited numeric fields; arbitrary imported strings never enter output. HTML escapes dynamic text and contains no script or external resource dependency. Export rolls back only files newly created by this invocation; existing files are never removed. Output directory selection is caller-controlled, and concurrent replacement/hard links remain outside the model.
+
+本轮新验证：[完整套件](../evidence/v02-tests.json)、[单独授权文件链接补测](../evidence/v02-authorized-links.json)、[显示核验](html-validation.md)、[本机检查](../evidence/v02-host/runs.json)。下文沿用的 dsh 单项链接证据属于 v0.1 历史。
+
 ## 读取什么 / What is read
 
 - 当前进程 PATH/PATHEXT、配置目录环境变量、当前用户主目录位置。

@@ -1,0 +1,38 @@
+[
+  {
+    "language": "zh",
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "synthetic": true,
+    "broken_npm_wrapper_unknown": true,
+    "real_junction_fixture": true
+  },
+  {
+    "language": "en",
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "synthetic": true,
+    "broken_npm_wrapper_unknown": true,
+    "real_junction_fixture": true
+  },
+  {
+    "language": "zh",
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "synthetic": true,
+    "stage": "after_synthetic_config_fix",
+    "comparison_exit_code": 0,
+    "broken_npm_wrapper_unknown": true,
+    "real_junction_fixture": true
+  },
+  {
+    "language": "en",
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "synthetic": true,
+    "stage": "after_synthetic_config_fix",
+    "comparison_exit_code": 0,
+    "broken_npm_wrapper_unknown": true,
+    "real_junction_fixture": true
+  }
+]

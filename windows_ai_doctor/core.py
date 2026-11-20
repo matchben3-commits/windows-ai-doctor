@@ -11,6 +11,7 @@ from .discovery import bounded_read, discover, is_native, local_absolute
 from .messages import message
 from .privacy import Privacy, safe_version
 from .runner import run_bounded
+from .guidance import guidance, priorities
 
 
 class Doctor:
@@ -24,10 +25,14 @@ class Doctor:
         self.privacy, self.findings = Privacy(), []
 
     def add(self, id, target, status, text, evidence=None, review="review_scope"):
-        self.findings.append({"id": id, "target": target, "status": status,
+        finding = {"id": id, "target": target, "status": status,
             "summary": message(text, self.lang), "evidence": evidence or {},
             "recommendation": message(review, self.lang),
-            "recheck": message(review, self.lang)})
+            "recheck": message(review, self.lang)}
+        finding["guidance"] = guidance(finding, self.lang)
+        finding["recommendation"] = finding["guidance"]["phenomenon"]
+        finding["recheck"] = " ".join(finding["guidance"]["steps"])
+        self.findings.append(finding)
 
     def probe(self, argv):
         return self.runner(argv, timeout=self.timeout, env=self.env)
@@ -49,7 +54,7 @@ class Doctor:
                 "language": self.lang, "summary": counts,
                 "privacy": {"paths": "opaque_references", "raw_output": False,
                             "config_values": False, "credentials_read": False},
-                "findings": self.findings}
+                "findings": self.findings, "priorities": priorities(self.findings)}
 
     def check_tool(self, tool):
         entries, selected, ps, limited = discover(tool, self.env)

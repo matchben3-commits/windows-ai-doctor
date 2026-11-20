@@ -1,0 +1,38 @@
+[
+  {
+    "script": "doctor.py",
+    "lang": "zh",
+    "exit_code": 0,
+    "config_unchanged_by_variable": {
+      "CODEX_HOME": true,
+      "CLAUDE_CONFIG_DIR": true
+    }
+  },
+  {
+    "script": "doctor.py",
+    "lang": "en",
+    "exit_code": 0,
+    "config_unchanged_by_variable": {
+      "CODEX_HOME": true,
+      "CLAUDE_CONFIG_DIR": true
+    }
+  },
+  {
+    "script": "tests/offline_check.py",
+    "lang": "zh",
+    "exit_code": 0,
+    "config_unchanged_by_variable": {
+      "CODEX_HOME": true,
+      "CLAUDE_CONFIG_DIR": true
+    }
+  },
+  {
+    "script": "tests/offline_check.py",
+    "lang": "en",
+    "exit_code": 0,
+    "config_unchanged_by_variable": {
+      "CODEX_HOME": true,
+      "CLAUDE_CONFIG_DIR": true
+    }
+  }
+]

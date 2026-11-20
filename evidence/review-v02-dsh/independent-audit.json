@@ -1,0 +1,77 @@
+{
+  "generated_at": "2026-11-20T09:36:22.305671+00:00",
+  "python": "3.12.10",
+  "exit_code": 0,
+  "tests_run": 13,
+  "passed": 13,
+  "skipped": 0,
+  "failures": 0,
+  "errors": 0,
+  "cases": [
+    {
+      "test": "__main__.Audit.test_accepted_id_set_and_integer_boolean_limits",
+      "outcome": "PASS",
+      "seconds": 0.031
+    },
+    {
+      "test": "__main__.Audit.test_ads_parent_and_unc_rejected_before_open",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "__main__.Audit.test_byte_limit_exact_and_oversize_before_open",
+      "outcome": "PASS",
+      "seconds": 0.094
+    },
+    {
+      "test": "__main__.Audit.test_compare_only_opens_two_explicit_inputs_and_no_probes",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "__main__.Audit.test_depth_boundary_and_escaped_brackets",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "__main__.Audit.test_duplicate_keys_escaped_alias_and_duplicate_id_rejected",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "__main__.Audit.test_error_messages_and_all_comparison_formats_drop_imported_text",
+      "outcome": "PASS",
+      "seconds": 0.078
+    },
+    {
+      "test": "__main__.Audit.test_guidance_steps_and_limits_consistent_across_languages_and_formats",
+      "outcome": "PASS",
+      "seconds": 0.015
+    },
+    {
+      "test": "__main__.Audit.test_node_and_string_budget_exact_boundaries",
+      "outcome": "PASS",
+      "seconds": 0.063
+    },
+    {
+      "test": "__main__.Audit.test_nonfinite_bad_encoding_schema_and_unsupported_fields_rejected",
+      "outcome": "PASS",
+      "seconds": 0.015
+    },
+    {
+      "test": "__main__.Audit.test_real_junction_blocks_missing_leaf_before_descendant_access",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "__main__.Audit.test_reduced_scope_removed_checks_and_version_only_change",
+      "outcome": "PASS",
+      "seconds": 0.0
+    },
+    {
+      "test": "__main__.Audit.test_status_transition_matrix_has_no_repair_claim",
+      "outcome": "PASS",
+      "seconds": 0.094
+    }
+  ]
+}

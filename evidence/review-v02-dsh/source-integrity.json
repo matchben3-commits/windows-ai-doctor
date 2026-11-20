@@ -1,0 +1,54 @@
+{
+  "verified_at": "2026-11-20T09:44:23.589140+00:00",
+  "runtime_modules_unchanged": true,
+  "files": [
+    {
+      "path": "windows_ai_doctor/__init__.py",
+      "sha256": "90b6ae6cf81274c7e57c09b974c1d6080812f1bbe06c13591d5fa5dd671f4d31"
+    },
+    {
+      "path": "windows_ai_doctor/__main__.py",
+      "sha256": "79ee6f134c5c5193377cf9b189cbdcc3e2095e49ba9cec310114441c15a917c4"
+    },
+    {
+      "path": "windows_ai_doctor/cli.py",
+      "sha256": "d34233591e5f5df9b3eeb293289c33d4d03f9ab88b144a7b4b2d50bd4a77a94f"
+    },
+    {
+      "path": "windows_ai_doctor/compare.py",
+      "sha256": "2bcd315603729302a566caffd0f7af447d7aeb9f2390a380a112383d12887831"
+    },
+    {
+      "path": "windows_ai_doctor/core.py",
+      "sha256": "98bfc2b99ee28e463baccf849f0282fdde30f16bde3933be5e5119cfd631de7b"
+    },
+    {
+      "path": "windows_ai_doctor/discovery.py",
+      "sha256": "ee921e7121b8faeba3f0f05b9ea32b5d46b5b35a09d5cc4f69111dfe70d4da91"
+    },
+    {
+      "path": "windows_ai_doctor/guidance.py",
+      "sha256": "71d346c8ff079ad59665ee99f4dfaf953dda5ee90c314c253bbd53eef7c1fb5a"
+    },
+    {
+      "path": "windows_ai_doctor/messages.py",
+      "sha256": "a00c0c20fdc795724ba218b461d64d67677a3c9b34d7fd50e15ca6adaf0bd1c7"
+    },
+    {
+      "path": "windows_ai_doctor/npm_shims.py",
+      "sha256": "9087fa4a3905909fc3d9ba86c3e7c1da9137e63416fb81ba844e4a72063edea8"
+    },
+    {
+      "path": "windows_ai_doctor/privacy.py",
+      "sha256": "a549ca7d3cadcd6860e4285e5789b432177a7edd46e5f78c5fb5e1feaf1ff0ce"
+    },
+    {
+      "path": "windows_ai_doctor/report.py",
+      "sha256": "4955fc8a9db488f1536066d5472091e55fee40a816879bd1bdee1fd833818548"
+    },
+    {
+      "path": "windows_ai_doctor/runner.py",
+      "sha256": "e1138ee2fb6a3e37477428bb2d47f2b5f6f06c579dd12f464678a003177b0396"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "report_type": "comparison",
+  "doctor_version": "0.2.0",
+  "generated_at": "2026-11-19T14:01:33+00:00",
+  "language": "zh",
+  "summary": {
+    "added": 0,
+    "removed": 0,
+    "changed": 1
+  },
+  "unchanged": 18,
+  "changes": [
+    {
+      "id": "claude.config.local",
+      "change": "changed",
+      "before": "error",
+      "after": "pass",
+      "note": "passes_now",
+      "details": {}
+    }
+  ],
+  "notice": "请自行确认两份报告来自相同环境和检查范围；路径代号跨次无身份意义。通过仅代表此项本次通过；未知、未检查和移除均不代表修复。仅比较数字版本、安装组数量和扫描限制，其他证据未比较。"
+}

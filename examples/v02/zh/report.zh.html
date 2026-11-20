@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;">
+<title>Windows AI Doctor</title><style>
+:root{color-scheme:light;font-family:system-ui,'Segoe UI',sans-serif;color:#17243a;background:#f2f5fa}
+*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:32px 24px}
+header{margin-bottom:24px}h1{font-size:clamp(1.6rem,5vw,2.5rem);margin:0 0 12px}
+h2{font-size:1.15rem}p,li,pre,h2{overflow-wrap:anywhere}p,li{line-height:1.65}
+.muted{color:#526078}.counts{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}
+.count,article,.priority{border:1px solid #cdd6e4;background:white;border-radius:12px;padding:18px}
+.count{min-width:115px;flex:1}.count strong{font-size:1.8rem;display:block}
+article{margin:16px 0}article h2{margin:0 0 12px}.badge{font-weight:700}
+.error{border-left:5px solid #b42318}.warn{border-left:5px solid #906400}
+.unknown{border-left:5px solid #5d478b}.pass{border-left:5px solid #167345}
+pre{white-space:pre-wrap;word-break:break-word;font-size:.86rem;background:#f4f6fa;padding:14px;border-radius:8px}
+ol{padding-left:24px}.priority{border-left:5px solid #315cc9}footer{margin-top:32px}
+@media(max-width:480px){main{padding:20px 12px}.count{min-width:90px;padding:12px}article{padding:14px}}
+</style></head><body><main>
+<header><h1>Windows AI Doctor</h1><p class="muted">v0.2.0 · schema 1.0 · 2026-11-19T14:00:55+00:00</p></header>
+<section class="counts" aria-label="Status counts">
+<div class="count"><span>通过</span><strong>6</strong></div>
+<div class="count"><span>提醒</span><strong>2</strong></div>
+<div class="count"><span>异常</span><strong>1</strong></div>
+<div class="count"><span>无法判断</span><strong>6</strong></div>
+<div class="count"><span>未检查</span><strong>4</strong></div>
+</section>
+<section class="priority"><h2>优先处理：异常 → 提醒 → 无法判断</h2><p>claude.config.local, codex.path, claude.path, codex.install, codex.dependency, codex.version, claude.install, claude.dependency, claude.version</p></section>
+<article class="pass"><h2>system.platform · <span class="badge">通过</span></h2><p>当前操作系统；仅检查当前进程可见环境。</p><pre>{
+  &quot;os&quot;: &quot;Windows&quot;,
+  &quot;python&quot;: &quot;3.12.10&quot;,
+  &quot;windows_target&quot;: true
+}</pre>
+<h3>现象</h3><p>此项仅反映限定范围内的观察。</p><p>判断依据：报告保留具体检查状态与证据。</p><h3>手动复查步骤</h3><ol><li>先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。</li></ol><p class="muted">检查限制：不检查账户、认证、聊天记录、完整配置合并或实际 AI 任务。</p>
+</article>
+<article class="warn"><h2>codex.path · <span class="badge">提醒</span></h2><p>部分 PATH 候选受链接或访问限制，存在性未确认；保留原顺序且不执行。</p><pre>{
+  &quot;entries&quot;: [
+    {
+      &quot;path&quot;: &quot;&lt;PATH:1&gt;&quot;,
+      &quot;command_name&quot;: &quot;codex.cmd&quot;,
+      &quot;installation_group&quot;: 1,
+      &quot;kind&quot;: &quot;unknown&quot;,
+      &quot;path_access&quot;: &quot;checked&quot;,
+      &quot;existence_verified&quot;: true
+    },
+    {
+      &quot;path&quot;: &quot;&lt;PATH:2&gt;&quot;,
+      &quot;command_name&quot;: &quot;codex.com&quot;,
+      &quot;installation_group&quot;: 2,
+      &quot;kind&quot;: &quot;unknown&quot;,
+      &quot;path_access&quot;: &quot;blocked&quot;,
+      &quot;existence_verified&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;&lt;PATH:3&gt;&quot;,
+      &quot;command_name&quot;: &quot;codex.exe&quot;,
+      &quot;installation_group&quot;: 2,
+      &quot;kind&quot;: &quot;unknown&quot;,
+      &quot;path_access&quot;: &quot;blocked&quot;,
+      &quot;existence_verified&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;&lt;PATH:4&gt;&quot;,
+      &quot;command_name&quot;: &quot;codex.bat&quot;,
+      &quot;installation_group&quot;: 2,
+      &quot;kind&quot;: &quot;unknown&quot;,
+      &quot;path_access&quot;: &quot;blocked&quot;,
+      &quot;existence_verified&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;&lt;PATH:5&gt;&quot;,
+      &quot;command_name&quot;: &quot;codex.cmd&quot;,
+      &quot;installation_group&quot;: 2,
+      &quot;kind&quot;: &quot;unknown&quot;,
+      &quot;path_access&quot;: &quot;blocked&quot;,
+      &quot;existence_verified&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;&lt;PATH:6&gt;&quot;,
+      &quot;command_name&quot;: &quot;codex.ps1&quot;,
+      &quot;installation_group&quot;: 2,
+      &quot;kind&quot;: &quot;unknown&quot;,
+      &quot;path_access&quot;: &quot;blocked&quot;,
+      &quot;existence_verified&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;&lt;PATH:7&gt;&quot;,
+      &quot;command_name&quot;: &quot;codex&quot;,
+      &quot;installation_group&quot;: 2,
+      &quot;kind&quot;: &quot;unknown&quot;,
+      &quot;path_access&quot;: &quot;blocked&quot;,
+      &quot;existence_verified&quot;: false
+    }
+  ],
+  &quot;installation_groups&quot;: 2,
+  &quot;cmd_path_candidate&quot;: &quot;&lt;PATH:1&gt;&quot;,
+  &quot;powershell_path_candidate&quot;: &quot;&lt;PATH:1&gt;&quot;,
+  &quot;resolution_model&quot;: &quot;PATH+PATHEXT; excludes CWD, aliases and functions&quot;,
+  &quot;scan_limited&quot;: false
+}</pre>
+<h3>现象</h3><p>扫描范围受限。</p><p>判断依据：scan_limited 为 true，或存在受限候选。</p><h3>手动复查步骤</h3><ol><li>运行 Get-Command codex,claude -All，人工核对未能覆盖的入口。</li><li>在范围一致时重新体检。</li><li>官方说明（手动查看）：https://github.com/openai/codex/blob/main/README.md</li></ol><p class="muted">检查限制：候选列表不完整，不能证明未安装或不存在重复安装。</p>
+</article>
+<article class="unknown"><h2>codex.install · <span class="badge">无法判断</span></h2><p>安装方式仅由本地文件结构推断；未知入口不执行。</p><pre>{
+  &quot;kind&quot;: &quot;unknown&quot;,
+  &quot;publisher_verified&quot;: false
+}</pre>
+<h3>现象</h3><p>入口形式未识别。</p><p>判断依据：安装形式为 unknown；未满足原生格式或完整 npm 模板。</p><h3>手动复查步骤</h3><ol><li>运行 Get-Command codex,claude -All，人工核对安装来源。</li><li>对照官方安装说明检查包装器；不要因目标文件存在就判定入口正常。</li><li>官方说明（手动查看）：https://github.com/openai/codex/blob/main/README.md</li></ol><p class="muted">检查限制：自定义或新版包装器也可能未知；本工具不通过 shell 执行包装器。</p>
+</article>
+<article class="unknown"><h2>codex.dependency · <span class="badge">无法判断</span></h2><p>只检查所识别入口的运行时依赖；原生程序不统一要求 Node.js。</p><pre>{
+  &quot;runtime&quot;: &quot;unknown&quot;
+}</pre>
+<h3>现象</h3><p>Node 依赖无法判断。</p><p>判断依据：入口或 Node 路径、版本响应、引擎范围未能完整确认。</p><h3>手动复查步骤</h3><ol><li>运行 Get-Command node -All 核对终端入口。</li><li>人工检查受限路径或本地包引擎范围，再体检。</li><li>官方说明（手动查看）：https://github.com/openai/codex/blob/main/README.md</li></ol><p class="muted">检查限制：路径受限、探测关闭或响应未知均不等于未安装。</p>
+</article>
+<article class="unknown"><h2>codex.version · <span class="badge">无法判断</span></h2><p>仅接受完整匹配的版本响应；未保留原始输出。</p><pre>{
+  &quot;reason&quot;: &quot;unrecognized_or_missing_runtime&quot;
+}</pre>
+<h3>现象</h3><p>版本观察有范围限制。</p><p>判断依据：仅接受短且完整匹配的版本响应；禁用或未知响应不算通过。</p><h3>手动复查步骤</h3><ol><li>人工确认入口后运行 codex --version 或 claude --version。</li><li>官方说明（手动查看）：https://github.com/openai/codex/blob/main/README.md</li></ol><p class="muted">检查限制：版本通过仅表示本次版本查询通过，不验证服务、登录或实际任务。</p>
+</article>
+<article class="pass"><h2>codex.config.user · <span class="badge">通过</span></h2><p>仅检查指定配置文件的语法；不验证登录、模型服务、键名或最终生效值。</p><pre>{
+  &quot;layer&quot;: &quot;user&quot;,
+  &quot;location_source&quot;: &quot;CODEX_HOME&quot;,
+  &quot;path&quot;: &quot;&lt;PATH:8&gt;&quot;,
+  &quot;format&quot;: &quot;TOML&quot;,
+  &quot;syntax&quot;: &quot;valid&quot;
+}</pre>
+<h3>现象</h3><p>配置只做有限语法检查。</p><p>判断依据：syntax 区分 valid、absent、unreadable 和 safety_limit 等观察。</p><h3>手动复查步骤</h3><ol><li>人工核对本次用户层或显式项目层是否是预期检查范围。</li><li>需要修改时先参照官方配置说明，再运行体检。</li><li>官方说明（手动查看）：https://developers.openai.com/codex/config-basic/</li></ol><p class="muted">检查限制：文件可缺省；语法通过不等于配置生效或服务可用；受限文件不继续读取。</p>
+</article>
+<article class="pass"><h2>codex.config.project · <span class="badge">通过</span></h2><p>仅检查指定配置文件的语法；不验证登录、模型服务、键名或最终生效值。</p><pre>{
+  &quot;layer&quot;: &quot;project&quot;,
+  &quot;effective_loading&quot;: &quot;not_evaluated&quot;,
+  &quot;path&quot;: &quot;&lt;PATH:9&gt;&quot;,
+  &quot;format&quot;: &quot;TOML&quot;,
+  &quot;syntax&quot;: &quot;valid&quot;
+}</pre>
+<h3>现象</h3><p>配置只做有限语法检查。</p><p>判断依据：syntax 区分 valid、absent、unreadable 和 safety_limit 等观察。</p><h3>手动复查步骤</h3><ol><li>人工核对本次用户层或显式项目层是否是预期检查范围。</li><li>需要修改时先参照官方配置说明，再运行体检。</li><li>官方说明（手动查看）：https://developers.openai.com/codex/config-basic/</li></ol><p class="muted">检查限制：文件可缺省；语法通过不等于配置生效或服务可用；受限文件不继续读取。</p>
+</article>
+<article class="warn"><h2>claude.path · <span class="badge">提醒</span></h2><p>部分 PATH 候选受链接或访问限制，存在性未确认；保留原顺序且不执行。</p><pre>{
+  &quot;entries&quot;: [
+    {
+      &quot;path&quot;: &quot;&lt;PATH:10&gt;&quot;,
+      &quot;command_name&quot;: &quot;claude.com&quot;,
+      &quot;installation_group&quot;: 1,
+      &quot;kind&quot;: &quot;unknown&quot;,
+      &quot;path_access&quot;: &quot;blocked&quot;,
+      &quot;existence_verified&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;&lt;PATH:11&gt;&quot;,
+      &quot;command_name&quot;: &quot;claude.exe&quot;,
+      &quot;installation_group&quot;: 1,
+      &quot;kind&quot;: &quot;unknown&quot;,
+      &quot;path_access&quot;: &quot;blocked&quot;,
+      &quot;existence_verified&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;&lt;PATH:12&gt;&quot;,
+      &quot;command_name&quot;: &quot;claude.bat&quot;,
+      &quot;installation_group&quot;: 1,
+      &quot;kind&quot;: &quot;unknown&quot;,
+      &quot;path_access&quot;: &quot;blocked&quot;,
+      &quot;existence_verified&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;&lt;PATH:13&gt;&quot;,
+      &quot;command_name&quot;: &quot;claude.cmd&quot;,
+      &quot;installation_group&quot;: 1,
+      &quot;kind&quot;: &quot;unknown&quot;,
+      &quot;path_access&quot;: &quot;blocked&quot;,
+      &quot;existence_verified&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;&lt;PATH:14&gt;&quot;,
+      &quot;command_name&quot;: &quot;claude.ps1&quot;,
+      &quot;installation_group&quot;: 1,
+      &quot;kind&quot;: &quot;unknown&quot;,
+      &quot;path_access&quot;: &quot;blocked&quot;,
+      &quot;existence_verified&quot;: false
+    },
+    {
+      &quot;path&quot;: &quot;&lt;PATH:15&gt;&quot;,
+      &quot;command_name&quot;: &quot;claude&quot;,
+      &quot;installation_group&quot;: 1,
+      &quot;kind&quot;: &quot;unknown&quot;,
+      &quot;path_access&quot;: &quot;blocked&quot;,
+      &quot;existence_verified&quot;: false
+    }
+  ],
+  &quot;installation_groups&quot;: 1,
+  &quot;cmd_path_candidate&quot;: &quot;&lt;PATH:10&gt;&quot;,
+  &quot;powershell_path_candidate&quot;: &quot;&lt;PATH:14&gt;&quot;,
+  &quot;resolution_model&quot;: &quot;PATH+PATHEXT; excludes CWD, aliases and functions&quot;,
+  &quot;scan_limited&quot;: false
+}</pre>
+<h3>现象</h3><p>优先入口受读取限制。</p><p>判断依据：选中候选的 path_access 为 blocked，存在性未确认。</p><h3>手动复查步骤</h3><ol><li>人工检查预期入口是否经过链接、重解析点或非固定本地盘。</li><li>运行 Get-Command codex,claude -All 核对终端选择；保留本次无法判断结论。</li><li>官方说明（手动查看）：https://code.claude.com/docs/en/setup</li></ol><p class="muted">检查限制：不会沿链接读取，也不会跳过受限优先入口执行后续程序。</p>
+</article>
+<article class="unknown"><h2>claude.install · <span class="badge">无法判断</span></h2><p>安装方式仅由本地文件结构推断；未知入口不执行。</p><pre>{
+  &quot;kind&quot;: &quot;unknown&quot;,
+  &quot;publisher_verified&quot;: false
+}</pre>
+<h3>现象</h3><p>入口形式未识别。</p><p>判断依据：安装形式为 unknown；未满足原生格式或完整 npm 模板。</p><h3>手动复查步骤</h3><ol><li>运行 Get-Command codex,claude -All，人工核对安装来源。</li><li>对照官方安装说明检查包装器；不要因目标文件存在就判定入口正常。</li><li>官方说明（手动查看）：https://code.claude.com/docs/en/setup</li></ol><p class="muted">检查限制：自定义或新版包装器也可能未知；本工具不通过 shell 执行包装器。</p>
+</article>
+<article class="unknown"><h2>claude.dependency · <span class="badge">无法判断</span></h2><p>只检查所识别入口的运行时依赖；原生程序不统一要求 Node.js。</p><pre>{
+  &quot;runtime&quot;: &quot;unknown&quot;
+}</pre>
+<h3>现象</h3><p>Node 依赖无法判断。</p><p>判断依据：入口或 Node 路径、版本响应、引擎范围未能完整确认。</p><h3>手动复查步骤</h3><ol><li>运行 Get-Command node -All 核对终端入口。</li><li>人工检查受限路径或本地包引擎范围，再体检。</li><li>官方说明（手动查看）：https://code.claude.com/docs/en/setup</li></ol><p class="muted">检查限制：路径受限、探测关闭或响应未知均不等于未安装。</p>
+</article>
+<article class="unknown"><h2>claude.version · <span class="badge">无法判断</span></h2><p>仅接受完整匹配的版本响应；未保留原始输出。</p><pre>{
+  &quot;reason&quot;: &quot;unrecognized_or_missing_runtime&quot;
+}</pre>
+<h3>现象</h3><p>版本观察有范围限制。</p><p>判断依据：仅接受短且完整匹配的版本响应；禁用或未知响应不算通过。</p><h3>手动复查步骤</h3><ol><li>人工确认入口后运行 codex --version 或 claude --version。</li><li>官方说明（手动查看）：https://code.claude.com/docs/en/setup</li></ol><p class="muted">检查限制：版本通过仅表示本次版本查询通过，不验证服务、登录或实际任务。</p>
+</article>
+<article class="pass"><h2>claude.config.user · <span class="badge">通过</span></h2><p>仅检查指定配置文件的语法；不验证登录、模型服务、键名或最终生效值。</p><pre>{
+  &quot;layer&quot;: &quot;user&quot;,
+  &quot;location_source&quot;: &quot;CLAUDE_CONFIG_DIR&quot;,
+  &quot;path&quot;: &quot;&lt;PATH:16&gt;&quot;,
+  &quot;format&quot;: &quot;JSON&quot;,
+  &quot;syntax&quot;: &quot;valid&quot;
+}</pre>
+<h3>现象</h3><p>配置只做有限语法检查。</p><p>判断依据：syntax 区分 valid、absent、unreadable 和 safety_limit 等观察。</p><h3>手动复查步骤</h3><ol><li>人工核对本次用户层或显式项目层是否是预期检查范围。</li><li>需要修改时先参照官方配置说明，再运行体检。</li><li>官方说明（手动查看）：https://code.claude.com/docs/en/settings</li></ol><p class="muted">检查限制：文件可缺省；语法通过不等于配置生效或服务可用；受限文件不继续读取。</p>
+</article>
+<article class="skipped"><h2>claude.config.project · <span class="badge">未检查</span></h2><p>未发现此可选配置文件；缺省配置不是故障。</p><pre>{
+  &quot;layer&quot;: &quot;project&quot;,
+  &quot;effective_loading&quot;: &quot;not_evaluated&quot;,
+  &quot;path&quot;: &quot;&lt;PATH:17&gt;&quot;,
+  &quot;format&quot;: &quot;JSON&quot;,
+  &quot;syntax&quot;: &quot;absent&quot;
+}</pre>
+<h3>现象</h3><p>配置只做有限语法检查。</p><p>判断依据：syntax 区分 valid、absent、unreadable 和 safety_limit 等观察。</p><h3>手动复查步骤</h3><ol><li>人工核对本次用户层或显式项目层是否是预期检查范围。</li><li>需要修改时先参照官方配置说明，再运行体检。</li><li>官方说明（手动查看）：https://code.claude.com/docs/en/settings</li></ol><p class="muted">检查限制：文件可缺省；语法通过不等于配置生效或服务可用；受限文件不继续读取。</p>
+</article>
+<article class="error"><h2>claude.config.local · <span class="badge">异常</span></h2><p>配置语法或根结构不符合要求；没有输出内容或解析异常正文。</p><pre>{
+  &quot;layer&quot;: &quot;project_local&quot;,
+  &quot;effective_loading&quot;: &quot;not_evaluated&quot;,
+  &quot;path&quot;: &quot;&lt;PATH:18&gt;&quot;,
+  &quot;format&quot;: &quot;JSON&quot;,
+  &quot;syntax&quot;: &quot;invalid&quot;,
+  &quot;line&quot;: 1
+}</pre>
+<h3>现象</h3><p>配置语法或根结构无效。</p><p>判断依据：syntax 为 invalid 或 invalid_structure；不保留配置内容。</p><h3>手动复查步骤</h3><ol><li>在本地编辑器查看对应配置；若报告有行号，先检查该行附近。</li><li>按官方配置说明人工修正并保存 UTF-8，然后重新体检。</li><li>官方说明（手动查看）：https://code.claude.com/docs/en/settings</li></ol><p class="muted">检查限制：只检查单文件语法和对象根；不计算配置合并或账户有效性。</p>
+</article>
+<article class="pass"><h2>wsl.launcher · <span class="badge">通过</span></h2><p>只检查系统 WSL 启动器；存在不等于组件或发行版可用。</p><pre>{
+  &quot;present&quot;: true,
+  &quot;component_health&quot;: &quot;not_checked&quot;
+}</pre>
+<h3>现象</h3><p>WSL 内部环境未检查。</p><p>判断依据：Windows 启动器和注册数量仅是外部观察；内部检查始终跳过。</p><h3>手动复查步骤</h3><ol><li>若实际在 WSL 内使用工具，请在自己选定的发行版内单独核对安装。</li><li>仅需查看 Windows 注册列表时，可人工运行 wsl --list --quiet。</li><li>官方说明（手动查看）：https://learn.microsoft.com/en-us/windows/wsl/basic-commands</li></ol><p class="muted">检查限制：本工具不启动发行版，也不把未安装 WSL 判为 AI 工具故障。</p>
+</article>
+<article class="pass"><h2>wsl.inventory · <span class="badge">通过</span></h2><p>只观察当前用户已注册发行版数量，不读取内部文件。</p><pre>{
+  &quot;registered_count&quot;: 0,
+  &quot;reason&quot;: &quot;registration_key_absent&quot;
+}</pre>
+<h3>现象</h3><p>WSL 内部环境未检查。</p><p>判断依据：Windows 启动器和注册数量仅是外部观察；内部检查始终跳过。</p><h3>手动复查步骤</h3><ol><li>若实际在 WSL 内使用工具，请在自己选定的发行版内单独核对安装。</li><li>仅需查看 Windows 注册列表时，可人工运行 wsl --list --quiet。</li><li>官方说明（手动查看）：https://learn.microsoft.com/en-us/windows/wsl/basic-commands</li></ol><p class="muted">检查限制：本工具不启动发行版，也不把未安装 WSL 判为 AI 工具故障。</p>
+</article>
+<article class="skipped"><h2>wsl.running · <span class="badge">未检查</span></h2><p>运行状态只由显式启用的只读列表查询判断；默认不执行 WSL。</p><pre>{
+  &quot;reason&quot;: &quot;not_requested&quot;,
+  &quot;running_count&quot;: null
+}</pre>
+<h3>现象</h3><p>WSL 内部环境未检查。</p><p>判断依据：Windows 启动器和注册数量仅是外部观察；内部检查始终跳过。</p><h3>手动复查步骤</h3><ol><li>若实际在 WSL 内使用工具，请在自己选定的发行版内单独核对安装。</li><li>仅需查看 Windows 注册列表时，可人工运行 wsl --list --quiet。</li><li>官方说明（手动查看）：https://learn.microsoft.com/en-us/windows/wsl/basic-commands</li></ol><p class="muted">检查限制：本工具不启动发行版，也不把未安装 WSL 判为 AI 工具故障。</p>
+</article>
+<article class="skipped"><h2>wsl.internal · <span class="badge">未检查</span></h2><p>未检查发行版内部命令或配置；没有启动发行版。</p><pre>{}</pre>
+<h3>现象</h3><p>WSL 内部环境未检查。</p><p>判断依据：Windows 启动器和注册数量仅是外部观察；内部检查始终跳过。</p><h3>手动复查步骤</h3><ol><li>若实际在 WSL 内使用工具，请在自己选定的发行版内单独核对安装。</li><li>仅需查看 Windows 注册列表时，可人工运行 wsl --list --quiet。</li><li>官方说明（手动查看）：https://learn.microsoft.com/en-us/windows/wsl/basic-commands</li></ol><p class="muted">检查限制：本工具不启动发行版，也不把未安装 WSL 判为 AI 工具故障。</p>
+</article>
+<article class="skipped"><h2>scope.unchecked · <span class="badge">未检查</span></h2><p>未计算合并配置；项目祖先、配置档、管理策略、别名与终端执行策略不在首版范围。</p><pre>{}</pre>
+<h3>现象</h3><p>此项仅反映限定范围内的观察。</p><p>判断依据：报告保留具体检查状态与证据。</p><h3>手动复查步骤</h3><ol><li>先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。</li></ol><p class="muted">检查限制：不检查账户、认证、聊天记录、完整配置合并或实际 AI 任务。</p>
+</article>
+<footer class="muted"><p>离线报告 · 路径原值、配置值和程序原始输出未保存。</p></footer></main></body></html>

@@ -1,4 +1,29 @@
-# v0.1 实跑验收记录
+# 实跑验收记录 / Validation
+
+## v0.2 本轮自测：2026-11-19
+
+本节保留 2026-11-19 实现者 gpt 的自测记录：Windows build 26200，64 位 Python 3.12.10。2026-11-20 独立复核和终审范围见 [v0.2 发布审查](release-review-v0.2.md)；不将历史记录冒充当日新测试。
+
+| 验证 | 本次结果 | 机器证据 |
+| --- | --- | --- |
+| 整套测试 | 56 项；54 通过、2 跳过、0 失败、0 错误，退出 0 | [逐项记录](../evidence/v02-tests.json) |
+| 原 39 项回归 | 本次 38 通过、1 跳过；位于同一套件的 test_doctor/test_boundaries | 同上 |
+| 新增 17 项 | 本次 16 通过、1 跳过；输入边界、比较语义/隐私、参数冲突、HTML转义、排障、导出失败/中断、真实 junction/文件链接 | 同上 |
+| 单独授权补测 | 两项真实文件符号链接 2 通过、0 跳过、退出 0；源代码前后哈希一致 | [测试](../evidence/v02-authorized-links.json)、[进程退出码](../evidence/v02-authorized-process.json) |
+| 本机中英正常/禁网 API | 四次退出 0，全部导出 MD/JSON/HTML；配置字节和父环境未改 | [主机记录](../evidence/v02-host/runs.json) |
+| 实际 HTML 浏览器 | 中文桌面、390px 内容视口、转义长文本、英文对比均检查并截图 | [显示核验](html-validation.md) |
+| wheel 和 sdist | sdist → wheel 构建；分别在干净临时 venv 安装、运行控制台命令、中英文三格式和对比、卸载成功 | [构建安装记录](../evidence/build-install.json) |
+| Windows CI | 定义已提供，Python 3.11/3.14 + Node 24；托管结果待发布阶段验证 | [.github/workflows/windows.yml](../.github/workflows/windows.yml) |
+
+普通进程两项跳过都因不能创建真实文件符号链接（原配置项、新报告输入项）。依据用户明确授权，在临时管理员进程独立补测两项，均通过。不能合并声称一次完整 56 通过；以前单项授权记录也保留原时间归属。
+
+新测试实际验证：禁止比较模式实例化 Doctor/运行子进程/网络/注册表；嵌入路径不访问；相同观察但语言/时间/代号不同无变化；数字版本、安装组、扫描限制和新增/移除/状态变化可见；error 转 unknown/skipped 或检查消失不报修复；拒绝畸形/重复/过深/超大/非有限/未知 schema 和 ID；任意输入文案及秘密标记不导出；真实 junction 不访问后代；导出冲突保留已有文件，部分失败/中断清理本次文件。原 npm 损坏包装器和进程树清理回归保留。
+
+当前主机仍识别 Codex 0.169.0，Claude 无 PATH 入口。未验证真实 Claude、WSL 内部/运行发行版、其他 Windows/Python 组合、POSIX、物理断网或第三方进程防火墙隔离。仅禁止 Python 网络 API 的运行不等于物理断网；实际浏览器报告的被阻止 Google 请求见显示核验记录。
+
+This iteration is implementer validation, not independent review. All 56 distinct tests have pass evidence across an ordinary full run and a separate two-case authorized supplement; they did not all pass in one full run. Both distributions are actually installed, exercised and uninstalled in temporary clean environments. Hosted CI, other Python/OS versions, real Claude and WSL internals remain unverified.
+
+## v0.1 历史自测（下文保留原始归属）
 
 日期：2026-11-19（北京时间）。以下为 gpt 返工时的历史自测记录。随后 dsh 独立复核与 MausBot 终审结果见 [发布审查](release-review.md)，历史测试数量保留原归属。具体变更见 [返工说明](rework.md)。
 
