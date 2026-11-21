@@ -1,4 +1,11 @@
-# v0.4.0 — 2026-11-21 (local development; independent review and hosted CI pending)
+# v0.5.0 — 2026-11-21 (local development; independent review and hosted CI pending)
+
+- Add compare `--format csv` change tables with twelve whitelisted observation columns, UTF-8 BOM and byte-identical Chinese/English bodies; both/all sets unchanged.
+- Add offline `--catalog` for the fixed 19-check directory (default md); no input reads, diagnosis, environment, registry or network access.
+- Add deterministic `--schema` JSON Schema export; document one-way consistency with `load_report` (schema may be wider; `--validate` sole acceptance authority).
+- Preserve all v0.4 entries, safety bounds and exit codes; runtime stays standard-library only.
+
+# v0.4.0 — 2026-11-21 (historical local development baseline)
 
 - Add offline diagnosis validity checks with recomputed counts and fixed scope notices; validity is separate from health.
 - Add bounded in-memory support ZIP verification for fixed regular members, CRC, SHA and support-summary consistency, compatible with v0.3 bundles. This does not authenticate source identity or guarantee privacy of arbitrary text.

@@ -4,7 +4,9 @@ Requires a complete Python with venv/ensurepip. Build dependencies are fetched
 into temporary task directories only. No package is published.
 """
 import argparse
+import csv
 import hashlib
+import io
 import json
 import os
 import shutil
@@ -102,6 +104,60 @@ def main():
                 csv_output = run(kind + "_csv_" + lang, [entry, "--history", task / (kind + "zh/report.zh.json"), task / (kind + "en/report.en.json"), "--lang", lang, "--format", "csv"], environment=clean)
                 if not csv_output.stdout.startswith(b"\xef\xbb\xbfsequence,check_id,status,version,installation_groups,scan_limited"):
                     raise ValueError("installed_csv")
+            comparison_outputs = []
+            for lang in ("zh", "en"):
+                csv_output = run(kind + "_compare_csv_" + lang, [entry, "--compare", task / (kind + "zh/report.zh.json"),
+                    task / (kind + "en/report.en.json"), "--lang", lang, "--format", "csv"], environment=clean)
+                rows = list(csv.reader(io.StringIO(csv_output.stdout.decode("utf-8-sig"))))
+                if (not csv_output.stdout.startswith(b"\xef\xbb\xbfsequence,") or b"\r" in csv_output.stdout
+                        or len(rows) != 1 or len(rows[0]) != 12):
+                    raise ValueError("installed_compare_csv")
+                comparison_outputs.append(csv_output.stdout)
+            if comparison_outputs[0] != comparison_outputs[1]:
+                raise ValueError("installed_compare_csv_language")
+            default_catalog = run(kind + "_catalog_default", [entry, "--catalog"], environment=clean)
+            if not default_catalog.stdout.startswith(b"# "):
+                raise ValueError("installed_catalog_default")
+            catalogs = []
+            for lang in ("zh", "en"):
+                output = task / (kind + "catalog-" + lang)
+                run(kind + "_catalog_" + lang, [entry, "--catalog", "--format", "both", "--lang", lang,
+                    "--output-dir", output], environment=clean)
+                catalog = json.loads((output / ("catalog." + lang + ".json")).read_text(encoding="utf-8"))
+                ids = [check["id"] for check in catalog["checks"]]
+                if (catalog["report_type"] != "catalog" or catalog["doctor_version"] != __version__
+                        or catalog["language"] != lang or len(ids) != 19 or ids != sorted(set(ids))
+                        or "generated_at" in catalog or len(list(output.iterdir())) != 2):
+                    raise ValueError("installed_catalog")
+                if any(set(check[field]) != {"zh", "en"} or
+                       any(not isinstance(value, str) or not value for value in check[field].values())
+                       for check in catalog["checks"] for field in ("purpose", "limitation")):
+                    raise ValueError("installed_catalog_bilingual_fields")
+                catalogs.append(ids)
+            if catalogs[0] != catalogs[1]:
+                raise ValueError("installed_catalog_language")
+            subset = run(kind + "_catalog_subset", [entry, "--catalog", "wsl.internal", "codex.path", "wsl.internal",
+                "--format", "json"], environment=clean)
+            if [check["id"] for check in json.loads(subset.stdout)["checks"]] != ["codex.path", "wsl.internal"]:
+                raise ValueError("installed_catalog_subset")
+            rejected = run(kind + "_catalog_unknown", [entry, "--catalog", "SYNTHETIC_PRIVATE_UNKNOWN"], environment=clean, expected=2)
+            if b"SYNTHETIC_PRIVATE_UNKNOWN" in rejected.stdout + rejected.stderr:
+                raise ValueError("installed_catalog_echo")
+            emitted = run(kind + "_schema_stdout", [entry, "--schema"], environment=clean)
+            schema = json.loads(emitted.stdout)
+            if (schema["$schema"] != "https://json-schema.org/draft/2020-12/schema"
+                    or schema["$defs"]["finding"]["properties"]["id"]["enum"] != catalogs[0]):
+                raise ValueError("installed_schema")
+            output = task / (kind + "schema")
+            emitted_file = run(kind + "_schema_file", [entry, "--schema", "--output-dir", output], environment=clean)
+            schema_file = output / "schema.diagnosis.json"
+            if emitted_file.stdout or schema_file.read_bytes() != emitted.stdout:
+                raise ValueError("installed_schema_file")
+            run(kind + "_schema_collision", [entry, "--schema", "--output-dir", output], environment=clean, expected=2)
+            if schema_file.read_bytes() != emitted.stdout:
+                raise ValueError("installed_schema_collision")
+            run(kind + "_schema_lang_rejected", [entry, "--schema", "--lang", "zh"], environment=clean, expected=2)
+            run(kind + "_schema_format_rejected", [entry, "--schema", "--format", "json"], environment=clean, expected=2)
             import zipfile
             with zipfile.ZipFile(task / (kind + "support/support-bundle.zip")) as archive:
                 if archive.testzip() is not None or json.loads(archive.read("support.json"))["report_type"] != "support":

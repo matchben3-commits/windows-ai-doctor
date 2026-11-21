@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "report_type": "catalog",
+  "doctor_version": "0.5.0",
+  "language": "en",
+  "checks": [
+    {
+      "id": "codex.path",
+      "target": "codex",
+      "availability": "always",
+      "produced_by_current_version": true,
+      "purpose": {
+        "zh": "在 PATH/PATHEXT 限定模型下观察 Codex 入口候选与安装组线索。",
+        "en": "Observe Codex PATH/PATHEXT candidates and installation-group clues under the limited resolution model."
+      },
+      "evidence_fields": [
+        "entries",
+        "installation_groups",
+        "cmd_path_candidate",
+        "powershell_path_candidate",
+        "resolution_model",
+        "scan_limited"
+      ],
+      "limitation": {
+        "zh": "不扫描磁盘；不预测别名/函数；受限扫描不能证明未安装或无重复。",
+        "en": "No disk search; aliases/functions are outside prediction; a limited scan cannot prove absence or uniqueness."
+      }
+    },
+    {
+      "id": "system.platform",
+      "target": "system",
+      "availability": "always",
+      "produced_by_current_version": true,
+      "purpose": {
+        "zh": "记录当前解释器所见的操作系统类别与 Python 版本线索。",
+        "en": "Record the OS class and Python version clues visible to the current interpreter."
+      },
+      "evidence_fields": [
+        "os",
+        "python",
+        "windows_target"
+      ],
+      "limitation": {
+        "zh": "不是硬件清单或补丁审计；Windows 目标标记只反映 os.name。",
+        "en": "Not a hardware inventory or patch audit; the Windows-target flag reflects os.name only."
+      }
+    }
+  ],
+  "status_vocabulary": [
+    "pass",
+    "warn",
+    "error",
+    "unknown",
+    "skipped"
+  ],
+  "notice": "This catalog lists stable check IDs and fixed descriptions the current version can produce. It does not assert that checks always run, that the environment is healthy, or that the catalog itself verifies installations. No input files, diagnosis, environment, registry, network or packaged paths are consulted."
+}

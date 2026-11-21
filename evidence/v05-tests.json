@@ -1,0 +1,845 @@
+{
+    "started_at":  "2026-11-21T14:35:12.878734+00:00",
+    "finished_at":  "2026-11-21T14:35:24.029433+00:00",
+    "python":  "3.12.10",
+    "python_version":  "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "administrator":  true,
+    "exit_code":  0,
+    "tests_run":  138,
+    "unique_case_ids":  true,
+    "passed":  138,
+    "failures":  0,
+    "errors":  0,
+    "skipped":  0,
+    "all_106_old_cases_passed":  true,
+    "all_9_required_symlink_cases_passed":  true,
+    "required_symlink_case_ids":  [
+                                      "test_doctor.DoctorTests.test_config_link_to_auth_is_not_read",
+                                      "test_v02.CompareJunctionTests.test_report_file_symlink_is_rejected_without_reading_target",
+                                      "test_v04.V04Tests.test_new_json_zip_ancestor_symlinks_rejected_before_descendant_access",
+                                      "test_v04.V04Tests.test_validate_real_file_symlink_rejected_without_read",
+                                      "test_v04.V04Tests.test_verify_real_file_symlink_rejected_without_read",
+                                      "test_v05_integration.V05RequiredLinks.test_compare_csv_new_ancestor_real_symlink_zero_descendant_access",
+                                      "test_v05_integration.V05RequiredLinks.test_compare_csv_new_file_real_symlink_zero_target_reads",
+                                      "test_v05_integration.V05RequiredLinks.test_compare_csv_old_ancestor_real_symlink_zero_descendant_access",
+                                      "test_v05_integration.V05RequiredLinks.test_compare_csv_old_file_real_symlink_zero_target_reads"
+                                  ],
+    "run_type":  "single complete v0.5 suite after user authorization; never combined with other runs",
+    "cases":  [
+                  {
+                      "test":  "test_boundaries.BoundaryTests.test_all_wrapper_variants_reject_marker_only_and_added_commands",
+                      "outcome":  "PASS",
+                      "seconds":  0.125
+                  },
+                  {
+                      "test":  "test_boundaries.BoundaryTests.test_broken_first_node_does_not_use_later_runtime",
+                      "outcome":  "PASS",
+                      "seconds":  0.032
+                  },
+                  {
+                      "test":  "test_boundaries.BoundaryTests.test_broken_marker_wrapper_exit7_never_queries_package",
+                      "outcome":  "PASS",
+                      "seconds":  0.046
+                  },
+                  {
+                      "test":  "test_boundaries.BoundaryTests.test_demo_relative_destination_survives_clean_child_cwd",
+                      "outcome":  "PASS",
+                      "seconds":  0.844
+                  },
+                  {
+                      "test":  "test_boundaries.BoundaryTests.test_host_relative_destination_and_default_no_wsl_execution",
+                      "outcome":  "PASS",
+                      "seconds":  0.578
+                  },
+                  {
+                      "test":  "test_boundaries.BoundaryTests.test_node_shim_cannot_be_reinterpreted_as_native_target",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_boundaries.BoundaryTests.test_package_bin_parent_or_absolute_escape_is_unknown",
+                      "outcome":  "PASS",
+                      "seconds":  0.031
+                  },
+                  {
+                      "test":  "test_boundaries.BoundaryTests.test_real_junction_blocks_config_native_discovery_and_node_before_leaf",
+                      "outcome":  "PASS",
+                      "seconds":  0.0,
+                      "link_evidence":  [
+                                            {
+                                                "kind":  "directory_junction",
+                                                "reparse_tag":  "0xa0000003",
+                                                "descendant_access_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_boundaries.BoundaryTests.test_real_junction_native_package_target_is_unknown",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_boundaries.BoundaryTests.test_real_junction_package_metadata_and_bin_never_followed",
+                      "outcome":  "PASS",
+                      "seconds":  0.015
+                  },
+                  {
+                      "test":  "test_boundaries.BoundaryTests.test_real_junction_rejected_even_if_leaf_missing",
+                      "outcome":  "PASS",
+                      "seconds":  0.0,
+                      "link_evidence":  [
+                                            {
+                                                "kind":  "directory_junction",
+                                                "reparse_tag":  "0xa0000003",
+                                                "descendant_access_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_boundaries.BoundaryTests.test_real_junction_runtime_does_not_fall_through_to_later_node",
+                      "outcome":  "PASS",
+                      "seconds":  0.032,
+                      "link_evidence":  [
+                                            {
+                                                "kind":  "directory_junction",
+                                                "reparse_tag":  "0xa0000003",
+                                                "descendant_access_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_boundaries.BoundaryTests.test_six_golden_wrappers_from_real_cmd_shim",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_boundaries.BoundaryTests.test_unsupported_paths_do_not_query_metadata",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_claude_native_and_npm_native_without_node",
+                      "outcome":  "PASS",
+                      "seconds":  0.297
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_clean_environment_excludes_tokens_and_config_override",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_cli_invalid_args_and_export_errors_hide_paths",
+                      "outcome":  "PASS",
+                      "seconds":  0.531
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_config_link_to_auth_is_not_read",
+                      "outcome":  "PASS",
+                      "seconds":  0.0,
+                      "link_evidence":  [
+                                            {
+                                                "kind":  "file_symlink",
+                                                "reparse_tag":  "0xa000000c",
+                                                "content_read_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_custom_home_overrides_invalid_default_and_both_config_errors_continue",
+                      "outcome":  "PASS",
+                      "seconds":  0.125
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_distinct_installations_shadow_in_path_order",
+                      "outcome":  "PASS",
+                      "seconds":  0.031
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_existing_reports_preserved_and_clean_cwd_start",
+                      "outcome":  "PASS",
+                      "seconds":  0.344
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_json_strictness_and_large_or_non_utf8_config",
+                      "outcome":  "PASS",
+                      "seconds":  0.031
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_missing_both_cli_and_bilingual_status_ids",
+                      "outcome":  "PASS",
+                      "seconds":  0.203
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_native_cli_with_spaces_does_not_require_node",
+                      "outcome":  "PASS",
+                      "seconds":  0.328
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_npm_missing_or_incompatible_node_is_conditional_error",
+                      "outcome":  "PASS",
+                      "seconds":  0.094
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_oversized_cli_output_still_completes_other_checks",
+                      "outcome":  "PASS",
+                      "seconds":  0.219
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_project_layer_syntax_and_no_auth_or_history_reads",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_real_cli_with_network_audit_denied",
+                      "outcome":  "PASS",
+                      "seconds":  0.219
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_real_npm_query_in_chinese_space_directory_and_wrapper_dedup",
+                      "outcome":  "PASS",
+                      "seconds":  0.234
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_relative_override_not_silently_replaced",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_reparse_guard_without_symlink_privilege",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_runner_caps_output_and_terminates_process_tree",
+                      "outcome":  "PASS",
+                      "seconds":  0.656
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_runner_child_exit_also_removes_descendants",
+                      "outcome":  "PASS",
+                      "seconds":  0.062
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_sensitive_markers_never_reach_json_markdown_stdout_stderr",
+                      "outcome":  "PASS",
+                      "seconds":  0.453
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_socket_denied_offline_bilingual_reports",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_timeout_and_nonzero_continue_reports",
+                      "outcome":  "PASS",
+                      "seconds":  0.704
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_unknown_wrapper_is_never_executed",
+                      "outcome":  "PASS",
+                      "seconds":  0.015
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_version_allowlist_rejects_noise_or_urls",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_doctor.DoctorTests.test_wsl_default_never_executes_and_synthetic_visibility",
+                      "outcome":  "PASS",
+                      "seconds":  0.172
+                  },
+                  {
+                      "test":  "test_v02.CompareJunctionTests.test_nonlocal_report_rejected_before_metadata",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v02.CompareJunctionTests.test_report_ancestor_junction_is_rejected_before_descendant_access",
+                      "outcome":  "PASS",
+                      "seconds":  0.0,
+                      "link_evidence":  [
+                                            {
+                                                "kind":  "directory_junction",
+                                                "reparse_tag":  "0xa0000003",
+                                                "descendant_access_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_v02.CompareJunctionTests.test_report_file_symlink_is_rejected_without_reading_target",
+                      "outcome":  "PASS",
+                      "seconds":  0.0,
+                      "link_evidence":  [
+                                            {
+                                                "kind":  "file_symlink",
+                                                "reparse_tag":  "0xa000000c",
+                                                "content_read_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_v02.V02Tests.test_all_and_html_formats_bilingual_keep_both_contract",
+                      "outcome":  "PASS",
+                      "seconds":  0.938
+                  },
+                  {
+                      "test":  "test_v02.V02Tests.test_compare_conflicting_options_and_abbreviations_exit_2",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v02.V02Tests.test_compare_ignores_language_time_path_and_all_arbitrary_text",
+                      "outcome":  "PASS",
+                      "seconds":  0.046
+                  },
+                  {
+                      "test":  "test_v02.V02Tests.test_compare_never_invokes_diagnostics_or_follows_embedded_paths",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v02.V02Tests.test_compare_versions_groups_limits_and_status_transitions",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v02.V02Tests.test_export_interrupt_cleans_created_files_and_exits_130",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v02.V02Tests.test_export_preserves_existing_and_cleans_partial_files",
+                      "outcome":  "PASS",
+                      "seconds":  0.109
+                  },
+                  {
+                      "test":  "test_v02.V02Tests.test_guidance_distinguishes_missing_blocked_and_unsupported_node",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v02.V02Tests.test_html_escapes_dynamic_text_and_has_no_active_resource_tags",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v02.V02Tests.test_import_node_string_budgets_apply_to_ignored_fields",
+                      "outcome":  "PASS",
+                      "seconds":  0.015
+                  },
+                  {
+                      "test":  "test_v02.V02Tests.test_import_rejects_duplicate_keys_deep_huge_and_nonfinite_json",
+                      "outcome":  "PASS",
+                      "seconds":  0.047
+                  },
+                  {
+                      "test":  "test_v02.V02Tests.test_import_rejects_invalid_shapes_ids_status_and_count",
+                      "outcome":  "PASS",
+                      "seconds":  0.047
+                  },
+                  {
+                      "test":  "test_v02.V02Tests.test_import_version_tags_are_not_exported",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v02.V02Tests.test_read_old_v01_report_without_guidance",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_derived_json_types_rejected_by_all_importing_modes",
+                      "outcome":  "PASS",
+                      "seconds":  0.031
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_fail_on_default_and_dedup_never_changes_findings",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_fail_on_real_process_default_warn_unknown_and_error",
+                      "outcome":  "PASS",
+                      "seconds":  0.546
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_history_bilingual_all_formats_and_stdout",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_history_export_collision_preserves_existing",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_history_html_twenty_columns_semantics_and_no_resources",
+                      "outcome":  "PASS",
+                      "seconds":  0.031
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_history_ignores_timestamps_language_refs_and_private_text",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_history_old_v01_v02_diagnoses_remain_accepted",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_history_partial_export_and_support_interrupt_cleanup",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_history_three_runs_unknown_pass_and_scope_loss",
+                      "outcome":  "PASS",
+                      "seconds":  0.015
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_history_twenty_accepted_twentyone_rejected_before_reads",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_history_versions_counts_and_limits_are_observed",
+                      "outcome":  "PASS",
+                      "seconds":  0.015
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_missing_and_nonlocal_inputs_hide_details",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_new_import_modes_reject_schema_ids_statuses_and_duplicate_findings",
+                      "outcome":  "PASS",
+                      "seconds":  0.032
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_new_modes_reject_duplicate_keys_budgets_and_invalid_json",
+                      "outcome":  "PASS",
+                      "seconds":  0.078
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_offline_conflicts_rejected_before_input_read",
+                      "outcome":  "PASS",
+                      "seconds":  0.015
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_offline_modes_never_scan_execute_network_or_embedded_paths",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_policy_invalid_args_and_failure_interrupt_priority",
+                      "outcome":  "PASS",
+                      "seconds":  0.109
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_policy_visible_in_bilingual_markdown_json_html",
+                      "outcome":  "PASS",
+                      "seconds":  0.297
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_support_collision_and_midwrite_failure_preserve_old_files",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_support_drops_free_form_versions_and_recomputes_summary",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v03.V03Tests.test_support_zip_fixed_members_crc_hashes_whitelist_and_privacy",
+                      "outcome":  "PASS",
+                      "seconds":  0.031
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_all_modes_conflict_and_explicit_defaults_rejected_before_reads",
+                      "outcome":  "PASS",
+                      "seconds":  0.031
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_bundle_arbitrary_text_is_not_echoed_or_claimed_private",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_csv_all_states_missing_order_and_bilingual_values",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_csv_known_union_projection_numeric_boolean_and_formula_safety",
+                      "outcome":  "PASS",
+                      "seconds":  0.047
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_csv_partial_write_interrupt_cleanup",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_csv_two_twenty_twentyone_boundaries_and_bom_export",
+                      "outcome":  "PASS",
+                      "seconds":  0.031
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_deflate_actual_length_bounded_despite_false_declared_size_and_crc",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_derived_results_rejected_in_every_diagnosis_import_mode",
+                      "outcome":  "PASS",
+                      "seconds":  0.031
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_new_exports_preserve_collisions_and_cleanup_only_new_files",
+                      "outcome":  "PASS",
+                      "seconds":  0.031
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_new_json_zip_ancestor_junctions_rejected_before_descendant_access",
+                      "outcome":  "PASS",
+                      "seconds":  0.0,
+                      "link_evidence":  [
+                                            {
+                                                "kind":  "directory_junction",
+                                                "reparse_tag":  "0xa0000003",
+                                                "descendant_access_attempts":  0
+                                            },
+                                            {
+                                                "kind":  "directory_junction",
+                                                "reparse_tag":  "0xa0000003",
+                                                "descendant_access_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_new_json_zip_ancestor_symlinks_rejected_before_descendant_access",
+                      "outcome":  "PASS",
+                      "seconds":  0.0,
+                      "link_evidence":  [
+                                            {
+                                                "kind":  "directory_symlink",
+                                                "reparse_tag":  "0xa000000c",
+                                                "descendant_access_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_new_offline_modes_prohibit_doctor_process_network_registry_and_embedded_paths",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_old_v03_bundle_compatibility_and_new_roundtrip",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_real_child_process_offline_audit",
+                      "outcome":  "PASS",
+                      "seconds":  0.343
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_support_semantics_bad_schema_states_counts_and_observations",
+                      "outcome":  "PASS",
+                      "seconds":  0.172
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_validate_real_file_symlink_rejected_without_read",
+                      "outcome":  "PASS",
+                      "seconds":  0.0,
+                      "link_evidence":  [
+                                            {
+                                                "kind":  "file_symlink",
+                                                "reparse_tag":  "0xa000000c",
+                                                "content_read_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_validation_accepts_historical_schema_inputs",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_validation_and_verification_bilingual_export_formats",
+                      "outcome":  "PASS",
+                      "seconds":  0.031
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_validation_recomputes_counts_and_separates_health",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_validation_rejects_malformed_duplicate_deep_and_budget_inputs",
+                      "outcome":  "PASS",
+                      "seconds":  0.062
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_verify_real_file_symlink_rejected_without_read",
+                      "outcome":  "PASS",
+                      "seconds":  0.0,
+                      "link_evidence":  [
+                                            {
+                                                "kind":  "file_symlink",
+                                                "reparse_tag":  "0xa000000c",
+                                                "content_read_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_zip_archive_member_and_total_size_budgets_before_decompression",
+                      "outcome":  "PASS",
+                      "seconds":  0.047
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_zip_bad_manifest_hash_duplicate_missing_or_extra_lines",
+                      "outcome":  "PASS",
+                      "seconds":  0.047
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_zip_compression_encryption_and_truncation_rejected",
+                      "outcome":  "PASS",
+                      "seconds":  0.062
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_zip_crc_damage_local_header_mismatch_and_overlap_rejected",
+                      "outcome":  "PASS",
+                      "seconds":  0.032
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_zip_member_sets_duplicates_paths_and_special_types",
+                      "outcome":  "PASS",
+                      "seconds":  0.109
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_zip_nul_names_and_dos_nonregular_attributes_rejected",
+                      "outcome":  "PASS",
+                      "seconds":  0.047
+                  },
+                  {
+                      "test":  "test_v04.V04Tests.test_zip_streaming_descriptors_validated_and_stored_supported",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v05_catalog.CatalogCliTests.test_bilingual_directory_bytes_stable_without_timestamp",
+                      "outcome":  "PASS",
+                      "seconds":  0.015
+                  },
+                  {
+                      "test":  "test_v05_catalog.CatalogCliTests.test_collision_and_partial_write_cleanup",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v05_catalog.CatalogCliTests.test_default_md_stdout_json_both_and_directory_names",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v05_catalog.CatalogCliTests.test_real_child_process_catalog_has_no_input_or_external_access",
+                      "outcome":  "PASS",
+                      "seconds":  0.109
+                  },
+                  {
+                      "test":  "test_v05_catalog.CatalogCliTests.test_unknown_id_exit_two_without_echo_and_format_conflicts",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v05_catalog.CatalogModuleTests.test_full_catalog_matches_ids_and_is_deterministic",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v05_catalog.CatalogModuleTests.test_ids_match_synthetic_doctor_generation_set",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v05_catalog.CatalogModuleTests.test_project_only_marks_and_evidence_fields_are_fixed",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v05_catalog.CatalogModuleTests.test_subset_dedupe_sort_and_reject_unknown_malformed_oversize",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v05_integration.ComparisonCSVTests.test_bilingual_bytes_and_old_format_sets",
+                      "outcome":  "PASS",
+                      "seconds":  0.047
+                  },
+                  {
+                      "test":  "test_v05_integration.ComparisonCSVTests.test_changes_sorted_and_all_observations_survive_status_only_changes",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v05_integration.ComparisonCSVTests.test_collision_and_partial_write_cleanup",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v05_integration.ComparisonCSVTests.test_ignored_and_formula_text_never_reaches_cells",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v05_integration.ComparisonCSVTests.test_malformed_bounds_derived_and_duplicate_inputs_remain_rejected",
+                      "outcome":  "PASS",
+                      "seconds":  0.031
+                  },
+                  {
+                      "test":  "test_v05_integration.ComparisonCSVTests.test_missing_false_groups_bounds_numeric_versions_and_notes",
+                      "outcome":  "PASS",
+                      "seconds":  0.016
+                  },
+                  {
+                      "test":  "test_v05_integration.ComparisonCSVTests.test_no_changes_and_empty_inputs_only_emit_header",
+                      "outcome":  "PASS",
+                      "seconds":  0.015
+                  },
+                  {
+                      "test":  "test_v05_integration.SchemaTests.test_evaluator_uses_schema_semantics_and_rejects_unsupported_keywords",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v05_integration.SchemaTests.test_export_is_deterministic_silent_and_preserves_collision",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v05_integration.SchemaTests.test_legacy_versions_and_ignored_nonpath_observations_remain_accepted",
+                      "outcome":  "PASS",
+                      "seconds":  0.063
+                  },
+                  {
+                      "test":  "test_v05_integration.SchemaTests.test_mathematical_integer_and_parser_extra_limits_are_distinguished",
+                      "outcome":  "PASS",
+                      "seconds":  0.047
+                  },
+                  {
+                      "test":  "test_v05_integration.SchemaTests.test_schema_and_parser_constants_match_and_no_external_refs",
+                      "outcome":  "PASS",
+                      "seconds":  0.0
+                  },
+                  {
+                      "test":  "test_v05_integration.SchemaTests.test_schema_partial_write_error_and_interruption_cleanup",
+                      "outcome":  "PASS",
+                      "seconds":  0.015
+                  },
+                  {
+                      "test":  "test_v05_integration.SchemaTests.test_structural_samples_follow_directional_compatibility",
+                      "outcome":  "PASS",
+                      "seconds":  0.063
+                  },
+                  {
+                      "test":  "test_v05_integration.V05ModeTests.test_compare_csv_real_child_process_only_reads_two_explicit_inputs",
+                      "outcome":  "PASS",
+                      "seconds":  0.109
+                  },
+                  {
+                      "test":  "test_v05_integration.V05ModeTests.test_explicit_default_conflicts_and_abbreviations_fail_before_reads",
+                      "outcome":  "PASS",
+                      "seconds":  0.031
+                  },
+                  {
+                      "test":  "test_v05_integration.V05ModeTests.test_schema_real_child_process_has_no_input_environment_or_external_access",
+                      "outcome":  "PASS",
+                      "seconds":  0.11
+                  },
+                  {
+                      "test":  "test_v05_integration.V05RequiredLinks.test_compare_csv_new_ancestor_real_junction_zero_descendant_access",
+                      "outcome":  "PASS",
+                      "seconds":  0.0,
+                      "link_evidence":  [
+                                            {
+                                                "kind":  "directory_junction",
+                                                "reparse_tag":  "0xa0000003",
+                                                "descendant_access_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_v05_integration.V05RequiredLinks.test_compare_csv_new_ancestor_real_symlink_zero_descendant_access",
+                      "outcome":  "PASS",
+                      "seconds":  0.015,
+                      "link_evidence":  [
+                                            {
+                                                "side":  "new",
+                                                "kind":  "directory_symlink",
+                                                "reparse_tag":  "0xa000000c",
+                                                "content_read_attempts":  0,
+                                                "descendant_access_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_v05_integration.V05RequiredLinks.test_compare_csv_new_file_real_symlink_zero_target_reads",
+                      "outcome":  "PASS",
+                      "seconds":  0.0,
+                      "link_evidence":  [
+                                            {
+                                                "side":  "new",
+                                                "kind":  "file_symlink",
+                                                "reparse_tag":  "0xa000000c",
+                                                "content_read_attempts":  0,
+                                                "descendant_access_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_v05_integration.V05RequiredLinks.test_compare_csv_old_ancestor_real_junction_zero_descendant_access",
+                      "outcome":  "PASS",
+                      "seconds":  0.0,
+                      "link_evidence":  [
+                                            {
+                                                "kind":  "directory_junction",
+                                                "reparse_tag":  "0xa0000003",
+                                                "descendant_access_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_v05_integration.V05RequiredLinks.test_compare_csv_old_ancestor_real_symlink_zero_descendant_access",
+                      "outcome":  "PASS",
+                      "seconds":  0.0,
+                      "link_evidence":  [
+                                            {
+                                                "side":  "old",
+                                                "kind":  "directory_symlink",
+                                                "reparse_tag":  "0xa000000c",
+                                                "content_read_attempts":  0,
+                                                "descendant_access_attempts":  0
+                                            }
+                                        ]
+                  },
+                  {
+                      "test":  "test_v05_integration.V05RequiredLinks.test_compare_csv_old_file_real_symlink_zero_target_reads",
+                      "outcome":  "PASS",
+                      "seconds":  0.0,
+                      "link_evidence":  [
+                                            {
+                                                "side":  "old",
+                                                "kind":  "file_symlink",
+                                                "reparse_tag":  "0xa000000c",
+                                                "content_read_attempts":  0,
+                                                "descendant_access_attempts":  0
+                                            }
+                                        ]
+                  }
+              ]
+}

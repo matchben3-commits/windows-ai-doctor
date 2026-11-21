@@ -1,0 +1,41 @@
+{
+  "synthetic": true,
+  "exit_code": 0,
+  "steps": [
+    {
+      "step": "catalog_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "catalog_subset_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "compare_csv_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "catalog_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "catalog_subset_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "compare_csv_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "schema",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    }
+  ]
+}

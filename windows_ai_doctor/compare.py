@@ -1,4 +1,6 @@
 """Bounded schema-1.0 reader. Imported text and paths never reach output."""
+import csv
+import io
 import json
 import math
 import re
@@ -13,6 +15,8 @@ IDS = {"system.platform", "scope.unchecked", "wsl.launcher", "wsl.inventory", "w
     tool + "." + part for tool in ("codex", "claude")
     for part in ("path", "install", "dependency", "version", "config.user", "config.project")}
 MAX_BYTES, MAX_DEPTH, MAX_NODES, MAX_FINDINGS = 2 * 1024 * 1024, 16, 20000, 64
+VERSION_PATTERN = r"[0-9]{1,4}\.[0-9]{1,4}\.[0-9]{1,4}"
+MAX_INSTALLATION_GROUPS = 32
 
 
 def invalid(*_):
@@ -82,7 +86,7 @@ def check_nodes(obj):
 
 def numeric_version(value):
     # Free-form prerelease tags could carry private text. Compare numeric only.
-    if isinstance(value, str) and re.fullmatch(r"[0-9]{1,4}\.[0-9]{1,4}\.[0-9]{1,4}", value):
+    if isinstance(value, str) and re.fullmatch(VERSION_PATTERN, value):
         return value
     return None
 
@@ -109,7 +113,7 @@ def project(obj):
         if id.endswith(".path"):
             if "installation_groups" in e:
                 n = e["installation_groups"]
-                if type(n) is not int or not 0 <= n <= 32:
+                if type(n) is not int or not 0 <= n <= MAX_INSTALLATION_GROUPS:
                     invalid()
                 safe["installation_groups"] = n
             if "scan_limited" in e:
@@ -159,6 +163,29 @@ def compare_reports(old, new, lang="zh"):
             "changes": changes,
             "notice": ("请自行确认两份报告来自相同环境和检查范围；路径代号跨次无身份意义。通过仅代表此项本次通过；未知、未检查和移除均不代表修复。仅比较数字版本、安装组数量和扫描限制，其他证据未比较。" if lang == "zh" else
                        "Confirm that both reports cover the same environment and scope; path references have no identity across runs. A pass covers this check now only; unknown, skipped and removed checks do not establish a fix. Only numeric versions, installation-group counts and scan limits are compared; other evidence is not compared.")}
+
+
+COMPARISON_COLUMNS = ("sequence", "check_id", "change", "before_status", "after_status", "note",
+                      "version_before", "version_after", "installation_groups_before", "installation_groups_after",
+                      "scan_limited_before", "scan_limited_after")
+
+
+def comparison_csv(old, new):
+    """Only consume projections returned by load_report; never imported text."""
+    stream = io.StringIO(newline="")
+    stream.write("\ufeff")
+    writer = csv.writer(stream, lineterminator="\n")
+    writer.writerow(COMPARISON_COLUMNS)
+    for sequence, change in enumerate(compare_reports(old, new)["changes"], 1):
+        before, after = old.get(change["id"], {}), new.get(change["id"], {})
+        observations = []
+        for key in ("version", "installation_groups", "scan_limited"):
+            for side in (before, after):
+                value = side.get(key)
+                observations.append("" if value is None else str(value).lower() if type(value) is bool else value)
+        writer.writerow((sequence, change["id"], change["change"], change["before"] or "",
+                         change["after"] or "", change["note"], *observations))
+    return stream.getvalue()
 
 
 NOTES = {

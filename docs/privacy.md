@@ -50,6 +50,12 @@ Tests and demos write synthetic fixtures only inside temporary directories. Gene
 ## 测试边界 / Validation boundary
 
 已验证两种语言、多格式、stdout/stderr、坏配置、带用户名/密码/查询凭据 URL 的合成输入不会出现在输出；异常信息采取固定分类，不做不可靠的正则替换兜底。网络检查包括禁止 Python 网络 API 的真实 CLI 运行；未关闭主机网卡，也未对第三方二进制建立防火墙级隔离。真实 NTFS junction 回归已执行，跟踪并禁止链接之后的 `lstat/stat/is_file/open/resolve`，覆盖配置、命令、Node、包元数据及 JS/原生目标。常规进程缺少文件符号链接创建权限，该项会跳过；dsh 已在用户授权后通过单项临时管理员补测，见 [补测证据](../evidence/review-dsh/symlink-elevated.json)。这与真实 junction 回归分别记录。
+## v0.5 更新 / Update
+
+compare CSV 与 catalog/schema 均为离线导出：catalog 与 schema 不读取任何输入文件、不实例化诊断器、不访问环境/注册表/网络；compare CSV 只读两个显式诊断 JSON，沿用有界读取与链接拒绝，不新增读取面。单元格与目录条目只含固定枚举、已知 ID、白名单字段名和固定双语说明，不拼接环境值或用户输入。公式前缀自由文本即使出现在被忽略字段也不得进入 CSV。`--schema` 通过只表示形状；`--validate` 仍是接受权威。详见[第五版契约](v05-contract.md)。
+
+compare CSV, catalog and schema are offline exports. Catalog/schema read no inputs, instantiate no Doctor and consult no environment/registry/network. compare CSV reads only the two explicit diagnosis JSON files under existing bounds and link rejection. Cells and catalog entries use fixed enums, known IDs, whitelisted field names and fixed bilingual prose only—never environment values or user text. Formula-leading free text in ignored fields still never reaches CSV. Passing `--schema` means shape only; `--validate` remains authoritative. See the [v0.5 contract](v05-contract.md).
+
 ## v0.4 更新 / Update
 
 离线报告校验只确认已知字段与边界的可接受性，未知自由文本不作全面审核。求助包校验不解压落盘，只有结构、CRC、SHA和摘要一致性检查；清单没有自签名，不证明来源身份、机器现状、未经重新打包或隐私无泄漏。CSV只输出固定枚举与已知数字/布尔字段，不带原始文字或路径。所有入口均不自动分享。详见[第四版契约](v04-contract.md)。

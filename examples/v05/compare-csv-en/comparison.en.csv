@@ -1,0 +1,5 @@
+﻿sequence,check_id,change,before_status,after_status,note,version_before,version_after,installation_groups_before,installation_groups_after,scan_limited_before,scan_limited_after
+1,claude.path,changed,warn,pass,passes_now,,,0,0,false,false
+2,codex.version,changed,warn,pass,passes_now,1.2.3,1.2.3,,,,
+3,system.platform,added,,unknown,added,,,,,,
+4,wsl.internal,removed,skipped,,removed,,,,,,

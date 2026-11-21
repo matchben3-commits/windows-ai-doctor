@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "report_type": "diagnosis",
+  "findings": [
+    {
+      "id": "codex.version",
+      "status": "warn",
+      "evidence": {
+        "version": "1.2.3"
+      }
+    },
+    {
+      "id": "claude.path",
+      "status": "warn",
+      "evidence": {
+        "installation_groups": 0,
+        "scan_limited": false
+      }
+    },
+    {
+      "id": "wsl.internal",
+      "status": "skipped",
+      "evidence": {}
+    }
+  ]
+}
