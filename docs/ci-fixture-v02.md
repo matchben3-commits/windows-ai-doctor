@@ -1,3 +1,5 @@
+> v0.1/v0.2 历史材料：测试、截图、日期和发布状态保留原轮次；不能当作第三版结果。第三版当前契约与证据见 [v03-contract.md](v03-contract.md) 和 [HANDOFF](../HANDOFF.md)。
+
 # Windows CI fixture correction / Windows CI 测试夹具修正
 
 2026-11-20。首次托管运行 [44753910123](https://github.com/matchben3-commits/windows-ai-doctor/actions/runs/44753910123) 在 Python 3.11 和 3.14 上分别得到 51 通过、5 失败、0 跳过；打包步骤跳过。此失败记录保留，不用本地通过代替。

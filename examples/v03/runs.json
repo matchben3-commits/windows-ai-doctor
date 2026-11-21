@@ -1,0 +1,48 @@
+{
+  "exit_code": 0,
+  "synthetic": true,
+  "steps": [
+    {
+      "step": "history_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "synthetic": true
+    },
+    {
+      "step": "history_20_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "synthetic": true
+    },
+    {
+      "step": "history_en",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "synthetic": true
+    },
+    {
+      "step": "history_20_en",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "synthetic": true
+    },
+    {
+      "step": "support",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "synthetic": true
+    },
+    {
+      "step": "fail_on_unknown_zh",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "synthetic": true
+    },
+    {
+      "step": "fail_on_unknown_en",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "synthetic": true
+    }
+  ]
+}

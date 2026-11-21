@@ -138,7 +138,7 @@ def compare_reports(old, new, lang="zh"):
         if a == b:
             continue
         kind = "added" if a is None else "removed" if b is None else "changed"
-        note = "added" if a is None else "removed" if b is None else "unassessed" if b["status"] in ("unknown", "skipped") else "passes_now" if b["status"] == "pass" and a["status"] != "pass" else "observations_changed"
+        note = "added" if a is None else "removed" if b is None else "unassessed" if b["status"] in ("unknown", "skipped") or b.get("scan_limited") is True else "passes_now" if b["status"] == "pass" and a["status"] != "pass" else "observations_changed"
         details = {}
         for key in ("version", "installation_groups", "scan_limited"):
             av, bv = (a or {}).get(key), (b or {}).get(key)
@@ -156,6 +156,6 @@ def compare_reports(old, new, lang="zh"):
 
 
 NOTES = {
-    "zh": {"added": "本次新增检查。", "removed": "本次未包含，未再检查。", "unassessed": "无法判断或未再检查，不代表修复。", "passes_now": "该检查本次通过。", "observations_changed": "观察字段或状态变化。"},
-    "en": {"added": "Check added in this report.", "removed": "Not included this time; not rechecked.", "unassessed": "Unknown or not rechecked; this does not establish a fix.", "passes_now": "This check passes now.", "observations_changed": "Observed fields or status changed."},
+    "zh": {"added": "本次新增检查。", "removed": "本次未包含，未再检查。", "unassessed": "无法判断、未再检查或扫描受限，不代表修复。", "passes_now": "该检查本次通过。", "observations_changed": "观察字段或状态变化。"},
+    "en": {"added": "Check added in this report.", "removed": "Not included this time; not rechecked.", "unassessed": "Unknown, not rechecked or scan limited; this does not establish a fix.", "passes_now": "This check passes now.", "observations_changed": "Observed fields or status changed."},
 }

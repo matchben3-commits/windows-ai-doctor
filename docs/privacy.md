@@ -1,3 +1,9 @@
+## v0.3 更新 / Update
+
+趋势和求助包共用有界白名单读取，不扫描、不执行命令、不访问报告内路径。求助包不保证诊断信号无法关联，用户须审阅后自行分享；无原始路径映射。exit_policy只由本次命令参数重建，派生模式忽略输入此字段。当前完整契约见 [v03-contract.md](v03-contract.md)。
+
+> v0.1/v0.2 历史材料：测试、截图、日期和发布状态保留原轮次；不能当作第三版结果。第三版当前契约与证据见 [v03-contract.md](v03-contract.md) 和 [HANDOFF](../HANDOFF.md)。
+
 # 隐私与执行边界 / Privacy and execution boundaries
 
 ## v0.2 新增边界 / New in v0.2

@@ -7,6 +7,8 @@ from . import __version__
 from .core import Doctor
 from .report import json_report, markdown_report, html_report
 from .compare import load_report, compare_reports
+from .history import load_history, history_report
+from .support import export_support
 
 
 class SafeParser(argparse.ArgumentParser):
@@ -21,6 +23,9 @@ def parser():
     p.add_argument("--lang", choices=("zh", "en"), default="zh", help="报告语言 / report language")
     p.add_argument("--format", choices=("both", "md", "json", "html", "all"), default="both", help="both=MD+JSON; all=MD+JSON+HTML; stdout: both/all use MD")
     p.add_argument("--compare", nargs=2, type=Path, metavar=("OLD.json", "NEW.json"), help="离线对比，不运行诊断；禁用诊断参数 / offline comparison; conflicts with diagnostic options; output: comparison.LANG.FORMAT")
+    p.add_argument("--history", nargs="+", type=Path, metavar="REPORT.json", help="2–20份诊断报告的离线趋势，按输入顺序 / offline history in input order; output: history.LANG.FORMAT")
+    p.add_argument("--support", type=Path, metavar="REPORT.json", help="生成有限求助摘要ZIP，需输出目录；自行审阅分享，不保证无法关联，无原始路径映射 / limited support ZIP, requires output directory; review before sharing, signals may be linkable, no original path mapping")
+    p.add_argument("--fail-on", nargs="+", choices=("error", "warn", "unknown"), help="诊断退出条件，默认error；选中状态出现则退出1，不改变检查状态 / diagnosis exit conditions, default error; matched states exit 1 without changing findings")
     p.add_argument("--output-dir", type=Path, help="新建报告目录 / report directory (existing reports are not overwritten)")
     p.add_argument("--home", type=Path, help="诊断目标用户目录 / diagnostic user home override")
     p.add_argument("--project", type=Path, help="只检查此项目根目录 / inspect only this explicit project root")
@@ -64,12 +69,33 @@ def main(argv=None):
         if not math.isfinite(args.timeout) or not 0.1 <= args.timeout <= 30:
             parser().error("")
         comparison = args.compare is not None
-        diagnostic_options = {"--tools", "--home", "--project", "--timeout", "--no-version", "--wsl-list"}
-        if comparison and any(token.split("=", 1)[0] in diagnostic_options for token in raw_args):
+        history = args.history is not None
+        support = args.support is not None
+        if sum((comparison, history, support)) > 1:
             parser().error("")
-        report = compare_reports(load_report(args.compare[0]), load_report(args.compare[1]), args.lang) if comparison else Doctor(home=args.home, lang=args.lang, tools=tuple(dict.fromkeys(args.tools)),
+        diagnostic_options = {"--tools", "--home", "--project", "--timeout", "--no-version", "--wsl-list"}
+        explicit = {token.split("=", 1)[0] for token in raw_args}
+        if (comparison or history or support) and explicit & (diagnostic_options | {"--fail-on"}):
+            parser().error("")
+        if support:
+            if args.output_dir is None or explicit & {"--format", "--lang"}:
+                parser().error("")
+            export_support(load_report(args.support), args.output_dir)
+            print("求助摘要已保存，请自行审阅后分享；路径未回显 / Support summary saved; review before sharing; paths withheld.")
+            return 0
+        if history:
+            report = history_report(load_history(args.history), args.lang)
+        elif comparison:
+            report = compare_reports(load_report(args.compare[0]), load_report(args.compare[1]), args.lang)
+        else:
+            report = Doctor(home=args.home, lang=args.lang, tools=tuple(dict.fromkeys(args.tools)),
                         timeout=args.timeout, versions=not args.no_version,
                         project=args.project, wsl_list=args.wsl_list).run()
+            selected = [s for s in ("error", "warn", "unknown") if s in (args.fail_on or ["error"])]
+            triggered = [s for s in selected if report["summary"][s]]
+            report["exit_policy"] = {"fail_on": selected, "triggered": triggered, "matched": bool(triggered),
+                "meaning": ("达到所选退出条件仅表示出现选中状态；无法判断不等于已确认故障。操作失败退出2，中断130。" if args.lang == "zh" else
+                            "Meeting the selected exit conditions means a selected state occurred; unknown is not a confirmed fault. Operational failure exits 2; interruption exits 130.")}
         formats = ("md", "json") if args.format == "both" else ("md", "json", "html") if args.format == "all" else (args.format,)
         renderers = {"md": markdown_report, "json": json_report, "html": html_report}
         rendered = {fmt: renderers[fmt](report) for fmt in formats}
@@ -77,9 +103,9 @@ def main(argv=None):
             # JSON goes alone to stdout for pipelines; both defaults to Markdown.
             print(rendered["md"] if "md" in rendered else next(iter(rendered.values())), end="")
         else:
-            export_reports(rendered, args.output_dir, "comparison" if comparison else "report", args.lang)
+            export_reports(rendered, args.output_dir, "history" if history else "comparison" if comparison else "report", args.lang)
             print("报告已保存（路径未回显）。" if args.lang == "zh" else "Reports saved (paths withheld).")
-        return 0 if comparison else 1 if report["summary"]["error"] else 0
+        return 0 if comparison or history else int(report["exit_policy"]["matched"])
     except KeyboardInterrupt:
         print("已中断 / Interrupted.", file=sys.stderr)
         return 130

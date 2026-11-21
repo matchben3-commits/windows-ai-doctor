@@ -1,0 +1,211 @@
+{
+  "schema_version": "1.0",
+  "report_type": "history",
+  "doctor_version": "0.3.0",
+  "generated_at": "2026-11-21T05:27:20+00:00",
+  "language": "zh",
+  "summary": {
+    "pass": 3,
+    "warn": 0,
+    "error": 0,
+    "unknown": 0,
+    "skipped": 1
+  },
+  "snapshots": [
+    {
+      "sequence": 1,
+      "summary": {
+        "pass": 2,
+        "warn": 0,
+        "error": 1,
+        "unknown": 0,
+        "skipped": 1
+      },
+      "check_count": 4
+    },
+    {
+      "sequence": 2,
+      "summary": {
+        "pass": 1,
+        "warn": 1,
+        "error": 0,
+        "unknown": 1,
+        "skipped": 1
+      },
+      "check_count": 4
+    },
+    {
+      "sequence": 3,
+      "summary": {
+        "pass": 3,
+        "warn": 0,
+        "error": 0,
+        "unknown": 0,
+        "skipped": 1
+      },
+      "check_count": 4
+    }
+  ],
+  "checks": [
+    {
+      "id": "codex.config.user",
+      "observations": [
+        {
+          "status": "error"
+        },
+        {
+          "status": "unknown"
+        },
+        {
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "id": "codex.path",
+      "observations": [
+        {
+          "status": "pass",
+          "installation_groups": 1,
+          "scan_limited": false
+        },
+        {
+          "status": "warn",
+          "installation_groups": 1,
+          "scan_limited": true
+        },
+        {
+          "status": "pass",
+          "installation_groups": 1,
+          "scan_limited": false
+        }
+      ]
+    },
+    {
+      "id": "codex.version",
+      "observations": [
+        {
+          "status": "pass",
+          "version": "1.2.1"
+        },
+        {
+          "status": "pass",
+          "version": "1.2.2"
+        },
+        {
+          "status": "pass",
+          "version": "1.2.3"
+        }
+      ]
+    },
+    {
+      "id": "scope.unchecked",
+      "observations": [
+        {
+          "status": "skipped"
+        },
+        {
+          "status": "skipped"
+        },
+        {
+          "status": "skipped"
+        }
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "from": 1,
+      "to": 2,
+      "summary": {
+        "added": 0,
+        "removed": 0,
+        "changed": 3
+      },
+      "unchanged": 1,
+      "changes": [
+        {
+          "id": "codex.config.user",
+          "change": "changed",
+          "before": "error",
+          "after": "unknown",
+          "note": "unassessed",
+          "details": {}
+        },
+        {
+          "id": "codex.path",
+          "change": "changed",
+          "before": "pass",
+          "after": "warn",
+          "note": "unassessed",
+          "details": {
+            "scan_limited": {
+              "before": false,
+              "after": true
+            }
+          }
+        },
+        {
+          "id": "codex.version",
+          "change": "changed",
+          "before": "pass",
+          "after": "pass",
+          "note": "observations_changed",
+          "details": {
+            "version": {
+              "before": "1.2.1",
+              "after": "1.2.2"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "summary": {
+        "added": 0,
+        "removed": 0,
+        "changed": 3
+      },
+      "unchanged": 1,
+      "changes": [
+        {
+          "id": "codex.config.user",
+          "change": "changed",
+          "before": "unknown",
+          "after": "pass",
+          "note": "passes_now",
+          "details": {}
+        },
+        {
+          "id": "codex.path",
+          "change": "changed",
+          "before": "warn",
+          "after": "pass",
+          "note": "passes_now",
+          "details": {
+            "scan_limited": {
+              "before": true,
+              "after": false
+            }
+          }
+        },
+        {
+          "id": "codex.version",
+          "change": "changed",
+          "before": "pass",
+          "after": "pass",
+          "note": "observations_changed",
+          "details": {
+            "version": {
+              "before": "1.2.2",
+              "after": "1.2.3"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "notice": "顺序以命令行输入为准。请自行确认所有报告来自同一环境和相同检查范围；不推断机器身份。状态数量不是健康评分。缺失、未知、未检查或扫描受限均不代表修复；通过仅指该项本次通过。仅比较已知检查的状态、数字版本、安装组数量和扫描限制。"
+}

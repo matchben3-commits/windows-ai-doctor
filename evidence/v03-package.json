@@ -1,0 +1,183 @@
+{
+  "generated_at": "2026-11-21T05:34:33.000141+00:00",
+  "python": "3.12.10",
+  "exit_code": 0,
+  "build": "sdist then wheel from sdist",
+  "clean_working_directory": true,
+  "dependencies": {
+    "build": "1.6.1",
+    "setuptools": "84.2.1",
+    "wheel": "0.48.0"
+  },
+  "steps": [
+    {
+      "step": "isolated_build_dependencies",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "cache_sdist_build_dependencies",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "build_sdist_and_wheel",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_venv_isolated",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_install",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_installed_import",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_console_entry",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_zh_all",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_en_all",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_compare",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_history_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_history_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_support",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_fail_on_warn",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "wheel_uninstall",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_import_removed",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_venv_isolated",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_offline_build_dependencies",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_install",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_installed_import",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_console_entry",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_zh_all",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_en_all",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_compare",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_history_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_history_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_support",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_fail_on_warn",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "sdist_uninstall",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_import_removed",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "build_dependency_versions",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "windows_ai_doctor-0.3.0-py3-none-any.whl",
+      "bytes": 42080,
+      "sha256": "9e39d660c3ca85ea345653e89acc7e64c47b8ec9d0bc97917e76dfaa51e74b64"
+    },
+    {
+      "file": "windows_ai_doctor-0.3.0.tar.gz",
+      "bytes": 168684,
+      "sha256": "f2f639650317e6c3984dbc9bd15b8007d18b5fd1dd0cdf98df5f910bce344ff3"
+    }
+  ],
+  "system_python_changed": false,
+  "temporary_venvs_removed": true
+}

@@ -16,6 +16,8 @@ from pathlib import Path
 
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from windows_ai_doctor import __version__
 
 
 def main():
@@ -60,10 +62,10 @@ def main():
             if kind == "sdist":
                 run("sdist_offline_build_dependencies", [python, "-m", "pip", "install", "--no-index", "--find-links", wheelhouse, "setuptools>=68", "wheel"])
             run(kind + "_install", [python, "-m", "pip", "install", "--no-index", "--no-deps", "--no-build-isolation", artifact])
-            run(kind + "_installed_import", [python, "-I", "-c", "import sys, pathlib, windows_ai_doctor; assert pathlib.Path(windows_ai_doctor.__file__).is_relative_to(sys.prefix); assert windows_ai_doctor.__version__ == '0.2.0'"])
+            run(kind + "_installed_import", [python, "-I", "-c", "import sys, pathlib, windows_ai_doctor; assert pathlib.Path(windows_ai_doctor.__file__).is_relative_to(sys.prefix); assert windows_ai_doctor.__version__ == " + repr(__version__)])
             entry = python.parent / ("windows-ai-doctor.exe" if os.name == "nt" else "windows-ai-doctor")
             version = run(kind + "_console_entry", [entry, "--version"])
-            if version.stdout.decode("utf-8").strip() != "0.2.0":
+            if version.stdout.decode("utf-8").strip() != __version__:
                 raise ValueError("wrong_version")
             home = task / ("home-" + kind)
             home.mkdir()
@@ -73,11 +75,23 @@ def main():
                 output = task / (kind + lang)
                 run(kind + "_" + lang + "_all", [entry, "--home", home, "--no-version", "--format", "all", "--lang", lang, "--output-dir", output], environment=clean)
                 doc = json.loads((output / ("report." + lang + ".json")).read_text(encoding="utf-8"))
-                if doc["doctor_version"] != "0.2.0" or len(list(output.iterdir())) != 3:
+                if doc["doctor_version"] != __version__ or len(list(output.iterdir())) != 3:
                     raise ValueError("installed_export")
                 if lang == "zh" and "手动复查" not in (output / "report.zh.html").read_text(encoding="utf-8"):
                     raise ValueError("chinese_export")
             run(kind + "_compare", [entry, "--compare", task / (kind + "zh/report.zh.json"), task / (kind + "en/report.en.json"), "--format", "all", "--output-dir", task / (kind + "comparison")], environment=clean)
+            for lang in ("zh", "en"):
+                run(kind + "_history_" + lang, [entry, "--history", task / (kind + "zh/report.zh.json"), task / (kind + "en/report.en.json"),
+                    "--lang", lang, "--format", "all", "--output-dir", task / (kind + "history" + lang)], environment=clean)
+                history = json.loads((task / (kind + "history" + lang) / ("history." + lang + ".json")).read_text(encoding="utf-8"))
+                if history["report_type"] != "history" or history["transitions"][0]["changes"]:
+                    raise ValueError("installed_history")
+            run(kind + "_support", [entry, "--support", task / (kind + "zh/report.zh.json"), "--output-dir", task / (kind + "support")], environment=clean)
+            import zipfile
+            with zipfile.ZipFile(task / (kind + "support/support-bundle.zip")) as archive:
+                if archive.testzip() is not None or json.loads(archive.read("support.json"))["report_type"] != "support":
+                    raise ValueError("installed_support")
+            run(kind + "_fail_on_warn", [entry, "--home", home, "--no-version", "--fail-on", "warn", "--format", "json"], environment=clean, expected=1)
             run(kind + "_uninstall", [python, "-m", "pip", "uninstall", "--yes", "windows-ai-doctor"])
             run(kind + "_import_removed", [python, "-I", "-c", "import importlib.util; assert importlib.util.find_spec('windows_ai_doctor') is None"])
             if entry.exists():

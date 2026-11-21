@@ -1,0 +1,404 @@
+{
+  "schema_version": "1.0",
+  "doctor_version": "0.3.0",
+  "generated_at": "2026-11-21T05:27:21+00:00",
+  "language": "en",
+  "summary": {
+    "pass": 3,
+    "warn": 2,
+    "error": 0,
+    "unknown": 4,
+    "skipped": 7
+  },
+  "privacy": {
+    "paths": "opaque_references",
+    "raw_output": false,
+    "config_values": false,
+    "credentials_read": false
+  },
+  "findings": [
+    {
+      "id": "system.platform",
+      "target": "system",
+      "status": "pass",
+      "summary": "Current OS; only the current process environment is inspected.",
+      "evidence": {
+        "os": "Windows",
+        "python": "3.12.10",
+        "windows_target": true
+      },
+      "recommendation": "This is an observation within a limited scope.",
+      "recheck": "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "This is an observation within a limited scope.",
+        "basis": "The report retains the check's specific status and evidence.",
+        "steps": [
+          "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope."
+        ],
+        "limitation": "Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked."
+      }
+    },
+    {
+      "id": "codex.path",
+      "target": "codex",
+      "status": "warn",
+      "summary": "No callable entry in the current PATH; this does not prove the tool is absent from the machine.",
+      "evidence": {
+        "entries": [],
+        "installation_groups": 0,
+        "cmd_path_candidate": null,
+        "powershell_path_candidate": null,
+        "resolution_model": "PATH+PATHEXT; excludes CWD, aliases and functions",
+        "scan_limited": false
+      },
+      "recommendation": "No selectable PATH entry was found.",
+      "recheck": "Run Get-Command codex,claude -All in your actual PowerShell to inspect entries. Manually review installation locations using the official setup guide; open a new terminal before rechecking. Official guidance (open manually): https://github.com/openai/codex/blob/main/README.md",
+      "guidance": {
+        "code": "missing",
+        "phenomenon": "No selectable PATH entry was found.",
+        "basis": "No CMD/PATHEXT candidate was selected in this scan.",
+        "steps": [
+          "Run Get-Command codex,claude -All in your actual PowerShell to inspect entries.",
+          "Manually review installation locations using the official setup guide; open a new terminal before rechecking.",
+          "Official guidance (open manually): https://github.com/openai/codex/blob/main/README.md"
+        ],
+        "limitation": "No disk search is performed; absence from PATH does not prove absence of installation."
+      }
+    },
+    {
+      "id": "codex.install",
+      "target": "codex",
+      "status": "unknown",
+      "summary": "Installation type is inferred from local layout; unknown entries are not executed.",
+      "evidence": {
+        "kind": "not_found",
+        "publisher_verified": false
+      },
+      "recommendation": "This is an observation within a limited scope.",
+      "recheck": "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope. Official guidance (open manually): https://github.com/openai/codex/blob/main/README.md",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "This is an observation within a limited scope.",
+        "basis": "The report retains the check's specific status and evidence.",
+        "steps": [
+          "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.",
+          "Official guidance (open manually): https://github.com/openai/codex/blob/main/README.md"
+        ],
+        "limitation": "Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked."
+      }
+    },
+    {
+      "id": "codex.dependency",
+      "target": "codex",
+      "status": "unknown",
+      "summary": "Runtime checks depend on the identified entry; native programs do not universally require Node.js.",
+      "evidence": {
+        "runtime": "unknown"
+      },
+      "recommendation": "The Node dependency cannot be determined.",
+      "recheck": "Run Get-Command node -All to inspect shell entries. Manually review restricted paths or the package engine range, then recheck. Official guidance (open manually): https://github.com/openai/codex/blob/main/README.md",
+      "guidance": {
+        "code": "node_unknown",
+        "phenomenon": "The Node dependency cannot be determined.",
+        "basis": "The entry, Node path, version response or engine range could not be fully confirmed.",
+        "steps": [
+          "Run Get-Command node -All to inspect shell entries.",
+          "Manually review restricted paths or the package engine range, then recheck.",
+          "Official guidance (open manually): https://github.com/openai/codex/blob/main/README.md"
+        ],
+        "limitation": "Restricted paths, disabled probes and unknown responses do not establish that Node is missing."
+      }
+    },
+    {
+      "id": "codex.version",
+      "target": "codex",
+      "status": "skipped",
+      "summary": "Only a complete matching version response is accepted; raw output is discarded.",
+      "evidence": {
+        "reason": "disabled"
+      },
+      "recommendation": "Version observations have a limited scope.",
+      "recheck": "After manually confirming the entry, run codex --version or claude --version. Official guidance (open manually): https://github.com/openai/codex/blob/main/README.md",
+      "guidance": {
+        "code": "version",
+        "phenomenon": "Version observations have a limited scope.",
+        "basis": "Only short complete version responses are accepted; disabled or unknown responses do not pass.",
+        "steps": [
+          "After manually confirming the entry, run codex --version or claude --version.",
+          "Official guidance (open manually): https://github.com/openai/codex/blob/main/README.md"
+        ],
+        "limitation": "A pass covers this version query only, not service, login or task availability."
+      }
+    },
+    {
+      "id": "codex.config.user",
+      "target": "codex",
+      "status": "skipped",
+      "summary": "This optional configuration file is absent; defaults are not a fault.",
+      "evidence": {
+        "layer": "user",
+        "location_source": "default_home",
+        "path": "<PATH:1>",
+        "format": "TOML",
+        "syntax": "absent"
+      },
+      "recommendation": "Configuration checks cover syntax only.",
+      "recheck": "Manually confirm that the user or explicit project layer is the intended scope. Consult official configuration guidance before making changes, then recheck. Official guidance (open manually): https://developers.openai.com/codex/config-basic/",
+      "guidance": {
+        "code": "config",
+        "phenomenon": "Configuration checks cover syntax only.",
+        "basis": "syntax distinguishes valid, absent, unreadable, safety_limit and other observations.",
+        "steps": [
+          "Manually confirm that the user or explicit project layer is the intended scope.",
+          "Consult official configuration guidance before making changes, then recheck.",
+          "Official guidance (open manually): https://developers.openai.com/codex/config-basic/"
+        ],
+        "limitation": "Files can be optional; valid syntax does not establish effective configuration or service availability; restricted files are not read further."
+      }
+    },
+    {
+      "id": "claude.path",
+      "target": "claude",
+      "status": "warn",
+      "summary": "No callable entry in the current PATH; this does not prove the tool is absent from the machine.",
+      "evidence": {
+        "entries": [],
+        "installation_groups": 0,
+        "cmd_path_candidate": null,
+        "powershell_path_candidate": null,
+        "resolution_model": "PATH+PATHEXT; excludes CWD, aliases and functions",
+        "scan_limited": false
+      },
+      "recommendation": "No selectable PATH entry was found.",
+      "recheck": "Run Get-Command codex,claude -All in your actual PowerShell to inspect entries. Manually review installation locations using the official setup guide; open a new terminal before rechecking. Official guidance (open manually): https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "missing",
+        "phenomenon": "No selectable PATH entry was found.",
+        "basis": "No CMD/PATHEXT candidate was selected in this scan.",
+        "steps": [
+          "Run Get-Command codex,claude -All in your actual PowerShell to inspect entries.",
+          "Manually review installation locations using the official setup guide; open a new terminal before rechecking.",
+          "Official guidance (open manually): https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "No disk search is performed; absence from PATH does not prove absence of installation."
+      }
+    },
+    {
+      "id": "claude.install",
+      "target": "claude",
+      "status": "unknown",
+      "summary": "Installation type is inferred from local layout; unknown entries are not executed.",
+      "evidence": {
+        "kind": "not_found",
+        "publisher_verified": false
+      },
+      "recommendation": "This is an observation within a limited scope.",
+      "recheck": "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope. Official guidance (open manually): https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "This is an observation within a limited scope.",
+        "basis": "The report retains the check's specific status and evidence.",
+        "steps": [
+          "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.",
+          "Official guidance (open manually): https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked."
+      }
+    },
+    {
+      "id": "claude.dependency",
+      "target": "claude",
+      "status": "unknown",
+      "summary": "Runtime checks depend on the identified entry; native programs do not universally require Node.js.",
+      "evidence": {
+        "runtime": "unknown"
+      },
+      "recommendation": "The Node dependency cannot be determined.",
+      "recheck": "Run Get-Command node -All to inspect shell entries. Manually review restricted paths or the package engine range, then recheck. Official guidance (open manually): https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "node_unknown",
+        "phenomenon": "The Node dependency cannot be determined.",
+        "basis": "The entry, Node path, version response or engine range could not be fully confirmed.",
+        "steps": [
+          "Run Get-Command node -All to inspect shell entries.",
+          "Manually review restricted paths or the package engine range, then recheck.",
+          "Official guidance (open manually): https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "Restricted paths, disabled probes and unknown responses do not establish that Node is missing."
+      }
+    },
+    {
+      "id": "claude.version",
+      "target": "claude",
+      "status": "skipped",
+      "summary": "Only a complete matching version response is accepted; raw output is discarded.",
+      "evidence": {
+        "reason": "disabled"
+      },
+      "recommendation": "Version observations have a limited scope.",
+      "recheck": "After manually confirming the entry, run codex --version or claude --version. Official guidance (open manually): https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "version",
+        "phenomenon": "Version observations have a limited scope.",
+        "basis": "Only short complete version responses are accepted; disabled or unknown responses do not pass.",
+        "steps": [
+          "After manually confirming the entry, run codex --version or claude --version.",
+          "Official guidance (open manually): https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "A pass covers this version query only, not service, login or task availability."
+      }
+    },
+    {
+      "id": "claude.config.user",
+      "target": "claude",
+      "status": "skipped",
+      "summary": "This optional configuration file is absent; defaults are not a fault.",
+      "evidence": {
+        "layer": "user",
+        "location_source": "default_home",
+        "path": "<PATH:2>",
+        "format": "JSON",
+        "syntax": "absent"
+      },
+      "recommendation": "Configuration checks cover syntax only.",
+      "recheck": "Manually confirm that the user or explicit project layer is the intended scope. Consult official configuration guidance before making changes, then recheck. Official guidance (open manually): https://code.claude.com/docs/en/settings",
+      "guidance": {
+        "code": "config",
+        "phenomenon": "Configuration checks cover syntax only.",
+        "basis": "syntax distinguishes valid, absent, unreadable, safety_limit and other observations.",
+        "steps": [
+          "Manually confirm that the user or explicit project layer is the intended scope.",
+          "Consult official configuration guidance before making changes, then recheck.",
+          "Official guidance (open manually): https://code.claude.com/docs/en/settings"
+        ],
+        "limitation": "Files can be optional; valid syntax does not establish effective configuration or service availability; restricted files are not read further."
+      }
+    },
+    {
+      "id": "wsl.launcher",
+      "target": "wsl",
+      "status": "pass",
+      "summary": "Only the system WSL launcher is checked; presence does not prove component or distribution availability.",
+      "evidence": {
+        "present": true,
+        "component_health": "not_checked"
+      },
+      "recommendation": "The WSL internal environment is not checked.",
+      "recheck": "If you use tools inside WSL, inspect installation separately inside the distribution you select yourself. To inspect the Windows registration list only, manually run wsl --list --quiet. Official guidance (open manually): https://learn.microsoft.com/en-us/windows/wsl/basic-commands",
+      "guidance": {
+        "code": "wsl",
+        "phenomenon": "The WSL internal environment is not checked.",
+        "basis": "Windows launcher and registration counts are external observations; internal checks always remain skipped.",
+        "steps": [
+          "If you use tools inside WSL, inspect installation separately inside the distribution you select yourself.",
+          "To inspect the Windows registration list only, manually run wsl --list --quiet.",
+          "Official guidance (open manually): https://learn.microsoft.com/en-us/windows/wsl/basic-commands"
+        ],
+        "limitation": "This tool does not start distributions or treat absence of WSL as an AI tool failure."
+      }
+    },
+    {
+      "id": "wsl.inventory",
+      "target": "wsl",
+      "status": "pass",
+      "summary": "Observe only the count of registered distributions for this user; no internal files are read.",
+      "evidence": {
+        "registered_count": 0,
+        "reason": "registration_key_absent"
+      },
+      "recommendation": "The WSL internal environment is not checked.",
+      "recheck": "If you use tools inside WSL, inspect installation separately inside the distribution you select yourself. To inspect the Windows registration list only, manually run wsl --list --quiet. Official guidance (open manually): https://learn.microsoft.com/en-us/windows/wsl/basic-commands",
+      "guidance": {
+        "code": "wsl",
+        "phenomenon": "The WSL internal environment is not checked.",
+        "basis": "Windows launcher and registration counts are external observations; internal checks always remain skipped.",
+        "steps": [
+          "If you use tools inside WSL, inspect installation separately inside the distribution you select yourself.",
+          "To inspect the Windows registration list only, manually run wsl --list --quiet.",
+          "Official guidance (open manually): https://learn.microsoft.com/en-us/windows/wsl/basic-commands"
+        ],
+        "limitation": "This tool does not start distributions or treat absence of WSL as an AI tool failure."
+      }
+    },
+    {
+      "id": "wsl.running",
+      "target": "wsl",
+      "status": "skipped",
+      "summary": "Running state comes only from an explicitly enabled read-only list query; WSL is not executed by default.",
+      "evidence": {
+        "reason": "not_requested",
+        "running_count": null
+      },
+      "recommendation": "The WSL internal environment is not checked.",
+      "recheck": "If you use tools inside WSL, inspect installation separately inside the distribution you select yourself. To inspect the Windows registration list only, manually run wsl --list --quiet. Official guidance (open manually): https://learn.microsoft.com/en-us/windows/wsl/basic-commands",
+      "guidance": {
+        "code": "wsl",
+        "phenomenon": "The WSL internal environment is not checked.",
+        "basis": "Windows launcher and registration counts are external observations; internal checks always remain skipped.",
+        "steps": [
+          "If you use tools inside WSL, inspect installation separately inside the distribution you select yourself.",
+          "To inspect the Windows registration list only, manually run wsl --list --quiet.",
+          "Official guidance (open manually): https://learn.microsoft.com/en-us/windows/wsl/basic-commands"
+        ],
+        "limitation": "This tool does not start distributions or treat absence of WSL as an AI tool failure."
+      }
+    },
+    {
+      "id": "wsl.internal",
+      "target": "wsl",
+      "status": "skipped",
+      "summary": "Commands and configuration inside distributions were not inspected; no distribution was launched.",
+      "evidence": {},
+      "recommendation": "The WSL internal environment is not checked.",
+      "recheck": "If you use tools inside WSL, inspect installation separately inside the distribution you select yourself. To inspect the Windows registration list only, manually run wsl --list --quiet. Official guidance (open manually): https://learn.microsoft.com/en-us/windows/wsl/basic-commands",
+      "guidance": {
+        "code": "wsl",
+        "phenomenon": "The WSL internal environment is not checked.",
+        "basis": "Windows launcher and registration counts are external observations; internal checks always remain skipped.",
+        "steps": [
+          "If you use tools inside WSL, inspect installation separately inside the distribution you select yourself.",
+          "To inspect the Windows registration list only, manually run wsl --list --quiet.",
+          "Official guidance (open manually): https://learn.microsoft.com/en-us/windows/wsl/basic-commands"
+        ],
+        "limitation": "This tool does not start distributions or treat absence of WSL as an AI tool failure."
+      }
+    },
+    {
+      "id": "scope.unchecked",
+      "target": "system",
+      "status": "skipped",
+      "summary": "Merged configuration is not computed; project ancestors, profiles, managed policy, aliases and shell execution policy are outside v0.1 scope.",
+      "evidence": {},
+      "recommendation": "This is an observation within a limited scope.",
+      "recheck": "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "This is an observation within a limited scope.",
+        "basis": "The report retains the check's specific status and evidence.",
+        "steps": [
+          "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope."
+        ],
+        "limitation": "Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked."
+      }
+    }
+  ],
+  "priorities": [
+    "codex.path",
+    "claude.path",
+    "codex.install",
+    "codex.dependency",
+    "claude.install",
+    "claude.dependency"
+  ],
+  "exit_policy": {
+    "fail_on": [
+      "unknown"
+    ],
+    "triggered": [
+      "unknown"
+    ],
+    "matched": true,
+    "meaning": "Meeting the selected exit conditions means a selected state occurred; unknown is not a confirmed fault. Operational failure exits 2; interruption exits 130."
+  }
+}

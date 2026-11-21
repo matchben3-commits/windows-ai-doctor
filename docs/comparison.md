@@ -1,3 +1,9 @@
+## v0.3 更新 / Update
+
+同时支持v0.3 schema 1.0诊断，明确拒绝history/support派生类型。compare禁止fail-on，与history/support互斥。scan_limited=true时保持unassessed说明，即使状态为pass，也不宣称恢复完整覆盖。其余比较限额和输出契约保持兼容。见 [第三版契约](v03-contract.md)。
+
+> v0.1/v0.2 历史材料：测试、截图、日期和发布状态保留原轮次；不能当作第三版结果。第三版当前契约与证据见 [v03-contract.md](v03-contract.md) 和 [HANDOFF](../HANDOFF.md)。
+
 # 离线对比契约 / Offline comparison contract
 
 `python doctor.py --compare OLD.json NEW.json --lang zh --format all --output-dir reports/comparison-new`

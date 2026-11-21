@@ -1,3 +1,9 @@
+## v0.3 范围 / Scope
+
+本轮只增加本地报告派生和退出条件，未扩展上游产品探测或变更官方规则断言。沿用的上游依据保留原日期，不作为已刷新到第三版日期的事实。新输入/输出契约为本项目策略，见 [v03-contract.md](v03-contract.md)。
+
+> v0.1/v0.2 历史材料：测试、截图、日期和发布状态保留原轮次；不能当作第三版结果。第三版当前契约与证据见 [v03-contract.md](v03-contract.md) 和 [HANDOFF](../HANDOFF.md)。
+
 # 规则依据与适用边界 / Rules and scope
 
 核对日期：2026-11-19（北京时间）。第二版本轮重新打开并核对 Codex npm package.json、Codex config basics、Claude setup/CLI reference、微软 WSL/Get-Command、GitHub Actions 定义及 Python 打包资料。下表其余规则沿用同日首版核对，网页可能继续变化。适用范围为 v0.2 的有限本地观察，不承诺覆盖全部上游版本。

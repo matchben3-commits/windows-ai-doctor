@@ -1,3 +1,13 @@
+# v0.3.0 — 2026-11-21 (candidate; not published)
+
+- Ordered offline history for 2–20 schema-1.0 diagnoses, bilingual MD/JSON/HTML, per-run counts and adjacent changes without health scoring.
+- Limited support ZIP rebuilt from whitelisted observations, bilingual summaries, fixed privacy notice and SHA-256 member manifest. No source text or automatic sharing.
+- Configurable diagnosis exit conditions (--fail-on error/warn/unknown), additive JSON policy metadata and visible explanations in every format.
+- Shared bounded input and derivative-type rejection; scan-limited transitions retain uncertainty even when the supplied status is pass.
+- New privacy, offline-mode, input-budget, cleanup, exit-priority and installed-entry checks; independent review and hosted CI remain separate gates.
+
+The entries below describe historical versions, not current candidate verification.
+
 # Changelog
 
 ## 0.2.0 — local development, 2026-11-19

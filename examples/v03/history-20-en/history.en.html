@@ -1,0 +1,228 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;">
+<title>Windows AI Doctor · History</title><style>
+:root{color-scheme:light;font-family:system-ui,'Segoe UI',sans-serif;color:#17243a;background:#f2f5fa}
+*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:32px 24px}
+header{margin-bottom:24px}h1{font-size:clamp(1.6rem,5vw,2.5rem);margin:0 0 12px}
+h2{font-size:1.15rem}p,li,pre,h2{overflow-wrap:anywhere}p,li{line-height:1.65}
+.muted{color:#526078}.counts{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}
+.count,article,.priority{border:1px solid #cdd6e4;background:white;border-radius:12px;padding:18px}
+.count{min-width:115px;flex:1}.count strong{font-size:1.8rem;display:block}
+article{margin:16px 0}article h2{margin:0 0 12px}.badge{font-weight:700}
+.error{border-left:5px solid #b42318}.warn{border-left:5px solid #906400}
+.unknown{border-left:5px solid #5d478b}.pass{border-left:5px solid #167345}
+pre{white-space:pre-wrap;word-break:break-word;font-size:.86rem;background:#f4f6fa;padding:14px;border-radius:8px}
+ol{padding-left:24px}.priority{border-left:5px solid #315cc9}footer{margin-top:32px}
+@media(max-width:480px){main{padding:20px 12px}.count{min-width:90px;padding:12px}article{padding:14px}}
+.table-scroll{overflow-x:auto;max-width:100%;border:1px solid #cdd6e4;border-radius:12px;background:white;margin:20px 0}
+table{border-collapse:collapse;font-size:.9rem}caption{text-align:left;padding:14px;font-weight:700}
+th,td{border:1px solid #d8e0ec;text-align:left;padding:12px;min-width:135px;vertical-align:top}
+th{background:#eaf0fa}th[scope=row]{min-width:190px;position:sticky;left:0;z-index:1}td small{display:block;margin-top:8px;overflow-wrap:anywhere}
+.table-scroll:focus{outline:3px solid #315cc9}
+thead th:first-child{position:sticky;left:0;z-index:2}
+</style></head><body><main><header><h1>Windows AI Doctor · History</h1><p>v0.3.0 · schema 1.0 · 2026-11-21T05:31:48+00:00</p></header>
+<p class="priority">Order follows the command line. Confirm that all reports cover the same environment and scope; machine identity is not inferred. Counts are not a health score. Missing, unknown, skipped or scan-limited checks do not establish a fix; a pass covers this check now only. Only known check states, numeric versions, installation-group counts and scan limits are compared.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Counts by run"><table><caption>Counts by run</caption><thead><tr><th scope="col">Sequence</th><th scope="col">Pass</th><th scope="col">Warning</th><th scope="col">Error</th><th scope="col">Unknown</th><th scope="col">Not checked</th></tr></thead><tbody>
+<tr><th scope="row">Run 1</th><td>2</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">Run 2</th><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th scope="row">Run 3</th><td>3</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">Run 4</th><td>2</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">Run 5</th><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th scope="row">Run 6</th><td>3</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">Run 7</th><td>2</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">Run 8</th><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th scope="row">Run 9</th><td>3</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">Run 10</th><td>2</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">Run 11</th><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th scope="row">Run 12</th><td>3</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">Run 13</th><td>2</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">Run 14</th><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th scope="row">Run 15</th><td>3</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">Run 16</th><td>2</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">Run 17</th><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th scope="row">Run 18</th><td>3</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">Run 19</th><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th scope="row">Run 20</th><td>3</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+</tbody></table></div><p>Tables scroll horizontally; focus a table region to use the arrow keys.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Check states"><table><caption>Check states and limited observations</caption><thead><tr><th scope="col">ID</th><th scope="col">Run 1</th><th scope="col">Run 2</th><th scope="col">Run 3</th><th scope="col">Run 4</th><th scope="col">Run 5</th><th scope="col">Run 6</th><th scope="col">Run 7</th><th scope="col">Run 8</th><th scope="col">Run 9</th><th scope="col">Run 10</th><th scope="col">Run 11</th><th scope="col">Run 12</th><th scope="col">Run 13</th><th scope="col">Run 14</th><th scope="col">Run 15</th><th scope="col">Run 16</th><th scope="col">Run 17</th><th scope="col">Run 18</th><th scope="col">Run 19</th><th scope="col">Run 20</th></tr></thead><tbody>
+<tr><th scope="row">codex.config.user</th>
+<td class="error"><span class="badge">× Error</span></td>
+<td class="unknown"><span class="badge">? Unknown</span></td>
+<td class="pass"><span class="badge">✓ Pass</span></td>
+<td class="error"><span class="badge">× Error</span></td>
+<td class="unknown"><span class="badge">? Unknown</span></td>
+<td class="pass"><span class="badge">✓ Pass</span></td>
+<td class="error"><span class="badge">× Error</span></td>
+<td class="unknown"><span class="badge">? Unknown</span></td>
+<td class="pass"><span class="badge">✓ Pass</span></td>
+<td class="error"><span class="badge">× Error</span></td>
+<td class="unknown"><span class="badge">? Unknown</span></td>
+<td class="pass"><span class="badge">✓ Pass</span></td>
+<td class="error"><span class="badge">× Error</span></td>
+<td class="unknown"><span class="badge">? Unknown</span></td>
+<td class="pass"><span class="badge">✓ Pass</span></td>
+<td class="error"><span class="badge">× Error</span></td>
+<td class="unknown"><span class="badge">? Unknown</span></td>
+<td class="pass"><span class="badge">✓ Pass</span></td>
+<td class="unknown"><span class="badge">? Unknown</span></td>
+<td class="pass"><span class="badge">✓ Pass</span></td>
+</tr>
+<tr><th scope="row">codex.path</th>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="warn"><span class="badge">! Warning</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: true}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="warn"><span class="badge">! Warning</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: true}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="warn"><span class="badge">! Warning</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: true}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="warn"><span class="badge">! Warning</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: true}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="warn"><span class="badge">! Warning</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: true}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="warn"><span class="badge">! Warning</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: true}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="warn"><span class="badge">! Warning</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: true}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+</tr>
+<tr><th scope="row">codex.version</th>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.1&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.2&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.3&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.1&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.2&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.3&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.1&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.2&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.3&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.1&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.2&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.3&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.1&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.2&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.3&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.1&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.2&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.3&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.2&quot;}</small></td>
+<td class="pass"><span class="badge">✓ Pass</span><small>{&quot;version&quot;: &quot;1.2.3&quot;}</small></td>
+</tr>
+<tr><th scope="row">scope.unchecked</th>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+<td class="skipped"><span class="badge">— Not checked</span></td>
+</tr>
+</tbody></table></div>
+<article><h2>Run 1 → Run 2</h2><p>Unchanged checks: 1</p>
+<h3>codex.config.user</h3><p>error → unknown</p><p>Unknown, not rechecked or scan limited; this does not establish a fix.</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → warn</p><p>Unknown, not rechecked or scan limited; this does not establish a fix.</p><pre>{&quot;scan_limited&quot;: {&quot;before&quot;: false, &quot;after&quot;: true}}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.1&quot;, &quot;after&quot;: &quot;1.2.2&quot;}}</pre>
+</article>
+<article><h2>Run 2 → Run 3</h2><p>Unchanged checks: 1</p>
+<h3>codex.config.user</h3><p>unknown → pass</p><p>This check passes now.</p><pre>{}</pre>
+<h3>codex.path</h3><p>warn → pass</p><p>This check passes now.</p><pre>{&quot;scan_limited&quot;: {&quot;before&quot;: true, &quot;after&quot;: false}}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.2&quot;, &quot;after&quot;: &quot;1.2.3&quot;}}</pre>
+</article>
+<article><h2>Run 3 → Run 4</h2><p>Unchanged checks: 2</p>
+<h3>codex.config.user</h3><p>pass → error</p><p>Observed fields or status changed.</p><pre>{}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.3&quot;, &quot;after&quot;: &quot;1.2.1&quot;}}</pre>
+</article>
+<article><h2>Run 4 → Run 5</h2><p>Unchanged checks: 1</p>
+<h3>codex.config.user</h3><p>error → unknown</p><p>Unknown, not rechecked or scan limited; this does not establish a fix.</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → warn</p><p>Unknown, not rechecked or scan limited; this does not establish a fix.</p><pre>{&quot;scan_limited&quot;: {&quot;before&quot;: false, &quot;after&quot;: true}}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.1&quot;, &quot;after&quot;: &quot;1.2.2&quot;}}</pre>
+</article>
+<article><h2>Run 5 → Run 6</h2><p>Unchanged checks: 1</p>
+<h3>codex.config.user</h3><p>unknown → pass</p><p>This check passes now.</p><pre>{}</pre>
+<h3>codex.path</h3><p>warn → pass</p><p>This check passes now.</p><pre>{&quot;scan_limited&quot;: {&quot;before&quot;: true, &quot;after&quot;: false}}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.2&quot;, &quot;after&quot;: &quot;1.2.3&quot;}}</pre>
+</article>
+<article><h2>Run 6 → Run 7</h2><p>Unchanged checks: 2</p>
+<h3>codex.config.user</h3><p>pass → error</p><p>Observed fields or status changed.</p><pre>{}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.3&quot;, &quot;after&quot;: &quot;1.2.1&quot;}}</pre>
+</article>
+<article><h2>Run 7 → Run 8</h2><p>Unchanged checks: 1</p>
+<h3>codex.config.user</h3><p>error → unknown</p><p>Unknown, not rechecked or scan limited; this does not establish a fix.</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → warn</p><p>Unknown, not rechecked or scan limited; this does not establish a fix.</p><pre>{&quot;scan_limited&quot;: {&quot;before&quot;: false, &quot;after&quot;: true}}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.1&quot;, &quot;after&quot;: &quot;1.2.2&quot;}}</pre>
+</article>
+<article><h2>Run 8 → Run 9</h2><p>Unchanged checks: 1</p>
+<h3>codex.config.user</h3><p>unknown → pass</p><p>This check passes now.</p><pre>{}</pre>
+<h3>codex.path</h3><p>warn → pass</p><p>This check passes now.</p><pre>{&quot;scan_limited&quot;: {&quot;before&quot;: true, &quot;after&quot;: false}}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.2&quot;, &quot;after&quot;: &quot;1.2.3&quot;}}</pre>
+</article>
+<article><h2>Run 9 → Run 10</h2><p>Unchanged checks: 2</p>
+<h3>codex.config.user</h3><p>pass → error</p><p>Observed fields or status changed.</p><pre>{}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.3&quot;, &quot;after&quot;: &quot;1.2.1&quot;}}</pre>
+</article>
+<article><h2>Run 10 → Run 11</h2><p>Unchanged checks: 1</p>
+<h3>codex.config.user</h3><p>error → unknown</p><p>Unknown, not rechecked or scan limited; this does not establish a fix.</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → warn</p><p>Unknown, not rechecked or scan limited; this does not establish a fix.</p><pre>{&quot;scan_limited&quot;: {&quot;before&quot;: false, &quot;after&quot;: true}}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.1&quot;, &quot;after&quot;: &quot;1.2.2&quot;}}</pre>
+</article>
+<article><h2>Run 11 → Run 12</h2><p>Unchanged checks: 1</p>
+<h3>codex.config.user</h3><p>unknown → pass</p><p>This check passes now.</p><pre>{}</pre>
+<h3>codex.path</h3><p>warn → pass</p><p>This check passes now.</p><pre>{&quot;scan_limited&quot;: {&quot;before&quot;: true, &quot;after&quot;: false}}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.2&quot;, &quot;after&quot;: &quot;1.2.3&quot;}}</pre>
+</article>
+<article><h2>Run 12 → Run 13</h2><p>Unchanged checks: 2</p>
+<h3>codex.config.user</h3><p>pass → error</p><p>Observed fields or status changed.</p><pre>{}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.3&quot;, &quot;after&quot;: &quot;1.2.1&quot;}}</pre>
+</article>
+<article><h2>Run 13 → Run 14</h2><p>Unchanged checks: 1</p>
+<h3>codex.config.user</h3><p>error → unknown</p><p>Unknown, not rechecked or scan limited; this does not establish a fix.</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → warn</p><p>Unknown, not rechecked or scan limited; this does not establish a fix.</p><pre>{&quot;scan_limited&quot;: {&quot;before&quot;: false, &quot;after&quot;: true}}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.1&quot;, &quot;after&quot;: &quot;1.2.2&quot;}}</pre>
+</article>
+<article><h2>Run 14 → Run 15</h2><p>Unchanged checks: 1</p>
+<h3>codex.config.user</h3><p>unknown → pass</p><p>This check passes now.</p><pre>{}</pre>
+<h3>codex.path</h3><p>warn → pass</p><p>This check passes now.</p><pre>{&quot;scan_limited&quot;: {&quot;before&quot;: true, &quot;after&quot;: false}}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.2&quot;, &quot;after&quot;: &quot;1.2.3&quot;}}</pre>
+</article>
+<article><h2>Run 15 → Run 16</h2><p>Unchanged checks: 2</p>
+<h3>codex.config.user</h3><p>pass → error</p><p>Observed fields or status changed.</p><pre>{}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.3&quot;, &quot;after&quot;: &quot;1.2.1&quot;}}</pre>
+</article>
+<article><h2>Run 16 → Run 17</h2><p>Unchanged checks: 1</p>
+<h3>codex.config.user</h3><p>error → unknown</p><p>Unknown, not rechecked or scan limited; this does not establish a fix.</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → warn</p><p>Unknown, not rechecked or scan limited; this does not establish a fix.</p><pre>{&quot;scan_limited&quot;: {&quot;before&quot;: false, &quot;after&quot;: true}}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.1&quot;, &quot;after&quot;: &quot;1.2.2&quot;}}</pre>
+</article>
+<article><h2>Run 17 → Run 18</h2><p>Unchanged checks: 1</p>
+<h3>codex.config.user</h3><p>unknown → pass</p><p>This check passes now.</p><pre>{}</pre>
+<h3>codex.path</h3><p>warn → pass</p><p>This check passes now.</p><pre>{&quot;scan_limited&quot;: {&quot;before&quot;: true, &quot;after&quot;: false}}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.2&quot;, &quot;after&quot;: &quot;1.2.3&quot;}}</pre>
+</article>
+<article><h2>Run 18 → Run 19</h2><p>Unchanged checks: 1</p>
+<h3>codex.config.user</h3><p>pass → unknown</p><p>Unknown, not rechecked or scan limited; this does not establish a fix.</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → warn</p><p>Unknown, not rechecked or scan limited; this does not establish a fix.</p><pre>{&quot;scan_limited&quot;: {&quot;before&quot;: false, &quot;after&quot;: true}}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.3&quot;, &quot;after&quot;: &quot;1.2.2&quot;}}</pre>
+</article>
+<article><h2>Run 19 → Run 20</h2><p>Unchanged checks: 1</p>
+<h3>codex.config.user</h3><p>unknown → pass</p><p>This check passes now.</p><pre>{}</pre>
+<h3>codex.path</h3><p>warn → pass</p><p>This check passes now.</p><pre>{&quot;scan_limited&quot;: {&quot;before&quot;: true, &quot;after&quot;: false}}</pre>
+<h3>codex.version</h3><p>pass → pass</p><p>Observed fields or status changed.</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.2&quot;, &quot;after&quot;: &quot;1.2.3&quot;}}</pre>
+</article>
+<footer><p>Offline summary; no new scan or access to paths embedded in reports.</p></footer></main></body></html>

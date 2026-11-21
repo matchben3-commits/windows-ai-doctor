@@ -1,3 +1,5 @@
+> v0.1/v0.2 历史材料：测试、截图、日期和发布状态保留原轮次；不能当作第三版结果。第三版当前契约与证据见 [v03-contract.md](v03-contract.md) 和 [HANDOFF](../HANDOFF.md)。
+
 # HTML 实际显示核验 / Browser display validation
 
 2026-11-19，gpt 在本机可用的内置浏览器实际打开本项目合成 HTML。以下是实现者自测，不替代 dsh 独立复核。报告由临时合成配置生成，不含用户真实配置。

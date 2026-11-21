@@ -112,7 +112,7 @@ class V02Tests(DoctorFixture):
         c = {v["id"]: v for v in result["changes"]}
         self.assertEqual(c["codex.version"]["details"]["version"], {"before": "1.2.3", "after": "1.2.4"})
         self.assertTrue(c["codex.path"]["details"]["scan_limited"]["after"])
-        self.assertEqual(c["codex.path"]["note"], "observations_changed")
+        self.assertEqual(c["codex.path"]["note"], "unassessed")
         self.assertEqual(c["codex.config.user"]["note"], "unassessed")
         self.assertEqual(c["claude.version"]["note"], "unassessed")
         self.assertEqual(c["wsl.running"]["note"], "removed")

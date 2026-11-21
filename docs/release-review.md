@@ -1,3 +1,5 @@
+> v0.1/v0.2 历史材料：测试、截图、日期和发布状态保留原轮次；不能当作第三版结果。第三版当前契约与证据见 [v03-contract.md](v03-contract.md) 和 [HANDOFF](../HANDOFF.md)。
+
 # v0.1.0 发布审查 / Release review
 
 日期 / Date: 2026-11-19, China time (UTC+08:00).

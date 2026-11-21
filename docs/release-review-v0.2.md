@@ -1,3 +1,5 @@
+> v0.1/v0.2 历史材料：测试、截图、日期和发布状态保留原轮次；不能当作第三版结果。第三版当前契约与证据见 [v03-contract.md](v03-contract.md) 和 [HANDOFF](../HANDOFF.md)。
+
 # v0.2.0 发布审查 / Release review
 
 2026-11-20，北京时间。dsh 独立复核；MausBot 负责最终候选、公开材料和发布检查。本文件记录本地验证的范围；是否已经发布以 [版本页](https://github.com/matchben3-commits/windows-ai-doctor/releases) 为准，具体托管运行从版本说明链接。

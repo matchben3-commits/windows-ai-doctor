@@ -1,44 +1,41 @@
-# v0.2.0 开发交接 / Development handoff
+# v0.3.0 开发交接
 
-本轮三项功能已实现：离线单文件 HTML；两份 JSON 离线对比；按证据选择的中英文排障。保留原 CLI、稳定检查编号、默认 MD+JSON、npm 完整模板及逐级拒绝链接策略。开发阶段未发布；2026-11-20 后续独立复核、终审和正式发布状态见 [v0.2 发布审查](docs/release-review-v0.2.md) 与版本页。
+三项功能已实现：2–20次离线趋势、白名单重建的双语求助ZIP、可选诊断退出条件。保持Python 3.11+和标准库运行时、稳定ID、默认MD+JSON及旧版诊断输入兼容。候选尚未发布；dsh独立复核和MausBot终审、托管CI仍是后续门槛。
 
 ## 本轮证据
 
-- [测试逐项记录](evidence/v02-tests.json)：56 项，54 通过、2 跳过、0 失败/错误，退出 0。原 39 项是本次套件中的 38 通过、1 跳过；新增 17 项为 16 通过、1 跳过。
-- [用户授权的独立两项补测](evidence/v02-authorized-links.json)及[真实进程退出码](evidence/v02-authorized-process.json)：配置文件链接和报告输入链接均通过，2 通过、0 跳过、退出 0。不是一次完整 56 通过。补测中记录的核心源文件哈希保持一致。
-- [四次本机检查](evidence/v02-host/runs.json)：中英文常规和禁止 Python 网络 API 均退出 0；允许读取的用户配置字节及父环境未变。Codex 0.169.0；未执行 WSL。
-- [原始两项反例本轮复跑](evidence/v02-edges.json)：损坏包装器实际退出 7、doctor unknown；真实 junction 未读取后代，脚本退出 0。
-- [实际 HTML 显示核验](docs/html-validation.md)：桌面中文、390px iframe 视口、长文本/注入文本、英文对比，保留截图。
-- [源码包/wheel 构建与安装](evidence/build-install.json)：从 sdist 构建 wheel；分别在干净临时虚拟环境安装、实际命令入口、中文/英文全部格式、对比、卸载验证。
-- [变更及基线清单](evidence/v02-baseline.json)、[SHA-256 文件清单](SHA256SUMS.txt)。旧 examples/review-fixes、review-dsh、review-maus 及其他原证据仍归 v0.1 历史，不代表第二版新验证。
+- [完整逐项测试](evidence/v03-tests.json)：本地78项，76通过、2权限跳过、0失败/错误，真实进程退出0。两项跳过是配置文件符号链接及报告文件符号链接，未申请提权或更改开发者模式；真实NTFS junction回归正常执行。旧版补测不能算本轮通过。
+- [三项功能合成样例](examples/v03/runs.json)：3次趋势、20次趋势、中英文退出条件及求助包；记录每次实际/预期退出码。run1–3是明确编写的合成观察，不是真实主机诊断；退出条件示例只使用临时空目录。
+- 求助包测试实际解压固定五成员、CRC、四成员SHA清单及敏感标记；拒绝将support派生JSON重新输入。离线测试禁止Doctor、命令/网络入口及对嵌入路径的元数据访问。见test_v03逐项记录。
+- [实际HTML显示核验](docs/v03-html-validation.md)：中文、英文、20列表格和390px真实iframe视口，保留末列与固定ID同时显示的截图。Browser报告过被阻止的Google访问，不据此声称整个浏览器无联网尝试。
+- [构建安装记录](evidence/v03-package.json)：由package_check在本候选构建时生成，各步真实退出码及成品SHA在其中；本交接冻结以该记录exit_code=0为门槛。脚本从sdist构建wheel，分别在干净venv安装、验证隔离导入/版本、双语诊断/趋势、比较、求助包、fail-on退出1及卸载。
+- [基线与变更](evidence/v03-baseline.json)、[交付静态检查](evidence/v03-artifact-check.json)、[当前逐文件SHA](SHA256SUMS.txt)。文件名含v0.1/v0.2、旧tests.json/build-install.json/artifact-check.json、历史SHA和[旧交接](docs/historical-v02-HANDOFF.md)仅代表原轮次，不代表第三版。
 
-## 干净目录复跑
-
-将完整目录复制到新的空目录；使用已安装的 Python 3.11+，无需模型密钥或系统配置变动：
+## 新入口与退出码
 
 ```powershell
-python -B .\tests\run_tests.py --evidence .\evidence\review-tests.json
-python -B .\examples\make_demo.py .\reports\review-demo
-python -B .\doctor.py --compare .\reports\review-demo\zh\report.zh.json .\reports\review-demo\after\zh\report.zh.json --format all --output-dir .\reports\review-comparison
-python -B .\tests\host_check.py .\evidence\review-host
-python -B .\tests\edge_check.py
-python -B .\tests\check_artifacts.py
+python -B doctor.py --history first.json second.json third.json --format all --output-dir reports/history-new
+python -B doctor.py --support first.json --output-dir reports/support-new
+python -B doctor.py --no-version --fail-on error warn unknown --format all --output-dir reports/strict-new
 ```
 
-文件链接测试需创建符号链接权限。用户已授权补测；如需重做，只在具有该权限的临时进程运行 `python -B .\tests\authorized_links.py .\evidence\review-authorized-links.json`，该脚本拒绝覆盖已有结果。不要更改系统策略或开发者模式。
+诊断所选状态出现为1，否则0；默认error。参数/输入/操作/导出失败2，中断130优先。完成比较、趋势或求助包均0。fail-on不改检查状态，unknown仍是无法判断。所有选项禁用缩写。完整字段、大小、派生类型及冲突矩阵见 [第三版契约](docs/v03-contract.md)。
 
-构建需完整 Python（含 venv/ensurepip）及仅用于临时构建环境的网络依赖。先将本次 dist 成品保留到交付目录之外的新备份，再在复核副本中移除 dist，使其为空，然后执行：
+## 干净副本复核
 
 ```powershell
-python -B .\tests\package_check.py .\evidence\review-package.json
+python -B tests/run_tests.py --evidence evidence/review-v03-tests.json
+python -B examples/make_v03_demo.py reports/review-v03-demo-new
+python -B tests/package_check.py evidence/review-v03-package.json
+python -B tests/check_artifacts.py
 ```
 
-脚本创建临时 builder 和两个独立安装环境，只在临时环境获取 build/setuptools/wheel，保留 dist 成品，自动清理虚拟环境。精简嵌入版 Python 没有 venv；本轮使用 Python 官方文档列出的 NuGet Python 3.12.10，解压到任务临时目录，未安装到系统，验收后移除。
+使用新空目录复制冻结候选。构建脚本要求dist为空；在复核副本中保留候选dist至该副本之外，再使用空dist运行。使用完整Python含venv/ensurepip进行构建；嵌入版Python只用于标准库测试，不含venv。解释器的本机绝对路径和源码ZIP校验值在交给dsh的本地开发记录中，公开源码不携带用户目录。
 
-## 复核关注点与未覆盖
+构建依赖只进入任务临时builder，不安装系统依赖、不上传PyPI；每个安装环境都在脚本退出前卸载和清理。当前CI定义保持Windows/Python3.11及3.14，运行完整套件和扩展安装入口验证；本地Python3.12.10结果不能代替托管矩阵。
 
-对比仅接受 schema 1.0 诊断报告，按已知 ID 重建状态、纯数字三段版本、安装组数量及 scan_limited；不复用任意输入文案，也不读取其中路径。详见 [比较契约](docs/comparison.md)。状态丢失、未知、未查、范围受限不宣称修复。
+## 边界与接续
 
-Windows CI 定义已提供（Python 3.11/3.14、Node 24），托管结果待发布阶段验证。本轮实际系统为 Windows build 26200、Python 3.12.10；未验证真实 Claude 发行包、真实 WSL 内部/运行发行版、其他 Windows/Python 组合、POSIX、物理断网或防火墙隔离。浏览器报告过被阻止的 Google 请求，页面资源列表为空；详见显示核验边界。
+不修改旧版目录、用户真实配置、环境或系统策略，不启动WSL，不新建监控，不推送GitHub。输入只读固定本地普通文件，逐级拒绝链接/重解析点；派生输出不复制自由文本。输出路径由调用者负责；并发替换和硬链接不是完整安全边界。求助摘要仍可能被关联，须自行审阅分享。
 
-以上为 2026-11-19 开发交接快照；后续复核和发布记录见 [v0.2 发布审查](docs/release-review-v0.2.md)。开发阶段未创建监控、未上传 GitHub/PyPI，未修改用户配置或启动 WSL。
+未验证真实Claude发行包、真实WSL内部、其他操作系统、手机设备、屏幕阅读器、物理断网或第三方程序防火墙隔离。此开发交付也不声称第三版托管CI或Release已完成。dsh从冻结候选独立副本复核后，再交MausBot核对远端main/tag/Release及真实托管结果，避免重复发布，不force push、不移动旧标签。

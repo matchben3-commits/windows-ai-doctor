@@ -1,0 +1,232 @@
+{
+  "generated_at": "2026-11-21T05:35:48.688199+00:00",
+  "baseline_version": "0.2.0",
+  "baseline_commit": "eeaf6375ac17b949becf267354bc28f9c9773e21",
+  "baseline_remote_rechecked": false,
+  "baseline_zip": "windows-ai-doctor-v0.2.0-source.zip",
+  "baseline_zip_sha256": "3d5162d2f8db3ce192b7d8deae620c77459b9e5914298051512cbea9b6dc5d31",
+  "baseline_files_verified": 153,
+  "candidate_version": "0.3.0",
+  "source_and_docs_changes": {
+    "changed": [
+      {
+        "path": "CHANGELOG.md",
+        "before": "f62e0d85990e42b3fe911e5d7681f6ed3c883ce9a5c02102e917c3b4e2c5ee98",
+        "after": "f9b7de7f056cf75b4d8e27ccd0bfa9384c03b48aa10f6d917a828b269a278cdd"
+      },
+      {
+        "path": "HANDOFF.md",
+        "before": "af6522ef98866f29a443cc8f69ee7c8cc4d67ab3dbdb7817f1e4a700f3e3993d",
+        "after": "49f2ce525b063343d1eb96043628e7f1f405afa152b462e1b7346d7b4758108b"
+      },
+      {
+        "path": "README.en.md",
+        "before": "b0d7ff2ad5bfca35c21b0e6f95d7d05524b2b1089490825297eac90de020cbf7",
+        "after": "e9ba4f6e711d5c69f7addd18e886b0a22db9ecc66eaecf765eac96bb2d002e5f"
+      },
+      {
+        "path": "README.md",
+        "before": "fbe9c83d79843e199872dbc38267e67dc8f1b29a901ac781b8b7c875de1cbff8",
+        "after": "d54c8ceefd719472877cfe7092476cc3e62384a2c4ef4b1ba94fc9517ec42bea"
+      },
+      {
+        "path": "docs/ci-fixture-v02.md",
+        "before": "53c76ec9c01b6e81d7b0ee0104877f2a755ea5463fd7d341c4c83770c9651cf4",
+        "after": "4d4ab1cfea703787af45ca9b88137dedbdaa9d03d9904a3c9ae94f8347528686"
+      },
+      {
+        "path": "docs/comparison.md",
+        "before": "bbd8b2a19bf036913137edc48b39443d77d030b3d7a45c142cb9006ed8316bea",
+        "after": "6b4ec6e46e4746ba950f472beedfd86b33d873b8bf38a0d01b96ef979e7bf3d4"
+      },
+      {
+        "path": "docs/html-validation.md",
+        "before": "925f5f107c1b1e2a12f1aebd3292c158621266a39e10d826de5dc96619439510",
+        "after": "212cb4ba9e3899cd61e165789e85e9119d5d1395aa140d3bc5d866733b127a67"
+      },
+      {
+        "path": "docs/privacy.md",
+        "before": "38d6047f343a89df027f5be7a679604b5da85cd2003776c979e32425c1c36399",
+        "after": "63007e6176198f1d62eba41131b9520be2afd1bb47255277878f67c7d053d058"
+      },
+      {
+        "path": "docs/release-review-v0.2.md",
+        "before": "09a26c7c55d138c6d120e2f97ae9bef370bef6db52e064c25eb61ef873ed2bdf",
+        "after": "c3d0d1872ddac2b4fe028a0e495d04632c2c947d31122951271d7ff9517bc649"
+      },
+      {
+        "path": "docs/release-review.md",
+        "before": "b8c387c3e335e8abcad30f8f77044a69eaccdd1d7f6c057cdef51ea13d1e50d4",
+        "after": "78f1964b04ffab3e9ef9d2f48e1c189920c97711445aaebee7906779253e81a6"
+      },
+      {
+        "path": "docs/rework.md",
+        "before": "9845a94b69a234495c682df018032677f6218fd11429acac381759e36a8e9467",
+        "after": "072d0ea3d31ded082785f05c90e360fab3b55f879c161a58835e9216d2135ba5"
+      },
+      {
+        "path": "docs/rules.md",
+        "before": "81ad0d3686044d0fdfe353bc086f3a57c355635d6a33a2e3bda1bd4cf925180e",
+        "after": "fc8c713517ab70e6d49bb482342678867650e7ddc07acf660d1e0c4c17859f61"
+      },
+      {
+        "path": "docs/validation.md",
+        "before": "2444638b85d647a164f33eae0c9326471f78e5da24a5e992c6fe9e28de1e7c1e",
+        "after": "464bbc210208f2d03c3cf625b4a731ef0ea3111b23755c51c0fee6c4c20d1b17"
+      },
+      {
+        "path": "pyproject.toml",
+        "before": "9c054cadf4e3cef53c52f21827300ef2fb8c0f954e3a4a91e13bf660944f0aa6",
+        "after": "61b6b2e0ed94534eb02439fce4a89cb3f2e5845d04442bef227f8b4c4bd326ee"
+      },
+      {
+        "path": "tests/check_artifacts.py",
+        "before": "87007926dd22148ae81c660daf33068bde66fbc65615defcc12f9ff0cc4ab0a5",
+        "after": "bac3d7b2bb67e2c18c2e553dbf2d77828d24a95c374b52b72ea2bc5463788602"
+      },
+      {
+        "path": "tests/package_check.py",
+        "before": "8e4e9da78525d3f4d09bb2cbeff3d982688f2fa7dd1320c7197ac58b107290e5",
+        "after": "13ded6553a09ff75099056b55f9383a3ec9296a5f346f827a8d43cf2b94e766a"
+      },
+      {
+        "path": "tests/test_v02.py",
+        "before": "27888f4a763dd520f058ad374aee734e51e1d1836f14c0f7cc07e5990872583b",
+        "after": "ab3314dd3a81bf21c001e5f01ce56da424508cf3c6f53927e17dff26363626fd"
+      },
+      {
+        "path": "windows_ai_doctor/__init__.py",
+        "before": "90b6ae6cf81274c7e57c09b974c1d6080812f1bbe06c13591d5fa5dd671f4d31",
+        "after": "69345295b6b81281cb5e3a13b6dfab09e0cc450ec7e651c8500089419cf3fb92"
+      },
+      {
+        "path": "windows_ai_doctor/cli.py",
+        "before": "d34233591e5f5df9b3eeb293289c33d4d03f9ab88b144a7b4b2d50bd4a77a94f",
+        "after": "4a825f100df4c9c8767fc1b7943122c3f5077f50919becb0799dfd71b826cb34"
+      },
+      {
+        "path": "windows_ai_doctor/compare.py",
+        "before": "2bcd315603729302a566caffd0f7af447d7aeb9f2390a380a112383d12887831",
+        "after": "71772fee0d52279c7371b28939e1b5eb157b33965fc71c729697ca35375c342c"
+      },
+      {
+        "path": "windows_ai_doctor/report.py",
+        "before": "4955fc8a9db488f1536066d5472091e55fee40a816879bd1bdee1fd833818548",
+        "after": "1a4157c73a5e5aff129ff6654ee549608c9b489a6759bebb7cd074c00dd83795"
+      }
+    ],
+    "added": [
+      {
+        "path": "docs/historical-v02-HANDOFF.md",
+        "sha256": "da84a6e306805fe38e9b32919d9755587b83c1ca6064335326b065edae746274"
+      },
+      {
+        "path": "docs/v03-contract.md",
+        "sha256": "a446e4ad30410e6be28a59524cdbe3f19462458985cc39d3e13fa961e6c4c720"
+      },
+      {
+        "path": "docs/v03-html-validation.md",
+        "sha256": "98e3eb598a473cd683b7194da00fc19d6c019f810c53254f236de998ed905dc3"
+      },
+      {
+        "path": "examples/make_v03_demo.py",
+        "sha256": "624ed19ec43ae55e7e5ffee999e149267ffec355378d08b9d202e9d874b3b950"
+      },
+      {
+        "path": "examples/v03/history-20-en/history.en.html",
+        "sha256": "11d0c44e479d56724f7001f015119f782035bbdd8e94cdf4a3b2ee7de8ab5eb6"
+      },
+      {
+        "path": "examples/v03/history-20-zh/history.zh.html",
+        "sha256": "c158b919c19de027fd87d5caa466dc38785c7750aab7dcc89a2918a1222839ef"
+      },
+      {
+        "path": "examples/v03/history-en/history.en.html",
+        "sha256": "abeb025d59c395f0dd53d3e8794109f5ea7d54631adf2eaba4cd26fb6ee1d192"
+      },
+      {
+        "path": "examples/v03/history-en/history.en.json",
+        "sha256": "1390bb90247d4d7e1352272ab66f1953d83b80e09a9be38562fa63903d273e57"
+      },
+      {
+        "path": "examples/v03/history-en/history.en.md",
+        "sha256": "973debb72b8ce670ed9e0047d1a5deefd01e7db24f436ec8148a58688352f79b"
+      },
+      {
+        "path": "examples/v03/history-zh/history.zh.html",
+        "sha256": "1e1518c1aa931409899a12d4959cba65c8b1ed7bf106935301d0066111790199"
+      },
+      {
+        "path": "examples/v03/history-zh/history.zh.json",
+        "sha256": "e0a70cd4d806b256df5a7153b840793346682112af164be8cfe480ef617e2200"
+      },
+      {
+        "path": "examples/v03/history-zh/history.zh.md",
+        "sha256": "3fd6e3d1e150affcbb9538f1d2cb684d70e22f08193ba39c27ad15ba868332ca"
+      },
+      {
+        "path": "examples/v03/policy-en/report.en.html",
+        "sha256": "024a8ace5c203e285121f6683888581197fe57c0d63bae0bbb5c227a11559f74"
+      },
+      {
+        "path": "examples/v03/policy-en/report.en.json",
+        "sha256": "716beb1e2e28995479df19c088e8663d951017ce2ee9a47212e4890ef794d2ab"
+      },
+      {
+        "path": "examples/v03/policy-en/report.en.md",
+        "sha256": "dbf7c0f65c5a37e5bb54733f30867cfbf972981ac568ca5ad42492198eaddb7e"
+      },
+      {
+        "path": "examples/v03/policy-zh/report.zh.html",
+        "sha256": "6f80c7be36babb2421f5e84007a4b586c4e2723abe036febb5ce3fbc9d27365f"
+      },
+      {
+        "path": "examples/v03/policy-zh/report.zh.json",
+        "sha256": "74584232ba54e0691d5640693eb99ce6cad9a8900f01f8e791840050048dbcc7"
+      },
+      {
+        "path": "examples/v03/policy-zh/report.zh.md",
+        "sha256": "538f94281b6668e42a460061c9e0b0b86f4d2eb2731033c4394e8cba9f4f6832"
+      },
+      {
+        "path": "examples/v03/run1.json",
+        "sha256": "5fdb7b1cd660d0bfc5605a3d1fb1a346af996d957bbec3394cb908358b9a0f0c"
+      },
+      {
+        "path": "examples/v03/run2.json",
+        "sha256": "b1a4831a6a8800879f12ea14466a3eaf97ce9ad9aaf4af0f75550ee4763764c4"
+      },
+      {
+        "path": "examples/v03/run3.json",
+        "sha256": "8c1f4a28a859eda17a7c0d03256b3b5c4e2946a0261f73501678cc8070637fee"
+      },
+      {
+        "path": "examples/v03/runs.json",
+        "sha256": "a8a3613d23400d3941e2098a3d316130f25c7ef1cbc0e342b62ee191809851ec"
+      },
+      {
+        "path": "examples/v03/support/support-bundle.zip",
+        "sha256": "29ce2b6ad3a1def2d8bd2754b6fe725bad4958e747943cdd7ac9291b075e845b"
+      },
+      {
+        "path": "tests/render_v03_fixtures.py",
+        "sha256": "8054cbf8bd52b26408176f1574df0ae60a5d7ff8522972916bbf10dfc7d5213a"
+      },
+      {
+        "path": "tests/test_v03.py",
+        "sha256": "6820a53cfe1c1d3b79effefd73e35131002dc4b3005e2bb5a9c88e43e90e589f"
+      },
+      {
+        "path": "windows_ai_doctor/history.py",
+        "sha256": "6686bcb2219fc2c33e5a090edb4032dccae09893cb66680969307dac96b54d2f"
+      },
+      {
+        "path": "windows_ai_doctor/support.py",
+        "sha256": "daf58f06a26f6f302065762f9f9e51dad40b83cf15ed7c993e7b36d465a0ab32"
+      }
+    ],
+    "removed": []
+  },
+  "current_manifest": "SHA256SUMS.txt",
+  "historical_manifest": "evidence/historical-v02-SHA256SUMS.txt"
+}
