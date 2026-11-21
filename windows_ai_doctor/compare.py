@@ -123,12 +123,18 @@ def project(obj):
 def load_report(path):
     # absolute() is lexical; no resolve(), exists() or probe before bounded_read.
     raw = bounded_read(Path(path).absolute(), MAX_BYTES)
+    return project(decode_object(raw))
+
+
+def decode_object(raw):
+    if len(raw) > MAX_BYTES:
+        invalid()
     text = raw.decode("utf-8")
     check_depth(text)
     obj = json.loads(text, object_pairs_hook=pairs, parse_int=integer,
                      parse_float=floating, parse_constant=invalid)
     check_nodes(obj)
-    return project(obj)
+    return obj
 
 
 def compare_reports(old, new, lang="zh"):

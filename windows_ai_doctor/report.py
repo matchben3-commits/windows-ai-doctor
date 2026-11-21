@@ -14,6 +14,9 @@ def json_report(report):
 
 
 def markdown_report(report):
+    if report.get("report_type") in ("validation", "support_verification"):
+        from .validation import verification_markdown
+        return verification_markdown(report)
     if report.get("report_type") == "history":
         return history_markdown(report)
     lang, zh = report["language"], report["language"] == "zh"

@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "report_type": "validation",
+  "doctor_version": "0.4.0",
+  "language": "zh",
+  "valid": true,
+  "check_count": 4,
+  "summary": {
+    "pass": 1,
+    "warn": 0,
+    "error": 2,
+    "unknown": 0,
+    "skipped": 1
+  },
+  "notice": "仅确认报告可按当前已知字段和边界接受；未知字段已忽略，未全面审核自由文本，未运行诊断。检查数为0不表示健康或完整。状态数量重新计算，报告有效不表示检查通过。"
+}

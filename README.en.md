@@ -1,10 +1,25 @@
 # Windows AI Doctor
 
-[中文](README.md) · v0.3.0 · Python 3.11+ · Windows first · standard library runtime
+[中文](README.md) · v0.4.0 · Python 3.11+ · Windows first · standard library runtime
 
 Limited local diagnostics for Codex CLI and Claude Code CLI: PATH entries, duplicate installation clues, versions, launcher-specific runtimes, configuration syntax and Windows/WSL visibility. Export English or Chinese Markdown, JSON and standalone offline HTML with manual guidance. It diagnoses without installing, upgrading, repairing, logging in or calling model APIs.
 
-## New in v0.3
+## New in v0.4
+
+- `--validate REPORT.json`: accept diagnoses under known fields and bounds, recomputing counts; error findings do not invalidate an input.
+- `--verify-support BUNDLE.zip`: verify fixed members, CRC, SHA and summary consistency in memory; this does not prove source identity or privacy of arbitrary text.
+- `--history ... --format csv`: UTF-8 BOM long tables with known IDs and limited state/numeric/boolean observations. Missing checks use missing; repairs are not inferred.
+
+```powershell
+python .\doctor.py --validate first.json --lang en --format json
+python .\doctor.py --verify-support .\reports\support-new\support-bundle.zip --lang en
+python .\doctor.py --history first.json second.json --format csv --output-dir .\reports\csv-new
+python .\examples\make_v04_demo.py .\reports\v04-demo-new
+```
+
+Validation and verification support both/md/json. CSV is history-only; both/all retain their output sets. Successful validation/verification exits 0, failure 2, interruption 130, without a new diagnosis. See the [v0.4 contract](docs/v04-contract.md) for bounds and empty-value meanings.
+
+## Retained from v0.3
 
 - History over 2–20 saved diagnoses, ordered by the command line, with counts, per-check observations and adjacent changes.
 - A support ZIP rebuilt from a fixed whitelist, containing bilingual limited summaries, machine-readable observations and member hashes; review it before sharing.
@@ -54,7 +69,7 @@ Replace sample paths with your own files. If Python is not on PATH, use your ins
 
 Completed diagnosis exits 1 when any selected fail-on state occurs, otherwise 0. Default selects only error. Invalid arguments/input, incomplete diagnosis or export always exit 2; interruption exits 130. Completed comparison/history/support exit 0 regardless of imported error counts. Reports show exit_policy selections, triggered states and meaning; selecting unknown does not make it a confirmed fault.
 
-Diagnosis remains schema 1.0 with additive CLI exit_policy metadata. Import modes accept v0.1/v0.2/v0.3 schema-1.0 diagnosis input and reject comparison/history/support derivatives. Only known IDs, states, numeric versions, installation-group counts and scan limits survive. Duplicate keys/IDs, invalid states/schema, oversized or linked input are rejected. Each file is capped at 2 MiB, 16 levels and 20,000 nodes; history allows 20 files. Arbitrary source text never reaches derivative output.
+Diagnosis remains schema 1.0 with additive CLI exit_policy metadata. Import modes accept v0.1/v0.2/v0.3/v0.4 schema-1.0 diagnosis input and reject comparison/history/support/validation/support_verification derivatives. Only known IDs, states, numeric versions, installation-group counts and scan limits survive. Duplicate keys/IDs, invalid states/schema, oversized or linked input are rejected. Each file is capped at 2 MiB, 16 levels and 20,000 nodes; history allows 20 files. Arbitrary source text never reaches derivative output.
 
 ## Privacy and scope
 
@@ -67,13 +82,15 @@ Only recognized targets are queried, never shell wrappers; binary recognition is
 ## Examples and validation
 
 ```powershell
-python -B .\examples\make_v03_demo.py .\reports\v03-demo-new
-python -B .\tests\run_tests.py --evidence .\evidence\review-v03-tests.json
-python -B .\tests\package_check.py .\evidence\review-v03-package.json
+python -B .\examples\make_v04_demo.py .\reports\v04-demo-new
+python -B .\tests\run_tests.py --evidence .\evidence\review-v04-tests.json
+python -B .\tests\package_check.py .\evidence\review-v04-package.json
 ```
 
-The first three input samples are explicitly authored synthetic observations, not real-host diagnoses. Policy examples diagnose only a temporary empty home. Examples: [English history](examples/v03/history-en/history.en.html), [中文趋势](examples/v03/history-zh/history.zh.html), [20-run history](examples/v03/history-20-en/history.en.html). Build checks require complete Python with venv/ensurepip and an empty dist; dependencies stay in temporary build environments. [HANDOFF](HANDOFF.md) identifies current local results, actual display evidence and untested scope.
+The first three inputs are explicitly authored synthetic observations, not real-host diagnoses. Examples: [English history](examples/v04/history-en/history.en.html), [中文趋势](examples/v04/history-zh/history.zh.html), [20-run history](examples/v04/history20-en/history.en.html). Build checks require complete Python with venv/ensurepip and an empty artifact directory; dependencies stay in temporary build environments. [HANDOFF](HANDOFF.md) identifies current local results, display evidence and untested scope.
 
-All v0.1/v0.2-named materials, old tests.json/build-install.json and old manifests are historical. Third-version independent review, hosted Windows/Python 3.11/3.14 CI and publication require separate verification.
+All v0.1/v0.2/v0.3 materials, old tests.json/build-install.json and old manifests are historical. Fourth-version independent review, hosted Windows/Python 3.11/3.14 CI and publication require separate verification.
 
 [MIT](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
+
+Current v0.4 status is in [HANDOFF](HANDOFF.md). Existing evidence not identified as v04, including v0.1/v0.2/v0.3 results, is historical. Required local permission tests, independent review, hosted CI and publication are separate v0.4 gates.

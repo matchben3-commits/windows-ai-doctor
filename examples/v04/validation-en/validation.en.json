@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "report_type": "validation",
+  "doctor_version": "0.4.0",
+  "language": "en",
+  "valid": true,
+  "check_count": 4,
+  "summary": {
+    "pass": 1,
+    "warn": 0,
+    "error": 2,
+    "unknown": 0,
+    "skipped": 1
+  },
+  "notice": "Acceptable under current known fields and bounds only; unknown fields were ignored. Free text was not comprehensively audited and no diagnosis was run. Zero checks do not establish health or completeness. Counts were recomputed; a valid report does not mean its checks passed."
+}

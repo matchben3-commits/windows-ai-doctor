@@ -27,7 +27,9 @@ def finding(report, id):
 
 class DoctorFixture(unittest.TestCase):
     def setUp(self):
-        self.temp = tempfile.TemporaryDirectory(prefix="ai-doctor-test-")
+        fixture_root = ROOT / ".test-fixtures"
+        fixture_root.mkdir(exist_ok=True)
+        self.temp = tempfile.TemporaryDirectory(prefix="ai-doctor-test-", dir=fixture_root)
         # Windows TEMP may use an 8.3 alias; fixture containment uses resolved paths.
         self.root = Path(self.temp.name).resolve()
         self.home = self.root / "private user 用户"
@@ -248,8 +250,20 @@ class DoctorTests(DoctorFixture):
         try:
             (directory / "config.toml").symlink_to(secret)
         except OSError:
-            self.skipTest("symlink privilege unavailable")
-        self.assertEqual(finding(self.doctor(), "codex.config.user")["status"], "unknown")
+            self.fail("Required file-symlink fixture needs user-authorized privilege; acceptance blocked")
+        link = directory / "config.toml"
+        self.assertEqual(link.lstat().st_reparse_tag, 0xA000000C)
+        audit = {"kind": "file_symlink", "reparse_tag": hex(link.lstat().st_reparse_tag), "content_read_attempts": 0}
+        self.link_evidence = [audit]
+        original = Path.open
+        def guarded(path, *args, **kwargs):
+            if path in (link, secret):
+                audit["content_read_attempts"] += 1
+                self.fail("linked synthetic config content opened")
+            return original(path, *args, **kwargs)
+        with patch.object(Path, "open", guarded):
+            self.assertEqual(finding(self.doctor(), "codex.config.user")["status"], "unknown")
+        self.assertEqual(audit["content_read_attempts"], 0)
 
     def test_timeout_and_nonzero_continue_reports(self):
         self.npm(self.root / "slow", script='setTimeout(() => {}, 30000)')

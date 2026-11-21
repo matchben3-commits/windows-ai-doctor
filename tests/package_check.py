@@ -3,6 +3,7 @@
 Requires a complete Python with venv/ensurepip. Build dependencies are fetched
 into temporary task directories only. No package is published.
 """
+import argparse
 import hashlib
 import json
 import os
@@ -21,9 +22,13 @@ from windows_ai_doctor import __version__
 
 
 def main():
-    destination = Path(sys.argv[1]).absolute() if len(sys.argv) == 2 else ROOT / "evidence/build-install.json"
-    dist = ROOT / "dist"
-    dist.mkdir(exist_ok=True)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("evidence", type=Path, nargs="?", default=ROOT / "evidence/build-install.json")
+    parser.add_argument("--artifacts-dir", type=Path, default=ROOT / "dist")
+    args = parser.parse_args()
+    destination = args.evidence.absolute()
+    dist = args.artifacts_dir.absolute()
+    dist.mkdir(parents=True, exist_ok=True)
     if list(dist.iterdir()):
         raise ValueError("dist_must_be_empty")
     scratch = ROOT / ".task-build"
@@ -50,7 +55,7 @@ def main():
         wheelhouse = task / "wheelhouse"
         run("cache_sdist_build_dependencies", [builder, "-m", "pip", "download", "--dest", wheelhouse, "setuptools>=68", "wheel"])
         tree = task / "source"
-        shutil.copytree(ROOT, tree, ignore=shutil.ignore_patterns(".task-build", "dist", "build", "*.egg-info", "__pycache__", ".git", "evidence"))
+        shutil.copytree(ROOT, tree, ignore=shutil.ignore_patterns(".task-build", ".test-fixtures", "dist", "build", "*.egg-info", "__pycache__", ".git", "evidence"))
         # The default builds an sdist then builds the wheel from that sdist.
         run("build_sdist_and_wheel", [builder, "-m", "build", "--no-isolation", "--outdir", dist, tree])
         wheels, sources = list(dist.glob("*.whl")), list(dist.glob("*.tar.gz"))
@@ -87,6 +92,16 @@ def main():
                 if history["report_type"] != "history" or history["transitions"][0]["changes"]:
                     raise ValueError("installed_history")
             run(kind + "_support", [entry, "--support", task / (kind + "zh/report.zh.json"), "--output-dir", task / (kind + "support")], environment=clean)
+            for lang in ("zh", "en"):
+                validation = run(kind + "_validate_" + lang, [entry, "--validate", task / (kind + "zh/report.zh.json"), "--lang", lang, "--format", "json"], environment=clean)
+                if json.loads(validation.stdout)["report_type"] != "validation":
+                    raise ValueError("installed_validation")
+                verified = run(kind + "_verify_support_" + lang, [entry, "--verify-support", task / (kind + "support/support-bundle.zip"), "--lang", lang, "--format", "json"], environment=clean)
+                if json.loads(verified.stdout)["member_count"] != 5:
+                    raise ValueError("installed_verification")
+                csv_output = run(kind + "_csv_" + lang, [entry, "--history", task / (kind + "zh/report.zh.json"), task / (kind + "en/report.en.json"), "--lang", lang, "--format", "csv"], environment=clean)
+                if not csv_output.stdout.startswith(b"\xef\xbb\xbfsequence,check_id,status,version,installation_groups,scan_limited"):
+                    raise ValueError("installed_csv")
             import zipfile
             with zipfile.ZipFile(task / (kind + "support/support-bundle.zip")) as archive:
                 if archive.testzip() is not None or json.loads(archive.read("support.json"))["report_type"] != "support":

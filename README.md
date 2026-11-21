@@ -1,10 +1,25 @@
 # Windows AI Doctor
 
-[English](README.en.md) · v0.3.0 · Python 3.11+ · Windows 优先 · 运行时仅标准库
+[English](README.en.md) · v0.4.0 · Python 3.11+ · Windows 优先 · 运行时仅标准库
 
 对 Codex CLI 和 Claude Code CLI 做本地有限体检：PATH 入口、重复安装线索、版本、入口所需运行时、配置语法及 Windows/WSL 可见状态。导出中英文 Markdown、JSON 和单文件离线 HTML，提供固定手动排障建议。默认只诊断，不安装、升级、修复、登录或调用模型 API。
 
-## 第三版新增
+## 第四版新增
+
+- `--validate REPORT.json`：离线确认诊断输入可按已知字段与边界接受；重新计算数量，报告含error仍可有效。
+- `--verify-support BUNDLE.zip`：在内存中核对固定成员、CRC、SHA及摘要一致性；不证明来源身份或任意文字的隐私。
+- `--history ... --format csv`：UTF-8 BOM长表，只输出已知ID及有限状态/数字/布尔观察；缺失为missing，不推断修复。
+
+```powershell
+python .\doctor.py --validate first.json --format json
+python .\doctor.py --verify-support .\reports\support-new\support-bundle.zip --lang en
+python .\doctor.py --history first.json second.json --format csv --output-dir .\reports\csv-new
+python .\examples\make_v04_demo.py .\reports\v04-demo-new
+```
+
+校验/核验支持both、md、json；csv只对history开放，不改变both/all。两种校验模式成功0、失败2、中断130；不运行新诊断。细节、空值及字节限额见[第四版契约](docs/v04-contract.md)。
+
+## 第三版保留功能
 
 - 多次体检趋势：汇总2–20份已有诊断，按输入顺序显示数量、每项状态和相邻变化。
 - 求助包：按固定白名单重建中英文有限摘要及机器可读结果，生成带哈希清单的ZIP，由用户审阅和分享。
@@ -52,9 +67,9 @@ python .\doctor.py --compare first.json second.json --lang zh --format all --out
 | unknown | 布局、版本、权限、编码或证据不足，不能确认为故障 |
 | skipped | 不存在的可选项、未启用或范围外 |
 
-诊断完成后，出现任意选中的fail-on状态退出1，否则0；默认仅error。参数/输入/诊断/导出失败始终2，中断130。完成的比较/趋势/求助包退出0，与输入的error数量无关。报告中的exit_policy明示所选状态、实际触发状态和含义；将unknown设为失败不等于确认故障。
+诊断完成后，出现任意选中的fail-on状态退出1，否则0；默认仅error。参数/输入/诊断/导出失败始终2，中断130。完成的比较/趋势/求助包/报告校验/求助包核验退出0，与输入的error数量无关。报告中的exit_policy明示所选状态、实际触发状态和含义；将unknown设为失败不等于确认故障。
 
-诊断JSON保留schema 1.0，CLI附加exit_policy。三个导入模式接受v0.1/v0.2/v0.3的schema 1.0诊断，拒绝comparison/history/support派生类型；只保留已知ID、状态、纯数字版本、安装组数量和扫描限制。重复键/ID、非法状态/schema、超限输入和链接文件拒绝。每份2 MiB、16层、20,000节点；趋势最多20份。任意源文字不复制进派生输出。
+诊断JSON保留schema 1.0，CLI附加exit_policy。诊断导入模式接受v0.1/v0.2/v0.3/v0.4的schema 1.0诊断，拒绝comparison/history/support/validation/support_verification派生类型；只保留已知ID、状态、纯数字版本、安装组数量和扫描限制。重复键/ID、非法状态/schema、超限输入和链接文件拒绝。每份2 MiB、16层、20,000节点；趋势最多20份。任意源文字不复制进派生输出。
 
 ## 隐私与范围
 
@@ -67,13 +82,15 @@ python .\doctor.py --compare first.json second.json --lang zh --format all --out
 ## 示例与验证
 
 ```powershell
-python -B .\examples\make_v03_demo.py .\reports\v03-demo-new
-python -B .\tests\run_tests.py --evidence .\evidence\review-v03-tests.json
-python -B .\tests\package_check.py .\evidence\review-v03-package.json
+python -B .\examples\make_v04_demo.py .\reports\v04-demo-new
+python -B .\tests\run_tests.py --evidence .\evidence\review-v04-tests.json
+python -B .\tests\package_check.py .\evidence\review-v04-package.json
 ```
 
-生成器前3份是明确编写的合成观察，非真实主机诊断；退出条件示例仅诊断临时空用户目录。样例：[中文趋势](examples/v03/history-zh/history.zh.html)、[英文趋势](examples/v03/history-en/history.en.html)、[20次趋势](examples/v03/history-20-zh/history.zh.html)。构建检查要求完整Python含venv/ensurepip，dist为空；依赖仅进入临时构建环境。完整第三版本地结果、显示证据和未覆盖项见 [HANDOFF](HANDOFF.md)。
+生成器前3份是明确编写的合成观察，非真实主机诊断。样例：[中文趋势](examples/v04/history-zh/history.zh.html)、[英文趋势](examples/v04/history-en/history.en.html)、[20次趋势](examples/v04/history20-zh/history.zh.html)。构建检查要求完整Python含venv/ensurepip及空的成品目录；依赖仅进入临时构建环境。当前本地结果、显示证据和未覆盖项见 [HANDOFF](HANDOFF.md)。
 
-原v0.1/v0.2命名材料、旧tests.json/build-install.json和旧SHA清单是历史记录，不能视为第三版通过。第三版独立复核、托管Windows/Python 3.11/3.14 CI与发布须分别验收。
+原v0.1/v0.2/v0.3材料、旧tests.json/build-install.json和旧SHA清单是历史记录，不能视为第四版通过。本轮独立复核、托管Windows/Python 3.11/3.14 CI与发布须分别验收。
 
 [MIT许可证](LICENSE) · [第三方声明](THIRD_PARTY_NOTICES.md)
+
+第四版当前状态见[开发交接](HANDOFF.md)。未标v04的既有证据（包括v0.1/v0.2/v0.3）属于历史；本轮权限实测、独立复核、托管CI及发布须分别验收。

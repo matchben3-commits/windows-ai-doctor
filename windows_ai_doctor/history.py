@@ -1,10 +1,27 @@
 """Ordered offline trends over bounded, projected diagnosis inputs."""
+import csv
+import io
 from datetime import datetime, timezone
 
 from . import __version__
 from .compare import STATES, compare_reports, load_report
 
 MAX_REPORTS = 20
+
+
+def history_csv(report):
+    stream = io.StringIO(newline="")
+    stream.write("\ufeff")
+    writer = csv.writer(stream, lineterminator="\n")
+    writer.writerow(("sequence", "check_id", "status", "version", "installation_groups", "scan_limited"))
+    for n in range(len(report["snapshots"])):
+        for check in report["checks"]:
+            observation = check["observations"][n] or {}
+            limited = observation.get("scan_limited")
+            writer.writerow((n + 1, check["id"], observation.get("status", "missing"),
+                             observation.get("version") or "", observation.get("installation_groups", ""),
+                             "" if limited is None else str(limited).lower()))
+    return stream.getvalue()
 
 
 def counts(report):

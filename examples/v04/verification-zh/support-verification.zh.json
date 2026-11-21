@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "report_type": "support_verification",
+  "doctor_version": "0.4.0",
+  "language": "zh",
+  "verified": true,
+  "member_count": 5,
+  "archive_bytes": 2455,
+  "uncompressed_bytes": 3043,
+  "notice": "仅核对固定成员、CRC、SHA及求助摘要的内部一致性；清单没有自签名，不能证明来源身份、机器现状、未经重新打包或包内任意文字不含私密信息。未解压落盘、执行、扫描或分享。"
+}

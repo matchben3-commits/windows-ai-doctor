@@ -7,8 +7,10 @@ from . import __version__
 from .core import Doctor
 from .report import json_report, markdown_report, html_report
 from .compare import load_report, compare_reports
-from .history import load_history, history_report
+from .history import load_history, history_report, history_csv
 from .support import export_support
+from .validation import validation_report, verification_report
+from .verify_support import verify_support
 
 
 class SafeParser(argparse.ArgumentParser):
@@ -21,10 +23,12 @@ def parser():
     p.add_argument("--version", action="version", version=__version__)
     p.add_argument("--tools", nargs="+", choices=("codex", "claude"), default=["codex", "claude"], help="选择工具 / select tools")
     p.add_argument("--lang", choices=("zh", "en"), default="zh", help="报告语言 / report language")
-    p.add_argument("--format", choices=("both", "md", "json", "html", "all"), default="both", help="both=MD+JSON; all=MD+JSON+HTML; stdout: both/all use MD")
+    p.add_argument("--format", choices=("both", "md", "json", "html", "all", "csv"), default="both", help="both=MD+JSON; all=MD+JSON+HTML; csv仅history / csv history only; validate/verify-support: both/md/json; stdout: both/all use MD")
     p.add_argument("--compare", nargs=2, type=Path, metavar=("OLD.json", "NEW.json"), help="离线对比，不运行诊断；禁用诊断参数 / offline comparison; conflicts with diagnostic options; output: comparison.LANG.FORMAT")
     p.add_argument("--history", nargs="+", type=Path, metavar="REPORT.json", help="2–20份诊断报告的离线趋势，按输入顺序 / offline history in input order; output: history.LANG.FORMAT")
     p.add_argument("--support", type=Path, metavar="REPORT.json", help="生成有限求助摘要ZIP，需输出目录；自行审阅分享，不保证无法关联，无原始路径映射 / limited support ZIP, requires output directory; review before sharing, signals may be linkable, no original path mapping")
+    p.add_argument("--validate", type=Path, metavar="REPORT.json", help="离线校验诊断输入的已知字段与边界 / offline input validity under known fields and bounds")
+    p.add_argument("--verify-support", type=Path, metavar="BUNDLE.zip", help="离线核验求助包结构/CRC/SHA/内部一致性，不证明来源或隐私 / offline bundle structure/CRC/SHA/consistency; no source or privacy assurance")
     p.add_argument("--fail-on", nargs="+", choices=("error", "warn", "unknown"), help="诊断退出条件，默认error；选中状态出现则退出1，不改变检查状态 / diagnosis exit conditions, default error; matched states exit 1 without changing findings")
     p.add_argument("--output-dir", type=Path, help="新建报告目录 / report directory (existing reports are not overwritten)")
     p.add_argument("--home", type=Path, help="诊断目标用户目录 / diagnostic user home override")
@@ -71,11 +75,18 @@ def main(argv=None):
         comparison = args.compare is not None
         history = args.history is not None
         support = args.support is not None
-        if sum((comparison, history, support)) > 1:
+        validating = args.validate is not None
+        verifying = args.verify_support is not None
+        offline = comparison or history or support or validating or verifying
+        if sum((comparison, history, support, validating, verifying)) > 1:
             parser().error("")
         diagnostic_options = {"--tools", "--home", "--project", "--timeout", "--no-version", "--wsl-list"}
         explicit = {token.split("=", 1)[0] for token in raw_args}
-        if (comparison or history or support) and explicit & (diagnostic_options | {"--fail-on"}):
+        if offline and explicit & (diagnostic_options | {"--fail-on"}):
+            parser().error("")
+        if args.format == "csv" and not history:
+            parser().error("")
+        if (validating or verifying) and args.format not in ("both", "md", "json"):
             parser().error("")
         if support:
             if args.output_dir is None or explicit & {"--format", "--lang"}:
@@ -83,7 +94,11 @@ def main(argv=None):
             export_support(load_report(args.support), args.output_dir)
             print("求助摘要已保存，请自行审阅后分享；路径未回显 / Support summary saved; review before sharing; paths withheld.")
             return 0
-        if history:
+        if validating:
+            report = validation_report(load_report(args.validate), args.lang)
+        elif verifying:
+            report = verification_report(verify_support(args.verify_support), args.lang)
+        elif history:
             report = history_report(load_history(args.history), args.lang)
         elif comparison:
             report = compare_reports(load_report(args.compare[0]), load_report(args.compare[1]), args.lang)
@@ -97,15 +112,17 @@ def main(argv=None):
                 "meaning": ("达到所选退出条件仅表示出现选中状态；无法判断不等于已确认故障。操作失败退出2，中断130。" if args.lang == "zh" else
                             "Meeting the selected exit conditions means a selected state occurred; unknown is not a confirmed fault. Operational failure exits 2; interruption exits 130.")}
         formats = ("md", "json") if args.format == "both" else ("md", "json", "html") if args.format == "all" else (args.format,)
-        renderers = {"md": markdown_report, "json": json_report, "html": html_report}
+        renderers = {"md": markdown_report, "json": json_report, "html": html_report, "csv": history_csv}
         rendered = {fmt: renderers[fmt](report) for fmt in formats}
         if args.output_dir is None:
             # JSON goes alone to stdout for pipelines; both defaults to Markdown.
             print(rendered["md"] if "md" in rendered else next(iter(rendered.values())), end="")
         else:
-            export_reports(rendered, args.output_dir, "history" if history else "comparison" if comparison else "report", args.lang)
-            print("报告已保存（路径未回显）。" if args.lang == "zh" else "Reports saved (paths withheld).")
-        return 0 if comparison or history else int(report["exit_policy"]["matched"])
+            stem = "validation" if validating else "support-verification" if verifying else "history" if history else "comparison" if comparison else "report"
+            export_reports(rendered, args.output_dir, stem, args.lang)
+            if args.format != "csv":
+                print("报告已保存（路径未回显）。" if args.lang == "zh" else "Reports saved (paths withheld).")
+        return 0 if offline else int(report["exit_policy"]["matched"])
     except KeyboardInterrupt:
         print("已中断 / Interrupted.", file=sys.stderr)
         return 130

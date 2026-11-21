@@ -24,7 +24,8 @@ class SafeResult(unittest.TestResult):
 
     def record(self, test, outcome):
         self.cases.append({"test": test.id(), "outcome": outcome,
-                           "seconds": round(time.monotonic() - self.started, 3)})
+                           "seconds": round(time.monotonic() - self.started, 3),
+                           **({"link_evidence": test.link_evidence} if hasattr(test, "link_evidence") else {})})
         print(f"{outcome}: {test.id()}", flush=True)
 
     def addSuccess(self, test):
@@ -52,7 +53,7 @@ def main():
     suite = unittest.defaultTestLoader.discover(str(ROOT / "tests"), pattern="test_*.py")
     started = time.monotonic()
     suite.run(result)
-    code = 0 if result.wasSuccessful() else 1
+    code = 0 if result.wasSuccessful() and not result.skipped else 1
     evidence = {"generated_at": datetime.now(timezone.utc).isoformat(),
                 "python": ".".join(map(str, sys.version_info[:3])),
                 "command": "python tests/run_tests.py --evidence evidence/tests.json",

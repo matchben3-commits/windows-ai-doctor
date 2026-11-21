@@ -1,4 +1,12 @@
-# v0.3.0 — 2026-11-21 (candidate; not published)
+# v0.4.0 — 2026-11-21 (local development; independent review and hosted CI pending)
+
+- Add offline diagnosis validity checks with recomputed counts and fixed scope notices; validity is separate from health.
+- Add bounded in-memory support ZIP verification for fixed regular members, CRC, SHA and support-summary consistency, compatible with v0.3 bundles. This does not authenticate source identity or guarantee privacy of arbitrary text.
+- Add history-only UTF-8 BOM CSV long tables from whitelisted observations. Preserve missing checks and empty fields without inferring fixes; both/all output sets are unchanged.
+- Make any skipped required test block suite success. Real file/ancestor links require actual local execution; restricted fixture creation is a failed acceptance gate until authorized and retested.
+- Extend installed-package checks for all new entries; keep distribution artifacts separate from source snapshots.
+
+# v0.3.0 — 2026-11-21 (historical release)
 
 - Ordered offline history for 2–20 schema-1.0 diagnoses, bilingual MD/JSON/HTML, per-run counts and adjacent changes without health scoring.
 - Limited support ZIP rebuilt from whitelisted observations, bilingual summaries, fixed privacy notice and SHA-256 member manifest. No source text or automatic sharing.

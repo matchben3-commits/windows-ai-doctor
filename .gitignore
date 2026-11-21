@@ -8,3 +8,4 @@ reports/
 .coverage
 .pytest_cache/
 .task-build/
+.test-fixtures/

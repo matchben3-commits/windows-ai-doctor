@@ -50,3 +50,9 @@ Tests and demos write synthetic fixtures only inside temporary directories. Gene
 ## 测试边界 / Validation boundary
 
 已验证两种语言、多格式、stdout/stderr、坏配置、带用户名/密码/查询凭据 URL 的合成输入不会出现在输出；异常信息采取固定分类，不做不可靠的正则替换兜底。网络检查包括禁止 Python 网络 API 的真实 CLI 运行；未关闭主机网卡，也未对第三方二进制建立防火墙级隔离。真实 NTFS junction 回归已执行，跟踪并禁止链接之后的 `lstat/stat/is_file/open/resolve`，覆盖配置、命令、Node、包元数据及 JS/原生目标。常规进程缺少文件符号链接创建权限，该项会跳过；dsh 已在用户授权后通过单项临时管理员补测，见 [补测证据](../evidence/review-dsh/symlink-elevated.json)。这与真实 junction 回归分别记录。
+## v0.4 更新 / Update
+
+离线报告校验只确认已知字段与边界的可接受性，未知自由文本不作全面审核。求助包校验不解压落盘，只有结构、CRC、SHA和摘要一致性检查；清单没有自签名，不证明来源身份、机器现状、未经重新打包或隐私无泄漏。CSV只输出固定枚举与已知数字/布尔字段，不带原始文字或路径。所有入口均不自动分享。详见[第四版契约](v04-contract.md)。
+
+Offline validation checks acceptability under known fields and bounds, not all free text. Bundle verification checks structure, CRC, SHA and summary consistency in memory; the unsigned manifest does not establish identity, machine state, absence of repackaging or privacy. CSV exports fixed IDs/enums and limited numeric/boolean observations, never source text or paths. No entry shares automatically. See the [v0.4 contract](v04-contract.md).
+

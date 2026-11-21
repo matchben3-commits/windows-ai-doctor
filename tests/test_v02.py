@@ -246,10 +246,14 @@ class CompareJunctionTests(DoctorFixture):
         try:
             link.symlink_to(target)
         except OSError:
-            self.skipTest("file symlink creation requires privilege")
+            self.fail("Required file-symlink fixture needs user-authorized privilege; acceptance blocked")
+        self.assertEqual(link.lstat().st_reparse_tag, 0xA000000C)
+        audit = {"kind": "file_symlink", "reparse_tag": hex(link.lstat().st_reparse_tag), "content_read_attempts": 0}
+        self.link_evidence = [audit]
         original = Path.open
         def guarded(p, *a, **k):
             if p in (link, target):
+                audit["content_read_attempts"] += 1
                 self.fail("import opened linked content")
             return original(p, *a, **k)
         with patch.object(Path, "open", guarded):

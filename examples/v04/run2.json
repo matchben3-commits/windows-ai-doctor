@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "report_type": "diagnosis",
+  "findings": [
+    {
+      "id": "codex.version",
+      "status": "unknown",
+      "evidence": {
+        "version": "1.2.2"
+      }
+    },
+    {
+      "id": "codex.path",
+      "status": "warn",
+      "evidence": {
+        "installation_groups": 2,
+        "scan_limited": true
+      }
+    },
+    {
+      "id": "scope.unchecked",
+      "status": "skipped",
+      "evidence": {}
+    }
+  ]
+}

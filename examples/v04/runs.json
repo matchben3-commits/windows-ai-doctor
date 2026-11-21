@@ -1,0 +1,61 @@
+{
+  "synthetic": true,
+  "exit_code": 0,
+  "steps": [
+    {
+      "step": "support",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "validation_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "verification_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "csv_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "history_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "history20_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "validation_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "verification_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "csv_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "history_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "history20_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    }
+  ]
+}

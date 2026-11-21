@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def delivery_files():
     for folder, dirs, names in os.walk(ROOT):
-        dirs[:] = [d for d in dirs if d not in (".git", ".task-build", "build") and not d.endswith(".egg-info")]
+        dirs[:] = [d for d in dirs if d not in (".git", ".task-build", ".test-fixtures", "dist", "build") and not d.endswith(".egg-info")]
         for name in names:
             yield Path(folder) / name
 
@@ -57,7 +57,7 @@ def main():
               "generated_report_files_checked": len(report_files),
               "local_markdown_links_checked": True, "private_report_marker_scan": "passed" if not issues else "see_issue_codes",
               "issues": sorted(set(issues))}
-    (ROOT / "evidence/v03-artifact-check.json").write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
+    (ROOT / "evidence/v04-artifact-check.json").write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
     # Exclude the manifest itself to avoid a recursive checksum dependency.
     files = sorted(p for p in delivery_files() if p.name != "SHA256SUMS.txt")
     manifest = [hashlib.sha256(p.read_bytes()).hexdigest() + "  " + p.relative_to(ROOT).as_posix() for p in files]

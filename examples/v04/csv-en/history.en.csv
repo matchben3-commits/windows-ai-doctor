@@ -1,0 +1,13 @@
+﻿sequence,check_id,status,version,installation_groups,scan_limited
+1,codex.config.user,error,,,
+1,codex.path,pass,,1,false
+1,codex.version,error,1.2.1,,
+1,scope.unchecked,skipped,,,
+2,codex.config.user,missing,,,
+2,codex.path,warn,,2,true
+2,codex.version,unknown,1.2.2,,
+2,scope.unchecked,skipped,,,
+3,codex.config.user,pass,,,
+3,codex.path,pass,,3,false
+3,codex.version,pass,1.2.3,,
+3,scope.unchecked,skipped,,,

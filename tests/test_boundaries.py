@@ -25,6 +25,9 @@ class BoundaryTests(DoctorFixture):
         _winapi.CreateJunction(str(target), str(link))
         try:
             self.assertTrue(link.lstat().st_file_attributes & 0x400)
+            if not hasattr(self, "link_evidence"):
+                self.link_evidence = []
+            self.link_evidence.append({"kind": "directory_junction", "reparse_tag": hex(link.lstat().st_reparse_tag), "descendant_access_attempts": 0})
             yield link
         finally:
             link.rmdir()  # remove only the junction, never its target
@@ -36,6 +39,8 @@ class BoundaryTests(DoctorFixture):
         def guarded(original, label):
             def invoke(path, *args, **kwargs):
                 if path != link and path.is_relative_to(link):
+                    if hasattr(self, "link_evidence"):
+                        self.link_evidence[-1]["descendant_access_attempts"] += 1
                     raise AssertionError("access beyond rejected ancestor: " + label)
                 if label == "lstat":
                     calls.append(path)

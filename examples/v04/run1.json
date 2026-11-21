@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "report_type": "diagnosis",
+  "findings": [
+    {
+      "id": "codex.version",
+      "status": "error",
+      "evidence": {
+        "version": "1.2.1"
+      }
+    },
+    {
+      "id": "codex.path",
+      "status": "pass",
+      "evidence": {
+        "installation_groups": 1,
+        "scan_limited": false
+      }
+    },
+    {
+      "id": "scope.unchecked",
+      "status": "skipped",
+      "evidence": {}
+    },
+    {
+      "id": "codex.config.user",
+      "status": "error",
+      "evidence": {}
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;">
+<title>Windows AI Doctor · 多次体检趋势</title><style>
+:root{color-scheme:light;font-family:system-ui,'Segoe UI',sans-serif;color:#17243a;background:#f2f5fa}
+*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:32px 24px}
+header{margin-bottom:24px}h1{font-size:clamp(1.6rem,5vw,2.5rem);margin:0 0 12px}
+h2{font-size:1.15rem}p,li,pre,h2{overflow-wrap:anywhere}p,li{line-height:1.65}
+.muted{color:#526078}.counts{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}
+.count,article,.priority{border:1px solid #cdd6e4;background:white;border-radius:12px;padding:18px}
+.count{min-width:115px;flex:1}.count strong{font-size:1.8rem;display:block}
+article{margin:16px 0}article h2{margin:0 0 12px}.badge{font-weight:700}
+.error{border-left:5px solid #b42318}.warn{border-left:5px solid #906400}
+.unknown{border-left:5px solid #5d478b}.pass{border-left:5px solid #167345}
+pre{white-space:pre-wrap;word-break:break-word;font-size:.86rem;background:#f4f6fa;padding:14px;border-radius:8px}
+ol{padding-left:24px}.priority{border-left:5px solid #315cc9}footer{margin-top:32px}
+@media(max-width:480px){main{padding:20px 12px}.count{min-width:90px;padding:12px}article{padding:14px}}
+.table-scroll{overflow-x:auto;max-width:100%;border:1px solid #cdd6e4;border-radius:12px;background:white;margin:20px 0}
+table{border-collapse:collapse;font-size:.9rem}caption{text-align:left;padding:14px;font-weight:700}
+th,td{border:1px solid #d8e0ec;text-align:left;padding:12px;min-width:135px;vertical-align:top}
+th{background:#eaf0fa}th[scope=row]{min-width:190px;position:sticky;left:0;z-index:1}td small{display:block;margin-top:8px;overflow-wrap:anywhere}
+.table-scroll:focus{outline:3px solid #315cc9}
+thead th:first-child{position:sticky;left:0;z-index:2}
+</style></head><body><main><header><h1>Windows AI Doctor · 多次体检趋势</h1><p>v0.4.0 · schema 1.0 · 2026-11-21T10:50:57+00:00</p></header>
+<p class="priority">顺序以命令行输入为准。请自行确认所有报告来自同一环境和相同检查范围；不推断机器身份。状态数量不是健康评分。缺失、未知、未检查或扫描受限均不代表修复；通过仅指该项本次通过。仅比较已知检查的状态、数字版本、安装组数量和扫描限制。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="各次状态数量"><table><caption>各次状态数量</caption><thead><tr><th scope="col">顺序</th><th scope="col">通过</th><th scope="col">提醒</th><th scope="col">异常</th><th scope="col">无法判断</th><th scope="col">未检查</th></tr></thead><tbody>
+<tr><th scope="row">第1次</th><td>1</td><td>0</td><td>2</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">第2次</th><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th scope="row">第3次</th><td>3</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">第4次</th><td>1</td><td>0</td><td>2</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">第5次</th><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th scope="row">第6次</th><td>3</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">第7次</th><td>1</td><td>0</td><td>2</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">第8次</th><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th scope="row">第9次</th><td>3</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">第10次</th><td>1</td><td>0</td><td>2</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">第11次</th><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th scope="row">第12次</th><td>3</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">第13次</th><td>1</td><td>0</td><td>2</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">第14次</th><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th scope="row">第15次</th><td>3</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">第16次</th><td>1</td><td>0</td><td>2</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">第17次</th><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th scope="row">第18次</th><td>3</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><th scope="row">第19次</th><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><th scope="row">第20次</th><td>3</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+</tbody></table></div><p>表格可横向滚动；选择表格区域后也可使用方向键。</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="检查状态"><table><caption>检查状态与有限观察</caption><thead><tr><th scope="col">ID</th><th scope="col">第1次</th><th scope="col">第2次</th><th scope="col">第3次</th><th scope="col">第4次</th><th scope="col">第5次</th><th scope="col">第6次</th><th scope="col">第7次</th><th scope="col">第8次</th><th scope="col">第9次</th><th scope="col">第10次</th><th scope="col">第11次</th><th scope="col">第12次</th><th scope="col">第13次</th><th scope="col">第14次</th><th scope="col">第15次</th><th scope="col">第16次</th><th scope="col">第17次</th><th scope="col">第18次</th><th scope="col">第19次</th><th scope="col">第20次</th></tr></thead><tbody>
+<tr><th scope="row">codex.config.user</th>
+<td class="error"><span class="badge">× 异常</span></td>
+<td class="unknown"><span class="badge">— 未包含</span></td>
+<td class="pass"><span class="badge">✓ 通过</span></td>
+<td class="error"><span class="badge">× 异常</span></td>
+<td class="unknown"><span class="badge">— 未包含</span></td>
+<td class="pass"><span class="badge">✓ 通过</span></td>
+<td class="error"><span class="badge">× 异常</span></td>
+<td class="unknown"><span class="badge">— 未包含</span></td>
+<td class="pass"><span class="badge">✓ 通过</span></td>
+<td class="error"><span class="badge">× 异常</span></td>
+<td class="unknown"><span class="badge">— 未包含</span></td>
+<td class="pass"><span class="badge">✓ 通过</span></td>
+<td class="error"><span class="badge">× 异常</span></td>
+<td class="unknown"><span class="badge">— 未包含</span></td>
+<td class="pass"><span class="badge">✓ 通过</span></td>
+<td class="error"><span class="badge">× 异常</span></td>
+<td class="unknown"><span class="badge">— 未包含</span></td>
+<td class="pass"><span class="badge">✓ 通过</span></td>
+<td class="unknown"><span class="badge">— 未包含</span></td>
+<td class="pass"><span class="badge">✓ 通过</span></td>
+</tr>
+<tr><th scope="row">codex.path</th>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="warn"><span class="badge">! 提醒</span><small>{&quot;installation_groups&quot;: 2, &quot;scan_limited&quot;: true}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;installation_groups&quot;: 3, &quot;scan_limited&quot;: false}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="warn"><span class="badge">! 提醒</span><small>{&quot;installation_groups&quot;: 2, &quot;scan_limited&quot;: true}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;installation_groups&quot;: 3, &quot;scan_limited&quot;: false}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="warn"><span class="badge">! 提醒</span><small>{&quot;installation_groups&quot;: 2, &quot;scan_limited&quot;: true}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;installation_groups&quot;: 3, &quot;scan_limited&quot;: false}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="warn"><span class="badge">! 提醒</span><small>{&quot;installation_groups&quot;: 2, &quot;scan_limited&quot;: true}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;installation_groups&quot;: 3, &quot;scan_limited&quot;: false}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="warn"><span class="badge">! 提醒</span><small>{&quot;installation_groups&quot;: 2, &quot;scan_limited&quot;: true}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;installation_groups&quot;: 3, &quot;scan_limited&quot;: false}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;installation_groups&quot;: 1, &quot;scan_limited&quot;: false}</small></td>
+<td class="warn"><span class="badge">! 提醒</span><small>{&quot;installation_groups&quot;: 2, &quot;scan_limited&quot;: true}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;installation_groups&quot;: 3, &quot;scan_limited&quot;: false}</small></td>
+<td class="warn"><span class="badge">! 提醒</span><small>{&quot;installation_groups&quot;: 2, &quot;scan_limited&quot;: true}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;installation_groups&quot;: 3, &quot;scan_limited&quot;: false}</small></td>
+</tr>
+<tr><th scope="row">codex.version</th>
+<td class="error"><span class="badge">× 异常</span><small>{&quot;version&quot;: &quot;1.2.1&quot;}</small></td>
+<td class="unknown"><span class="badge">? 无法判断</span><small>{&quot;version&quot;: &quot;1.2.2&quot;}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;version&quot;: &quot;1.2.3&quot;}</small></td>
+<td class="error"><span class="badge">× 异常</span><small>{&quot;version&quot;: &quot;1.2.1&quot;}</small></td>
+<td class="unknown"><span class="badge">? 无法判断</span><small>{&quot;version&quot;: &quot;1.2.2&quot;}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;version&quot;: &quot;1.2.3&quot;}</small></td>
+<td class="error"><span class="badge">× 异常</span><small>{&quot;version&quot;: &quot;1.2.1&quot;}</small></td>
+<td class="unknown"><span class="badge">? 无法判断</span><small>{&quot;version&quot;: &quot;1.2.2&quot;}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;version&quot;: &quot;1.2.3&quot;}</small></td>
+<td class="error"><span class="badge">× 异常</span><small>{&quot;version&quot;: &quot;1.2.1&quot;}</small></td>
+<td class="unknown"><span class="badge">? 无法判断</span><small>{&quot;version&quot;: &quot;1.2.2&quot;}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;version&quot;: &quot;1.2.3&quot;}</small></td>
+<td class="error"><span class="badge">× 异常</span><small>{&quot;version&quot;: &quot;1.2.1&quot;}</small></td>
+<td class="unknown"><span class="badge">? 无法判断</span><small>{&quot;version&quot;: &quot;1.2.2&quot;}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;version&quot;: &quot;1.2.3&quot;}</small></td>
+<td class="error"><span class="badge">× 异常</span><small>{&quot;version&quot;: &quot;1.2.1&quot;}</small></td>
+<td class="unknown"><span class="badge">? 无法判断</span><small>{&quot;version&quot;: &quot;1.2.2&quot;}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;version&quot;: &quot;1.2.3&quot;}</small></td>
+<td class="unknown"><span class="badge">? 无法判断</span><small>{&quot;version&quot;: &quot;1.2.2&quot;}</small></td>
+<td class="pass"><span class="badge">✓ 通过</span><small>{&quot;version&quot;: &quot;1.2.3&quot;}</small></td>
+</tr>
+<tr><th scope="row">scope.unchecked</th>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+<td class="skipped"><span class="badge">— 未检查</span></td>
+</tr>
+</tbody></table></div>
+<article><h2>第1次 → 第2次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>error → —</p><p>本次未包含，未再检查。</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → warn</p><p>无法判断、未再检查或扫描受限，不代表修复。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 1, &quot;after&quot;: 2}, &quot;scan_limited&quot;: {&quot;before&quot;: false, &quot;after&quot;: true}}</pre>
+<h3>codex.version</h3><p>error → unknown</p><p>无法判断、未再检查或扫描受限，不代表修复。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.1&quot;, &quot;after&quot;: &quot;1.2.2&quot;}}</pre>
+</article>
+<article><h2>第2次 → 第3次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>— → pass</p><p>本次新增检查。</p><pre>{}</pre>
+<h3>codex.path</h3><p>warn → pass</p><p>该检查本次通过。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 2, &quot;after&quot;: 3}, &quot;scan_limited&quot;: {&quot;before&quot;: true, &quot;after&quot;: false}}</pre>
+<h3>codex.version</h3><p>unknown → pass</p><p>该检查本次通过。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.2&quot;, &quot;after&quot;: &quot;1.2.3&quot;}}</pre>
+</article>
+<article><h2>第3次 → 第4次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>pass → error</p><p>观察字段或状态变化。</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → pass</p><p>观察字段或状态变化。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 3, &quot;after&quot;: 1}}</pre>
+<h3>codex.version</h3><p>pass → error</p><p>观察字段或状态变化。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.3&quot;, &quot;after&quot;: &quot;1.2.1&quot;}}</pre>
+</article>
+<article><h2>第4次 → 第5次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>error → —</p><p>本次未包含，未再检查。</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → warn</p><p>无法判断、未再检查或扫描受限，不代表修复。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 1, &quot;after&quot;: 2}, &quot;scan_limited&quot;: {&quot;before&quot;: false, &quot;after&quot;: true}}</pre>
+<h3>codex.version</h3><p>error → unknown</p><p>无法判断、未再检查或扫描受限，不代表修复。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.1&quot;, &quot;after&quot;: &quot;1.2.2&quot;}}</pre>
+</article>
+<article><h2>第5次 → 第6次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>— → pass</p><p>本次新增检查。</p><pre>{}</pre>
+<h3>codex.path</h3><p>warn → pass</p><p>该检查本次通过。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 2, &quot;after&quot;: 3}, &quot;scan_limited&quot;: {&quot;before&quot;: true, &quot;after&quot;: false}}</pre>
+<h3>codex.version</h3><p>unknown → pass</p><p>该检查本次通过。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.2&quot;, &quot;after&quot;: &quot;1.2.3&quot;}}</pre>
+</article>
+<article><h2>第6次 → 第7次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>pass → error</p><p>观察字段或状态变化。</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → pass</p><p>观察字段或状态变化。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 3, &quot;after&quot;: 1}}</pre>
+<h3>codex.version</h3><p>pass → error</p><p>观察字段或状态变化。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.3&quot;, &quot;after&quot;: &quot;1.2.1&quot;}}</pre>
+</article>
+<article><h2>第7次 → 第8次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>error → —</p><p>本次未包含，未再检查。</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → warn</p><p>无法判断、未再检查或扫描受限，不代表修复。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 1, &quot;after&quot;: 2}, &quot;scan_limited&quot;: {&quot;before&quot;: false, &quot;after&quot;: true}}</pre>
+<h3>codex.version</h3><p>error → unknown</p><p>无法判断、未再检查或扫描受限，不代表修复。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.1&quot;, &quot;after&quot;: &quot;1.2.2&quot;}}</pre>
+</article>
+<article><h2>第8次 → 第9次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>— → pass</p><p>本次新增检查。</p><pre>{}</pre>
+<h3>codex.path</h3><p>warn → pass</p><p>该检查本次通过。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 2, &quot;after&quot;: 3}, &quot;scan_limited&quot;: {&quot;before&quot;: true, &quot;after&quot;: false}}</pre>
+<h3>codex.version</h3><p>unknown → pass</p><p>该检查本次通过。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.2&quot;, &quot;after&quot;: &quot;1.2.3&quot;}}</pre>
+</article>
+<article><h2>第9次 → 第10次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>pass → error</p><p>观察字段或状态变化。</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → pass</p><p>观察字段或状态变化。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 3, &quot;after&quot;: 1}}</pre>
+<h3>codex.version</h3><p>pass → error</p><p>观察字段或状态变化。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.3&quot;, &quot;after&quot;: &quot;1.2.1&quot;}}</pre>
+</article>
+<article><h2>第10次 → 第11次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>error → —</p><p>本次未包含，未再检查。</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → warn</p><p>无法判断、未再检查或扫描受限，不代表修复。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 1, &quot;after&quot;: 2}, &quot;scan_limited&quot;: {&quot;before&quot;: false, &quot;after&quot;: true}}</pre>
+<h3>codex.version</h3><p>error → unknown</p><p>无法判断、未再检查或扫描受限，不代表修复。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.1&quot;, &quot;after&quot;: &quot;1.2.2&quot;}}</pre>
+</article>
+<article><h2>第11次 → 第12次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>— → pass</p><p>本次新增检查。</p><pre>{}</pre>
+<h3>codex.path</h3><p>warn → pass</p><p>该检查本次通过。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 2, &quot;after&quot;: 3}, &quot;scan_limited&quot;: {&quot;before&quot;: true, &quot;after&quot;: false}}</pre>
+<h3>codex.version</h3><p>unknown → pass</p><p>该检查本次通过。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.2&quot;, &quot;after&quot;: &quot;1.2.3&quot;}}</pre>
+</article>
+<article><h2>第12次 → 第13次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>pass → error</p><p>观察字段或状态变化。</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → pass</p><p>观察字段或状态变化。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 3, &quot;after&quot;: 1}}</pre>
+<h3>codex.version</h3><p>pass → error</p><p>观察字段或状态变化。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.3&quot;, &quot;after&quot;: &quot;1.2.1&quot;}}</pre>
+</article>
+<article><h2>第13次 → 第14次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>error → —</p><p>本次未包含，未再检查。</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → warn</p><p>无法判断、未再检查或扫描受限，不代表修复。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 1, &quot;after&quot;: 2}, &quot;scan_limited&quot;: {&quot;before&quot;: false, &quot;after&quot;: true}}</pre>
+<h3>codex.version</h3><p>error → unknown</p><p>无法判断、未再检查或扫描受限，不代表修复。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.1&quot;, &quot;after&quot;: &quot;1.2.2&quot;}}</pre>
+</article>
+<article><h2>第14次 → 第15次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>— → pass</p><p>本次新增检查。</p><pre>{}</pre>
+<h3>codex.path</h3><p>warn → pass</p><p>该检查本次通过。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 2, &quot;after&quot;: 3}, &quot;scan_limited&quot;: {&quot;before&quot;: true, &quot;after&quot;: false}}</pre>
+<h3>codex.version</h3><p>unknown → pass</p><p>该检查本次通过。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.2&quot;, &quot;after&quot;: &quot;1.2.3&quot;}}</pre>
+</article>
+<article><h2>第15次 → 第16次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>pass → error</p><p>观察字段或状态变化。</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → pass</p><p>观察字段或状态变化。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 3, &quot;after&quot;: 1}}</pre>
+<h3>codex.version</h3><p>pass → error</p><p>观察字段或状态变化。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.3&quot;, &quot;after&quot;: &quot;1.2.1&quot;}}</pre>
+</article>
+<article><h2>第16次 → 第17次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>error → —</p><p>本次未包含，未再检查。</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → warn</p><p>无法判断、未再检查或扫描受限，不代表修复。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 1, &quot;after&quot;: 2}, &quot;scan_limited&quot;: {&quot;before&quot;: false, &quot;after&quot;: true}}</pre>
+<h3>codex.version</h3><p>error → unknown</p><p>无法判断、未再检查或扫描受限，不代表修复。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.1&quot;, &quot;after&quot;: &quot;1.2.2&quot;}}</pre>
+</article>
+<article><h2>第17次 → 第18次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>— → pass</p><p>本次新增检查。</p><pre>{}</pre>
+<h3>codex.path</h3><p>warn → pass</p><p>该检查本次通过。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 2, &quot;after&quot;: 3}, &quot;scan_limited&quot;: {&quot;before&quot;: true, &quot;after&quot;: false}}</pre>
+<h3>codex.version</h3><p>unknown → pass</p><p>该检查本次通过。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.2&quot;, &quot;after&quot;: &quot;1.2.3&quot;}}</pre>
+</article>
+<article><h2>第18次 → 第19次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>pass → —</p><p>本次未包含，未再检查。</p><pre>{}</pre>
+<h3>codex.path</h3><p>pass → warn</p><p>无法判断、未再检查或扫描受限，不代表修复。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 3, &quot;after&quot;: 2}, &quot;scan_limited&quot;: {&quot;before&quot;: false, &quot;after&quot;: true}}</pre>
+<h3>codex.version</h3><p>pass → unknown</p><p>无法判断、未再检查或扫描受限，不代表修复。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.3&quot;, &quot;after&quot;: &quot;1.2.2&quot;}}</pre>
+</article>
+<article><h2>第19次 → 第20次</h2><p>无变化检查数：1</p>
+<h3>codex.config.user</h3><p>— → pass</p><p>本次新增检查。</p><pre>{}</pre>
+<h3>codex.path</h3><p>warn → pass</p><p>该检查本次通过。</p><pre>{&quot;installation_groups&quot;: {&quot;before&quot;: 2, &quot;after&quot;: 3}, &quot;scan_limited&quot;: {&quot;before&quot;: true, &quot;after&quot;: false}}</pre>
+<h3>codex.version</h3><p>unknown → pass</p><p>该检查本次通过。</p><pre>{&quot;version&quot;: {&quot;before&quot;: &quot;1.2.2&quot;, &quot;after&quot;: &quot;1.2.3&quot;}}</pre>
+</article>
+<footer><p>离线汇总；未做新扫描，未读取报告所指路径。</p></footer></main></body></html>
