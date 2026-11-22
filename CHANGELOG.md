@@ -4,6 +4,7 @@
 - Add offline `--catalog` for the fixed 19-check directory (default md); no input reads, diagnosis, environment, registry or network access.
 - Add deterministic `--schema` JSON Schema export; document one-way consistency with `load_report` (schema may be wider; `--validate` sole acceptance authority).
 - Preserve all v0.4 entries, safety bounds and exit codes; runtime stays standard-library only.
+- r2: reproduce the Python 3.14.10 comparison-CSV audit failure at argparse's first `_colorize` import. Construct and reuse the parser before the operation audit; retain exact two-input read checks and all external-access bans, and deny environment access during the audited operation. Runtime code is unchanged.
 
 # v0.4.0 — 2026-11-21 (historical local development baseline)
 

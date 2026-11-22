@@ -318,11 +318,16 @@ raise SystemExit(cli.main(["--schema"]))
     def test_compare_csv_real_child_process_only_reads_two_explicit_inputs(self):
         a = self.write(source(item("codex.version", "warn", version="1.2.3", path="Z:/SYNTHETIC_PRIVATE")), "old.json")
         b = self.write(source(item("codex.version", "pass", version="2.0.0")), "new.json")
-        script = '''import sys
+        script = '''import os, sys
 sys.path.insert(0, sys.argv[1])
 from windows_ai_doctor import cli
 from pathlib import Path
 import ctypes  # Windows local-drive guard lazily imports this standard library.
+# Scope: audit the comparison after argparse's locale/terminal/color bootstrap.
+# Python 3.14 first imports _colorize while constructing the parser. Reuse that
+# parser; argument parsing and the comparison still run inside the strict audit.
+parser = cli.parser()
+cli.parser = lambda: parser
 allowed = {str(Path(v).absolute()) for v in sys.argv[2:]}
 seen = []
 def denied(*a, **kw): raise AssertionError("forbidden offline operation")
@@ -331,6 +336,9 @@ def audit(event, args):
     if event == "open":
         if str(args[0]) not in allowed or args[1] != "r": denied()
         seen.append(str(args[0]))
+class NoEnvironment(dict):
+    __getitem__ = get = __iter__ = items = values = keys = __contains__ = denied
+os.environ = NoEnvironment()
 sys.addaudithook(audit)
 cli.Doctor = denied
 code = cli.main(["--compare", *sys.argv[2:], "--format=csv"])
@@ -342,6 +350,12 @@ raise SystemExit(code)
         self.assertTrue(result.stdout.startswith(b"\xef\xbb\xbfsequence,"))
         self.assertNotIn(b"\r", result.stdout)
         self.assertNotIn(b"SYNTHETIC_PRIVATE", result.stdout + result.stderr)
+        self.offline_access_evidence = {
+            "audit_starts_after": "argparse construction; before argument parsing and comparison",
+            "explicit_input_reads": 2, "extra_file_access_attempts": 0,
+            "environment_access_attempts": 0, "external_access_attempts": 0,
+            "csv_bom_lf_and_private_marker_checks_passed": True,
+        }
 
 
 class V05RequiredLinks(IntegrationFixture):

@@ -1,12 +1,12 @@
 # v0.5.0 开发交接 / Development handoff
 
-2026-11-21。第五版新增 compare CSV、19 项稳定检查目录及诊断输入 JSON Schema。gpt 负责集成，cursor 共同实现目录、文档与联调；dsh 独立复核，MausBot 终审、托管 CI 与发布。独立复核、托管 Windows Python 3.11/3.14 CI 与正式发布仍待完成。
+2026-11-21，r2 修正候选。第五版新增 compare CSV、19 项稳定检查目录及诊断输入 JSON Schema。gpt 负责集成，cursor 共同实现目录、文档与联调；dsh 独立复核，MausBot 终审、托管 CI 与发布。原候选已独立复核；托管 CI 的 Python 3.14.10 单项失败经同版本复现，r2 只修正测试审计初始化边界并加强环境禁用，产品运行时代码未变。r2 独立复核、两组新托管 CI 与正式发布仍待完成。
 
-v0.5 adds comparison CSV, a fixed 19-check catalog and a diagnosis-input JSON Schema. gpt integrated the release; cursor contributed the catalog, documentation and integration checks. Independent review, hosted Windows Python 3.11/3.14 CI and publication remain pending.
+This r2 candidate addresses a reproduced Python 3.14.10 CI failure in the test audit bootstrap; runtime code is unchanged. The original candidate passed independent review. New independent review, hosted Windows Python 3.11/3.14 CI and publication remain pending for r2. See [CI correction and audit scope](docs/v05-ci-r2.md).
 
 ## 本轮完整套件 / Current complete suite
 
-本轮在用户已授权的单次临时管理员进程中实跑 **138 项唯一测试，138 PASS、0 FAIL、0 ERROR、0 SKIP，真实进程退出 0**；保留全部 106 项旧测试。运行时及测试 Python 源码前后哈希一致，合成临时夹具已清空。完整逐项结果见 [v05-tests.json](evidence/v05-tests.json)。此前普通权限局部结果单独记录，不与本轮拼接。
+本轮 r2 在 Windows Python 3.14.10 的单次已授权临时管理员进程中实跑 **138 项唯一测试，138 PASS、0 FAIL、0 ERROR、0 SKIP，真实进程退出 0**；保留全部 106 项旧测试。运行时及测试 Python 源码前后哈希一致，合成临时夹具已清空。完整逐项结果见 [v05-r2-tests.json](evidence/v05-r2-tests.json)。原候选及局部复现结果单独保留，不与本轮拼接。
 
 One user-authorized administrator process completed **138 unique tests: 138 PASS, 0 FAIL, 0 ERROR, 0 SKIP; actual exit 0**, including all 106 existing cases. Python sources were unchanged across the run and generated temporary fixtures were removed. The per-case record is linked above. Earlier focused runs are separate records.
 
@@ -24,9 +24,9 @@ Comparison CSV uses twelve fixed columns and safe projected values. Catalog JSON
 
 ## 构建、示例与显示 / Packaging, examples and display
 
-两个发行包的本轮构建、干净安装、新旧入口和卸载记录保存为 `evidence/v05-package.json`；逐步实际退出码与预期退出码、包哈希以该执行记录为准。源码根不保留分发成品，构建依赖只进入临时环境。
+两个发行包的 r2 构建、干净安装、新旧入口和卸载记录保存为 `evidence/v05-r2-package.json`；逐步实际退出码与预期退出码、包哈希以该执行记录为准。源码根不保留分发成品，构建依赖只进入临时环境。
 
-The current build/install record is `evidence/v05-package.json`, containing actual and expected step exits and both artifact hashes. Distribution files stay outside the source tree and build dependencies use temporary environments.
+The r2 build/install record is `evidence/v05-r2-package.json`, containing actual and expected step exits and both artifact hashes. Earlier evidence files remain historical. Distribution files stay outside the source tree and build dependencies use temporary environments.
 
 可复跑合成示例见 [examples/v05/runs.json](examples/v05/runs.json)，不是主机诊断。双语 HTML 的桌面、390 CSS px、固定 ID/第 20 次同屏及键盘实际横滚显示记录见 [v05-html-validation.md](docs/v05-html-validation.md)。这不是物理手机、屏幕阅读器或抓包验收。
 
@@ -39,4 +39,4 @@ python -B tests/check_artifacts.py
 
 完整套件需要 Windows、Node、.NET 夹具编译器及真实链接创建权限。权限缺失须阻塞验收，不能跳过必需用例。旧 v0.1–v0.4 证据只代表历史；真实 Claude 发行包、WSL 内部、物理手机、屏幕阅读器及抓包未覆盖。未进行本轮 GitHub 写入或发布。
 
-The complete suite requires Windows, Node, the .NET fixture compiler and real-link creation rights; missing rights block acceptance. Earlier-version evidence is historical. Real Claude distributions, WSL internals, physical phones, screen readers and packet capture are outside this local verification. No v0.5 GitHub write or publication has occurred.
+The complete suite requires Windows, Node, the .NET fixture compiler and real-link creation rights; missing rights block acceptance. Earlier-version evidence is historical. Real Claude distributions, WSL internals, physical phones, screen readers and packet capture are outside this local verification. The r2 correction performs no GitHub write or publication.
