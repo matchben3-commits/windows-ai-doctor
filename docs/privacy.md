@@ -50,6 +50,12 @@ Tests and demos write synthetic fixtures only inside temporary directories. Gene
 ## 测试边界 / Validation boundary
 
 已验证两种语言、多格式、stdout/stderr、坏配置、带用户名/密码/查询凭据 URL 的合成输入不会出现在输出；异常信息采取固定分类，不做不可靠的正则替换兜底。网络检查包括禁止 Python 网络 API 的真实 CLI 运行；未关闭主机网卡，也未对第三方二进制建立防火墙级隔离。真实 NTFS junction 回归已执行，跟踪并禁止链接之后的 `lstat/stat/is_file/open/resolve`，覆盖配置、命令、Node、包元数据及 JS/原生目标。常规进程缺少文件符号链接创建权限，该项会跳过；dsh 已在用户授权后通过单项临时管理员补测，见 [补测证据](../evidence/review-dsh/symlink-elevated.json)。这与真实 junction 回归分别记录。
+## v0.6 更新 / Update
+
+`--baseline` 在诊断前经既有 `load_report` 读取；非法或链接基线拒绝且不启动探测。基线段、诊断 CSV 与 SARIF 只投影白名单观察（五态、数字版本、安装组、扫描限制及固定回归布尔），不复制基线路径、摘要、evidence 或任意输入文字。诊断 CSV 的基线列在无基线时留空；有基线时 `baseline_regression` 仅反映固定三种状态转移。SARIF 为无文件位置子集，不含 locations/artifacts/路径/时间戳，不宣称可直接用于 GitHub code scanning。基线文件及祖先目录真实链接须拒绝，目标内容读取与后代访问为 0。详见[第六版契约](v06-contract.md)。
+
+`--baseline` is validated with the existing bounded reader before any probe. Baseline sections, diagnosis CSV and SARIF project only whitelisted observations—never baseline paths, summaries, evidence or free input text. Without a baseline, diagnosis CSV baseline columns stay empty; with one, `baseline_regression` reflects only the three fixed transitions. SARIF is a subset without file locations and does not claim direct GitHub code-scanning use. Real baseline file/ancestor links must reject with zero target-content reads and zero descendant access. See the [v0.6 contract](v06-contract.md).
+
 ## v0.5 更新 / Update
 
 compare CSV 与 catalog/schema 均为离线导出：catalog 与 schema 不读取任何输入文件、不实例化诊断器、不访问环境/注册表/网络；compare CSV 只读两个显式诊断 JSON，沿用有界读取与链接拒绝，不新增读取面。单元格与目录条目只含固定枚举、已知 ID、白名单字段名和固定双语说明，不拼接环境值或用户输入。公式前缀自由文本即使出现在被忽略字段也不得进入 CSV。`--schema` 通过只表示形状；`--validate` 仍是接受权威。详见[第五版契约](v05-contract.md)。

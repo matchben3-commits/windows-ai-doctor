@@ -1,42 +1,49 @@
-# v0.5.0 开发交接 / Development handoff
+# v0.6.0 开发交接 / Development handoff
 
-2026-11-21，r2 修正候选。第五版新增 compare CSV、19 项稳定检查目录及诊断输入 JSON Schema。gpt 负责集成，cursor 共同实现目录、文档与联调；dsh 独立复核，MausBot 终审、托管 CI 与发布。原候选已独立复核；托管 CI 的 Python 3.14.10 单项失败经同版本复现，r2 只修正测试审计初始化边界并加强环境禁用，产品运行时代码未变。r2 独立复核、两组新托管 CI 与正式发布仍待完成。
+2026-11-22，北京时间。gpt 完成 baseline、诊断 CSV、SARIF 的实现和集成；cursor 完成独立补测、契约、示例初稿及构建入口扩展。gpt 收回后将示例改为完全预设、确定性的合成观察，并补入 sdist 的 `.sarif` 示例。版本 0.6.0，运行时仅标准库。
 
-This r2 candidate addresses a reproduced Python 3.14.10 CI failure in the test audit bootstrap; runtime code is unchanged. The original candidate passed independent review. New independent review, hosted Windows Python 3.11/3.14 CI and publication remain pending for r2. See [CI correction and audit scope](docs/v05-ci-r2.md).
+v0.6 adds diagnosis baselines and fixed-rule regression policy, ten-column diagnosis CSV, and SARIF 2.1.0 without file locations. gpt integrated the implementation; cursor contributed independent tests, documentation and package checks. The final example generator uses authored constants instead of live-host observations. Independent review, new hosted CI and publication remain pending.
 
-## 本轮完整套件 / Current complete suite
+## 完整授权测试 / Complete authorized suite
 
-本轮 r2 在 Windows Python 3.14.10 的单次已授权临时管理员进程中实跑 **138 项唯一测试，138 PASS、0 FAIL、0 ERROR、0 SKIP，真实进程退出 0**；保留全部 106 项旧测试。运行时及测试 Python 源码前后哈希一致，合成临时夹具已清空。完整逐项结果见 [v05-r2-tests.json](evidence/v05-r2-tests.json)。原候选及局部复现结果单独保留，不与本轮拼接。
+最终源码在 Windows Python 3.14.10 的单次用户授权临时管理员进程中实跑 **168 个唯一用例：168 PASS、0 FAIL、0 ERROR、0 SKIP，实际进程退出 0**。保留全部 v0.5 的 138 个 ID，并加入 22 项主实现测试及 cursor 的 8 项独立用例。运行前后源码哈希相同，合成临时夹具清空。见 `evidence/v06-tests.json` 和 `evidence/v06-process.json`。
 
-One user-authorized administrator process completed **138 unique tests: 138 PASS, 0 FAIL, 0 ERROR, 0 SKIP; actual exit 0**, including all 106 existing cases. Python sources were unchanged across the run and generated temporary fixtures were removed. The per-case record is linked above. Earlier focused runs are separate records.
+One complete authorized Windows Python 3.14.10 run executed **168 unique tests: 168 PASS, zero failures/errors/skips, actual exit 0**, retaining every v0.5 case. Source hashes were unchanged across the run. Earlier unprivileged, focused and initial authorized runs remain separate historical records and are not added to this count.
 
-真实链接包含原有 5 项必需 symlink 及 compare CSV OLD/NEW 文件与祖先目录 4 项，tag 为 `0xa000000c`；全部 junction 回归同时执行，tag 为 `0xa0000003`。新用例的目标内容读取及祖先链接后代访问尝试均为 0。只操作合成夹具，未改开发者模式、安全策略或真实配置。
+11 项必需真实 symlink 全部实测，tag `0xa000000c`；9 条 junction 证据 tag `0xa0000003`。文件目标内容读取及目录链接后代访问的受审计次数为 0。新增 baseline 文件链接、祖先 symlink 和祖先 junction 均在内。仅创建合成夹具，不改开发者模式、安全策略或真实配置。
 
-The nine required real symlink cases and all junction regressions ran. The new comparison cases recorded zero target-content reads or descendant access. Only synthetic fixtures were used; no developer-mode, security-policy or real-configuration changes were made.
+All eleven required real symlink cases and all junction regressions ran. Link evidence records zero guarded target-content reads or descendant access; fixtures were synthetic. Security policy and real configurations were unchanged.
 
-## 入口与边界 / Entry points and bounds
+## 功能与边界 / Behavior and bounds
 
-- compare CSV：12 个固定 ASCII 列，UTF-8 BOM/LF，只输出变化项；缺失、0、false 可区分；中英正文逐字节相同，任意输入文字不进入单元格。
-- catalog：默认 Markdown，支持 md/json/both；JSON 的 `purpose`/`limitation` 各保留 `zh`/`en` 对象，Markdown 按语言选文；19 ID、3 项 project_only、32 参数上限、确定性与离线审计均覆盖。
-- schema：draft 2020-12，语言无关、无外部引用；按 dsh 2026-11-21 裁定采用单向一致，`--validate` 是唯一接受权威。非数字版本接受但不投影、非 `.path` 上的组数和扫描字段忽略、数学整数与整数 JSON 令牌的预期差异均有明确测试；见[第五版契约](docs/v05-contract.md)。
+- 基线在诊断前沿用 `load_report` 校验；只投影状态、数字三段版本、安装组数量和扫描限制。回归仅为未受扫描限制的 pass→warn、pass→error、warn→error，不推断故障根因或修复。
+- 诊断 CSV 固定 10 列、UTF-8 BOM/LF、ID 排序及并集；空/0/false 可区分；中英正文同字节。history/compare CSV 保持 12 列。
+- SARIF 2.1.0 无文件位置子集，19 条规则与 catalog 同源，error/warn/unknown 对应 error/warning/note。无导入 evidence、路径或时间戳，不宣称可直接用于 GitHub code scanning。
+- v0.4/v0.5 契约保留；旧 138 项全部执行；`both`/`all` 集合及原有退出码保持。详情见[第六版契约](docs/v06-contract.md)。
 
-Comparison CSV uses twelve fixed columns and safe projected values. Catalog JSON preserves both languages in each purpose/limitation object. Schema follows the adjudicated one-way compatibility rule: parser acceptance implies schema acceptance, while the schema may accept more. `--validate` is the sole acceptance authority.
+Baseline validation precedes probes. CSV cells use whitelisted observations only. SARIF is explicitly limited to a subset without locations. Prior offline entry points, safety bounds and exit semantics are retained.
 
 ## 构建、示例与显示 / Packaging, examples and display
 
-两个发行包的 r2 构建、干净安装、新旧入口和卸载记录保存为 `evidence/v05-r2-package.json`；逐步实际退出码与预期退出码、包哈希以该执行记录为准。源码根不保留分发成品，构建依赖只进入临时环境。
+最终 wheel/sdist 由 `tests/package_check.py` 在干净临时环境构建，wheel 从 sdist 构建；两包分别安装、检查新旧入口并卸载。81 个步骤的实际退出码、预期退出码及最终两包哈希见 `evidence/v06-package.json`。构建依赖只进入临时环境；源码根 `dist` 无成品。构建后仅更新证据与根清单；sdist 不收录 evidence。
 
-The r2 build/install record is `evidence/v05-r2-package.json`, containing actual and expected step exits and both artifact hashes. Earlier evidence files remain historical. Distribution files stay outside the source tree and build dependencies use temporary environments.
+Both final distributions are built and exercised in clean temporary environments. The 81-step record includes installation, every retained entry point, new baseline/CSV/SARIF paths and uninstall. Package hashes are in the execution evidence; runtime dependencies remain standard-library only.
 
-可复跑合成示例见 [examples/v05/runs.json](examples/v05/runs.json)，不是主机诊断。双语 HTML 的桌面、390 CSS px、固定 ID/第 20 次同屏及键盘实际横滚显示记录见 [v05-html-validation.md](docs/v05-html-validation.md)。这不是物理手机、屏幕阅读器或抓包验收。
+第六版合成示例见 [examples/v06/runs.json](examples/v06/runs.json)：13 个文件，由固定观察和固定时间生成，中英 CSV 同字节；另重新生成第五版 12 个文件，全部逐字节一致。命令均实际退出，策略触发的示例退出 1、相同基线退出 0。
+
+Authored v0.6 examples comprise thirteen deterministic files, with actual CLI policy exits. Twelve retained v0.5 example files were regenerated byte-for-byte as well. Example execution is separate from the 168 product-test count.
+
+双语桌面与 390 CSS px iframe 实际渲染、计数、固定 ID、两处回归标记及扫描受限反例见 [HTML 显示核验](docs/v06-html-validation.md)。不是物理手机、屏幕阅读器或抓包验收。
 
 ```powershell
-python -B tests/run_tests.py --evidence evidence/review-v05-tests.json
-python -B tests/package_check.py evidence/review-v05-package.json --artifacts-dir reports/packages-new
-python -B examples/make_v05_demo.py reports/v05-demo-new
+python -B tests/run_tests.py --evidence evidence/review-v06-tests.json
+python -B tests/package_check.py evidence/review-v06-package.json --artifacts-dir reports/packages-new
+python -B examples/make_v06_demo.py reports/v06-demo-new
 python -B tests/check_artifacts.py
 ```
 
-完整套件需要 Windows、Node、.NET 夹具编译器及真实链接创建权限。权限缺失须阻塞验收，不能跳过必需用例。旧 v0.1–v0.4 证据只代表历史；真实 Claude 发行包、WSL 内部、物理手机、屏幕阅读器及抓包未覆盖。未进行本轮 GitHub 写入或发布。
+完整套件需要 Windows、Node、.NET 夹具编译器和真实链接权限。权限缺失须阻塞验收，不得跳过或拼接。原普通权限首轮 160 项为 149 PASS、11 FAIL，cursor 局部 28 PASS；都不代替本轮完整 168 PASS。
 
-The complete suite requires Windows, Node, the .NET fixture compiler and real-link creation rights; missing rights block acceptance. Earlier-version evidence is historical. Real Claude distributions, WSL internals, physical phones, screen readers and packet capture are outside this local verification. The r2 correction performs no GitHub write or publication.
+尚未覆盖：真实 Claude 发行包、WSL 内部、物理手机、屏幕阅读器、抓包。本机仅 Python 3.14.10 的完整授权套件；托管 Windows 3.11/3.14 CI、dsh 独立复核及发布后线上验收待后续完成。本阶段未 push、未建 tag/Release、未发布、未发送求助包。
+
+Real Claude distributions, WSL internals, physical phones, screen readers and packet capture are not covered. New hosted Windows 3.11/3.14 CI, independent review and publication are separate pending gates. No GitHub write or publication is performed by this local implementation handoff.

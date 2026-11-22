@@ -1,0 +1,100 @@
+{
+  "desktop_en": {
+    "clientWidth": 1265,
+    "counts": "Added: 2 · Removed: 1 · Changed: 3 · Regressions: 2 · Unchanged: 2",
+    "ids": [
+      {
+        "count": 1,
+        "id": "baseline-comparison"
+      },
+      {
+        "count": 1,
+        "id": "baseline-heading"
+      },
+      {
+        "count": 1,
+        "id": "baseline-counts"
+      },
+      {
+        "count": 1,
+        "id": "baseline-changes"
+      }
+    ],
+    "lang": "en",
+    "overflowing": [],
+    "regressions": [
+      "claude.path · changed",
+      "codex.version · changed"
+    ],
+    "resources": [],
+    "scripts": 0,
+    "scrollWidth": 1265,
+    "viewport": 1280
+  },
+  "mobile": [
+    {
+      "clientWidth": 375,
+      "counts": "新增: 2 · 移除: 1 · 变化: 3 · 回归: 2 · 未变化: 2",
+      "ids": [
+        {
+          "count": 1,
+          "id": "baseline-comparison"
+        },
+        {
+          "count": 1,
+          "id": "baseline-heading"
+        },
+        {
+          "count": 1,
+          "id": "baseline-counts"
+        },
+        {
+          "count": 1,
+          "id": "baseline-changes"
+        }
+      ],
+      "language": "zh-CN",
+      "media390": true,
+      "overflowing": [],
+      "regressions": [
+        "claude.path · changed",
+        "codex.version · changed"
+      ],
+      "scrollWidth": 375,
+      "viewport": 390
+    },
+    {
+      "clientWidth": 375,
+      "counts": "Added: 2 · Removed: 1 · Changed: 3 · Regressions: 2 · Unchanged: 2",
+      "ids": [
+        {
+          "count": 1,
+          "id": "baseline-comparison"
+        },
+        {
+          "count": 1,
+          "id": "baseline-heading"
+        },
+        {
+          "count": 1,
+          "id": "baseline-counts"
+        },
+        {
+          "count": 1,
+          "id": "baseline-changes"
+        }
+      ],
+      "language": "en",
+      "media390": true,
+      "overflowing": [],
+      "regressions": [
+        "claude.path · changed",
+        "codex.version · changed"
+      ],
+      "scrollWidth": 375,
+      "viewport": 390
+    }
+  ],
+  "physical_device": false,
+  "screen_reader": false
+}

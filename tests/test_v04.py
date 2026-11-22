@@ -108,7 +108,7 @@ class V04Tests(DoctorFixture):
             for n, mode in enumerate(modes):
                 for other in modes[n + 1:]:
                     self.assertEqual(self.invoke([*mode, *other])[0], 2)
-            for mode in ([], modes[0], modes[1], modes[4]):
+            for mode in (modes[0], modes[1], modes[4]):
                 self.assertEqual(self.invoke([*mode, "--format=csv"])[0], 2)
 
     def test_validation_and_verification_bilingual_export_formats(self):

@@ -1,0 +1,198 @@
+{
+  "schema_version": "1.0",
+  "report_type": "diagnosis",
+  "doctor_version": "0.6.0",
+  "generated_at": "2000-01-01T00:00:00+00:00",
+  "language": "en",
+  "summary": {
+    "pass": 2,
+    "warn": 1,
+    "error": 1,
+    "unknown": 2,
+    "skipped": 1
+  },
+  "findings": [
+    {
+      "id": "system.platform",
+      "status": "pass",
+      "evidence": {},
+      "target": "system",
+      "summary": "Authored synthetic observation, not host state.",
+      "recommendation": "Review the check scope.",
+      "recheck": "Recheck with a separate real diagnosis."
+    },
+    {
+      "id": "claude.path",
+      "status": "error",
+      "evidence": {
+        "installation_groups": 0,
+        "scan_limited": false
+      },
+      "target": "claude",
+      "summary": "Authored synthetic observation, not host state.",
+      "recommendation": "Review the check scope.",
+      "recheck": "Recheck with a separate real diagnosis."
+    },
+    {
+      "id": "codex.version",
+      "status": "warn",
+      "evidence": {
+        "version": "1.2.4"
+      },
+      "target": "codex",
+      "summary": "Authored synthetic observation, not host state.",
+      "recommendation": "Review the check scope.",
+      "recheck": "Recheck with a separate real diagnosis."
+    },
+    {
+      "id": "codex.path",
+      "status": "unknown",
+      "evidence": {
+        "installation_groups": 1,
+        "scan_limited": true
+      },
+      "target": "codex",
+      "summary": "Authored synthetic observation, not host state.",
+      "recommendation": "Review the check scope.",
+      "recheck": "Recheck with a separate real diagnosis."
+    },
+    {
+      "id": "claude.version",
+      "status": "pass",
+      "evidence": {
+        "version": "2.3.4"
+      },
+      "target": "claude",
+      "summary": "Authored synthetic observation, not host state.",
+      "recommendation": "Review the check scope.",
+      "recheck": "Recheck with a separate real diagnosis."
+    },
+    {
+      "id": "scope.unchecked",
+      "status": "unknown",
+      "evidence": {},
+      "target": "scope",
+      "summary": "Authored synthetic observation, not host state.",
+      "recommendation": "Review the check scope.",
+      "recheck": "Recheck with a separate real diagnosis."
+    },
+    {
+      "id": "wsl.internal",
+      "status": "skipped",
+      "evidence": {},
+      "target": "wsl",
+      "summary": "Authored synthetic observation, not host state.",
+      "recommendation": "Review the check scope.",
+      "recheck": "Recheck with a separate real diagnosis."
+    }
+  ],
+  "privacy": {
+    "synthetic": true
+  },
+  "priorities": [
+    "claude.path",
+    "codex.version",
+    "codex.path",
+    "scope.unchecked"
+  ],
+  "baseline": {
+    "schema_version": "1.0",
+    "summary": {
+      "added": 2,
+      "removed": 1,
+      "changed": 3
+    },
+    "unchanged": 2,
+    "changes": [
+      {
+        "id": "claude.path",
+        "change": "changed",
+        "before": "pass",
+        "after": "error",
+        "note": "observations_changed",
+        "details": {
+          "installation_groups": {
+            "before": 1,
+            "after": 0
+          }
+        },
+        "regression": true
+      },
+      {
+        "id": "claude.version",
+        "change": "added",
+        "before": null,
+        "after": "pass",
+        "note": "added",
+        "details": {
+          "version": {
+            "before": null,
+            "after": "2.3.4"
+          }
+        },
+        "regression": false
+      },
+      {
+        "id": "codex.path",
+        "change": "changed",
+        "before": "warn",
+        "after": "unknown",
+        "note": "unassessed",
+        "details": {
+          "scan_limited": {
+            "before": false,
+            "after": true
+          }
+        },
+        "regression": false
+      },
+      {
+        "id": "codex.version",
+        "change": "changed",
+        "before": "pass",
+        "after": "warn",
+        "note": "observations_changed",
+        "details": {
+          "version": {
+            "before": "1.2.3",
+            "after": "1.2.4"
+          }
+        },
+        "regression": true
+      },
+      {
+        "id": "wsl.internal",
+        "change": "added",
+        "before": null,
+        "after": "skipped",
+        "note": "added",
+        "details": {},
+        "regression": false
+      },
+      {
+        "id": "wsl.running",
+        "change": "removed",
+        "before": "pass",
+        "after": null,
+        "note": "removed",
+        "details": {},
+        "regression": false
+      }
+    ],
+    "regressions": [
+      "claude.path",
+      "codex.version"
+    ],
+    "notice": "Confirm that the baseline and current diagnosis cover the same environment and scope. Regression means only pass→warn, pass→error or warn→error without a scan limit; it does not establish a fault's root cause. Added, removed, unknown and skipped checks do not establish a fix. Only states, numeric versions, installation-group counts and scan limits are compared."
+  },
+  "exit_policy": {
+    "fail_on": [
+      "regression"
+    ],
+    "triggered": [
+      "regression"
+    ],
+    "matched": true,
+    "meaning": "Meeting the selected exit conditions means a selected state occurred; unknown is not a confirmed fault. Operational failure exits 2; interruption exits 130. Regression means fixed state transitions without a scan limit; it does not establish a fault's root cause."
+  }
+}

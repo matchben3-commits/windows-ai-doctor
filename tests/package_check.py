@@ -158,6 +158,64 @@ def main():
                 raise ValueError("installed_schema_collision")
             run(kind + "_schema_lang_rejected", [entry, "--schema", "--lang", "zh"], environment=clean, expected=2)
             run(kind + "_schema_format_rejected", [entry, "--schema", "--format", "json"], environment=clean, expected=2)
+            diagnosis_csvs = []
+            for lang in ("zh", "en"):
+                csv_output = run(kind + "_diagnosis_csv_" + lang, [entry, "--home", home, "--no-version",
+                    "--lang", lang, "--format", "csv"], environment=clean)
+                header = b"\xef\xbb\xbfsequence,check_id,target,status,version,installation_groups,scan_limited,baseline_change,baseline_status,baseline_regression"
+                if (not csv_output.stdout.startswith(header) or b"\r" in csv_output.stdout
+                        or len(list(csv.reader(io.StringIO(csv_output.stdout.decode("utf-8-sig"))))[0]) != 10):
+                    raise ValueError("installed_diagnosis_csv")
+                diagnosis_csvs.append(csv_output.stdout)
+            if diagnosis_csvs[0] != diagnosis_csvs[1]:
+                raise ValueError("installed_diagnosis_csv_language")
+            sarif_outputs = []
+            for lang in ("zh", "en"):
+                sarif_output = run(kind + "_diagnosis_sarif_" + lang, [entry, "--home", home, "--no-version",
+                    "--lang", lang, "--format", "sarif"], environment=clean)
+                document = json.loads(sarif_output.stdout)
+                run_obj = document["runs"][0]
+                if (document.get("version") != "2.1.0" or len(document.get("runs", [])) != 1
+                        or run_obj["tool"]["driver"]["semanticVersion"] != __version__
+                        or len(run_obj["tool"]["driver"]["rules"]) != 19
+                        or b'"locations"' in sarif_output.stdout or b'"artifacts"' in sarif_output.stdout
+                        or "baseline" in run_obj["invocations"][0]["properties"]):
+                    raise ValueError("installed_sarif")
+                sarif_outputs.append(document)
+            def structure(obj):
+                if isinstance(obj, dict):
+                    return {key: structure(value) for key, value in obj.items()}
+                if isinstance(obj, list):
+                    return [structure(value) for value in obj]
+                return type(obj).__name__
+            if structure(sarif_outputs[0]) != structure(sarif_outputs[1]):
+                raise ValueError("installed_sarif_language")
+            baseline_path = task / (kind + "baseline.json")
+            baseline_path.write_text((task / (kind + "zh/report.zh.json")).read_text(encoding="utf-8"), encoding="utf-8")
+            same = run(kind + "_baseline_same", [entry, "--home", home, "--no-version", "--baseline", baseline_path,
+                "--fail-on", "regression", "--format", "json"], environment=clean)
+            same_report = json.loads(same.stdout)
+            if (same_report.get("baseline", {}).get("regressions") != []
+                    or "baseline" not in same_report or same.returncode != 0):
+                raise ValueError("installed_baseline_same")
+            folder = task / (kind + "baseline-all")
+            run(kind + "_baseline_all", [entry, "--home", home, "--no-version", "--baseline", baseline_path,
+                "--fail-on", "regression", "--format", "all", "--output-dir", folder], environment=clean)
+            html = (folder / "report.zh.html").read_text(encoding="utf-8")
+            if any('id="' + name + '"' not in html for name in
+                   ("baseline-comparison", "baseline-heading", "baseline-counts", "baseline-changes")):
+                raise ValueError("installed_baseline_html")
+            worse = json.loads(baseline_path.read_text(encoding="utf-8"))
+            for finding in worse["findings"]:
+                if finding["id"] in ("codex.path", "claude.path"):
+                    finding["status"] = "pass"
+            baseline_path.write_text(json.dumps(worse), encoding="utf-8")
+            regression = run(kind + "_baseline_regression", [entry, "--home", home, "--no-version",
+                "--baseline", baseline_path, "--fail-on", "regression", "--format", "sarif"],
+                environment=clean, expected=1)
+            invocation = json.loads(regression.stdout)["runs"][0]["invocations"][0]
+            if invocation["exitCode"] != 1 or not invocation["properties"]["baseline"]["regressions"]:
+                raise ValueError("installed_baseline_regression")
             import zipfile
             with zipfile.ZipFile(task / (kind + "support/support-bundle.zip")) as archive:
                 if archive.testzip() is not None or json.loads(archive.read("support.json"))["report_type"] != "support":

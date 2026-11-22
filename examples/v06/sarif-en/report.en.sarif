@@ -1,0 +1,640 @@
+{
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/cos02/schemas/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Windows AI Doctor",
+          "semanticVersion": "0.6.0",
+          "informationUri": "https://github.com/matchben3-commits/windows-ai-doctor",
+          "rules": [
+            {
+              "id": "claude.config.local",
+              "name": "claude.config.local",
+              "shortDescription": {
+                "text": "With an explicit --project root, check UTF-8 syntax and an object root for Claude settings.local.json."
+              },
+              "fullDescription": {
+                "text": "Emitted only with --project; no merge evaluation, account checks, or proof that local overrides apply."
+              },
+              "help": {
+                "text": "Emitted only with --project; no merge evaluation, account checks, or proof that local overrides apply."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "claude",
+                "availability": "project_only",
+                "evidence_fields": [
+                  "layer",
+                  "effective_loading",
+                  "path",
+                  "format",
+                  "syntax",
+                  "line"
+                ]
+              }
+            },
+            {
+              "id": "claude.config.project",
+              "name": "claude.config.project",
+              "shortDescription": {
+                "text": "With an explicit --project root, check UTF-8 syntax and an object root for the Claude project settings.json."
+              },
+              "fullDescription": {
+                "text": "Emitted only with --project; ancestors are not walked and effective merged configuration is not computed."
+              },
+              "help": {
+                "text": "Emitted only with --project; ancestors are not walked and effective merged configuration is not computed."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "claude",
+                "availability": "project_only",
+                "evidence_fields": [
+                  "layer",
+                  "effective_loading",
+                  "path",
+                  "format",
+                  "syntax",
+                  "line"
+                ]
+              }
+            },
+            {
+              "id": "claude.config.user",
+              "name": "claude.config.user",
+              "shortDescription": {
+                "text": "Check UTF-8 syntax and an object root for the user-layer Claude settings.json."
+              },
+              "fullDescription": {
+                "text": "The file may be absent; valid syntax does not establish login, API or service availability; config values are not exported."
+              },
+              "help": {
+                "text": "The file may be absent; valid syntax does not establish login, API or service availability; config values are not exported."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "claude",
+                "availability": "always",
+                "evidence_fields": [
+                  "layer",
+                  "location_source",
+                  "path",
+                  "format",
+                  "syntax",
+                  "line"
+                ]
+              }
+            },
+            {
+              "id": "claude.dependency",
+              "name": "claude.dependency",
+              "shortDescription": {
+                "text": "Observe runtime clues required by a recognized Claude launcher (native or Node)."
+              },
+              "fullDescription": {
+                "text": "Covers launcher runtime only; the full dependency tree and optional features are not validated."
+              },
+              "help": {
+                "text": "Covers launcher runtime only; the full dependency tree and optional features are not validated."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "claude",
+                "availability": "always",
+                "evidence_fields": [
+                  "runtime",
+                  "node_required",
+                  "scope",
+                  "node_found",
+                  "node_path_check",
+                  "documented_package_engine",
+                  "reason",
+                  "version",
+                  "probe_reason"
+                ]
+              }
+            },
+            {
+              "id": "claude.install",
+              "name": "claude.install",
+              "shortDescription": {
+                "text": "Observe whether the Claude installation kind is recognizable from the launcher layout."
+              },
+              "fullDescription": {
+                "text": "Not signature or publisher verification; an unknown kind does not prove absence of an installation."
+              },
+              "help": {
+                "text": "Not signature or publisher verification; an unknown kind does not prove absence of an installation."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "claude",
+                "availability": "always",
+                "evidence_fields": [
+                  "kind",
+                  "publisher_verified"
+                ]
+              }
+            },
+            {
+              "id": "claude.path",
+              "name": "claude.path",
+              "shortDescription": {
+                "text": "Observe Claude PATH/PATHEXT candidates and installation-group clues under the limited resolution model."
+              },
+              "fullDescription": {
+                "text": "No disk search; aliases/functions are outside prediction; a limited scan cannot prove absence or uniqueness."
+              },
+              "help": {
+                "text": "No disk search; aliases/functions are outside prediction; a limited scan cannot prove absence or uniqueness."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "claude",
+                "availability": "always",
+                "evidence_fields": [
+                  "entries",
+                  "installation_groups",
+                  "cmd_path_candidate",
+                  "powershell_path_candidate",
+                  "resolution_model",
+                  "scan_limited"
+                ]
+              }
+            },
+            {
+              "id": "claude.version",
+              "name": "claude.version",
+              "shortDescription": {
+                "text": "Perform a bounded --version observation against a recognized Claude launcher."
+              },
+              "fullDescription": {
+                "text": "Only short complete version responses are accepted; a pass covers this query only, not service or task availability."
+              },
+              "help": {
+                "text": "Only short complete version responses are accepted; a pass covers this query only, not service or task availability."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "claude",
+                "availability": "always",
+                "evidence_fields": [
+                  "reason",
+                  "returncode",
+                  "version",
+                  "captured_bytes",
+                  "timeout_seconds"
+                ]
+              }
+            },
+            {
+              "id": "codex.config.project",
+              "name": "codex.config.project",
+              "shortDescription": {
+                "text": "With an explicit --project root, check UTF-8 syntax and an object root for the Codex project config.toml."
+              },
+              "fullDescription": {
+                "text": "Emitted only with --project; ancestors are not walked and effective merged configuration is not computed."
+              },
+              "help": {
+                "text": "Emitted only with --project; ancestors are not walked and effective merged configuration is not computed."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "codex",
+                "availability": "project_only",
+                "evidence_fields": [
+                  "layer",
+                  "effective_loading",
+                  "path",
+                  "format",
+                  "syntax",
+                  "line"
+                ]
+              }
+            },
+            {
+              "id": "codex.config.user",
+              "name": "codex.config.user",
+              "shortDescription": {
+                "text": "Check UTF-8 syntax and an object root for the user-layer Codex config.toml."
+              },
+              "fullDescription": {
+                "text": "The file may be absent; valid syntax does not establish effective configuration or service availability; config values are not exported."
+              },
+              "help": {
+                "text": "The file may be absent; valid syntax does not establish effective configuration or service availability; config values are not exported."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "codex",
+                "availability": "always",
+                "evidence_fields": [
+                  "layer",
+                  "location_source",
+                  "path",
+                  "format",
+                  "syntax",
+                  "line"
+                ]
+              }
+            },
+            {
+              "id": "codex.dependency",
+              "name": "codex.dependency",
+              "shortDescription": {
+                "text": "Observe runtime clues required by a recognized Codex launcher (native or Node)."
+              },
+              "fullDescription": {
+                "text": "Covers launcher runtime only; the full dependency tree and optional features are not validated."
+              },
+              "help": {
+                "text": "Covers launcher runtime only; the full dependency tree and optional features are not validated."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "codex",
+                "availability": "always",
+                "evidence_fields": [
+                  "runtime",
+                  "node_required",
+                  "scope",
+                  "node_found",
+                  "node_path_check",
+                  "documented_package_engine",
+                  "reason",
+                  "version",
+                  "probe_reason"
+                ]
+              }
+            },
+            {
+              "id": "codex.install",
+              "name": "codex.install",
+              "shortDescription": {
+                "text": "Observe whether the Codex installation kind is recognizable from the launcher layout."
+              },
+              "fullDescription": {
+                "text": "Not signature or publisher verification; an unknown kind does not prove absence of an installation."
+              },
+              "help": {
+                "text": "Not signature or publisher verification; an unknown kind does not prove absence of an installation."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "codex",
+                "availability": "always",
+                "evidence_fields": [
+                  "kind",
+                  "publisher_verified"
+                ]
+              }
+            },
+            {
+              "id": "codex.path",
+              "name": "codex.path",
+              "shortDescription": {
+                "text": "Observe Codex PATH/PATHEXT candidates and installation-group clues under the limited resolution model."
+              },
+              "fullDescription": {
+                "text": "No disk search; aliases/functions are outside prediction; a limited scan cannot prove absence or uniqueness."
+              },
+              "help": {
+                "text": "No disk search; aliases/functions are outside prediction; a limited scan cannot prove absence or uniqueness."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "codex",
+                "availability": "always",
+                "evidence_fields": [
+                  "entries",
+                  "installation_groups",
+                  "cmd_path_candidate",
+                  "powershell_path_candidate",
+                  "resolution_model",
+                  "scan_limited"
+                ]
+              }
+            },
+            {
+              "id": "codex.version",
+              "name": "codex.version",
+              "shortDescription": {
+                "text": "Perform a bounded --version observation against a recognized Codex launcher."
+              },
+              "fullDescription": {
+                "text": "Only short complete version responses are accepted; a pass covers this query only, not service or task availability."
+              },
+              "help": {
+                "text": "Only short complete version responses are accepted; a pass covers this query only, not service or task availability."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "codex",
+                "availability": "always",
+                "evidence_fields": [
+                  "reason",
+                  "returncode",
+                  "version",
+                  "captured_bytes",
+                  "timeout_seconds"
+                ]
+              }
+            },
+            {
+              "id": "scope.unchecked",
+              "name": "scope.unchecked",
+              "shortDescription": {
+                "text": "Record that accounts, authentication, chat history, full configuration merging and real AI tasks remain outside scope."
+              },
+              "fullDescription": {
+                "text": "Always a skipped scope notice; it does not establish host health or that other checks passed."
+              },
+              "help": {
+                "text": "Always a skipped scope notice; it does not establish host health or that other checks passed."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "scope",
+                "availability": "always",
+                "evidence_fields": []
+              }
+            },
+            {
+              "id": "system.platform",
+              "name": "system.platform",
+              "shortDescription": {
+                "text": "Record the OS class and Python version clues visible to the current interpreter."
+              },
+              "fullDescription": {
+                "text": "Not a hardware inventory or patch audit; the Windows-target flag reflects os.name only."
+              },
+              "help": {
+                "text": "Not a hardware inventory or patch audit; the Windows-target flag reflects os.name only."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "system",
+                "availability": "always",
+                "evidence_fields": [
+                  "os",
+                  "python",
+                  "windows_target"
+                ]
+              }
+            },
+            {
+              "id": "wsl.internal",
+              "name": "wsl.internal",
+              "shortDescription": {
+                "text": "Record that the WSL distribution interior is never inspected."
+              },
+              "fullDescription": {
+                "text": "Always skipped; distributions are not started and absence of WSL is not treated as an AI tool failure."
+              },
+              "help": {
+                "text": "Always skipped; distributions are not started and absence of WSL is not treated as an AI tool failure."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "wsl",
+                "availability": "always",
+                "evidence_fields": []
+              }
+            },
+            {
+              "id": "wsl.inventory",
+              "name": "wsl.inventory",
+              "shortDescription": {
+                "text": "On Windows, observe the current-user Lxss registration subkey count clue."
+              },
+              "fullDescription": {
+                "text": "Distribution names are not listed; non-Windows hosts skip; this is not component-health proof."
+              },
+              "help": {
+                "text": "Distribution names are not listed; non-Windows hosts skip; this is not component-health proof."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "wsl",
+                "availability": "always",
+                "evidence_fields": [
+                  "registered_count",
+                  "reason"
+                ]
+              }
+            },
+            {
+              "id": "wsl.launcher",
+              "name": "wsl.launcher",
+              "shortDescription": {
+                "text": "Observe whether the system-directory WSL launcher is present (native-format clue)."
+              },
+              "fullDescription": {
+                "text": "Component health is not checked; non-Windows hosts skip; presence does not establish a usable distribution."
+              },
+              "help": {
+                "text": "Component health is not checked; non-Windows hosts skip; presence does not establish a usable distribution."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "wsl",
+                "availability": "always",
+                "evidence_fields": [
+                  "present",
+                  "component_health",
+                  "reason"
+                ]
+              }
+            },
+            {
+              "id": "wsl.running",
+              "name": "wsl.running",
+              "shortDescription": {
+                "text": "When --wsl-list is explicit, observe a read-only running-distribution count."
+              },
+              "fullDescription": {
+                "text": "Default is no execution; with explicit permission the list still runs even under --no-version; names are never exported."
+              },
+              "help": {
+                "text": "Default is no execution; with explicit permission the list still runs even under --no-version; names are never exported."
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "wsl",
+                "availability": "always",
+                "evidence_fields": [
+                  "reason",
+                  "running_count",
+                  "returncode"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "claude.path",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "Authored synthetic observation, not host state."
+          },
+          "properties": {
+            "status": "error",
+            "target": "claude",
+            "scan_limited": false
+          }
+        },
+        {
+          "ruleId": "codex.path",
+          "ruleIndex": 11,
+          "level": "note",
+          "message": {
+            "text": "Authored synthetic observation, not host state."
+          },
+          "properties": {
+            "status": "unknown",
+            "target": "codex",
+            "scan_limited": true
+          }
+        },
+        {
+          "ruleId": "codex.version",
+          "ruleIndex": 12,
+          "level": "warning",
+          "message": {
+            "text": "Authored synthetic observation, not host state."
+          },
+          "properties": {
+            "status": "warn",
+            "target": "codex"
+          }
+        },
+        {
+          "ruleId": "scope.unchecked",
+          "ruleIndex": 13,
+          "level": "note",
+          "message": {
+            "text": "Authored synthetic observation, not host state."
+          },
+          "properties": {
+            "status": "unknown",
+            "target": "scope"
+          }
+        }
+      ],
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "exitCode": 1,
+          "properties": {
+            "language": "en",
+            "schema_version": "1.0",
+            "summary": {
+              "pass": 2,
+              "warn": 1,
+              "error": 1,
+              "unknown": 2,
+              "skipped": 1
+            },
+            "fail_on": [
+              "regression"
+            ],
+            "triggered": [
+              "regression"
+            ],
+            "matched": true,
+            "scan_limited_checks": [
+              "codex.path"
+            ],
+            "notice": "SARIF 2.1.0 subset without source-file locations; direct GitHub code scanning use is not claimed. executionSuccessful means only that the tool completed, not health or a pass. Unknown or scan-limited observations establish neither a fault nor a fix.",
+            "baseline": {
+              "summary": {
+                "added": 2,
+                "removed": 1,
+                "changed": 3
+              },
+              "unchanged": 2,
+              "regressions": [
+                "claude.path",
+                "codex.version"
+              ]
+            }
+          }
+        }
+      ],
+      "properties": {
+        "status_vocabulary": [
+          "pass",
+          "warn",
+          "error",
+          "unknown",
+          "skipped"
+        ],
+        "notice": "SARIF 2.1.0 subset without source-file locations; direct GitHub code scanning use is not claimed. executionSuccessful means only that the tool completed, not health or a pass. Unknown or scan-limited observations establish neither a fault nor a fix.",
+        "diagnosis_schema_version": "1.0"
+      }
+    }
+  ]
+}

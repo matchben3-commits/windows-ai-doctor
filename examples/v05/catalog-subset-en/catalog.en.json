@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "report_type": "catalog",
-  "doctor_version": "0.5.0",
+  "doctor_version": "0.6.0",
   "language": "en",
   "checks": [
     {

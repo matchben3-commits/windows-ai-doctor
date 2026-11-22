@@ -1,0 +1,9 @@
+{
+  "started_at": "2026-11-22T11:41:09.296468+00:00",
+  "finished_at": "2026-11-22T11:41:24.772242+00:00",
+  "administrator": true,
+  "actual_process_exit_code": 0,
+  "actual_uac_process_exit_code": 0,
+  "wrapper": "run_authorized_final_v06.py",
+  "source": "fresh child process, unittest discovery with SafeResult, no result splicing"
+}

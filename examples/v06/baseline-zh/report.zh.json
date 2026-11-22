@@ -1,0 +1,198 @@
+{
+  "schema_version": "1.0",
+  "report_type": "diagnosis",
+  "doctor_version": "0.6.0",
+  "generated_at": "2000-01-01T00:00:00+00:00",
+  "language": "zh",
+  "summary": {
+    "pass": 2,
+    "warn": 1,
+    "error": 1,
+    "unknown": 2,
+    "skipped": 1
+  },
+  "findings": [
+    {
+      "id": "system.platform",
+      "status": "pass",
+      "evidence": {},
+      "target": "system",
+      "summary": "预设合成观察，不代表主机状态。",
+      "recommendation": "自行核对检查范围。",
+      "recheck": "使用实际诊断另行复查。"
+    },
+    {
+      "id": "claude.path",
+      "status": "error",
+      "evidence": {
+        "installation_groups": 0,
+        "scan_limited": false
+      },
+      "target": "claude",
+      "summary": "预设合成观察，不代表主机状态。",
+      "recommendation": "自行核对检查范围。",
+      "recheck": "使用实际诊断另行复查。"
+    },
+    {
+      "id": "codex.version",
+      "status": "warn",
+      "evidence": {
+        "version": "1.2.4"
+      },
+      "target": "codex",
+      "summary": "预设合成观察，不代表主机状态。",
+      "recommendation": "自行核对检查范围。",
+      "recheck": "使用实际诊断另行复查。"
+    },
+    {
+      "id": "codex.path",
+      "status": "unknown",
+      "evidence": {
+        "installation_groups": 1,
+        "scan_limited": true
+      },
+      "target": "codex",
+      "summary": "预设合成观察，不代表主机状态。",
+      "recommendation": "自行核对检查范围。",
+      "recheck": "使用实际诊断另行复查。"
+    },
+    {
+      "id": "claude.version",
+      "status": "pass",
+      "evidence": {
+        "version": "2.3.4"
+      },
+      "target": "claude",
+      "summary": "预设合成观察，不代表主机状态。",
+      "recommendation": "自行核对检查范围。",
+      "recheck": "使用实际诊断另行复查。"
+    },
+    {
+      "id": "scope.unchecked",
+      "status": "unknown",
+      "evidence": {},
+      "target": "scope",
+      "summary": "预设合成观察，不代表主机状态。",
+      "recommendation": "自行核对检查范围。",
+      "recheck": "使用实际诊断另行复查。"
+    },
+    {
+      "id": "wsl.internal",
+      "status": "skipped",
+      "evidence": {},
+      "target": "wsl",
+      "summary": "预设合成观察，不代表主机状态。",
+      "recommendation": "自行核对检查范围。",
+      "recheck": "使用实际诊断另行复查。"
+    }
+  ],
+  "privacy": {
+    "synthetic": true
+  },
+  "priorities": [
+    "claude.path",
+    "codex.version",
+    "codex.path",
+    "scope.unchecked"
+  ],
+  "baseline": {
+    "schema_version": "1.0",
+    "summary": {
+      "added": 2,
+      "removed": 1,
+      "changed": 3
+    },
+    "unchanged": 2,
+    "changes": [
+      {
+        "id": "claude.path",
+        "change": "changed",
+        "before": "pass",
+        "after": "error",
+        "note": "observations_changed",
+        "details": {
+          "installation_groups": {
+            "before": 1,
+            "after": 0
+          }
+        },
+        "regression": true
+      },
+      {
+        "id": "claude.version",
+        "change": "added",
+        "before": null,
+        "after": "pass",
+        "note": "added",
+        "details": {
+          "version": {
+            "before": null,
+            "after": "2.3.4"
+          }
+        },
+        "regression": false
+      },
+      {
+        "id": "codex.path",
+        "change": "changed",
+        "before": "warn",
+        "after": "unknown",
+        "note": "unassessed",
+        "details": {
+          "scan_limited": {
+            "before": false,
+            "after": true
+          }
+        },
+        "regression": false
+      },
+      {
+        "id": "codex.version",
+        "change": "changed",
+        "before": "pass",
+        "after": "warn",
+        "note": "observations_changed",
+        "details": {
+          "version": {
+            "before": "1.2.3",
+            "after": "1.2.4"
+          }
+        },
+        "regression": true
+      },
+      {
+        "id": "wsl.internal",
+        "change": "added",
+        "before": null,
+        "after": "skipped",
+        "note": "added",
+        "details": {},
+        "regression": false
+      },
+      {
+        "id": "wsl.running",
+        "change": "removed",
+        "before": "pass",
+        "after": null,
+        "note": "removed",
+        "details": {},
+        "regression": false
+      }
+    ],
+    "regressions": [
+      "claude.path",
+      "codex.version"
+    ],
+    "notice": "请自行确认基线与本次诊断来自相同环境和检查范围。回归仅指未受扫描限制时 pass→warn、pass→error 或 warn→error 的固定状态转移，不等于已确认故障根因。新增、移除、未知和未检查均不代表修复。只比较状态、数字版本、安装组数量和扫描限制。"
+  },
+  "exit_policy": {
+    "fail_on": [
+      "regression"
+    ],
+    "triggered": [
+      "regression"
+    ],
+    "matched": true,
+    "meaning": "达到所选退出条件仅表示出现选中状态；无法判断不等于已确认故障。操作失败退出2，中断130。 回归仅指未受扫描限制的固定状态转移，不等于已确认故障根因。"
+  }
+}

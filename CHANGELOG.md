@@ -1,4 +1,12 @@
-# v0.5.0 — 2026-11-21 (local development; independent review and hosted CI pending)
+# v0.6.0 — 2026-11-22 (local candidate; independent review and hosted CI pending)
+
+- Add `--baseline BASE.json` with additive diagnosis `baseline` audit section; reuse compare projections; no free text, paths or timestamps in the baseline object.
+- Add `--fail-on regression` (requires `--baseline`): only pass→warn, pass→error or warn→error without scan_limited=true count as regressions; meaning text states fixed transitions, not confirmed root causes.
+- Extend diagnosis `--format csv` to ten whitelisted columns including baseline fields; UTF-8 BOM; Chinese/English bodies byte-identical; history/compare CSV unchanged.
+- Add diagnosis `--format sarif` as a SARIF 2.1.0 subset without file locations: 19 catalog-sourced rules, error/warn/unknown results only, optional baseline properties; both/all sets unchanged.
+- Preserve all v0.5 entries, safety bounds and exit codes; runtime stays standard-library only; version 0.6.0.
+
+# v0.5.0 — 2026-11-21 (published; historical baseline for v0.6)
 
 - Add compare `--format csv` change tables with twelve whitelisted observation columns, UTF-8 BOM and byte-identical Chinese/English bodies; both/all sets unchanged.
 - Add offline `--catalog` for the fixed 19-check directory (default md); no input reads, diagnosis, environment, registry or network access.

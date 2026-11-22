@@ -1,0 +1,25 @@
+{
+  "exit_code": 0,
+  "regenerations": [
+    {
+      "generator": "v05",
+      "actual_process_exit_code": 0,
+      "files": 12,
+      "byte_identical": true
+    },
+    {
+      "generator": "v06",
+      "actual_process_exit_code": 0,
+      "files": 13,
+      "byte_identical": true
+    }
+  ],
+  "retained_v05_catalog_version_only_updates": [
+    "examples/v05/catalog-en/catalog.en.json",
+    "examples/v05/catalog-en/catalog.en.md",
+    "examples/v05/catalog-subset-en/catalog.en.json",
+    "examples/v05/catalog-subset-zh/catalog.zh.json",
+    "examples/v05/catalog-zh/catalog.zh.json",
+    "examples/v05/catalog-zh/catalog.zh.md"
+  ]
+}

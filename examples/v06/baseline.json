@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "report_type": "diagnosis",
+  "findings": [
+    {
+      "id": "system.platform",
+      "status": "pass",
+      "evidence": {}
+    },
+    {
+      "id": "claude.path",
+      "status": "pass",
+      "evidence": {
+        "installation_groups": 1,
+        "scan_limited": false
+      }
+    },
+    {
+      "id": "codex.version",
+      "status": "pass",
+      "evidence": {
+        "version": "1.2.3"
+      }
+    },
+    {
+      "id": "codex.path",
+      "status": "warn",
+      "evidence": {
+        "installation_groups": 1,
+        "scan_limited": false
+      }
+    },
+    {
+      "id": "scope.unchecked",
+      "status": "unknown",
+      "evidence": {}
+    },
+    {
+      "id": "wsl.running",
+      "status": "pass",
+      "evidence": {}
+    }
+  ]
+}

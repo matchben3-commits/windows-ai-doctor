@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;">
+<title>Windows AI Doctor</title><style>
+:root{color-scheme:light;font-family:system-ui,'Segoe UI',sans-serif;color:#17243a;background:#f2f5fa}
+*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:32px 24px}
+header{margin-bottom:24px}h1{font-size:clamp(1.6rem,5vw,2.5rem);margin:0 0 12px}
+h2{font-size:1.15rem}p,li,pre,h2{overflow-wrap:anywhere}p,li{line-height:1.65}
+.muted{color:#526078}.counts{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}
+.count,article,.priority{border:1px solid #cdd6e4;background:white;border-radius:12px;padding:18px}
+.count{min-width:115px;flex:1}.count strong{font-size:1.8rem;display:block}
+article{margin:16px 0}article h2{margin:0 0 12px}.badge{font-weight:700}
+.error{border-left:5px solid #b42318}.warn{border-left:5px solid #906400}
+.unknown{border-left:5px solid #5d478b}.pass{border-left:5px solid #167345}
+pre{white-space:pre-wrap;word-break:break-word;font-size:.86rem;background:#f4f6fa;padding:14px;border-radius:8px}
+ol{padding-left:24px}.priority{border-left:5px solid #315cc9}footer{margin-top:32px}
+@media(max-width:480px){main{padding:20px 12px}.count{min-width:90px;padding:12px}article{padding:14px}}
+.table-scroll{overflow-x:auto;max-width:100%;border:1px solid #cdd6e4;border-radius:12px;background:white;margin:20px 0}
+table{border-collapse:collapse;font-size:.9rem}caption{text-align:left;padding:14px;font-weight:700}
+th,td{border:1px solid #d8e0ec;text-align:left;padding:12px;min-width:135px;vertical-align:top}
+th{background:#eaf0fa}th[scope=row]{min-width:190px;position:sticky;left:0;z-index:1}td small{display:block;margin-top:8px;overflow-wrap:anywhere}
+.table-scroll:focus{outline:3px solid #315cc9}
+thead th:first-child{position:sticky;left:0;z-index:2}
+</style></head><body><main>
+<header><h1>Windows AI Doctor</h1><p class="muted">v0.6.0 · schema 1.0 · 2000-01-01T00:00:00+00:00</p></header>
+<section class="counts" aria-label="Status counts">
+<div class="count"><span>通过</span><strong>2</strong></div>
+<div class="count"><span>提醒</span><strong>1</strong></div>
+<div class="count"><span>异常</span><strong>1</strong></div>
+<div class="count"><span>无法判断</span><strong>2</strong></div>
+<div class="count"><span>未检查</span><strong>1</strong></div>
+</section>
+<section id="baseline-comparison" aria-labelledby="baseline-heading">
+<h2 id="baseline-heading">基线对比</h2>
+<p>请自行确认基线与本次诊断来自相同环境和检查范围。回归仅指未受扫描限制时 pass→warn、pass→error 或 warn→error 的固定状态转移，不等于已确认故障根因。新增、移除、未知和未检查均不代表修复。只比较状态、数字版本、安装组数量和扫描限制。</p>
+<p id="baseline-counts">新增: 2 · 移除: 1 · 变化: 3 · 回归: 2 · 未变化: 2</p>
+<div id="baseline-changes">
+<article><h3>claude.path · changed</h3><p>pass → error</p><p>观察字段或状态变化。</p>
+<p><strong>固定规则回归</strong></p>
+<pre>{
+  &quot;installation_groups&quot;: {
+    &quot;before&quot;: 1,
+    &quot;after&quot;: 0
+  }
+}</pre></article>
+<article><h3>claude.version · added</h3><p>— → pass</p><p>本次新增检查。</p>
+<pre>{
+  &quot;version&quot;: {
+    &quot;before&quot;: null,
+    &quot;after&quot;: &quot;2.3.4&quot;
+  }
+}</pre></article>
+<article><h3>codex.path · changed</h3><p>warn → unknown</p><p>无法判断、未再检查或扫描受限，不代表修复。</p>
+<pre>{
+  &quot;scan_limited&quot;: {
+    &quot;before&quot;: false,
+    &quot;after&quot;: true
+  }
+}</pre></article>
+<article><h3>codex.version · changed</h3><p>pass → warn</p><p>观察字段或状态变化。</p>
+<p><strong>固定规则回归</strong></p>
+<pre>{
+  &quot;version&quot;: {
+    &quot;before&quot;: &quot;1.2.3&quot;,
+    &quot;after&quot;: &quot;1.2.4&quot;
+  }
+}</pre></article>
+<article><h3>wsl.internal · added</h3><p>— → skipped</p><p>本次新增检查。</p>
+<pre>{}</pre></article>
+<article><h3>wsl.running · removed</h3><p>pass → —</p><p>本次未包含，未再检查。</p>
+<pre>{}</pre></article>
+</div></section>
+<section class="priority"><h2>退出条件</h2><p>所选状态：regression；触发状态：regression；达到所选退出条件：是. 达到所选退出条件仅表示出现选中状态；无法判断不等于已确认故障。操作失败退出2，中断130。 回归仅指未受扫描限制的固定状态转移，不等于已确认故障根因。</p></section>
+<section class="priority"><h2>优先处理：异常 → 提醒 → 无法判断</h2><p>claude.path, codex.version, codex.path, scope.unchecked</p></section>
+<article class="pass"><h2>system.platform · <span class="badge">通过</span></h2><p>预设合成观察，不代表主机状态。</p><pre>{}</pre>
+<p>自行核对检查范围。</p><p>使用实际诊断另行复查。</p>
+</article>
+<article class="error"><h2>claude.path · <span class="badge">异常</span></h2><p>预设合成观察，不代表主机状态。</p><pre>{
+  &quot;installation_groups&quot;: 0,
+  &quot;scan_limited&quot;: false
+}</pre>
+<p>自行核对检查范围。</p><p>使用实际诊断另行复查。</p>
+</article>
+<article class="warn"><h2>codex.version · <span class="badge">提醒</span></h2><p>预设合成观察，不代表主机状态。</p><pre>{
+  &quot;version&quot;: &quot;1.2.4&quot;
+}</pre>
+<p>自行核对检查范围。</p><p>使用实际诊断另行复查。</p>
+</article>
+<article class="unknown"><h2>codex.path · <span class="badge">无法判断</span></h2><p>预设合成观察，不代表主机状态。</p><pre>{
+  &quot;installation_groups&quot;: 1,
+  &quot;scan_limited&quot;: true
+}</pre>
+<p>自行核对检查范围。</p><p>使用实际诊断另行复查。</p>
+</article>
+<article class="pass"><h2>claude.version · <span class="badge">通过</span></h2><p>预设合成观察，不代表主机状态。</p><pre>{
+  &quot;version&quot;: &quot;2.3.4&quot;
+}</pre>
+<p>自行核对检查范围。</p><p>使用实际诊断另行复查。</p>
+</article>
+<article class="unknown"><h2>scope.unchecked · <span class="badge">无法判断</span></h2><p>预设合成观察，不代表主机状态。</p><pre>{}</pre>
+<p>自行核对检查范围。</p><p>使用实际诊断另行复查。</p>
+</article>
+<article class="skipped"><h2>wsl.internal · <span class="badge">未检查</span></h2><p>预设合成观察，不代表主机状态。</p><pre>{}</pre>
+<p>自行核对检查范围。</p><p>使用实际诊断另行复查。</p>
+</article>
+<footer class="muted"><p>离线报告 · 路径原值、配置值和程序原始输出未保存。</p></footer></main></body></html>

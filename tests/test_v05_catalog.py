@@ -47,7 +47,7 @@ class CatalogModuleTests(CatalogFixture):
         en = catalog_report(None, "en")
         self.assertEqual(zh["report_type"], "catalog")
         self.assertEqual(zh["schema_version"], "1.0")
-        self.assertEqual(zh["doctor_version"], "0.5.0")
+        self.assertEqual(zh["doctor_version"], "0.6.0")
         self.assertNotIn("generated_at", zh)
         self.assertEqual(zh["status_vocabulary"], list(STATES))
         self.assertEqual([c["id"] for c in zh["checks"]], sorted(IDS))

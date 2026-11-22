@@ -2,6 +2,7 @@ import html
 import json
 
 from .compare import NOTES
+from .baseline import baseline_markdown, baseline_html
 
 LABELS = {
     "zh": {"pass": "通过", "warn": "提醒", "error": "异常", "unknown": "无法判断", "skipped": "未检查", "added": "新增", "removed": "移除", "changed": "变化"},
@@ -33,6 +34,8 @@ def markdown_report(report):
                           f"{c['before'] or '—'} → {c['after'] or '—'}", "", NOTES[lang][c["note"]], "",
                           "```json", json.dumps(c["details"], ensure_ascii=False, indent=2), "```", ""])
         return "\n".join(lines)
+    if "baseline" in report:
+        lines.extend(baseline_markdown(report["baseline"], lang))
     if "exit_policy" in report:
         lines.extend(["## 退出条件" if zh else "## Exit conditions", "", policy_text(report), ""])
     lines.extend(["路径使用代号，原始映射未保存；语法通过不代表服务可用。" if zh else
@@ -102,6 +105,8 @@ def html_report(report):
                        esc(c["before"] or "—") + ' → ' + esc(c["after"] or "—") + '</p><p>' + esc(NOTES[lang][c["note"]]) +
                        '</p><pre>' + esc(json.dumps(c["details"], ensure_ascii=False, indent=2)) + '</pre></article>')
     else:
+        if "baseline" in report:
+            out.append(baseline_html(report["baseline"], lang))
         if "exit_policy" in report:
             out.append('<section class="priority"><h2>' + ("退出条件" if zh else "Exit conditions") +
                        '</h2><p>' + esc(policy_text(report)) + '</p></section>')

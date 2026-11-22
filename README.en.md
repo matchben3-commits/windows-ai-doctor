@@ -1,10 +1,26 @@
 # Windows AI Doctor
 
-[中文](README.md) · v0.5.0 · Python 3.11+ · Windows first · standard library runtime
+[中文](README.md) · v0.6.0 · Python 3.11+ · Windows first · standard library runtime
 
 Limited local diagnostics for Codex CLI and Claude Code CLI: PATH entries, duplicate installation clues, versions, launcher-specific runtimes, configuration syntax and Windows/WSL visibility. Export English or Chinese Markdown, JSON and standalone offline HTML with manual guidance. It diagnoses without installing, upgrading, repairing, logging in or calling model APIs.
 
-## New in v0.5
+## New in v0.6
+
+- `--baseline BASE.json`: validate a baseline before diagnosis and attach a baseline comparison section; whitelisted observations only.
+- `--fail-on regression`: requires `--baseline`; only pass→warn / pass→error / warn→error without scan limits count as regressions.
+- Diagnosis `--format csv`: ten columns including baseline fields; UTF-8 BOM; Chinese/English bodies byte-identical; history/compare CSV unchanged.
+- Diagnosis `--format sarif`: SARIF 2.1.0 subset without file locations; 19 catalog-sourced rules; direct GitHub code-scanning use is not claimed.
+
+```powershell
+python .\doctor.py --no-version --baseline baseline.json --fail-on regression --format all --output-dir .\reports\baseline-new
+python .\doctor.py --no-version --format csv
+python .\doctor.py --no-version --format sarif --output-dir .\reports\sarif-new
+python .\examples\make_v06_demo.py .\reports\v06-demo-new
+```
+
+`both`/`all` sets are unchanged; SARIF is explicit only. Completed diagnosis exits 0/1; argument/export failure exits 2; interruption exits 130. See the [v0.6 contract](docs/v06-contract.md).
+
+## Retained from v0.5
 
 - `--compare OLD.json NEW.json --format csv`: UTF-8 BOM change tables with twelve whitelisted observation columns; history/compare only; Chinese and English bodies are byte-identical.
 - `--catalog [CHECK_ID ...]`: offline export of the fixed 19-check catalog; default `md` (unlike diagnosis default `both`); no input reads and no diagnosis.
@@ -18,7 +34,7 @@ python .\doctor.py --schema --output-dir .\reports\schema-new
 python .\examples\make_v05_demo.py .\reports\v05-demo-new
 ```
 
-Catalog supports both/md/json (default md). Schema rejects explicit format/lang. CSV is history/compare only. Success exits 0, failure 2, interruption 130. See the [v0.5 contract](docs/v05-contract.md) for bounds and one-way schema/`load_report` consistency.
+Catalog supports both/md/json (default md). Schema rejects explicit format/lang. Compare/history CSV remain twelve columns. See the [v0.5 contract](docs/v05-contract.md).
 
 ## Retained from v0.4
 
@@ -69,9 +85,9 @@ Replace sample paths with your own files. If Python is not on PATH, use your ins
 - `--project` inspects only fixed configuration files at that explicit root, not ancestor layers or effective merged settings.
 - `--timeout` is 0.1–30 seconds per query, default 3; `--no-version` skips CLI/Node execution.
 - `--wsl-list` separately permits a read-only running-distribution list even with no-version; omit it for no external commands.
-- `--lang zh|en`; `--format both|md|json|html|all|csv`. Diagnosis default both is MD+JSON; all is three formats; catalog defaults to md. Without an output directory, both/all print MD, single formats print that format.
-- Filenames: report.LANG.FORMAT, comparison.LANG.FORMAT, history.LANG.FORMAT, catalog.LANG.FORMAT and schema.diagnosis.json. Existing files are preserved; failed/interrupted writes remove only newly created files.
-- compare/history/support/validate/verify-support/catalog/schema are mutually exclusive and reject diagnostic options and fail-on; support/schema further restrict format/lang. Option abbreviations and extra positional arguments are rejected.
+- `--lang zh|en`; `--format both|md|json|html|all|csv|sarif`. Diagnosis default both is MD+JSON; all is three formats; catalog defaults to md; sarif is diagnosis-only. Without an output directory, both/all print MD, single formats print that format.
+- `--baseline` is diagnosis-only; `--fail-on` accepts error/warn/unknown/regression (`regression` requires baseline). Filenames: report.LANG.FORMAT, comparison.LANG.FORMAT, history.LANG.FORMAT, catalog.LANG.FORMAT and schema.diagnosis.json. Existing files are preserved; failed/interrupted writes remove only newly created files; csv/sarif directory exports stay silent on success.
+- compare/history/support/validate/verify-support/catalog/schema are mutually exclusive and reject diagnostic options, fail-on and baseline; support/schema further restrict format/lang. Option abbreviations and extra positional arguments are rejected.
 
 ## Interpretation and exit codes
 
@@ -83,9 +99,9 @@ Replace sample paths with your own files. If Python is not on PATH, use your ins
 | unknown | Insufficient layout/version/permission/encoding evidence, not a confirmed fault |
 | skipped | Optional item absent, disabled or outside scope |
 
-Completed diagnosis exits 1 when any selected fail-on state occurs, otherwise 0. Default selects only error. Invalid arguments/input, incomplete diagnosis or export always exit 2; interruption exits 130. Completed comparison/history/support/validation/verification/catalog/schema exit 0 regardless of imported error counts. Reports show exit_policy selections, triggered states and meaning; selecting unknown does not make it a confirmed fault.
+Completed diagnosis exits 1 when any selected fail-on state (including regression) occurs, otherwise 0. Default selects only error. Invalid arguments/input, incomplete diagnosis or export always exit 2; interruption exits 130. Completed comparison/history/support/validation/verification/catalog/schema exit 0 regardless of imported error counts. Reports show exit_policy selections, triggered states and meaning; selecting unknown or regression does not establish a confirmed fault root cause.
 
-Diagnosis remains schema 1.0 with additive CLI exit_policy metadata. Import modes accept v0.1–v0.5 schema-1.0 diagnosis input and reject comparison/history/support/validation/support_verification/catalog derivatives. Only known IDs, states, numeric versions, installation-group counts and scan limits survive. Duplicate keys/IDs, invalid states/schema, oversized or linked input are rejected. Each file is capped at 2 MiB, 16 levels and 20,000 nodes; history allows 20 files. Arbitrary source text never reaches derivative output. Passing `--schema` means structural shape only; `--validate` remains authoritative for acceptance by this tool.
+Diagnosis remains schema 1.0 with additive CLI exit_policy metadata and an optional baseline section. Import modes accept v0.1–v0.6 schema-1.0 diagnosis input and reject comparison/history/support/validation/support_verification/catalog derivatives. Only known IDs, states, numeric versions, installation-group counts and scan limits survive. Duplicate keys/IDs, invalid states/schema, oversized or linked input are rejected. Each file is capped at 2 MiB, 16 levels and 20,000 nodes; history allows 20 files. Arbitrary source text never reaches derivative output. Passing `--schema` means structural shape only; `--validate` remains authoritative for acceptance by this tool.
 
 ## Privacy and scope
 
@@ -93,21 +109,22 @@ No authentication, session, chat or .claude.json files are read. Only fixed conf
 
 Only recognized targets are queried, never shell wrappers; binary recognition is not publisher-signature validation. Probes use temporary HOME and restricted environments, with Windows Job Object process-tree cleanup. Installed third-party programs are not a complete security sandbox and may bypass proxies. The doctor itself does not connect to the network. Valid configuration syntax does not establish authentication/API/service availability or complete tool operation. WSL internals remain unchecked and WSL is not started by default.
 
-[Privacy](docs/privacy.md) · [Official sources and detection limits](docs/rules.md) · [Comparison](docs/comparison.md) · [v0.5 contract](docs/v05-contract.md) · [v0.4 contract](docs/v04-contract.md)
+[Privacy](docs/privacy.md) · [Official sources and detection limits](docs/rules.md) · [Comparison](docs/comparison.md) · [v0.6 contract](docs/v06-contract.md) · [v0.5 contract](docs/v05-contract.md) · [v0.4 contract](docs/v04-contract.md)
 
 ## Examples and validation
 
 ```powershell
+python -B .\examples\make_v06_demo.py .\reports\v06-demo-new
 python -B .\examples\make_v05_demo.py .\reports\v05-demo-new
 python -B .\examples\make_v04_demo.py .\reports\v04-demo-new
-python -B .\tests\run_tests.py --evidence .\evidence\review-v05-tests.json
-python -B .\tests\package_check.py .\evidence\review-v05-package.json
+python -B .\tests\run_tests.py --evidence .\evidence\review-v06-tests.json
+python -B .\tests\package_check.py .\evidence\review-v06-package.json --artifacts-dir .\reports\packages-new
 ```
 
-Generators write authored synthetic observations and offline exports, not real-host diagnoses. Build checks require complete Python with venv/ensurepip and an empty artifact directory; dependencies stay in temporary build environments. [HANDOFF](HANDOFF.md) identifies current local results and untested scope.
+Generators write authored synthetic observations and derived exports, not real-host diagnosis bodies. Build checks require complete Python with venv/ensurepip and an empty artifact directory; dependencies stay in temporary build environments. [HANDOFF](HANDOFF.md) identifies current local results and untested scope.
 
-All v0.1–v0.4 materials, old tests.json/build-install.json and old manifests are historical. Fifth-version independent review, hosted Windows/Python 3.11/3.14 CI and publication require separate verification.
+All v0.1–v0.5 materials, old tests.json/build-install.json and old manifests are historical. Sixth-version independent review, hosted Windows/Python 3.11/3.14 CI and publication require separate verification.
 
 [MIT](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md)
 
-Current v0.5 status is in [HANDOFF](HANDOFF.md). Existing evidence not identified as v05 is historical. Required local permission tests, independent review, hosted CI and publication are separate v0.5 gates.
+Current v0.6 status is in [HANDOFF](HANDOFF.md). Existing evidence not identified as v06 is historical. Required local permission tests, independent review, hosted CI and publication are separate v0.6 gates.

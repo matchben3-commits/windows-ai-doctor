@@ -6,7 +6,9 @@ from pathlib import Path
 from . import __version__
 from .core import Doctor
 from .report import json_report, markdown_report, html_report
-from .compare import load_report, compare_reports, comparison_csv
+from .compare import load_report, compare_reports, comparison_csv, project
+from .baseline import baseline_report, diagnosis_csv
+from .sarif import sarif_report
 from .diagnosis_schema import schema_json
 from .history import load_history, history_report, history_csv
 from .support import export_support
@@ -24,7 +26,8 @@ def parser():
     p.add_argument("--version", action="version", version=__version__)
     p.add_argument("--tools", nargs="+", choices=("codex", "claude"), default=["codex", "claude"], help="选择工具 / select tools")
     p.add_argument("--lang", choices=("zh", "en"), default="zh", help="报告语言 / report language")
-    p.add_argument("--format", choices=("both", "md", "json", "html", "all", "csv"), default="both", help="both=MD+JSON; all=MD+JSON+HTML; csv仅history/compare / csv history/compare only; catalog: both/md/json, default md; validate/verify-support: both/md/json; schema: no explicit format; stdout: both/all use MD")
+    p.add_argument("--format", choices=("both", "md", "json", "html", "all", "csv", "sarif"), default="both", help="both=MD+JSON; all=MD+JSON+HTML; csv: diagnosis/history/compare; sarif: diagnosis only, no file locations; catalog: both/md/json, default md; validate/verify-support: both/md/json; schema: no explicit format; stdout: both/all use MD")
+    p.add_argument("--baseline", type=Path, metavar="BASE.json", help="诊断前校验并读取基线；仅比较白名单观察 / validate and read baseline before diagnosis; compare whitelisted observations only")
     p.add_argument("--compare", nargs=2, type=Path, metavar=("OLD.json", "NEW.json"), help="离线对比，不运行诊断；禁用诊断参数 / offline comparison; conflicts with diagnostic options; output: comparison.LANG.FORMAT")
     p.add_argument("--history", nargs="+", type=Path, metavar="REPORT.json", help="2–20份诊断报告的离线趋势，按输入顺序 / offline history in input order; output: history.LANG.FORMAT")
     p.add_argument("--support", type=Path, metavar="REPORT.json", help="生成有限求助摘要ZIP，需输出目录；自行审阅分享，不保证无法关联，无原始路径映射 / limited support ZIP, requires output directory; review before sharing, signals may be linkable, no original path mapping")
@@ -32,7 +35,7 @@ def parser():
     p.add_argument("--verify-support", type=Path, metavar="BUNDLE.zip", help="离线核验求助包结构/CRC/SHA/内部一致性，不证明来源或隐私 / offline bundle structure/CRC/SHA/consistency; no source or privacy assurance")
     p.add_argument("--catalog", nargs="*", metavar="CHECK_ID", help="导出固定19项检查目录，可选最多32个精确ID；默认md，不运行诊断 / export fixed 19-check catalog, up to 32 exact IDs; default md, no diagnosis")
     p.add_argument("--schema", action="store_true", help="导出确定性的诊断输入JSON Schema；仅允许output-dir / deterministic diagnosis input JSON Schema; only output-dir allowed; --validate remains authoritative")
-    p.add_argument("--fail-on", nargs="+", choices=("error", "warn", "unknown"), help="诊断退出条件，默认error；选中状态出现则退出1，不改变检查状态 / diagnosis exit conditions, default error; matched states exit 1 without changing findings")
+    p.add_argument("--fail-on", nargs="+", choices=("error", "warn", "unknown", "regression"), help="诊断退出条件，默认error；regression需baseline且只指固定状态转移 / diagnosis exit conditions, default error; regression requires baseline and means fixed state transitions only")
     p.add_argument("--output-dir", type=Path, help="新建报告目录 / report directory (existing reports are not overwritten)")
     p.add_argument("--home", type=Path, help="诊断目标用户目录 / diagnostic user home override")
     p.add_argument("--project", type=Path, help="只检查此项目根目录 / inspect only this explicit project root")
@@ -91,9 +94,13 @@ def main(argv=None):
             parser().error("")
         diagnostic_options = {"--tools", "--home", "--project", "--timeout", "--no-version", "--wsl-list"}
         explicit = {token.split("=", 1)[0] for token in raw_args}
-        if offline and explicit & (diagnostic_options | {"--fail-on"}):
+        if offline and explicit & (diagnostic_options | {"--fail-on", "--baseline"}):
             parser().error("")
-        if args.format == "csv" and not (history or comparison):
+        if "regression" in (args.fail_on or []) and args.baseline is None:
+            parser().error("")
+        if args.format == "csv" and offline and not (history or comparison):
+            parser().error("")
+        if args.format == "sarif" and offline:
             parser().error("")
         if (validating or verifying) and args.format not in ("both", "md", "json"):
             parser().error("")
@@ -136,16 +143,23 @@ def main(argv=None):
             old, new = load_report(args.compare[0]), load_report(args.compare[1])
             report = compare_reports(old, new, args.lang)
         else:
+            baseline = load_report(args.baseline) if args.baseline is not None else None
             report = Doctor(home=args.home, lang=args.lang, tools=tuple(dict.fromkeys(args.tools)),
                         timeout=args.timeout, versions=not args.no_version,
                         project=args.project, wsl_list=args.wsl_list).run()
-            selected = [s for s in ("error", "warn", "unknown") if s in (args.fail_on or ["error"])]
-            triggered = [s for s in selected if report["summary"][s]]
+            if baseline is not None:
+                report["baseline"] = baseline_report(baseline, project(report), args.lang)
+            selected = [s for s in ("error", "warn", "unknown", "regression") if s in (args.fail_on or ["error"])]
+            triggered = [s for s in selected if (report["baseline"]["regressions"] if s == "regression" else report["summary"][s])]
             report["exit_policy"] = {"fail_on": selected, "triggered": triggered, "matched": bool(triggered),
                 "meaning": ("达到所选退出条件仅表示出现选中状态；无法判断不等于已确认故障。操作失败退出2，中断130。" if args.lang == "zh" else
                             "Meeting the selected exit conditions means a selected state occurred; unknown is not a confirmed fault. Operational failure exits 2; interruption exits 130.")}
+            if baseline is not None:
+                report["exit_policy"]["meaning"] += (" 回归仅指未受扫描限制的固定状态转移，不等于已确认故障根因。" if args.lang == "zh" else
+                                                    " Regression means fixed state transitions without a scan limit; it does not establish a fault's root cause.")
         formats = ("md", "json") if args.format == "both" else ("md", "json", "html") if args.format == "all" else (args.format,)
-        renderers = {"md": markdown_report, "json": json_report, "html": html_report, "csv": history_csv}
+        renderers = {"md": markdown_report, "json": json_report, "html": html_report,
+                     "csv": history_csv if history else diagnosis_csv, "sarif": sarif_report}
         rendered = {"csv": comparison_csv(old, new)} if comparison and args.format == "csv" else {fmt: renderers[fmt](report) for fmt in formats}
         if args.output_dir is None:
             # JSON goes alone to stdout for pipelines; both defaults to Markdown.
@@ -153,7 +167,7 @@ def main(argv=None):
         else:
             stem = "validation" if validating else "support-verification" if verifying else "history" if history else "comparison" if comparison else "report"
             export_reports(rendered, args.output_dir, stem, args.lang)
-            if args.format != "csv":
+            if args.format not in ("csv", "sarif"):
                 print("报告已保存（路径未回显）。" if args.lang == "zh" else "Reports saved (paths withheld).")
         return 0 if offline else int(report["exit_policy"]["matched"])
     except KeyboardInterrupt:
