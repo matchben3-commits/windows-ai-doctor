@@ -1,0 +1,102 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A local report to investigate Windows command lookup, installation groups and launcher runtime."><title>Windows Claude / Codex PATH troubleshooting</title><style>*{box-sizing:border-box}body{margin:0;background:#f2f5fa;color:#17243a;font:17px/1.7 system-ui,sans-serif}main{max-width:900px;margin:auto;padding:30px 18px}pre{overflow:auto;padding:16px;background:#e5eaf2}table{display:block;max-width:100%;overflow:auto;border-collapse:collapse}th,td{padding:8px;border:1px solid #b9c7dc}a{color:#315cc9}code{overflow-wrap:anywhere}h1{line-height:1.2}</style></head><body><main><a href="../index.html">Demo / 演示</a><h1>Claude or Codex is installed, but Windows cannot find it. Which command is your terminal choosing?</h1>
+<p><a href="windows-cli-path.zh.html">中文</a></p>
+<p>An installer finishes successfully. One PowerShell window can run <code>claude</code>, while an editor's terminal cannot. Before changing the installation again, check <strong>which directories the failing process can see and which command its shell selects</strong>.</p>
+<p>This walkthrough starts with commands you can use independently, then shows how our open-source project, Windows AI Doctor, can save a report and compare observations after a manual change. The before-and-after scenario is <strong>SIMULATED</strong>, not a customer incident or evidence that a real machine was repaired.</p>
+<h2>Start inside the terminal that fails</h2>
+<p>Run this in that PowerShell window:</p>
+<pre><code class="language-powershell">Get-Command claude,codex -All -ErrorAction SilentlyContinue |
+    Format-Table CommandType,Name,Source -AutoSize
+where.exe claude
+where.exe codex
+</code></pre>
+<p>If you use only one tool, an absent result for the other is expected. The <code>.exe</code> matters: <code>where</code> can be a PowerShell alias. <code>Get-Command -All</code> shows matching commands in precedence order, including aliases and functions. <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-command?view=powershell-7.5">Microsoft's command lookup documentation</a> and <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_command_precedence?view=powershell-7.5">command precedence guide</a></p>
+<table>
+<thead>
+<tr>
+<th>Observation</th>
+<th>What to investigate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neither lookup finds an entry</td>
+<td>Whether the intended installation directory is in this process's PATH; the tool may still exist elsewhere</td>
+</tr>
+<tr>
+<td>Entries appear in different directories</td>
+<td>Their origins and selection order; file count alone does not establish duplicate installations</td>
+</tr>
+<tr>
+<td>An alias or function appears</td>
+<td>PowerShell's local overrides, which a PATH-only inspection cannot settle</td>
+</tr>
+<tr>
+<td>A standalone terminal works but an editor's terminal fails</td>
+<td>Run the same queries in both and compare the environments they actually use</td>
+</tr>
+</tbody>
+</table>
+<p>One npm installation can provide several launchers, such as <code>.cmd</code> and <code>.ps1</code>. Multiple filenames are not automatically multiple installations. Even separate installation sources need investigation before deciding which, if any, to remove.</p>
+<h2>Check the environment the process actually has</h2>
+<p>Inspect these two values locally:</p>
+<pre><code class="language-powershell">$env:PATH -split ';'
+$env:PATHEXT
+</code></pre>
+<p>Child processes inherit their parent's environment. An editor that was already running when the persistent PATH changed may still give a newly opened integrated terminal its earlier environment. Fully quit and reopen the editor when refreshing that environment, then repeat the lookup in its terminal. <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5">Microsoft's environment variable documentation</a></p>
+<p>For a manual change, first identify the official installation you intend to keep and its entry directory. Check that directory in Windows' user environment variable settings, reopen the relevant application, and rerun the lookup. If an entry belongs to a confirmed obsolete installation, follow the original installation method's official removal instructions. Change one thing at a time so the next observation is useful.</p>
+<p>If the failing shell is inside WSL, investigate inside that Linux environment. Finding a Windows WSL launcher does not establish that a CLI is installed or healthy within a distribution.</p>
+<h2>Save the observations for comparison or help</h2>
+<p><a href="https://github.com/matchben3-commits/windows-ai-doctor">Windows AI Doctor</a> is a project we help develop. It collects limited local clues, adds manual guidance, and exports Chinese or English reports.</p>
+<p>With a standard Python 3.11+ distribution that includes <code>venv</code> and <code>pip</code>, create a separate environment and install the pinned v0.6.0 wheel from GitHub Release. Installation needs internet access; the diagnostic command below uses <code>--no-version</code> and does not launch Claude, Codex, or Node. This installs from a Release URL, rather than PyPI. Checksums are on the <a href="https://github.com/matchben3-commits/windows-ai-doctor/releases/tag/v0.6.0">v0.6.0 release page</a>.</p>
+<pre><code class="language-powershell">python -m venv .wad-venv
+.\.wad-venv\Scripts\python.exe -m pip install --no-deps https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v0.6.0/windows_ai_doctor-0.6.0-py3-none-any.whl
+.\.wad-venv\Scripts\python.exe -m windows_ai_doctor --no-version --lang en --format all --output-dir .\reports\before
+</code></pre>
+<p>Open <code>reports\before\report.en.html</code> locally, or read <code>report.en.md</code>. Choose a new output directory each time; existing report files are not overwritten. Add <code>--tools claude</code> to the diagnostic command if you only want to inspect Claude.</p>
+<p>If your interpreter reports that <code>venv</code> is missing, it may be a minimal distribution. Use a standard Python installation, or download the source ZIP from that Release. From its extracted directory, substitute <code>python .\doctor.py</code> for <code>.\.wad-venv\Scripts\python.exe -m windows_ai_doctor</code> in the commands below; keep the diagnostic arguments.</p>
+<p>Start with <code>claude.path</code> or <code>codex.path</code>: installation-group counts, PATH candidates, and whether inspection was limited. Reports replace paths with references such as <code>&lt;PATH:1&gt;</code>; use the local lookup commands to inspect actual paths. A reference has no directory identity across separate reports.</p>
+<p><strong>SIMULATED: these scenarios illustrate the PATH check's scope.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th><code>claude.path</code></th>
+<th>Installation groups</th>
+<th>What it establishes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No entry in the inspected PATH</td>
+<td><code>warn</code></td>
+<td>0</td>
+<td>No entry was selected within that inspection scope</td>
+</tr>
+<tr>
+<td>One inspectable entry group</td>
+<td><code>pass</code></td>
+<td>1</td>
+<td>This PATH check passes; the CLI still needs verification</td>
+</tr>
+<tr>
+<td>Two separate entry groups</td>
+<td><code>warn</code></td>
+<td>2</td>
+<td>A person should confirm which entry ought to take effect</td>
+</tr>
+</tbody>
+</table>
+<p>This is not a whole-machine health rating. <code>--no-version</code> skips version queries. <code>unknown</code> means the tool could not determine a result; <code>skipped</code> means it did not perform that check. Limited scans need separate investigation. The PATH model also excludes PowerShell aliases, functions, and execution policy.</p>
+<h2>Rerun after the manual change</h2>
+<p>Keep the first JSON report. In the reopened terminal, use it as a baseline:</p>
+<pre><code class="language-powershell">.\.wad-venv\Scripts\python.exe -m windows_ai_doctor --no-version --lang en --baseline .\reports\before\report.en.json --fail-on regression --format all --output-dir .\reports\after
+</code></pre>
+<p>Use the same machine, tool selection, and inspection scope. The new report compares a limited set of observations. <code>--fail-on regression</code> returns 1 for <code>pass → warn</code>, <code>pass → error</code>, or <code>warn → error</code> when neither scan is limited. Exit 0 means the selected exit condition was not met; existing warnings may remain. Argument or export errors return 2.</p>
+<p>In the simulated table, moving from zero groups to one can turn the PATH finding from <code>warn</code> to <code>pass</code>. It does not establish that authentication, network access, or an actual task works. Launch the intended CLI in the originally failing terminal and retry that task. Once Claude can launch, its official <code>claude doctor</code> offers installation and settings diagnostics. <a href="https://code.claude.com/docs/en/setup#verify-your-installation">Claude's installation verification instructions</a></p>
+<h2>Feedback that helps improve the checks</h2>
+<p>Reports are not uploaded automatically. They omit configuration values and raw command output; review a report before sharing it. The diagnostic tool does not install, uninstall, or repair software. Removing <code>--no-version</code> allows recognized version entry points to run; this is not an enforced network sandbox for third-party executables.</p>
+<p>If you try it, a useful <a href="https://github.com/matchben3-commits/windows-ai-doctor/issues">issue</a> describes the failing terminal, expected behavior, relevant check IDs and states, and what changed after your manual step. You do not need to post your full environment or personal directories. Cases where the report finds an entry but the command still fails are particularly useful: they show us where the current checks fall short.</p>
+<p>Project: <a href="https://github.com/matchben3-commits/windows-ai-doctor">matchben3-commits/windows-ai-doctor</a>. Star it if you want to find it again for a future troubleshooting session.</p>
+<hr />
+<p>Applies to Windows AI Doctor v0.6.0. Official reference pages checked on November 22, 2026, China time. All illustrated scenarios are SIMULATED; no customer testimonials or success rates are claimed.</p>
+</main></body></html>

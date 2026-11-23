@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="description" content="Windows 上 Claude Code 和 Codex 命令查找、安装组和启动器运行时的本地排障。"><link rel="canonical" href="https://matchben3-commits.github.io/windows-ai-doctor/index.zh.html"><meta property="og:image" content="https://matchben3-commits.github.io/windows-ai-doctor/assets/social-preview.png">
+<title>Windows AI Doctor · 演示</title>
+<style>
+:root{color-scheme:light;--ink:#17243a;--muted:#526078;--line:#cdd6e4;--card:#fff;--bg:#f2f5fa;--accent:#315cc9;--warn:#906400}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:920px;margin:auto;padding:36px 22px 64px}
+.eyebrow{letter-spacing:.04em;text-transform:uppercase;font-size:.78rem;color:var(--muted);margin:0 0 10px}
+h1{font-size:clamp(1.7rem,4.5vw,2.55rem);line-height:1.15;margin:0 0 14px}
+.lead{font-size:1.05rem;line-height:1.65;color:var(--muted);margin:0 0 22px;max-width:42rem}
+.sim{display:inline-block;margin:0 0 18px;padding:8px 12px;border:2px solid var(--warn);background:#fff8e6;color:#5c4300;border-radius:999px;font-weight:700;font-size:.85rem}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 28px}
+a.btn{display:inline-block;padding:12px 16px;border-radius:10px;text-decoration:none;font-weight:650}
+a.primary{background:var(--accent);color:#fff}
+a.secondary{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.shot{width:100%;border:1px solid var(--line);border-radius:14px;background:var(--card);display:block}
+ol.story{list-style:none;padding:0;margin:28px 0;display:grid;gap:12px}
+ol.story li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+ol.story strong{display:block;margin-bottom:6px}
+ol.story span{color:var(--muted);line-height:1.55}
+.note{margin-top:28px;padding:14px 16px;border-left:5px solid var(--accent);background:var(--card);border-radius:0 10px 10px 0;color:var(--muted)}
+footer{margin-top:36px;color:var(--muted);font-size:.92rem}
+@media(max-width:480px){main{padding:24px 14px 48px}.cta a{width:100%;text-align:center}}
+</style>
+</head>
+<body>
+<main>
+<p class="eyebrow">Windows · Claude Code · Codex CLI · <a href="index.html">English</a></p>
+<p class="sim">SIMULATED EXAMPLE</p>
+<h1>Windows 上 Claude / Codex 命令找不到时，先看哪一层坏了</h1>
+<p class="lead">离线只读诊断：PATH、重复安装、启动器运行时、配置语法、WSL 可见性。下面是模拟案例，不是真实主机扫描。</p>
+<p class="cta">
+  <a class="btn primary" href="report-zh.html">打开中文模拟报告</a>
+  <a class="btn secondary" href="report-en.html">English sample</a>
+  <a class="btn secondary" href="https://github.com/matchben3-commits/windows-ai-doctor">GitHub 仓库</a>
+  <a class="btn secondary" href="report-after-zh.html">查看模拟调整后的报告</a>
+</p>
+<img class="shot" src="assets/report-zh.png" alt="SIMULATED sample report screenshot" width="1280" height="720">
+<ol class="story"><li><strong>现象</strong><span>此模拟案例中，出问题的终端在 PATH 内找不到 Claude 入口；未执行 CLI。</span></li>
+<li><strong>打开报告</strong><span>先看 error / warn，通常从 claude.path 或 codex.path 开始。</span></li>
+<li><strong>手动核对</strong><span>在出问题的终端跑 Get-Command claude,codex -All 与 where.exe。</span></li>
+<li><strong>复查</strong><span>模拟调整 PATH 后，claude.path 从 warn 变为 pass；这不代表登录或实际 AI 任务已验证。</span></li></ol>
+<p class="note">SIMULATED · 无安装、无自动修复、无登录、不上传配置、不调用模型 API。 · <a href="articles/windows-cli-path.zh.html">排障长文</a></p>
+<footer>Windows AI Doctor v0.6.0 · MIT · Python 3.11+ · standard library only</footer>
+</main>
+</body>
+</html>

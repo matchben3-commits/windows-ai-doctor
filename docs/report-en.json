@@ -1,0 +1,138 @@
+{
+  "schema_version": "1.0",
+  "report_type": "diagnosis",
+  "doctor_version": "0.6.0",
+  "generated_at": "2026-11-22T00:00:00+00:00",
+  "language": "en",
+  "summary": {
+    "pass": 0,
+    "warn": 1,
+    "error": 0,
+    "unknown": 2,
+    "skipped": 2
+  },
+  "findings": [
+    {
+      "id": "claude.path",
+      "target": "claude",
+      "status": "warn",
+      "summary": "No callable entry in the current PATH; this does not prove the tool is absent from the machine.",
+      "evidence": {
+        "entries": [],
+        "installation_groups": 0,
+        "cmd_path_candidate": null,
+        "powershell_path_candidate": null,
+        "scan_limited": false,
+        "resolution_model": "PATH+PATHEXT; excludes CWD, aliases and functions"
+      },
+      "recommendation": "No selectable PATH entry was found.",
+      "recheck": "Run Get-Command codex,claude -All in your actual PowerShell to inspect entries. Manually review installation locations using the official setup guide; open a new terminal before rechecking. Official guidance (open manually): https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "missing",
+        "phenomenon": "No selectable PATH entry was found.",
+        "basis": "No CMD/PATHEXT candidate was selected in this scan.",
+        "steps": [
+          "Run Get-Command codex,claude -All in your actual PowerShell to inspect entries.",
+          "Manually review installation locations using the official setup guide; open a new terminal before rechecking.",
+          "Official guidance (open manually): https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "No disk search is performed; absence from PATH does not prove absence of installation."
+      }
+    },
+    {
+      "id": "claude.install",
+      "target": "claude",
+      "status": "unknown",
+      "summary": "Installation type is inferred from local layout; unknown entries are not executed.",
+      "evidence": {
+        "kind": "not_found",
+        "publisher_verified": false
+      },
+      "recommendation": "This is an observation within a limited scope.",
+      "recheck": "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope. Official guidance (open manually): https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "This is an observation within a limited scope.",
+        "basis": "The report retains the check's specific status and evidence.",
+        "steps": [
+          "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.",
+          "Official guidance (open manually): https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked."
+      }
+    },
+    {
+      "id": "claude.dependency",
+      "target": "claude",
+      "status": "unknown",
+      "summary": "Runtime checks depend on the identified entry; native programs do not universally require Node.js.",
+      "evidence": {
+        "runtime": "unknown"
+      },
+      "recommendation": "The Node dependency cannot be determined.",
+      "recheck": "Run Get-Command node -All to inspect shell entries. Manually review restricted paths or the package engine range, then recheck. Official guidance (open manually): https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "node_unknown",
+        "phenomenon": "The Node dependency cannot be determined.",
+        "basis": "The entry, Node path, version response or engine range could not be fully confirmed.",
+        "steps": [
+          "Run Get-Command node -All to inspect shell entries.",
+          "Manually review restricted paths or the package engine range, then recheck.",
+          "Official guidance (open manually): https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "Restricted paths, disabled probes and unknown responses do not establish that Node is missing."
+      }
+    },
+    {
+      "id": "claude.version",
+      "target": "claude",
+      "status": "skipped",
+      "summary": "Only a complete matching version response is accepted; raw output is discarded.",
+      "evidence": {
+        "reason": "disabled"
+      },
+      "recommendation": "Version observations have a limited scope.",
+      "recheck": "After manually confirming the entry, run codex --version or claude --version. Official guidance (open manually): https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "version",
+        "phenomenon": "Version observations have a limited scope.",
+        "basis": "Only short complete version responses are accepted; disabled or unknown responses do not pass.",
+        "steps": [
+          "After manually confirming the entry, run codex --version or claude --version.",
+          "Official guidance (open manually): https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "A pass covers this version query only, not service, login or task availability."
+      }
+    },
+    {
+      "id": "scope.unchecked",
+      "target": "system",
+      "status": "skipped",
+      "summary": "Merged configuration is not computed; project ancestors, profiles, managed policy, aliases and shell execution policy are outside v0.1 scope.",
+      "evidence": {},
+      "recommendation": "This is an observation within a limited scope.",
+      "recheck": "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "This is an observation within a limited scope.",
+        "basis": "The report retains the check's specific status and evidence.",
+        "steps": [
+          "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope."
+        ],
+        "limitation": "Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked."
+      }
+    }
+  ],
+  "priorities": [
+    "claude.path",
+    "claude.install",
+    "claude.dependency"
+  ],
+  "privacy": {
+    "synthetic": true,
+    "paths": "opaque_references",
+    "raw_output": false,
+    "config_values": false,
+    "credentials_read": false
+  }
+}

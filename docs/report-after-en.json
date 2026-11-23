@@ -1,0 +1,188 @@
+{
+  "schema_version": "1.0",
+  "report_type": "diagnosis",
+  "doctor_version": "0.6.0",
+  "generated_at": "2026-11-22T00:00:00+00:00",
+  "language": "en",
+  "summary": {
+    "pass": 3,
+    "warn": 0,
+    "error": 0,
+    "unknown": 0,
+    "skipped": 2
+  },
+  "findings": [
+    {
+      "id": "claude.path",
+      "target": "claude",
+      "status": "pass",
+      "summary": "Entries are ordered by PATH; wrappers for one installation share a group.",
+      "evidence": {
+        "entries": [
+          {
+            "path": "<PATH:1>",
+            "command_name": "claude.exe",
+            "installation_group": 1,
+            "kind": "native",
+            "path_access": "checked",
+            "existence_verified": true
+          }
+        ],
+        "installation_groups": 1,
+        "cmd_path_candidate": "<PATH:1>",
+        "powershell_path_candidate": "<PATH:1>",
+        "scan_limited": false,
+        "resolution_model": "PATH+PATHEXT; excludes CWD, aliases and functions"
+      },
+      "recommendation": "This is an observation within a limited scope.",
+      "recheck": "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope. Official guidance (open manually): https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "This is an observation within a limited scope.",
+        "basis": "The report retains the check's specific status and evidence.",
+        "steps": [
+          "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.",
+          "Official guidance (open manually): https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked."
+      }
+    },
+    {
+      "id": "claude.install",
+      "target": "claude",
+      "status": "pass",
+      "summary": "Installation type is inferred from local layout; unknown entries are not executed.",
+      "evidence": {
+        "kind": "native",
+        "publisher_verified": false
+      },
+      "recommendation": "This is an observation within a limited scope.",
+      "recheck": "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope. Official guidance (open manually): https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "This is an observation within a limited scope.",
+        "basis": "The report retains the check's specific status and evidence.",
+        "steps": [
+          "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.",
+          "Official guidance (open manually): https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked."
+      }
+    },
+    {
+      "id": "claude.dependency",
+      "target": "claude",
+      "status": "pass",
+      "summary": "Runtime checks depend on the identified entry; native programs do not universally require Node.js.",
+      "evidence": {
+        "runtime": "native",
+        "node_required": false,
+        "scope": "launcher_only; optional feature dependencies not checked"
+      },
+      "recommendation": "This is an observation within a limited scope.",
+      "recheck": "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope. Official guidance (open manually): https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "This is an observation within a limited scope.",
+        "basis": "The report retains the check's specific status and evidence.",
+        "steps": [
+          "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.",
+          "Official guidance (open manually): https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked."
+      }
+    },
+    {
+      "id": "claude.version",
+      "target": "claude",
+      "status": "skipped",
+      "summary": "Only a complete matching version response is accepted; raw output is discarded.",
+      "evidence": {
+        "reason": "disabled"
+      },
+      "recommendation": "Version observations have a limited scope.",
+      "recheck": "After manually confirming the entry, run codex --version or claude --version. Official guidance (open manually): https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "version",
+        "phenomenon": "Version observations have a limited scope.",
+        "basis": "Only short complete version responses are accepted; disabled or unknown responses do not pass.",
+        "steps": [
+          "After manually confirming the entry, run codex --version or claude --version.",
+          "Official guidance (open manually): https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "A pass covers this version query only, not service, login or task availability."
+      }
+    },
+    {
+      "id": "scope.unchecked",
+      "target": "system",
+      "status": "skipped",
+      "summary": "Merged configuration is not computed; project ancestors, profiles, managed policy, aliases and shell execution policy are outside v0.1 scope.",
+      "evidence": {},
+      "recommendation": "This is an observation within a limited scope.",
+      "recheck": "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope.",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "This is an observation within a limited scope.",
+        "basis": "The report retains the check's specific status and evidence.",
+        "steps": [
+          "Review errors first, then warnings and unknown results; after manual changes recheck with the same scope."
+        ],
+        "limitation": "Accounts, authentication, chat history, complete configuration merging and real AI tasks are not checked."
+      }
+    }
+  ],
+  "priorities": [],
+  "privacy": {
+    "synthetic": true,
+    "paths": "opaque_references",
+    "raw_output": false,
+    "config_values": false,
+    "credentials_read": false
+  },
+  "baseline": {
+    "schema_version": "1.0",
+    "summary": {
+      "added": 0,
+      "removed": 0,
+      "changed": 3
+    },
+    "unchanged": 2,
+    "changes": [
+      {
+        "id": "claude.dependency",
+        "change": "changed",
+        "before": "unknown",
+        "after": "pass",
+        "note": "passes_now",
+        "details": {},
+        "regression": false
+      },
+      {
+        "id": "claude.install",
+        "change": "changed",
+        "before": "unknown",
+        "after": "pass",
+        "note": "passes_now",
+        "details": {},
+        "regression": false
+      },
+      {
+        "id": "claude.path",
+        "change": "changed",
+        "before": "warn",
+        "after": "pass",
+        "note": "passes_now",
+        "details": {
+          "installation_groups": {
+            "before": 0,
+            "after": 1
+          }
+        },
+        "regression": false
+      }
+    ],
+    "regressions": [],
+    "notice": "Confirm that the baseline and current diagnosis cover the same environment and scope. Regression means only pass→warn, pass→error or warn→error without a scan limit; it does not establish a fault's root cause. Added, removed, unknown and skipped checks do not establish a fix. Only states, numeric versions, installation-group counts and scan limits are compared."
+  }
+}

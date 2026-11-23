@@ -1,0 +1,138 @@
+{
+  "schema_version": "1.0",
+  "report_type": "diagnosis",
+  "doctor_version": "0.6.0",
+  "generated_at": "2026-11-22T00:00:00+00:00",
+  "language": "zh",
+  "summary": {
+    "pass": 0,
+    "warn": 1,
+    "error": 0,
+    "unknown": 2,
+    "skipped": 2
+  },
+  "findings": [
+    {
+      "id": "claude.path",
+      "target": "claude",
+      "status": "warn",
+      "summary": "当前 PATH 未发现可调用入口；不等于机器上完全未安装。",
+      "evidence": {
+        "entries": [],
+        "installation_groups": 0,
+        "cmd_path_candidate": null,
+        "powershell_path_candidate": null,
+        "scan_limited": false,
+        "resolution_model": "PATH+PATHEXT; excludes CWD, aliases and functions"
+      },
+      "recommendation": "PATH 未发现可选入口。",
+      "recheck": "在实际使用的 PowerShell 中运行 Get-Command codex,claude -All，核对入口。 按官方安装说明人工检查安装位置；调整后打开新终端再体检。 官方说明（手动查看）：https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "missing",
+        "phenomenon": "PATH 未发现可选入口。",
+        "basis": "本次限定范围中没有选中的 CMD/PATHEXT 候选。",
+        "steps": [
+          "在实际使用的 PowerShell 中运行 Get-Command codex,claude -All，核对入口。",
+          "按官方安装说明人工检查安装位置；调整后打开新终端再体检。",
+          "官方说明（手动查看）：https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "不扫描磁盘；未发现不等于未安装。"
+      }
+    },
+    {
+      "id": "claude.install",
+      "target": "claude",
+      "status": "unknown",
+      "summary": "安装方式仅由本地文件结构推断；未知入口不执行。",
+      "evidence": {
+        "kind": "not_found",
+        "publisher_verified": false
+      },
+      "recommendation": "此项仅反映限定范围内的观察。",
+      "recheck": "先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。 官方说明（手动查看）：https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "此项仅反映限定范围内的观察。",
+        "basis": "报告保留具体检查状态与证据。",
+        "steps": [
+          "先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。",
+          "官方说明（手动查看）：https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "不检查账户、认证、聊天记录、完整配置合并或实际 AI 任务。"
+      }
+    },
+    {
+      "id": "claude.dependency",
+      "target": "claude",
+      "status": "unknown",
+      "summary": "只检查所识别入口的运行时依赖；原生程序不统一要求 Node.js。",
+      "evidence": {
+        "runtime": "unknown"
+      },
+      "recommendation": "Node 依赖无法判断。",
+      "recheck": "运行 Get-Command node -All 核对终端入口。 人工检查受限路径或本地包引擎范围，再体检。 官方说明（手动查看）：https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "node_unknown",
+        "phenomenon": "Node 依赖无法判断。",
+        "basis": "入口或 Node 路径、版本响应、引擎范围未能完整确认。",
+        "steps": [
+          "运行 Get-Command node -All 核对终端入口。",
+          "人工检查受限路径或本地包引擎范围，再体检。",
+          "官方说明（手动查看）：https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "路径受限、探测关闭或响应未知均不等于未安装。"
+      }
+    },
+    {
+      "id": "claude.version",
+      "target": "claude",
+      "status": "skipped",
+      "summary": "仅接受完整匹配的版本响应；未保留原始输出。",
+      "evidence": {
+        "reason": "disabled"
+      },
+      "recommendation": "版本观察有范围限制。",
+      "recheck": "人工确认入口后运行 codex --version 或 claude --version。 官方说明（手动查看）：https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "version",
+        "phenomenon": "版本观察有范围限制。",
+        "basis": "仅接受短且完整匹配的版本响应；禁用或未知响应不算通过。",
+        "steps": [
+          "人工确认入口后运行 codex --version 或 claude --version。",
+          "官方说明（手动查看）：https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "版本通过仅表示本次版本查询通过，不验证服务、登录或实际任务。"
+      }
+    },
+    {
+      "id": "scope.unchecked",
+      "target": "system",
+      "status": "skipped",
+      "summary": "未计算合并配置；项目祖先、配置档、管理策略、别名与终端执行策略不在首版范围。",
+      "evidence": {},
+      "recommendation": "此项仅反映限定范围内的观察。",
+      "recheck": "先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "此项仅反映限定范围内的观察。",
+        "basis": "报告保留具体检查状态与证据。",
+        "steps": [
+          "先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。"
+        ],
+        "limitation": "不检查账户、认证、聊天记录、完整配置合并或实际 AI 任务。"
+      }
+    }
+  ],
+  "priorities": [
+    "claude.path",
+    "claude.install",
+    "claude.dependency"
+  ],
+  "privacy": {
+    "synthetic": true,
+    "paths": "opaque_references",
+    "raw_output": false,
+    "config_values": false,
+    "credentials_read": false
+  }
+}

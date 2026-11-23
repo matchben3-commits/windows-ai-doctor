@@ -1,0 +1,188 @@
+{
+  "schema_version": "1.0",
+  "report_type": "diagnosis",
+  "doctor_version": "0.6.0",
+  "generated_at": "2026-11-22T00:00:00+00:00",
+  "language": "zh",
+  "summary": {
+    "pass": 3,
+    "warn": 0,
+    "error": 0,
+    "unknown": 0,
+    "skipped": 2
+  },
+  "findings": [
+    {
+      "id": "claude.path",
+      "target": "claude",
+      "status": "pass",
+      "summary": "按 PATH 顺序列出入口；同一安装的包装入口合并计数。",
+      "evidence": {
+        "entries": [
+          {
+            "path": "<PATH:1>",
+            "command_name": "claude.exe",
+            "installation_group": 1,
+            "kind": "native",
+            "path_access": "checked",
+            "existence_verified": true
+          }
+        ],
+        "installation_groups": 1,
+        "cmd_path_candidate": "<PATH:1>",
+        "powershell_path_candidate": "<PATH:1>",
+        "scan_limited": false,
+        "resolution_model": "PATH+PATHEXT; excludes CWD, aliases and functions"
+      },
+      "recommendation": "此项仅反映限定范围内的观察。",
+      "recheck": "先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。 官方说明（手动查看）：https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "此项仅反映限定范围内的观察。",
+        "basis": "报告保留具体检查状态与证据。",
+        "steps": [
+          "先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。",
+          "官方说明（手动查看）：https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "不检查账户、认证、聊天记录、完整配置合并或实际 AI 任务。"
+      }
+    },
+    {
+      "id": "claude.install",
+      "target": "claude",
+      "status": "pass",
+      "summary": "安装方式仅由本地文件结构推断；未知入口不执行。",
+      "evidence": {
+        "kind": "native",
+        "publisher_verified": false
+      },
+      "recommendation": "此项仅反映限定范围内的观察。",
+      "recheck": "先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。 官方说明（手动查看）：https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "此项仅反映限定范围内的观察。",
+        "basis": "报告保留具体检查状态与证据。",
+        "steps": [
+          "先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。",
+          "官方说明（手动查看）：https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "不检查账户、认证、聊天记录、完整配置合并或实际 AI 任务。"
+      }
+    },
+    {
+      "id": "claude.dependency",
+      "target": "claude",
+      "status": "pass",
+      "summary": "只检查所识别入口的运行时依赖；原生程序不统一要求 Node.js。",
+      "evidence": {
+        "runtime": "native",
+        "node_required": false,
+        "scope": "launcher_only; optional feature dependencies not checked"
+      },
+      "recommendation": "此项仅反映限定范围内的观察。",
+      "recheck": "先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。 官方说明（手动查看）：https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "此项仅反映限定范围内的观察。",
+        "basis": "报告保留具体检查状态与证据。",
+        "steps": [
+          "先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。",
+          "官方说明（手动查看）：https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "不检查账户、认证、聊天记录、完整配置合并或实际 AI 任务。"
+      }
+    },
+    {
+      "id": "claude.version",
+      "target": "claude",
+      "status": "skipped",
+      "summary": "仅接受完整匹配的版本响应；未保留原始输出。",
+      "evidence": {
+        "reason": "disabled"
+      },
+      "recommendation": "版本观察有范围限制。",
+      "recheck": "人工确认入口后运行 codex --version 或 claude --version。 官方说明（手动查看）：https://code.claude.com/docs/en/setup",
+      "guidance": {
+        "code": "version",
+        "phenomenon": "版本观察有范围限制。",
+        "basis": "仅接受短且完整匹配的版本响应；禁用或未知响应不算通过。",
+        "steps": [
+          "人工确认入口后运行 codex --version 或 claude --version。",
+          "官方说明（手动查看）：https://code.claude.com/docs/en/setup"
+        ],
+        "limitation": "版本通过仅表示本次版本查询通过，不验证服务、登录或实际任务。"
+      }
+    },
+    {
+      "id": "scope.unchecked",
+      "target": "system",
+      "status": "skipped",
+      "summary": "未计算合并配置；项目祖先、配置档、管理策略、别名与终端执行策略不在首版范围。",
+      "evidence": {},
+      "recommendation": "此项仅反映限定范围内的观察。",
+      "recheck": "先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。",
+      "guidance": {
+        "code": "scope",
+        "phenomenon": "此项仅反映限定范围内的观察。",
+        "basis": "报告保留具体检查状态与证据。",
+        "steps": [
+          "先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。"
+        ],
+        "limitation": "不检查账户、认证、聊天记录、完整配置合并或实际 AI 任务。"
+      }
+    }
+  ],
+  "priorities": [],
+  "privacy": {
+    "synthetic": true,
+    "paths": "opaque_references",
+    "raw_output": false,
+    "config_values": false,
+    "credentials_read": false
+  },
+  "baseline": {
+    "schema_version": "1.0",
+    "summary": {
+      "added": 0,
+      "removed": 0,
+      "changed": 3
+    },
+    "unchanged": 2,
+    "changes": [
+      {
+        "id": "claude.dependency",
+        "change": "changed",
+        "before": "unknown",
+        "after": "pass",
+        "note": "passes_now",
+        "details": {},
+        "regression": false
+      },
+      {
+        "id": "claude.install",
+        "change": "changed",
+        "before": "unknown",
+        "after": "pass",
+        "note": "passes_now",
+        "details": {},
+        "regression": false
+      },
+      {
+        "id": "claude.path",
+        "change": "changed",
+        "before": "warn",
+        "after": "pass",
+        "note": "passes_now",
+        "details": {
+          "installation_groups": {
+            "before": 0,
+            "after": 1
+          }
+        },
+        "regression": false
+      }
+    ],
+    "regressions": [],
+    "notice": "请自行确认基线与本次诊断来自相同环境和检查范围。回归仅指未受扫描限制时 pass→warn、pass→error 或 warn→error 的固定状态转移，不等于已确认故障根因。新增、移除、未知和未检查均不代表修复。只比较状态、数字版本、安装组数量和扫描限制。"
+  }
+}

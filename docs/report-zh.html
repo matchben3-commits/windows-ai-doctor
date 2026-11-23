@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; style-src &#39;unsafe-inline&#39;; base-uri &#39;none&#39;; form-action &#39;none&#39;">
+<title>Windows AI Doctor</title><style>
+:root{color-scheme:light;font-family:system-ui,'Segoe UI',sans-serif;color:#17243a;background:#f2f5fa}
+*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:32px 24px}
+header{margin-bottom:24px}h1{font-size:clamp(1.6rem,5vw,2.5rem);margin:0 0 12px}
+h2{font-size:1.15rem}p,li,pre,h2{overflow-wrap:anywhere}p,li{line-height:1.65}
+.muted{color:#526078}.counts{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}
+.count,article,.priority{border:1px solid #cdd6e4;background:white;border-radius:12px;padding:18px}
+.count{min-width:115px;flex:1}.count strong{font-size:1.8rem;display:block}
+article{margin:16px 0}article h2{margin:0 0 12px}.badge{font-weight:700}
+.error{border-left:5px solid #b42318}.warn{border-left:5px solid #906400}
+.unknown{border-left:5px solid #5d478b}.pass{border-left:5px solid #167345}
+pre{white-space:pre-wrap;word-break:break-word;font-size:.86rem;background:#f4f6fa;padding:14px;border-radius:8px}
+ol{padding-left:24px}.priority{border-left:5px solid #315cc9}footer{margin-top:32px}
+@media(max-width:480px){main{padding:20px 12px}.count{min-width:90px;padding:12px}article{padding:14px}}
+.table-scroll{overflow-x:auto;max-width:100%;border:1px solid #cdd6e4;border-radius:12px;background:white;margin:20px 0}
+table{border-collapse:collapse;font-size:.9rem}caption{text-align:left;padding:14px;font-weight:700}
+th,td{border:1px solid #d8e0ec;text-align:left;padding:12px;min-width:135px;vertical-align:top}
+th{background:#eaf0fa}th[scope=row]{min-width:190px;position:sticky;left:0;z-index:1}td small{display:block;margin-top:8px;overflow-wrap:anywhere}
+.table-scroll:focus{outline:3px solid #315cc9}
+thead th:first-child{position:sticky;left:0;z-index:2}
+.sim-banner{margin:0 0 20px;padding:14px 16px;border:2px solid #906400;background:#fff8e6;border-radius:10px;color:#5c4300;font-weight:700}.sim-banner span{display:block;font-weight:500;margin-top:6px}</style></head><body><main><aside class="sim-banner">SIMULATED EXAMPLE · 模拟案例<span>Authored PATH-only scenario. No host scan, CLI execution, or repair was performed. 预设观察，未扫描或修复真实主机。</span></aside>
+<header><h1>Windows AI Doctor</h1><p class="muted">v0.6.0 · schema 1.0 · 2026-11-22T00:00:00+00:00</p></header>
+<section class="counts" aria-label="Status counts">
+<div class="count"><span>通过</span><strong>0</strong></div>
+<div class="count"><span>提醒</span><strong>1</strong></div>
+<div class="count"><span>异常</span><strong>0</strong></div>
+<div class="count"><span>无法判断</span><strong>2</strong></div>
+<div class="count"><span>未检查</span><strong>2</strong></div>
+</section>
+<section class="priority"><h2>优先处理：异常 → 提醒 → 无法判断</h2><p>claude.path, claude.install, claude.dependency</p></section>
+<article class="warn"><h2>claude.path · <span class="badge">提醒</span></h2><p>当前 PATH 未发现可调用入口；不等于机器上完全未安装。</p><pre>{
+  &quot;entries&quot;: [],
+  &quot;installation_groups&quot;: 0,
+  &quot;cmd_path_candidate&quot;: null,
+  &quot;powershell_path_candidate&quot;: null,
+  &quot;scan_limited&quot;: false,
+  &quot;resolution_model&quot;: &quot;PATH+PATHEXT; excludes CWD, aliases and functions&quot;
+}</pre>
+<h3>现象</h3><p>PATH 未发现可选入口。</p><p>判断依据：本次限定范围中没有选中的 CMD/PATHEXT 候选。</p><h3>手动复查步骤</h3><ol><li>在实际使用的 PowerShell 中运行 Get-Command codex,claude -All，核对入口。</li><li>按官方安装说明人工检查安装位置；调整后打开新终端再体检。</li><li>官方说明（手动查看）：https://code.claude.com/docs/en/setup</li></ol><p class="muted">检查限制：不扫描磁盘；未发现不等于未安装。</p>
+</article>
+<article class="unknown"><h2>claude.install · <span class="badge">无法判断</span></h2><p>安装方式仅由本地文件结构推断；未知入口不执行。</p><pre>{
+  &quot;kind&quot;: &quot;not_found&quot;,
+  &quot;publisher_verified&quot;: false
+}</pre>
+<h3>现象</h3><p>此项仅反映限定范围内的观察。</p><p>判断依据：报告保留具体检查状态与证据。</p><h3>手动复查步骤</h3><ol><li>先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。</li><li>官方说明（手动查看）：https://code.claude.com/docs/en/setup</li></ol><p class="muted">检查限制：不检查账户、认证、聊天记录、完整配置合并或实际 AI 任务。</p>
+</article>
+<article class="unknown"><h2>claude.dependency · <span class="badge">无法判断</span></h2><p>只检查所识别入口的运行时依赖；原生程序不统一要求 Node.js。</p><pre>{
+  &quot;runtime&quot;: &quot;unknown&quot;
+}</pre>
+<h3>现象</h3><p>Node 依赖无法判断。</p><p>判断依据：入口或 Node 路径、版本响应、引擎范围未能完整确认。</p><h3>手动复查步骤</h3><ol><li>运行 Get-Command node -All 核对终端入口。</li><li>人工检查受限路径或本地包引擎范围，再体检。</li><li>官方说明（手动查看）：https://code.claude.com/docs/en/setup</li></ol><p class="muted">检查限制：路径受限、探测关闭或响应未知均不等于未安装。</p>
+</article>
+<article class="skipped"><h2>claude.version · <span class="badge">未检查</span></h2><p>仅接受完整匹配的版本响应；未保留原始输出。</p><pre>{
+  &quot;reason&quot;: &quot;disabled&quot;
+}</pre>
+<h3>现象</h3><p>版本观察有范围限制。</p><p>判断依据：仅接受短且完整匹配的版本响应；禁用或未知响应不算通过。</p><h3>手动复查步骤</h3><ol><li>人工确认入口后运行 codex --version 或 claude --version。</li><li>官方说明（手动查看）：https://code.claude.com/docs/en/setup</li></ol><p class="muted">检查限制：版本通过仅表示本次版本查询通过，不验证服务、登录或实际任务。</p>
+</article>
+<article class="skipped"><h2>scope.unchecked · <span class="badge">未检查</span></h2><p>未计算合并配置；项目祖先、配置档、管理策略、别名与终端执行策略不在首版范围。</p><pre>{}</pre>
+<h3>现象</h3><p>此项仅反映限定范围内的观察。</p><p>判断依据：报告保留具体检查状态与证据。</p><h3>手动复查步骤</h3><ol><li>先处理异常，再核对提醒和无法判断项；手动调整后按相同范围重新体检。</li></ol><p class="muted">检查限制：不检查账户、认证、聊天记录、完整配置合并或实际 AI 任务。</p>
+</article>
+<footer class="muted"><p>离线报告 · 路径原值、配置值和程序原始输出未保存。</p></footer></main></body></html>
