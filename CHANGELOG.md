@@ -1,4 +1,11 @@
-# v0.6.0 — 2026-11-22 (local candidate; independent review and hosted CI pending)
+# v0.7.0 — 2026-11-24 (local candidate; independent review and hosted CI pending)
+
+- Add diagnosis `--format junit`: deterministic UTF-8/LF policy XML; every testcase has non-empty `<properties>` (status → optional scan_limited → baseline_*); non-hit pass/warn/unknown are properties-only; failures express selected exit policy only.
+- Add `--fail-on new` (requires `--baseline`): added error/warn versus baseline, excluding scan-limited `.path`; JSON `baseline.new_findings`; MD/HTML “New findings” count; CSV stays ten columns.
+- Extend SARIF with stable `partialFingerprints.windowsAIDoctorCheckId/v1`, optional `baselineState` (new/updated/unchanged, no absent), and `new_findings` / `result_baseline_states` under invocation baseline properties; `helpUri` → v07 contract.
+- Preserve all v0.6 entries, safety bounds and exit codes; runtime stays standard-library only; version 0.7.0.
+
+# v0.6.0 — 2026-11-22 (published; historical baseline for v0.7)
 
 - Add `--baseline BASE.json` with additive diagnosis `baseline` audit section; reuse compare projections; no free text, paths or timestamps in the baseline object.
 - Add `--fail-on regression` (requires `--baseline`): only pass→warn, pass→error or warn→error without scan_limited=true count as regressions; meaning text states fixed transitions, not confirmed root causes.

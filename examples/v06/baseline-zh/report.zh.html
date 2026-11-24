@@ -24,7 +24,7 @@ th{background:#eaf0fa}th[scope=row]{min-width:190px;position:sticky;left:0;z-ind
 .table-scroll:focus{outline:3px solid #315cc9}
 thead th:first-child{position:sticky;left:0;z-index:2}
 </style></head><body><main>
-<header><h1>Windows AI Doctor</h1><p class="muted">v0.6.0 · schema 1.0 · 2000-01-01T00:00:00+00:00</p></header>
+<header><h1>Windows AI Doctor</h1><p class="muted">v0.7.0 · schema 1.0 · 2000-01-01T00:00:00+00:00</p></header>
 <section class="counts" aria-label="Status counts">
 <div class="count"><span>通过</span><strong>2</strong></div>
 <div class="count"><span>提醒</span><strong>1</strong></div>
@@ -35,7 +35,7 @@ thead th:first-child{position:sticky;left:0;z-index:2}
 <section id="baseline-comparison" aria-labelledby="baseline-heading">
 <h2 id="baseline-heading">基线对比</h2>
 <p>请自行确认基线与本次诊断来自相同环境和检查范围。回归仅指未受扫描限制时 pass→warn、pass→error 或 warn→error 的固定状态转移，不等于已确认故障根因。新增、移除、未知和未检查均不代表修复。只比较状态、数字版本、安装组数量和扫描限制。</p>
-<p id="baseline-counts">新增: 2 · 移除: 1 · 变化: 3 · 回归: 2 · 未变化: 2</p>
+<p id="baseline-counts">新增: 2 · 移除: 1 · 变化: 3 · 回归: 2 · 未变化: 2 · 新发现: 0</p>
 <div id="baseline-changes">
 <article><h3>claude.path · changed</h3><p>pass → error</p><p>观察字段或状态变化。</p>
 <p><strong>固定规则回归</strong></p>
@@ -72,7 +72,7 @@ thead th:first-child{position:sticky;left:0;z-index:2}
 <article><h3>wsl.running · removed</h3><p>pass → —</p><p>本次未包含，未再检查。</p>
 <pre>{}</pre></article>
 </div></section>
-<section class="priority"><h2>退出条件</h2><p>所选状态：regression；触发状态：regression；达到所选退出条件：是. 达到所选退出条件仅表示出现选中状态；无法判断不等于已确认故障。操作失败退出2，中断130。 回归仅指未受扫描限制的固定状态转移，不等于已确认故障根因。</p></section>
+<section class="priority"><h2>退出条件</h2><p>所选状态：regression；触发状态：regression；达到所选退出条件：是. 达到所选退出条件仅表示出现选中状态；无法判断不等于已确认故障。操作失败退出2，中断130。 回归仅指未受扫描限制的固定状态转移，不等于已确认故障根因。 新发现仅指相对基线 added 的 error/warn（排除扫描受限的 path），不等于已确认故障根因。</p></section>
 <section class="priority"><h2>优先处理：异常 → 提醒 → 无法判断</h2><p>claude.path, codex.version, codex.path, scope.unchecked</p></section>
 <article class="pass"><h2>system.platform · <span class="badge">通过</span></h2><p>预设合成观察，不代表主机状态。</p><pre>{}</pre>
 <p>自行核对检查范围。</p><p>使用实际诊断另行复查。</p>

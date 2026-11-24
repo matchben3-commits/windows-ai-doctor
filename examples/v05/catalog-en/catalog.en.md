@@ -1,6 +1,6 @@
 # Windows AI Doctor — Check catalog
 
-v0.6.0 · schema 1.0
+v0.7.0 · schema 1.0
 
 This catalog lists stable check IDs and fixed descriptions the current version can produce. It does not assert that checks always run, that the environment is healthy, or that the catalog itself verifies installations. No input files, diagnosis, environment, registry, network or packaged paths are consulted.
 

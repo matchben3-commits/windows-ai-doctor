@@ -1,7 +1,7 @@
-include doctor.py README.md README.en.md HANDOFF.md LICENSE THIRD_PARTY_NOTICES.md CHANGELOG.md
+include doctor.py README.md README.en.md README.zh.md HANDOFF.md LICENSE THIRD_PARTY_NOTICES.md CHANGELOG.md
 recursive-include windows_ai_doctor *.py
 recursive-include tests *.py *.txt
-recursive-include examples *.py *.md *.json *.html *.csv *.sarif *.zip
+recursive-include examples *.py *.md *.json *.html *.csv *.sarif *.xml *.zip
 recursive-include docs *.md
 recursive-exclude * __pycache__ *.pyc
 prune evidence

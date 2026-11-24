@@ -1,0 +1,32 @@
+{
+  "date_beijing": "2026-11-24",
+  "reviewer": "gpt",
+  "synthetic": true,
+  "live_host_probes": false,
+  "source": "examples/v07/baseline-LANG/report.LANG.html",
+  "desktop": {
+    "width_css_px": 1280,
+    "en_new_findings": "New findings: 1",
+    "zh_new_findings": "新发现: 1",
+    "fixed_ids_each_once_both_languages": true,
+    "horizontal_document_overflow_both_languages": false,
+    "script_elements_both_languages": 0
+  },
+  "narrow": {
+    "method": "Same-origin iframe srcdoc from a DOM copy of each currently loaded synthetic report; source file unchanged",
+    "iframe_client_width_both_languages": 390,
+    "iframe_inner_width_both_languages": 390,
+    "height_css_px": 720,
+    "fixed_ids_each_once_both_languages": true,
+    "new_findings_count_both_languages": 1,
+    "horizontal_document_overflow_both_languages": false,
+    "script_elements_both_languages": 0
+  },
+  "cursor_narrow_bilingual_screenshot_visually_reviewed": true,
+  "limitations": [
+    "not physical mobile hardware",
+    "not screen-reader testing",
+    "not packet capture"
+  ],
+  "browser_reported": "A request to www.google.com:443 was blocked as a reserved address; no claim of zero network behavior"
+}

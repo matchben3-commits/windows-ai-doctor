@@ -24,7 +24,7 @@ th{background:#eaf0fa}th[scope=row]{min-width:190px;position:sticky;left:0;z-ind
 .table-scroll:focus{outline:3px solid #315cc9}
 thead th:first-child{position:sticky;left:0;z-index:2}
 </style></head><body><main>
-<header><h1>Windows AI Doctor</h1><p class="muted">v0.6.0 · schema 1.0 · 2000-01-01T00:00:00+00:00</p></header>
+<header><h1>Windows AI Doctor</h1><p class="muted">v0.7.0 · schema 1.0 · 2000-01-01T00:00:00+00:00</p></header>
 <section class="counts" aria-label="Status counts">
 <div class="count"><span>Pass</span><strong>2</strong></div>
 <div class="count"><span>Warning</span><strong>1</strong></div>
@@ -35,7 +35,7 @@ thead th:first-child{position:sticky;left:0;z-index:2}
 <section id="baseline-comparison" aria-labelledby="baseline-heading">
 <h2 id="baseline-heading">Baseline comparison</h2>
 <p>Confirm that the baseline and current diagnosis cover the same environment and scope. Regression means only pass→warn, pass→error or warn→error without a scan limit; it does not establish a fault&#x27;s root cause. Added, removed, unknown and skipped checks do not establish a fix. Only states, numeric versions, installation-group counts and scan limits are compared.</p>
-<p id="baseline-counts">Added: 2 · Removed: 1 · Changed: 3 · Regressions: 2 · Unchanged: 2</p>
+<p id="baseline-counts">Added: 2 · Removed: 1 · Changed: 3 · Regressions: 2 · Unchanged: 2 · New findings: 0</p>
 <div id="baseline-changes">
 <article><h3>claude.path · changed</h3><p>pass → error</p><p>Observed fields or status changed.</p>
 <p><strong>Regression under fixed rules</strong></p>
@@ -72,7 +72,7 @@ thead th:first-child{position:sticky;left:0;z-index:2}
 <article><h3>wsl.running · removed</h3><p>pass → —</p><p>Not included this time; not rechecked.</p>
 <pre>{}</pre></article>
 </div></section>
-<section class="priority"><h2>Exit conditions</h2><p>Selected states: regression; triggered states: regression; selected conditions met: Yes. Meeting the selected exit conditions means a selected state occurred; unknown is not a confirmed fault. Operational failure exits 2; interruption exits 130. Regression means fixed state transitions without a scan limit; it does not establish a fault&#x27;s root cause.</p></section>
+<section class="priority"><h2>Exit conditions</h2><p>Selected states: regression; triggered states: regression; selected conditions met: Yes. Meeting the selected exit conditions means a selected state occurred; unknown is not a confirmed fault. Operational failure exits 2; interruption exits 130. Regression means fixed state transitions without a scan limit; it does not establish a fault&#x27;s root cause. New findings mean only added error/warn versus baseline, excluding scan-limited paths; they do not establish a fault&#x27;s root cause.</p></section>
 <section class="priority"><h2>Review first: errors → warnings → unknown</h2><p>claude.path, codex.version, codex.path, scope.unchecked</p></section>
 <article class="pass"><h2>system.platform · <span class="badge">Pass</span></h2><p>Authored synthetic observation, not host state.</p><pre>{}</pre>
 <p>Review the check scope.</p><p>Recheck with a separate real diagnosis.</p>

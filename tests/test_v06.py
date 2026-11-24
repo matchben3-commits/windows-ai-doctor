@@ -232,7 +232,7 @@ class SarifTests(IntegrationFixture):
         run = sarif_document(report)["runs"][0]
         rules = run["tool"]["driver"]["rules"]
         self.assertEqual(len(rules), 19)
-        self.assertEqual(run["tool"]["driver"]["semanticVersion"], "0.6.0")
+        self.assertEqual(run["tool"]["driver"]["semanticVersion"], "0.7.0")
         for rule, check in zip(rules, catalog_report()["checks"]):
             self.assertEqual(rule["id"], check["id"])
             self.assertEqual(rule["shortDescription"]["text"], check["purpose"]["zh"])
@@ -254,7 +254,7 @@ class SarifTests(IntegrationFixture):
             self.assertIs(invocation["executionSuccessful"], True)
             self.assertEqual(invocation["exitCode"], int(matched))
             self.assertEqual(invocation["properties"]["scan_limited_checks"], ["claude.path", "codex.path"])
-            self.assertEqual(invocation["properties"]["baseline"], {"summary": {"added": 2, "removed": 0, "changed": 0}, "unchanged": 0, "regressions": []})
+            self.assertEqual(invocation["properties"]["baseline"], {"summary": {"added": 2, "removed": 0, "changed": 0}, "unchanged": 0, "regressions": [], "new_findings": [], "result_baseline_states": {"new": 1, "updated": 0, "unchanged": 0}})
             self.assertTrue(sarif_document(report)["runs"][0]["results"][0]["properties"]["scan_limited"])
 
     def test_determinism_no_evidence_paths_time_or_external_references_and_bilingual_structure(self):

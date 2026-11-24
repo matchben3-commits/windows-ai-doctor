@@ -1,0 +1,593 @@
+{
+  "generated_at": "2026-11-24T11:56:15.208103+00:00",
+  "python": "3.14.10",
+  "exit_code": 0,
+  "build": "sdist then wheel from sdist",
+  "clean_working_directory": true,
+  "dependencies": {
+    "build": "1.6.1",
+    "setuptools": "84.2.1",
+    "wheel": "0.48.0"
+  },
+  "steps": [
+    {
+      "step": "isolated_build_dependencies",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "cache_sdist_build_dependencies",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "build_sdist_and_wheel",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_venv_isolated",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_install",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_installed_import",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_console_entry",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_module_entry",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_zh_all",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_en_all",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_compare",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_history_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_history_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_support",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_validate_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_verify_support_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_csv_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_validate_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_verify_support_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_csv_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_compare_csv_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_compare_csv_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_catalog_default",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_catalog_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_catalog_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_catalog_subset",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_catalog_unknown",
+      "exit_code": 2,
+      "expected_exit_code": 2
+    },
+    {
+      "step": "wheel_schema_stdout",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_schema_file",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_schema_collision",
+      "exit_code": 2,
+      "expected_exit_code": 2
+    },
+    {
+      "step": "wheel_schema_lang_rejected",
+      "exit_code": 2,
+      "expected_exit_code": 2
+    },
+    {
+      "step": "wheel_schema_format_rejected",
+      "exit_code": 2,
+      "expected_exit_code": 2
+    },
+    {
+      "step": "wheel_diagnosis_csv_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_diagnosis_csv_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_diagnosis_sarif_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_diagnosis_sarif_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_baseline_same",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_baseline_all",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_baseline_regression",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "wheel_junit_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_junit_file_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_junit_collision_zh",
+      "exit_code": 2,
+      "expected_exit_code": 2
+    },
+    {
+      "step": "wheel_new_json_zh",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "wheel_new_sarif_zh",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "wheel_new_junit_zh",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "wheel_new_same_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_junit_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_junit_file_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_junit_collision_en",
+      "exit_code": 2,
+      "expected_exit_code": 2
+    },
+    {
+      "step": "wheel_new_json_en",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "wheel_new_sarif_en",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "wheel_new_junit_en",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "wheel_new_same_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_new_without_baseline",
+      "exit_code": 2,
+      "expected_exit_code": 2
+    },
+    {
+      "step": "wheel_fail_on_warn",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "wheel_uninstall",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "wheel_import_removed",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_venv_isolated",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_offline_build_dependencies",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_install",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_installed_import",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_console_entry",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_module_entry",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_zh_all",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_en_all",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_compare",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_history_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_history_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_support",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_validate_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_verify_support_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_csv_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_validate_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_verify_support_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_csv_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_compare_csv_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_compare_csv_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_catalog_default",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_catalog_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_catalog_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_catalog_subset",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_catalog_unknown",
+      "exit_code": 2,
+      "expected_exit_code": 2
+    },
+    {
+      "step": "sdist_schema_stdout",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_schema_file",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_schema_collision",
+      "exit_code": 2,
+      "expected_exit_code": 2
+    },
+    {
+      "step": "sdist_schema_lang_rejected",
+      "exit_code": 2,
+      "expected_exit_code": 2
+    },
+    {
+      "step": "sdist_schema_format_rejected",
+      "exit_code": 2,
+      "expected_exit_code": 2
+    },
+    {
+      "step": "sdist_diagnosis_csv_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_diagnosis_csv_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_diagnosis_sarif_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_diagnosis_sarif_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_baseline_same",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_baseline_all",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_baseline_regression",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "sdist_junit_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_junit_file_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_junit_collision_zh",
+      "exit_code": 2,
+      "expected_exit_code": 2
+    },
+    {
+      "step": "sdist_new_json_zh",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "sdist_new_sarif_zh",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "sdist_new_junit_zh",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "sdist_new_same_zh",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_junit_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_junit_file_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_junit_collision_en",
+      "exit_code": 2,
+      "expected_exit_code": 2
+    },
+    {
+      "step": "sdist_new_json_en",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "sdist_new_sarif_en",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "sdist_new_junit_en",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "sdist_new_same_en",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_new_without_baseline",
+      "exit_code": 2,
+      "expected_exit_code": 2
+    },
+    {
+      "step": "sdist_fail_on_warn",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "sdist_uninstall",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "sdist_import_removed",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "step": "build_dependency_versions",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "windows_ai_doctor-0.7.0-py3-none-any.whl",
+      "bytes": 57754,
+      "sha256": "6a030e06696febe5747ecdc22223ec761db896e04ce4269f444089ad4013d0b6"
+    },
+    {
+      "file": "windows_ai_doctor-0.7.0.tar.gz",
+      "bytes": 282815,
+      "sha256": "beee7ac396d7cf86c3c378b701bbd6cfb8940626be7dd55f9857c2b6ec24bc30"
+    }
+  ],
+  "system_python_changed": false,
+  "temporary_venvs_removed": true
+}

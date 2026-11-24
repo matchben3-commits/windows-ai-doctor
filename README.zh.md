@@ -2,13 +2,13 @@
 
 **Claude Code / Codex 在 Windows 上跑不起来？用本地报告检查 PATH、安装组和启动入口。**
 
-[English](README.md) · v0.6.0 · Python 3.11+ · Windows 优先 · MIT
+[English](README.md) · v0.7.0 · Python 3.11+ · Windows 优先 · MIT
 
 [![Windows CI](https://github.com/matchben3-commits/windows-ai-doctor/actions/workflows/windows.yml/badge.svg)](https://github.com/matchben3-commits/windows-ai-doctor/actions/workflows/windows.yml)
 [![release](https://img.shields.io/github/v/release/matchben3-commits/windows-ai-doctor)](https://github.com/matchben3-commits/windows-ai-doctor/releases)
 [![license](https://img.shields.io/github/license/matchben3-commits/windows-ai-doctor)](LICENSE)
 
-[**在线演示**](https://matchben3-commits.github.io/windows-ai-doctor/) · [示例报告](https://matchben3-commits.github.io/windows-ai-doctor/report-zh.html) · [Release](https://github.com/matchben3-commits/windows-ai-doctor/releases/tag/v0.6.0)
+[**在线演示**](https://matchben3-commits.github.io/windows-ai-doctor/) · [示例报告](https://matchben3-commits.github.io/windows-ai-doctor/report-zh.html) · [Discussions](https://github.com/matchben3-commits/windows-ai-doctor/discussions) · [Release](https://github.com/matchben3-commits/windows-ai-doctor/releases/tag/v0.7.0)
 
 ![Windows AI Doctor 报告截图](docs/assets/report-zh.png)
 
@@ -24,14 +24,14 @@ Windows AI Doctor 检查最容易出问题的几层：PATH/PATHEXT 解析、重�
 
 ```powershell
 python -m venv .wad-env
-.\.wad-env\Scripts\python.exe -m pip install https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v0.6.0/windows_ai_doctor-0.6.0-py3-none-any.whl
+.\.wad-env\Scripts\python.exe -m pip install https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v0.7.0/windows_ai_doctor-0.7.0-py3-none-any.whl
 .\.wad-env\Scripts\python.exe -m windows_ai_doctor --no-version --lang zh --format all --output-dir .\reports\first
 Start-Process .\reports\first\report.zh.html
 ```
 
 这里用 `--no-version` 跳过已安装 CLI 和 Node 的执行。需要版本探测时可去掉该参数；版本探测有边界，但不是完整的安全或网络沙箱。
 
-不想安装？下载[源码 ZIP](https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v0.6.0/windows-ai-doctor-v0.6.0-source.zip)，解压后在目录里运行 `python .\doctor.py --lang zh --format all --output-dir .\reports\first`。
+不想安装？下载[源码 ZIP](https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v0.7.0/windows-ai-doctor-v0.7.0-source.zip)，解压后在目录里运行 `python .\doctor.py --lang zh --format all --output-dir .\reports\first`。
 
 需要包含 pip 的 Python 3.11+ 发行版；隔离环境教程还需要 venv。运行时只用标准库，没有第三方依赖，也不需要模型密钥。wheel 还没上 PyPI，请用 Release 附件，并对照同页 `SHA256SUMS.txt` 校验。
 
@@ -43,7 +43,7 @@ Start-Process .\reports\first\report.zh.html
 | 启动器运行时 | 原生还是 Node；Node 版本是否满足本地包声明的引擎范围 |
 | 配置 | 已识别配置文件的语法和根结构；不打印任何配置值 |
 | WSL | 只观察 Windows 侧的外部线索；不启动、不进入任何发行版 |
-| 基线 | `--baseline` 对比两次诊断；`--fail-on regression` 在 pass→warn、pass→error、warn→error 时退出 1 |
+| 基线 | `--baseline` 对比两次诊断；`--fail-on regression` / `new` 在固定回归或相对基线新增的 error/warn（排除扫描受限 path）时退出 1 |
 
 报告状态分为 `pass`、`warn`、`error`、`unknown`、`skipped`，异常排在前面。每条结论都会说明：观察到了什么、为什么值得看、建议手动检查什么、这项检查不能证明什么。
 
@@ -88,13 +88,17 @@ Start-Process .\reports\first\report.zh.html
 # 修完后对比前后
 .\.wad-env\Scripts\python.exe -m windows_ai_doctor --baseline .\reports\first\report.zh.json --fail-on regression --format all --output-dir .\reports\after
 
+# 仅在相对基线的新发现 error/warn 时退出 1（便于 CI）
+.\.wad-env\Scripts\python.exe -m windows_ai_doctor --baseline .\reports\first\report.zh.json --fail-on new --format junit --output-dir .\reports\junit
+
 # 其他输出
 .\.wad-env\Scripts\python.exe -m windows_ai_doctor --format csv
 .\.wad-env\Scripts\python.exe -m windows_ai_doctor --format sarif --output-dir .\reports\sarif
+.\.wad-env\Scripts\python.exe -m windows_ai_doctor --format junit
 .\.wad-env\Scripts\python.exe -m windows_ai_doctor --catalog --format json
 ```
 
-退出码：`0` 完成，`1` 出现所选失败状态，`2` 参数/导出失败，`130` 中断。完整规则见 [v0.6 契约](docs/v06-contract.md)。
+退出码：`0` 完成，`1` 出现所选失败状态，`2` 参数/导出失败，`130` 中断。完整规则见 [v0.7 契约](docs/v07-contract.md)。
 
 ## 隐私
 
@@ -102,7 +106,7 @@ Start-Process .\reports\first\report.zh.html
 
 ## 文档
 
-- [v0.6 契约](docs/v06-contract.md) · [v0.5](docs/v05-contract.md) · [v0.4](docs/v04-contract.md) · [v0.3](docs/v03-contract.md)
+- [v0.7 契约](docs/v07-contract.md) · [v0.6](docs/v06-contract.md) · [v0.5](docs/v05-contract.md) · [v0.4](docs/v04-contract.md)
 - [规则依据与探测边界](docs/rules.md)
 - [比较与趋势](docs/comparison.md)
 - [更新日志](CHANGELOG.md)

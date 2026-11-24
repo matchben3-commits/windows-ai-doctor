@@ -6,7 +6,7 @@
       "tool": {
         "driver": {
           "name": "Windows AI Doctor",
-          "semanticVersion": "0.6.0",
+          "semanticVersion": "0.7.0",
           "informationUri": "https://github.com/matchben3-commits/windows-ai-doctor",
           "rules": [
             {
@@ -21,7 +21,7 @@
               "help": {
                 "text": "仅在提供 --project 时生成；不合并配置、不读账户、不判定本地覆盖是否生效。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -50,7 +50,7 @@
               "help": {
                 "text": "仅在提供 --project 时生成；不向祖先遍历，不计算最终合并配置。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -79,7 +79,7 @@
               "help": {
                 "text": "文件可缺省；语法通过不等于登录、API 或服务可用；不输出配置键值。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -108,7 +108,7 @@
               "help": {
                 "text": "只覆盖入口所需运行时；不验证完整依赖树或全部可选功能。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -140,7 +140,7 @@
               "help": {
                 "text": "不是签名或发行方验证；未知形式不等于未安装。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -165,7 +165,7 @@
               "help": {
                 "text": "不扫描磁盘；不预测别名/函数；受限扫描不能证明未安装或无重复。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -194,7 +194,7 @@
               "help": {
                 "text": "仅接受短且完整匹配的版本响应；通过只覆盖本次查询，不验证服务或任务。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -222,7 +222,7 @@
               "help": {
                 "text": "仅在提供 --project 时生成；不向祖先遍历，不计算最终合并配置。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -251,7 +251,7 @@
               "help": {
                 "text": "文件可缺省；语法通过不等于配置生效或服务可用；不输出配置键值。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -280,7 +280,7 @@
               "help": {
                 "text": "只覆盖入口所需运行时；不验证完整依赖树或全部可选功能。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -312,7 +312,7 @@
               "help": {
                 "text": "不是签名或发行方验证；未知形式不等于未安装。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -337,7 +337,7 @@
               "help": {
                 "text": "不扫描磁盘；不预测别名/函数；受限扫描不能证明未安装或无重复。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -366,7 +366,7 @@
               "help": {
                 "text": "仅接受短且完整匹配的版本响应；通过只覆盖本次查询，不验证服务或任务。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -394,7 +394,7 @@
               "help": {
                 "text": "始终为 skipped 提示；不表示主机健康或其他检查已通过。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -416,7 +416,7 @@
               "help": {
                 "text": "不是硬件清单或补丁审计；Windows 目标标记只反映 os.name。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -442,7 +442,7 @@
               "help": {
                 "text": "始终 skipped；不启动发行版，也不把未安装 WSL 判为 AI 工具故障。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -464,7 +464,7 @@
               "help": {
                 "text": "不列出发行版名称；非 Windows 跳过；不是组件健康证明。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -489,7 +489,7 @@
               "help": {
                 "text": "不检查组件健康；非 Windows 跳过；存在不等于发行版可用。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -515,7 +515,7 @@
               "help": {
                 "text": "默认不执行；即使加 --no-version 也会在显式允许时查询；不输出名称。"
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -544,7 +544,11 @@
             "status": "error",
             "target": "claude",
             "scan_limited": false
-          }
+          },
+          "partialFingerprints": {
+            "windowsAIDoctorCheckId/v1": "claude.path"
+          },
+          "baselineState": "updated"
         },
         {
           "ruleId": "codex.path",
@@ -557,7 +561,11 @@
             "status": "unknown",
             "target": "codex",
             "scan_limited": true
-          }
+          },
+          "partialFingerprints": {
+            "windowsAIDoctorCheckId/v1": "codex.path"
+          },
+          "baselineState": "updated"
         },
         {
           "ruleId": "codex.version",
@@ -569,7 +577,11 @@
           "properties": {
             "status": "warn",
             "target": "codex"
-          }
+          },
+          "partialFingerprints": {
+            "windowsAIDoctorCheckId/v1": "codex.version"
+          },
+          "baselineState": "updated"
         },
         {
           "ruleId": "scope.unchecked",
@@ -581,7 +593,11 @@
           "properties": {
             "status": "unknown",
             "target": "scope"
-          }
+          },
+          "partialFingerprints": {
+            "windowsAIDoctorCheckId/v1": "scope.unchecked"
+          },
+          "baselineState": "unchanged"
         }
       ],
       "invocations": [
@@ -619,7 +635,13 @@
               "regressions": [
                 "claude.path",
                 "codex.version"
-              ]
+              ],
+              "new_findings": [],
+              "result_baseline_states": {
+                "new": 0,
+                "updated": 3,
+                "unchanged": 1
+              }
             }
           }
         }

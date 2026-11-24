@@ -2,13 +2,13 @@
 
 **Claude Code or Codex won't run on Windows? Inspect PATH, installation groups, and launcher clues in a local report.**
 
-[中文](README.zh.md) · v0.6.0 · Python 3.11+ · Windows-first · MIT
+[中文](README.zh.md) · v0.7.0 · Python 3.11+ · Windows-first · MIT
 
 [![Windows CI](https://github.com/matchben3-commits/windows-ai-doctor/actions/workflows/windows.yml/badge.svg)](https://github.com/matchben3-commits/windows-ai-doctor/actions/workflows/windows.yml)
 [![release](https://img.shields.io/github/v/release/matchben3-commits/windows-ai-doctor)](https://github.com/matchben3-commits/windows-ai-doctor/releases)
 [![license](https://img.shields.io/github/license/matchben3-commits/windows-ai-doctor)](LICENSE)
 
-[**Live demo**](https://matchben3-commits.github.io/windows-ai-doctor/) · [Sample report](https://matchben3-commits.github.io/windows-ai-doctor/report-en.html) · [Release notes](https://github.com/matchben3-commits/windows-ai-doctor/releases/tag/v0.6.0)
+[**Live demo**](https://matchben3-commits.github.io/windows-ai-doctor/) · [Sample report](https://matchben3-commits.github.io/windows-ai-doctor/report-en.html) · [Discussions](https://github.com/matchben3-commits/windows-ai-doctor/discussions) · [Release notes](https://github.com/matchben3-commits/windows-ai-doctor/releases/tag/v0.7.0)
 
 ![Windows AI Doctor report](docs/assets/report-en.png)
 
@@ -24,14 +24,14 @@ The screenshot and online walkthrough use **SIMULATED** observations, not a real
 
 ```powershell
 python -m venv .wad-env
-.\.wad-env\Scripts\python.exe -m pip install https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v0.6.0/windows_ai_doctor-0.6.0-py3-none-any.whl
+.\.wad-env\Scripts\python.exe -m pip install https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v0.7.0/windows_ai_doctor-0.7.0-py3-none-any.whl
 .\.wad-env\Scripts\python.exe -m windows_ai_doctor --no-version --lang en --format all --output-dir .\reports\first
 Start-Process .\reports\first\report.en.html
 ```
 
 This quick start uses `--no-version` to skip execution of installed CLI and Node programs. Omit it to include supported version probes; those probes are bounded but are not a full security or network sandbox.
 
-Prefer not to install anything? Download the [source ZIP](https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v0.6.0/windows-ai-doctor-v0.6.0-source.zip), extract it, and run `python .\doctor.py --lang en --format all --output-dir .\reports\first` from the extracted folder.
+Prefer not to install anything? Download the [source ZIP](https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v0.7.0/windows-ai-doctor-v0.7.0-source.zip), extract it, and run `python .\doctor.py --lang en --format all --output-dir .\reports\first` from the extracted folder.
 
 Use a Python 3.11+ distribution that includes pip (and venv for the isolated tutorial). The runtime uses the standard library; there are no third-party packages and no model keys. The wheel is not on PyPI yet; use the attached wheel and verify it against `SHA256SUMS.txt` on the release page.
 
@@ -43,7 +43,7 @@ Use a Python 3.11+ distribution that includes pip (and venv for the isolated tut
 | Launcher runtime | Native or Node, and whether the Node version satisfies the package's engine range |
 | Config | Syntax and root shape of recognized config files; values are never printed |
 | WSL | External clues only. Distributions are never started or entered |
-| Baseline | `--baseline` compares two runs; `--fail-on regression` exits 1 on pass→warn, pass→error, or warn→error |
+| Baseline | `--baseline` compares two runs; `--fail-on regression` / `new` exit 1 on fixed regressions or added error/warn (excluding scan-limited paths) |
 
 The report shows `pass`, `warn`, `error`, `unknown`, and `skipped`, and puts errors first. Every finding explains what was observed, why it matters, what to check manually, and what the check does not prove.
 
@@ -88,13 +88,17 @@ Run command lookup in the terminal that fails, then use the report to preserve o
 # Compare before and after a fix
 .\.wad-env\Scripts\python.exe -m windows_ai_doctor --baseline .\reports\first\report.en.json --fail-on regression --format all --output-dir .\reports\after
 
+# Exit 1 only on new error/warn versus baseline (CI-friendly)
+.\.wad-env\Scripts\python.exe -m windows_ai_doctor --baseline .\reports\first\report.en.json --fail-on new --format junit --output-dir .\reports\junit
+
 # Other outputs
 .\.wad-env\Scripts\python.exe -m windows_ai_doctor --format csv
 .\.wad-env\Scripts\python.exe -m windows_ai_doctor --format sarif --output-dir .\reports\sarif
+.\.wad-env\Scripts\python.exe -m windows_ai_doctor --format junit
 .\.wad-env\Scripts\python.exe -m windows_ai_doctor --catalog --format json
 ```
 
-Exit codes: `0` completed, `1` a selected failure state occurred, `2` argument/export failure, `130` interrupted. See the [v0.6 contract](docs/v06-contract.md) for the full rules.
+Exit codes: `0` completed, `1` a selected failure state occurred, `2` argument/export failure, `130` interrupted. See the [v0.7 contract](docs/v07-contract.md) for the full rules.
 
 ## Privacy
 
@@ -102,7 +106,7 @@ The report uses opaque path references instead of real paths. It does not includ
 
 ## Docs
 
-- [v0.6 contract](docs/v06-contract.md) · [v0.5](docs/v05-contract.md) · [v0.4](docs/v04-contract.md) · [v0.3](docs/v03-contract.md)
+- [v0.7 contract](docs/v07-contract.md) · [v0.6](docs/v06-contract.md) · [v0.5](docs/v05-contract.md) · [v0.4](docs/v04-contract.md)
 - [Rules and probe boundaries](docs/rules.md)
 - [Comparison and history](docs/comparison.md)
 - [Changelog](CHANGELOG.md)

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "report_type": "diagnosis",
-  "doctor_version": "0.6.0",
+  "doctor_version": "0.7.0",
   "generated_at": "2000-01-01T00:00:00+00:00",
   "language": "en",
   "summary": {
@@ -183,6 +183,7 @@
       "claude.path",
       "codex.version"
     ],
+    "new_findings": [],
     "notice": "Confirm that the baseline and current diagnosis cover the same environment and scope. Regression means only pass→warn, pass→error or warn→error without a scan limit; it does not establish a fault's root cause. Added, removed, unknown and skipped checks do not establish a fix. Only states, numeric versions, installation-group counts and scan limits are compared."
   },
   "exit_policy": {
@@ -193,6 +194,6 @@
       "regression"
     ],
     "matched": true,
-    "meaning": "Meeting the selected exit conditions means a selected state occurred; unknown is not a confirmed fault. Operational failure exits 2; interruption exits 130. Regression means fixed state transitions without a scan limit; it does not establish a fault's root cause."
+    "meaning": "Meeting the selected exit conditions means a selected state occurred; unknown is not a confirmed fault. Operational failure exits 2; interruption exits 130. Regression means fixed state transitions without a scan limit; it does not establish a fault's root cause. New findings mean only added error/warn versus baseline, excluding scan-limited paths; they do not establish a fault's root cause."
   }
 }

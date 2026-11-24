@@ -1,0 +1,176 @@
+{
+  "exit_code": 0,
+  "runs": [
+    {
+      "generator": "v04",
+      "file_count": 23,
+      "two_runs_byte_identical": false,
+      "file_set_retained": true,
+      "archived_outputs_retained": true,
+      "note": "v04 retains historical wall-clock fields; determinism is required for v07, v06, v05",
+      "changed_for_current_runtime": [
+        "history-en/history.en.html",
+        "history-en/history.en.json",
+        "history-en/history.en.md",
+        "history-zh/history.zh.html",
+        "history-zh/history.zh.json",
+        "history-zh/history.zh.md",
+        "history20-en/history.en.html",
+        "history20-zh/history.zh.html",
+        "support/support-bundle.zip",
+        "validation-en/validation.en.json",
+        "validation-zh/validation.zh.json",
+        "verification-en/support-verification.en.json",
+        "verification-en/support-verification.en.md",
+        "verification-zh/support-verification.zh.json",
+        "verification-zh/support-verification.zh.md"
+      ],
+      "hashes": {
+        "csv-en/history.en.csv": "01a09d2a8509a51773afc6579e5910cd036a3cf80c13b726ecdea7477b52b474",
+        "csv-zh/history.zh.csv": "01a09d2a8509a51773afc6579e5910cd036a3cf80c13b726ecdea7477b52b474",
+        "history-en/history.en.html": "b497968600b2f1a8ded08b48f46f6e158f312704214ecb688338bf2de8862717",
+        "history-en/history.en.json": "a9daef845e71f209b57992e19015bb181db820760fb0c5dc9deecb6fe15525f4",
+        "history-en/history.en.md": "c2ac1686788f670bb5538ea659d6da5190db670a96cf2c31304cfe2e2ff21f36",
+        "history-zh/history.zh.html": "758200e6a2143602be26bc2251fceb167ec6e088deaa151ad7466cc67848f157",
+        "history-zh/history.zh.json": "849c30f35a9ac1883864e554ff00d70a8ef9acfa3aed2598123f6048b9436dd5",
+        "history-zh/history.zh.md": "32eadf4acede399b261e3c32e8b144d62d90174fb4e5ceada2fb282c76c2b321",
+        "history20-en/history.en.html": "0986734ba69226d1de6f7931d8c913bbe587f71213d10004a469df98ca9f891a",
+        "history20-zh/history.zh.html": "67fe9c0a3789abdb3cf4aec15acb44fd6a57916640349c196f7ef80ecccb06ad",
+        "run1.json": "4719277ea90ffcd914a65a186585f6943ee23db34b597832c5351770a46484e6",
+        "run2.json": "70c5ad961f751b151a2d51b2a867f5e4e7954cf337c6753b3fb38541010fcbc3",
+        "run3.json": "8feb13d7ac45c5c5db767af952a5bde9e2a122bd4b938a25820397a92c23c71e",
+        "runs.json": "822f9e476eab1fdef535f8de6194ef52589a81c55db92a5016afbcf4e9df9b8e",
+        "support/support-bundle.zip": "407603514dfba8a761cf6273cd5ffed592bd21a0fbd0ea5e28a7cc78235b7fa2",
+        "validation-en/validation.en.json": "9afb76cd421f35edde5852424d6c8d291e9120145d4b4aa51feb0cca67439d16",
+        "validation-en/validation.en.md": "b0201557edf817da73d6aa7acc557137998d7bf735dfaf8c3b69765a0dbead49",
+        "validation-zh/validation.zh.json": "dc342ebbc68beda06eb987427dfb0d20558215f15835647a59b5e8526a5ac997",
+        "validation-zh/validation.zh.md": "5c457dd4d4f6b79ac2b4fd1885d085543d78a9c2af48d1c9c211aeefe03b2bec",
+        "verification-en/support-verification.en.json": "ab55fe3a52f23e50dbe0baeafec59c027f85f8668a6f71883e0444ff7a2c1c80",
+        "verification-en/support-verification.en.md": "fe1753c8565f25a02f0fd169c2de3b0976c1b4ab3317f8d89960d79a53868732",
+        "verification-zh/support-verification.zh.json": "409880db1e83d7403eac5a1e51a4dc7288a97f755a4e89abb00fb05ba1b31056",
+        "verification-zh/support-verification.zh.md": "bbe134f0561471d684365b7528df173c2453c43975ee73e7a638ce4ff2fd5e52"
+      },
+      "commands": [
+        {
+          "actual_exit_code": 0
+        },
+        {
+          "actual_exit_code": 0
+        }
+      ]
+    },
+    {
+      "generator": "v05",
+      "file_count": 12,
+      "two_runs_byte_identical": true,
+      "file_set_retained": true,
+      "archived_outputs_retained": false,
+      "note": "",
+      "changed_for_current_runtime": [
+        "catalog-en/catalog.en.json",
+        "catalog-en/catalog.en.md",
+        "catalog-subset-en/catalog.en.json",
+        "catalog-subset-zh/catalog.zh.json",
+        "catalog-zh/catalog.zh.json",
+        "catalog-zh/catalog.zh.md"
+      ],
+      "hashes": {
+        "catalog-en/catalog.en.json": "0a8f9db4149a19f2ac150418d8a74db85662dd610f5c767ccf86276a25714a8b",
+        "catalog-en/catalog.en.md": "26d7dc4e72e714a85978a9ff9f1d5a9fcb6ab9ff2ef8bb3bf7d02d57cdf4df79",
+        "catalog-subset-en/catalog.en.json": "fea6e978a10390b68f0ce5c94d9f94f7451d4d23ffca87e8f78e3197fcc114ab",
+        "catalog-subset-zh/catalog.zh.json": "dca19e4048aefe3c78a575c3334694b5f41ade6a052eec8e9752816ac3e90c14",
+        "catalog-zh/catalog.zh.json": "83522510948ec06e2b600413d2f1b38c09ffac100c7ec5ed0b1715dae1299fdf",
+        "catalog-zh/catalog.zh.md": "5506e109e201d734cdc282fc98dc6e6588815ad6f237f7717ba9a733e16422ec",
+        "compare-csv-en/comparison.en.csv": "3856c5f58160991d95f43bcc72a5f16c8acfcd740418f38af92beb9df02f3d25",
+        "compare-csv-zh/comparison.zh.csv": "3856c5f58160991d95f43bcc72a5f16c8acfcd740418f38af92beb9df02f3d25",
+        "new.json": "3a5b79358e6d3871600d60d25cc85f6a32adb8e96b50ab95dadeb1b9467e178a",
+        "old.json": "c47fd77f42700e4241064af16faf3e8381395e53e033d0f9873fb4430835c111",
+        "runs.json": "5c9c16c0e6691faa2022a899542d7673e4b0f0c6b53ac2195a8bd0a95163ca89",
+        "schema/schema.diagnosis.json": "f97218d0d71a9bd7efe2e46f78eb63b88c8694db8a3ff789adb1a57b547f9ef0"
+      },
+      "commands": [
+        {
+          "actual_exit_code": 0
+        },
+        {
+          "actual_exit_code": 0
+        }
+      ]
+    },
+    {
+      "generator": "v06",
+      "file_count": 13,
+      "two_runs_byte_identical": true,
+      "file_set_retained": true,
+      "archived_outputs_retained": false,
+      "note": "",
+      "changed_for_current_runtime": [
+        "baseline-en/report.en.html",
+        "baseline-en/report.en.json",
+        "baseline-en/report.en.md",
+        "baseline-zh/report.zh.html",
+        "baseline-zh/report.zh.json",
+        "baseline-zh/report.zh.md",
+        "sarif-en/report.en.sarif",
+        "sarif-zh/report.zh.sarif"
+      ],
+      "hashes": {
+        "baseline-en/report.en.html": "65ba76af2a052b7cb34987aba53f817121a1ff896dbf81f47e18d0f8cb06545e",
+        "baseline-en/report.en.json": "eaddb05b6dbfe660bafb2665753def4ffe43f86ef3862aac3c6bed3c52645ce9",
+        "baseline-en/report.en.md": "08653e48d6fcb98cf96c0ab8c15be243cee35ae866e9ab90481bf8b5cca0a603",
+        "baseline-zh/report.zh.html": "deab268cf6f525dc973e80707b016a2c62b17b21c78b56ca3c0a141591f18980",
+        "baseline-zh/report.zh.json": "a2e24706e800b5e1e0fd4c0734e38f3152c2d126400e2b3efef93b784ad36a47",
+        "baseline-zh/report.zh.md": "fe2f23a534412570a35466e3810f8a32656b1fdb36c796b308ae77a1d7cb4db6",
+        "baseline.json": "6a2201d458dc609c667a5e28336ba41b3c9fcf3a68c3958c2882fafd45797231",
+        "current.json": "24f8f4761d9185a14d013abbcba810b940382e0d31d2ddee5ca373f3fd7a1a60",
+        "report.en.csv": "15942964c736ffc6cc73dc07d35c1d3d59c8461f2c5138d31a2c0721239d0cfb",
+        "report.zh.csv": "15942964c736ffc6cc73dc07d35c1d3d59c8461f2c5138d31a2c0721239d0cfb",
+        "runs.json": "4295527fa03383458e7c53ddbf488154c85ed1b4152d91429f27d0ca6d9aa1ce",
+        "sarif-en/report.en.sarif": "92f46f80e3295808c55200902f5508d8a187d7a5ed7d550b66cb70397dd9fce0",
+        "sarif-zh/report.zh.sarif": "6a77ce558d7b58fb640f8ec13d264b36a72a114a4b4fd31020775073936d2e71"
+      },
+      "commands": [
+        {
+          "actual_exit_code": 0
+        },
+        {
+          "actual_exit_code": 0
+        }
+      ]
+    },
+    {
+      "generator": "v07",
+      "file_count": 15,
+      "two_runs_byte_identical": true,
+      "file_set_retained": true,
+      "archived_outputs_retained": false,
+      "note": "",
+      "changed_for_current_runtime": [],
+      "hashes": {
+        "baseline-en/report.en.html": "c50e8dd1ddd47736d3ce24bfc8194d764eb93197f07b0ade707d9b9e90c4836e",
+        "baseline-en/report.en.json": "6387f3885a985f5cd188fba949045cd0179e139aee561941801d4361de75eb66",
+        "baseline-en/report.en.md": "b4f3607f17d1e07935d1c0ad7242647091ef5f8f82f3d7dbd52fee923b768640",
+        "baseline-zh/report.zh.html": "100683ca2135536560a93b09d049b11a8d58986f2613e1f855831d16d2c9c707",
+        "baseline-zh/report.zh.json": "52b5d06e262fa33647689667ed7c92995c49108acccde2ea01cd2ab35ac2c196",
+        "baseline-zh/report.zh.md": "534809b7d40c7ea7d596bfe9162f2e3e2f0e2ed6637014ec322810fa1180eaa3",
+        "baseline.json": "757baeef9ef7409c3005540dd4bd07845a8a73386eddeecdfc1d5a7ef2c3d884",
+        "current.json": "24f8f4761d9185a14d013abbcba810b940382e0d31d2ddee5ca373f3fd7a1a60",
+        "junit-en/report.en.junit.xml": "954aa0a07e92de9a7803e90638b0759a57b95b9d8cc0d0c3e24aa3ce8a0f63b3",
+        "junit-zh/report.zh.junit.xml": "bd46f9e32a2c4d37b41f47060e7864e1d6259ded437e6de89f98bd9fabe3e2fb",
+        "report.en.csv": "1a74a73f6f67833c8fb8b2dfa6cf1f55c72ec39b57bb48b5ec591083cde7cacf",
+        "report.zh.csv": "1a74a73f6f67833c8fb8b2dfa6cf1f55c72ec39b57bb48b5ec591083cde7cacf",
+        "runs.json": "3bd444386a4080796230cbcb3b83cf5de99a5e32a65ae52859be01d95f939a95",
+        "sarif-en/report.en.sarif": "e00c19bb046dd0a7343281a12f0d4253868b06c7b98aa418b5c85dbd5fe44da4",
+        "sarif-zh/report.zh.sarif": "8ce6042d604837c8c4bb40fbe2e390675c7a4e8e03ee51636b5b9e777395eae2"
+      },
+      "commands": [
+        {
+          "actual_exit_code": 0
+        },
+        {
+          "actual_exit_code": 0
+        }
+      ]
+    }
+  ]
+}

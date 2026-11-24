@@ -97,7 +97,7 @@ class CursorSarifContract(IntegrationFixture):
         driver = document["runs"][0]["tool"]["driver"]
         self.assertEqual(driver["semanticVersion"], __version__)
         self.assertEqual(driver["rules"][0]["helpUri"], HELP_URI)
-        self.assertTrue(HELP_URI.endswith("docs/v06-contract.md"))
+        self.assertTrue(HELP_URI.endswith("docs/v07-contract.md"))
         results = document["runs"][0]["results"]
         self.assertEqual([r["ruleId"] for r in results],
                          ["claude.version", "scope.unchecked", "system.platform"])

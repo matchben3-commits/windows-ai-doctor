@@ -1,0 +1,663 @@
+{
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/cos02/schemas/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Windows AI Doctor",
+          "semanticVersion": "0.7.0",
+          "informationUri": "https://github.com/matchben3-commits/windows-ai-doctor",
+          "rules": [
+            {
+              "id": "claude.config.local",
+              "name": "claude.config.local",
+              "shortDescription": {
+                "text": "在显式 --project 根下检查 Claude settings.local.json 的 UTF-8 语法与对象根。"
+              },
+              "fullDescription": {
+                "text": "仅在提供 --project 时生成；不合并配置、不读账户、不判定本地覆盖是否生效。"
+              },
+              "help": {
+                "text": "仅在提供 --project 时生成；不合并配置、不读账户、不判定本地覆盖是否生效。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "claude",
+                "availability": "project_only",
+                "evidence_fields": [
+                  "layer",
+                  "effective_loading",
+                  "path",
+                  "format",
+                  "syntax",
+                  "line"
+                ]
+              }
+            },
+            {
+              "id": "claude.config.project",
+              "name": "claude.config.project",
+              "shortDescription": {
+                "text": "在显式 --project 根下检查 Claude 项目 settings.json 的 UTF-8 语法与对象根。"
+              },
+              "fullDescription": {
+                "text": "仅在提供 --project 时生成；不向祖先遍历，不计算最终合并配置。"
+              },
+              "help": {
+                "text": "仅在提供 --project 时生成；不向祖先遍历，不计算最终合并配置。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "claude",
+                "availability": "project_only",
+                "evidence_fields": [
+                  "layer",
+                  "effective_loading",
+                  "path",
+                  "format",
+                  "syntax",
+                  "line"
+                ]
+              }
+            },
+            {
+              "id": "claude.config.user",
+              "name": "claude.config.user",
+              "shortDescription": {
+                "text": "检查用户层 Claude settings.json 的 UTF-8 语法与对象根。"
+              },
+              "fullDescription": {
+                "text": "文件可缺省；语法通过不等于登录、API 或服务可用；不输出配置键值。"
+              },
+              "help": {
+                "text": "文件可缺省；语法通过不等于登录、API 或服务可用；不输出配置键值。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "claude",
+                "availability": "always",
+                "evidence_fields": [
+                  "layer",
+                  "location_source",
+                  "path",
+                  "format",
+                  "syntax",
+                  "line"
+                ]
+              }
+            },
+            {
+              "id": "claude.dependency",
+              "name": "claude.dependency",
+              "shortDescription": {
+                "text": "观察已识别 Claude 入口所需的运行时线索（原生或 Node）。"
+              },
+              "fullDescription": {
+                "text": "只覆盖入口所需运行时；不验证完整依赖树或全部可选功能。"
+              },
+              "help": {
+                "text": "只覆盖入口所需运行时；不验证完整依赖树或全部可选功能。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "claude",
+                "availability": "always",
+                "evidence_fields": [
+                  "runtime",
+                  "node_required",
+                  "scope",
+                  "node_found",
+                  "node_path_check",
+                  "documented_package_engine",
+                  "reason",
+                  "version",
+                  "probe_reason"
+                ]
+              }
+            },
+            {
+              "id": "claude.install",
+              "name": "claude.install",
+              "shortDescription": {
+                "text": "根据入口布局观察 Claude 安装形式是否可识别。"
+              },
+              "fullDescription": {
+                "text": "不是签名或发行方验证；未知形式不等于未安装。"
+              },
+              "help": {
+                "text": "不是签名或发行方验证；未知形式不等于未安装。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "claude",
+                "availability": "always",
+                "evidence_fields": [
+                  "kind",
+                  "publisher_verified"
+                ]
+              }
+            },
+            {
+              "id": "claude.path",
+              "name": "claude.path",
+              "shortDescription": {
+                "text": "在 PATH/PATHEXT 限定模型下观察 Claude 入口候选与安装组线索。"
+              },
+              "fullDescription": {
+                "text": "不扫描磁盘；不预测别名/函数；受限扫描不能证明未安装或无重复。"
+              },
+              "help": {
+                "text": "不扫描磁盘；不预测别名/函数；受限扫描不能证明未安装或无重复。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "claude",
+                "availability": "always",
+                "evidence_fields": [
+                  "entries",
+                  "installation_groups",
+                  "cmd_path_candidate",
+                  "powershell_path_candidate",
+                  "resolution_model",
+                  "scan_limited"
+                ]
+              }
+            },
+            {
+              "id": "claude.version",
+              "name": "claude.version",
+              "shortDescription": {
+                "text": "对已识别 Claude 入口做有界 --version 观察。"
+              },
+              "fullDescription": {
+                "text": "仅接受短且完整匹配的版本响应；通过只覆盖本次查询，不验证服务或任务。"
+              },
+              "help": {
+                "text": "仅接受短且完整匹配的版本响应；通过只覆盖本次查询，不验证服务或任务。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "claude",
+                "availability": "always",
+                "evidence_fields": [
+                  "reason",
+                  "returncode",
+                  "version",
+                  "captured_bytes",
+                  "timeout_seconds"
+                ]
+              }
+            },
+            {
+              "id": "codex.config.project",
+              "name": "codex.config.project",
+              "shortDescription": {
+                "text": "在显式 --project 根下检查 Codex 项目 config.toml 的 UTF-8 语法与对象根。"
+              },
+              "fullDescription": {
+                "text": "仅在提供 --project 时生成；不向祖先遍历，不计算最终合并配置。"
+              },
+              "help": {
+                "text": "仅在提供 --project 时生成；不向祖先遍历，不计算最终合并配置。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "codex",
+                "availability": "project_only",
+                "evidence_fields": [
+                  "layer",
+                  "effective_loading",
+                  "path",
+                  "format",
+                  "syntax",
+                  "line"
+                ]
+              }
+            },
+            {
+              "id": "codex.config.user",
+              "name": "codex.config.user",
+              "shortDescription": {
+                "text": "检查用户层 Codex config.toml 的 UTF-8 语法与对象根。"
+              },
+              "fullDescription": {
+                "text": "文件可缺省；语法通过不等于配置生效或服务可用；不输出配置键值。"
+              },
+              "help": {
+                "text": "文件可缺省；语法通过不等于配置生效或服务可用；不输出配置键值。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "codex",
+                "availability": "always",
+                "evidence_fields": [
+                  "layer",
+                  "location_source",
+                  "path",
+                  "format",
+                  "syntax",
+                  "line"
+                ]
+              }
+            },
+            {
+              "id": "codex.dependency",
+              "name": "codex.dependency",
+              "shortDescription": {
+                "text": "观察已识别 Codex 入口所需的运行时线索（原生或 Node）。"
+              },
+              "fullDescription": {
+                "text": "只覆盖入口所需运行时；不验证完整依赖树或全部可选功能。"
+              },
+              "help": {
+                "text": "只覆盖入口所需运行时；不验证完整依赖树或全部可选功能。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "codex",
+                "availability": "always",
+                "evidence_fields": [
+                  "runtime",
+                  "node_required",
+                  "scope",
+                  "node_found",
+                  "node_path_check",
+                  "documented_package_engine",
+                  "reason",
+                  "version",
+                  "probe_reason"
+                ]
+              }
+            },
+            {
+              "id": "codex.install",
+              "name": "codex.install",
+              "shortDescription": {
+                "text": "根据入口布局观察 Codex 安装形式是否可识别。"
+              },
+              "fullDescription": {
+                "text": "不是签名或发行方验证；未知形式不等于未安装。"
+              },
+              "help": {
+                "text": "不是签名或发行方验证；未知形式不等于未安装。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "codex",
+                "availability": "always",
+                "evidence_fields": [
+                  "kind",
+                  "publisher_verified"
+                ]
+              }
+            },
+            {
+              "id": "codex.path",
+              "name": "codex.path",
+              "shortDescription": {
+                "text": "在 PATH/PATHEXT 限定模型下观察 Codex 入口候选与安装组线索。"
+              },
+              "fullDescription": {
+                "text": "不扫描磁盘；不预测别名/函数；受限扫描不能证明未安装或无重复。"
+              },
+              "help": {
+                "text": "不扫描磁盘；不预测别名/函数；受限扫描不能证明未安装或无重复。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "codex",
+                "availability": "always",
+                "evidence_fields": [
+                  "entries",
+                  "installation_groups",
+                  "cmd_path_candidate",
+                  "powershell_path_candidate",
+                  "resolution_model",
+                  "scan_limited"
+                ]
+              }
+            },
+            {
+              "id": "codex.version",
+              "name": "codex.version",
+              "shortDescription": {
+                "text": "对已识别 Codex 入口做有界 --version 观察。"
+              },
+              "fullDescription": {
+                "text": "仅接受短且完整匹配的版本响应；通过只覆盖本次查询，不验证服务或任务。"
+              },
+              "help": {
+                "text": "仅接受短且完整匹配的版本响应；通过只覆盖本次查询，不验证服务或任务。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "codex",
+                "availability": "always",
+                "evidence_fields": [
+                  "reason",
+                  "returncode",
+                  "version",
+                  "captured_bytes",
+                  "timeout_seconds"
+                ]
+              }
+            },
+            {
+              "id": "scope.unchecked",
+              "name": "scope.unchecked",
+              "shortDescription": {
+                "text": "标明账户、认证、聊天、完整配置合并与真实 AI 任务等范围外项未检查。"
+              },
+              "fullDescription": {
+                "text": "始终为 skipped 提示；不表示主机健康或其他检查已通过。"
+              },
+              "help": {
+                "text": "始终为 skipped 提示；不表示主机健康或其他检查已通过。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "scope",
+                "availability": "always",
+                "evidence_fields": []
+              }
+            },
+            {
+              "id": "system.platform",
+              "name": "system.platform",
+              "shortDescription": {
+                "text": "记录当前解释器所见的操作系统类别与 Python 版本线索。"
+              },
+              "fullDescription": {
+                "text": "不是硬件清单或补丁审计；Windows 目标标记只反映 os.name。"
+              },
+              "help": {
+                "text": "不是硬件清单或补丁审计；Windows 目标标记只反映 os.name。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "system",
+                "availability": "always",
+                "evidence_fields": [
+                  "os",
+                  "python",
+                  "windows_target"
+                ]
+              }
+            },
+            {
+              "id": "wsl.internal",
+              "name": "wsl.internal",
+              "shortDescription": {
+                "text": "标明 WSL 发行版内部环境始终未检查。"
+              },
+              "fullDescription": {
+                "text": "始终 skipped；不启动发行版，也不把未安装 WSL 判为 AI 工具故障。"
+              },
+              "help": {
+                "text": "始终 skipped；不启动发行版，也不把未安装 WSL 判为 AI 工具故障。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "wsl",
+                "availability": "always",
+                "evidence_fields": []
+              }
+            },
+            {
+              "id": "wsl.inventory",
+              "name": "wsl.inventory",
+              "shortDescription": {
+                "text": "在 Windows 上观察当前用户 Lxss 注册子键数量线索。"
+              },
+              "fullDescription": {
+                "text": "不列出发行版名称；非 Windows 跳过；不是组件健康证明。"
+              },
+              "help": {
+                "text": "不列出发行版名称；非 Windows 跳过；不是组件健康证明。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "wsl",
+                "availability": "always",
+                "evidence_fields": [
+                  "registered_count",
+                  "reason"
+                ]
+              }
+            },
+            {
+              "id": "wsl.launcher",
+              "name": "wsl.launcher",
+              "shortDescription": {
+                "text": "观察系统目录下的 WSL 启动器是否存在（原生格式线索）。"
+              },
+              "fullDescription": {
+                "text": "不检查组件健康；非 Windows 跳过；存在不等于发行版可用。"
+              },
+              "help": {
+                "text": "不检查组件健康；非 Windows 跳过；存在不等于发行版可用。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "wsl",
+                "availability": "always",
+                "evidence_fields": [
+                  "present",
+                  "component_health",
+                  "reason"
+                ]
+              }
+            },
+            {
+              "id": "wsl.running",
+              "name": "wsl.running",
+              "shortDescription": {
+                "text": "在显式 --wsl-list 时只读观察运行中发行版数量。"
+              },
+              "fullDescription": {
+                "text": "默认不执行；即使加 --no-version 也会在显式允许时查询；不输出名称。"
+              },
+              "help": {
+                "text": "默认不执行；即使加 --no-version 也会在显式允许时查询；不输出名称。"
+              },
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "target": "wsl",
+                "availability": "always",
+                "evidence_fields": [
+                  "reason",
+                  "running_count",
+                  "returncode"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "claude.path",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "预设合成观察，不代表主机状态。"
+          },
+          "properties": {
+            "status": "error",
+            "target": "claude",
+            "scan_limited": false
+          },
+          "partialFingerprints": {
+            "windowsAIDoctorCheckId/v1": "claude.path"
+          },
+          "baselineState": "new"
+        },
+        {
+          "ruleId": "codex.path",
+          "ruleIndex": 11,
+          "level": "note",
+          "message": {
+            "text": "预设合成观察，不代表主机状态。"
+          },
+          "properties": {
+            "status": "unknown",
+            "target": "codex",
+            "scan_limited": true
+          },
+          "partialFingerprints": {
+            "windowsAIDoctorCheckId/v1": "codex.path"
+          },
+          "baselineState": "updated"
+        },
+        {
+          "ruleId": "codex.version",
+          "ruleIndex": 12,
+          "level": "warning",
+          "message": {
+            "text": "预设合成观察，不代表主机状态。"
+          },
+          "properties": {
+            "status": "warn",
+            "target": "codex"
+          },
+          "partialFingerprints": {
+            "windowsAIDoctorCheckId/v1": "codex.version"
+          },
+          "baselineState": "updated"
+        },
+        {
+          "ruleId": "scope.unchecked",
+          "ruleIndex": 13,
+          "level": "note",
+          "message": {
+            "text": "预设合成观察，不代表主机状态。"
+          },
+          "properties": {
+            "status": "unknown",
+            "target": "scope"
+          },
+          "partialFingerprints": {
+            "windowsAIDoctorCheckId/v1": "scope.unchecked"
+          },
+          "baselineState": "unchanged"
+        }
+      ],
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "exitCode": 1,
+          "properties": {
+            "language": "zh",
+            "schema_version": "1.0",
+            "summary": {
+              "pass": 2,
+              "warn": 1,
+              "error": 1,
+              "unknown": 2,
+              "skipped": 1
+            },
+            "fail_on": [
+              "new"
+            ],
+            "triggered": [
+              "new"
+            ],
+            "matched": true,
+            "scan_limited_checks": [
+              "codex.path"
+            ],
+            "notice": "无文件位置的 SARIF 2.1.0 子集；不含源文件位置，不宣称可直接用于 GitHub code scanning。executionSuccessful 仅表示工具完成执行，不表示健康或通过。未知或扫描受限不代表故障或修复。",
+            "baseline": {
+              "summary": {
+                "added": 3,
+                "removed": 1,
+                "changed": 2
+              },
+              "unchanged": 2,
+              "regressions": [
+                "codex.version"
+              ],
+              "new_findings": [
+                "claude.path"
+              ],
+              "result_baseline_states": {
+                "new": 1,
+                "updated": 2,
+                "unchanged": 1
+              }
+            }
+          }
+        }
+      ],
+      "properties": {
+        "status_vocabulary": [
+          "pass",
+          "warn",
+          "error",
+          "unknown",
+          "skipped"
+        ],
+        "notice": "无文件位置的 SARIF 2.1.0 子集；不含源文件位置，不宣称可直接用于 GitHub code scanning。executionSuccessful 仅表示工具完成执行，不表示健康或通过。未知或扫描受限不代表故障或修复。",
+        "diagnosis_schema_version": "1.0"
+      }
+    }
+  ]
+}

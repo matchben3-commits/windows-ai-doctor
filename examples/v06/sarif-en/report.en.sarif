@@ -6,7 +6,7 @@
       "tool": {
         "driver": {
           "name": "Windows AI Doctor",
-          "semanticVersion": "0.6.0",
+          "semanticVersion": "0.7.0",
           "informationUri": "https://github.com/matchben3-commits/windows-ai-doctor",
           "rules": [
             {
@@ -21,7 +21,7 @@
               "help": {
                 "text": "Emitted only with --project; no merge evaluation, account checks, or proof that local overrides apply."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -50,7 +50,7 @@
               "help": {
                 "text": "Emitted only with --project; ancestors are not walked and effective merged configuration is not computed."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -79,7 +79,7 @@
               "help": {
                 "text": "The file may be absent; valid syntax does not establish login, API or service availability; config values are not exported."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -108,7 +108,7 @@
               "help": {
                 "text": "Covers launcher runtime only; the full dependency tree and optional features are not validated."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -140,7 +140,7 @@
               "help": {
                 "text": "Not signature or publisher verification; an unknown kind does not prove absence of an installation."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -165,7 +165,7 @@
               "help": {
                 "text": "No disk search; aliases/functions are outside prediction; a limited scan cannot prove absence or uniqueness."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -194,7 +194,7 @@
               "help": {
                 "text": "Only short complete version responses are accepted; a pass covers this query only, not service or task availability."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -222,7 +222,7 @@
               "help": {
                 "text": "Emitted only with --project; ancestors are not walked and effective merged configuration is not computed."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -251,7 +251,7 @@
               "help": {
                 "text": "The file may be absent; valid syntax does not establish effective configuration or service availability; config values are not exported."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -280,7 +280,7 @@
               "help": {
                 "text": "Covers launcher runtime only; the full dependency tree and optional features are not validated."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -312,7 +312,7 @@
               "help": {
                 "text": "Not signature or publisher verification; an unknown kind does not prove absence of an installation."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -337,7 +337,7 @@
               "help": {
                 "text": "No disk search; aliases/functions are outside prediction; a limited scan cannot prove absence or uniqueness."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -366,7 +366,7 @@
               "help": {
                 "text": "Only short complete version responses are accepted; a pass covers this query only, not service or task availability."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -394,7 +394,7 @@
               "help": {
                 "text": "Always a skipped scope notice; it does not establish host health or that other checks passed."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -416,7 +416,7 @@
               "help": {
                 "text": "Not a hardware inventory or patch audit; the Windows-target flag reflects os.name only."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -442,7 +442,7 @@
               "help": {
                 "text": "Always skipped; distributions are not started and absence of WSL is not treated as an AI tool failure."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -464,7 +464,7 @@
               "help": {
                 "text": "Distribution names are not listed; non-Windows hosts skip; this is not component-health proof."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -489,7 +489,7 @@
               "help": {
                 "text": "Component health is not checked; non-Windows hosts skip; presence does not establish a usable distribution."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -515,7 +515,7 @@
               "help": {
                 "text": "Default is no execution; with explicit permission the list still runs even under --no-version; names are never exported."
               },
-              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v06-contract.md",
+              "helpUri": "https://github.com/matchben3-commits/windows-ai-doctor/blob/main/docs/v07-contract.md",
               "defaultConfiguration": {
                 "level": "warning"
               },
@@ -544,7 +544,11 @@
             "status": "error",
             "target": "claude",
             "scan_limited": false
-          }
+          },
+          "partialFingerprints": {
+            "windowsAIDoctorCheckId/v1": "claude.path"
+          },
+          "baselineState": "updated"
         },
         {
           "ruleId": "codex.path",
@@ -557,7 +561,11 @@
             "status": "unknown",
             "target": "codex",
             "scan_limited": true
-          }
+          },
+          "partialFingerprints": {
+            "windowsAIDoctorCheckId/v1": "codex.path"
+          },
+          "baselineState": "updated"
         },
         {
           "ruleId": "codex.version",
@@ -569,7 +577,11 @@
           "properties": {
             "status": "warn",
             "target": "codex"
-          }
+          },
+          "partialFingerprints": {
+            "windowsAIDoctorCheckId/v1": "codex.version"
+          },
+          "baselineState": "updated"
         },
         {
           "ruleId": "scope.unchecked",
@@ -581,7 +593,11 @@
           "properties": {
             "status": "unknown",
             "target": "scope"
-          }
+          },
+          "partialFingerprints": {
+            "windowsAIDoctorCheckId/v1": "scope.unchecked"
+          },
+          "baselineState": "unchanged"
         }
       ],
       "invocations": [
@@ -619,7 +635,13 @@
               "regressions": [
                 "claude.path",
                 "codex.version"
-              ]
+              ],
+              "new_findings": [],
+              "result_baseline_states": {
+                "new": 0,
+                "updated": 3,
+                "unchanged": 1
+              }
             }
           }
         }

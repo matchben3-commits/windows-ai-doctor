@@ -7,7 +7,7 @@ from .compare import STATES, project
 
 SCHEMA_URI = "https://docs.oasis-open.org/sarif/sarif/v2.1.0/cos02/schemas/sarif-schema-2.1.0.json"
 REPOSITORY_URI = "https://github.com/matchben3-commits/windows-ai-doctor"
-HELP_URI = REPOSITORY_URI + "/blob/main/docs/v06-contract.md"
+HELP_URI = REPOSITORY_URI + "/blob/main/docs/v07-contract.md"
 LEVELS = {"error": "error", "warn": "warning", "unknown": "note"}
 NOTICE = {
     "zh": "无文件位置的 SARIF 2.1.0 子集；不含源文件位置，不宣称可直接用于 GitHub code scanning。executionSuccessful 仅表示工具完成执行，不表示健康或通过。未知或扫描受限不代表故障或修复。",
@@ -28,6 +28,8 @@ def sarif_document(report):
              for check in checks]
     indices = {rule["id"]: index for index, rule in enumerate(rules)}
     findings = {finding["id"]: finding for finding in report["findings"]}
+    baseline = report.get("baseline")
+    changes = {c["id"]: c["change"] for c in baseline["changes"]} if baseline is not None else {}
     results = []
     for check_id, observation in sorted(current.items()):
         status = observation["status"]
@@ -36,8 +38,12 @@ def sarif_document(report):
         properties = {"status": status, "target": check_id.split(".", 1)[0]}
         if "scan_limited" in observation:
             properties["scan_limited"] = observation["scan_limited"]
-        results.append({"ruleId": check_id, "ruleIndex": indices[check_id], "level": LEVELS[status],
-                        "message": {"text": findings[check_id]["summary"]}, "properties": properties})
+        result = {"ruleId": check_id, "ruleIndex": indices[check_id], "level": LEVELS[status],
+                  "message": {"text": findings[check_id]["summary"]}, "properties": properties,
+                  "partialFingerprints": {"windowsAIDoctorCheckId/v1": check_id}}
+        if baseline is not None:
+            result["baselineState"] = {"added": "new", "changed": "updated"}.get(changes.get(check_id), "unchanged")
+        results.append(result)
     policy = report["exit_policy"]
     properties = {"language": lang, "schema_version": "1.0",
                   "summary": {state: sum(item["status"] == state for item in current.values()) for state in STATES},
@@ -45,8 +51,10 @@ def sarif_document(report):
                   "matched": policy["matched"],
                   "scan_limited_checks": [check_id for check_id in sorted(current) if current[check_id].get("scan_limited") is True],
                   "notice": NOTICE[lang]}
-    if "baseline" in report:
-        properties["baseline"] = {key: report["baseline"][key] for key in ("summary", "unchanged", "regressions")}
+    if baseline is not None:
+        properties["baseline"] = {key: baseline[key] for key in ("summary", "unchanged", "regressions", "new_findings")}
+        properties["baseline"]["result_baseline_states"] = {
+            state: sum(r["baselineState"] == state for r in results) for state in ("new", "updated", "unchanged")}
     return {"$schema": SCHEMA_URI, "version": "2.1.0", "runs": [{
         "tool": {"driver": {"name": "Windows AI Doctor", "semanticVersion": __version__,
                             "informationUri": REPOSITORY_URI, "rules": rules}},

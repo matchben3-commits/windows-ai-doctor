@@ -50,6 +50,12 @@ Tests and demos write synthetic fixtures only inside temporary directories. Gene
 ## 测试边界 / Validation boundary
 
 已验证两种语言、多格式、stdout/stderr、坏配置、带用户名/密码/查询凭据 URL 的合成输入不会出现在输出；异常信息采取固定分类，不做不可靠的正则替换兜底。网络检查包括禁止 Python 网络 API 的真实 CLI 运行；未关闭主机网卡，也未对第三方二进制建立防火墙级隔离。真实 NTFS junction 回归已执行，跟踪并禁止链接之后的 `lstat/stat/is_file/open/resolve`，覆盖配置、命令、Node、包元数据及 JS/原生目标。常规进程缺少文件符号链接创建权限，该项会跳过；dsh 已在用户授权后通过单项临时管理员补测，见 [补测证据](../evidence/review-dsh/symlink-elevated.json)。这与真实 junction 回归分别记录。
+## v0.7 更新 / Update
+
+JUnit 只导出白名单 properties 与固定策略 failure/skipped 文案，不写入 summary、evidence、版本号、路径、主机名或时间戳。`--fail-on new` 仅依据基线投影出的 `new_findings`（added error/warn，排除扫描受限 path），不等于已确认故障根因。SARIF 指纹只用 check_id；`baselineState` 不含 absent；基线独有 ID 仍不进入 results。CSV 仍为 10 列，不因 new 增列。详见[第七版契约](v07-contract.md)。
+
+JUnit exports only whitelisted properties and fixed policy failure/skipped text—never summaries, evidence, versions, paths, hostnames or timestamps. `--fail-on new` uses projected `new_findings` only (added error/warn, excluding scan-limited paths) and does not establish a root cause. SARIF fingerprints use check_id alone; `baselineState` has no absent; baseline-only IDs still omit from results. CSV stays ten columns. See the [v0.7 contract](v07-contract.md).
+
 ## v0.6 更新 / Update
 
 `--baseline` 在诊断前经既有 `load_report` 读取；非法或链接基线拒绝且不启动探测。基线段、诊断 CSV 与 SARIF 只投影白名单观察（五态、数字版本、安装组、扫描限制及固定回归布尔），不复制基线路径、摘要、evidence 或任意输入文字。诊断 CSV 的基线列在无基线时留空；有基线时 `baseline_regression` 仅反映固定三种状态转移。SARIF 为无文件位置子集，不含 locations/artifacts/路径/时间戳，不宣称可直接用于 GitHub code scanning。基线文件及祖先目录真实链接须拒绝，目标内容读取与后代访问为 0。详见[第六版契约](v06-contract.md)。

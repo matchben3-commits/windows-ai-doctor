@@ -1,0 +1,62 @@
+{
+  "synthetic": true,
+  "live_host_probes": false,
+  "exit_code": 0,
+  "steps": [
+    {
+      "step": "baseline_all_zh",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "baseline_all_en",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "diagnosis_csv_zh",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "diagnosis_csv_en",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "diagnosis_sarif_zh",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "diagnosis_sarif_en",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "diagnosis_junit_zh",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "diagnosis_junit_stdout_zh",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "diagnosis_junit_en",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "diagnosis_junit_stdout_en",
+      "exit_code": 1,
+      "expected_exit_code": 1
+    },
+    {
+      "step": "same_baseline_exit_0",
+      "exit_code": 0,
+      "expected_exit_code": 0
+    }
+  ]
+}

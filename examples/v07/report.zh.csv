@@ -1,0 +1,9 @@
+﻿sequence,check_id,target,status,version,installation_groups,scan_limited,baseline_change,baseline_status,baseline_regression
+1,claude.path,claude,error,,0,false,added,,false
+2,claude.version,claude,pass,2.3.4,,,added,,false
+3,codex.path,codex,unknown,,1,true,changed,warn,false
+4,codex.version,codex,warn,1.2.4,,,changed,pass,true
+5,scope.unchecked,scope,unknown,,,,unchanged,unknown,false
+6,system.platform,system,pass,,,,unchanged,pass,false
+7,wsl.internal,wsl,skipped,,,,added,,false
+8,wsl.running,wsl,,,,,removed,pass,false

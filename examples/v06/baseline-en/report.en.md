@@ -1,6 +1,6 @@
 # Windows AI Doctor
 
-v0.6.0 · schema 1.0
+v0.7.0 · schema 1.0
 
 2000-01-01T00:00:00+00:00
 
@@ -10,7 +10,7 @@ Pass: 2 · Warning: 1 · Error: 1 · Unknown: 2 · Not checked: 1
 
 Confirm that the baseline and current diagnosis cover the same environment and scope. Regression means only pass→warn, pass→error or warn→error without a scan limit; it does not establish a fault&#x27;s root cause. Added, removed, unknown and skipped checks do not establish a fix. Only states, numeric versions, installation-group counts and scan limits are compared.
 
-Added: 2 · Removed: 1 · Changed: 3 · Regressions: 2 · Unchanged: 2
+Added: 2 · Removed: 1 · Changed: 3 · Regressions: 2 · Unchanged: 2 · New findings: 0
 
 ### claude.path — changed
 
@@ -98,7 +98,7 @@ Not included this time; not rechecked.
 
 ## Exit conditions
 
-Selected states: regression; triggered states: regression; selected conditions met: Yes. Meeting the selected exit conditions means a selected state occurred; unknown is not a confirmed fault. Operational failure exits 2; interruption exits 130. Regression means fixed state transitions without a scan limit; it does not establish a fault's root cause.
+Selected states: regression; triggered states: regression; selected conditions met: Yes. Meeting the selected exit conditions means a selected state occurred; unknown is not a confirmed fault. Operational failure exits 2; interruption exits 130. Regression means fixed state transitions without a scan limit; it does not establish a fault's root cause. New findings mean only added error/warn versus baseline, excluding scan-limited paths; they do not establish a fault's root cause.
 
 Paths use opaque references; the original mapping is not saved. Valid syntax does not establish service availability.
 

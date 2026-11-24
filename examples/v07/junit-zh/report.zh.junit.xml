@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Windows AI Doctor" tests="7" failures="1" skipped="1" errors="0">
+  <testsuite name="windows-ai-doctor" tests="7" failures="1" skipped="1" errors="0">
+    <testcase classname="windows-ai-doctor.claude" name="claude.path">
+      <properties>
+        <property name="status" value="error" />
+        <property name="scan_limited" value="false" />
+        <property name="baseline_change" value="added" />
+        <property name="baseline_new" value="true" />
+        <property name="baseline_regression" value="false" />
+      </properties>
+      <failure type="policy" message="新发现（相对基线）">这是退出策略结果，不等于已确认故障根因。</failure>
+    </testcase>
+    <testcase classname="windows-ai-doctor.claude" name="claude.version">
+      <properties>
+        <property name="status" value="pass" />
+        <property name="baseline_change" value="added" />
+        <property name="baseline_new" value="false" />
+        <property name="baseline_regression" value="false" />
+      </properties>
+    </testcase>
+    <testcase classname="windows-ai-doctor.codex" name="codex.path">
+      <properties>
+        <property name="status" value="unknown" />
+        <property name="scan_limited" value="true" />
+        <property name="baseline_change" value="changed" />
+        <property name="baseline_new" value="false" />
+        <property name="baseline_regression" value="false" />
+      </properties>
+    </testcase>
+    <testcase classname="windows-ai-doctor.codex" name="codex.version">
+      <properties>
+        <property name="status" value="warn" />
+        <property name="baseline_change" value="changed" />
+        <property name="baseline_new" value="false" />
+        <property name="baseline_regression" value="true" />
+      </properties>
+    </testcase>
+    <testcase classname="windows-ai-doctor.scope" name="scope.unchecked">
+      <properties>
+        <property name="status" value="unknown" />
+        <property name="baseline_change" value="unchanged" />
+        <property name="baseline_new" value="false" />
+        <property name="baseline_regression" value="false" />
+      </properties>
+    </testcase>
+    <testcase classname="windows-ai-doctor.system" name="system.platform">
+      <properties>
+        <property name="status" value="pass" />
+        <property name="baseline_change" value="unchanged" />
+        <property name="baseline_new" value="false" />
+        <property name="baseline_regression" value="false" />
+      </properties>
+    </testcase>
+    <testcase classname="windows-ai-doctor.wsl" name="wsl.internal">
+      <properties>
+        <property name="status" value="skipped" />
+        <property name="baseline_change" value="added" />
+        <property name="baseline_new" value="false" />
+        <property name="baseline_regression" value="false" />
+      </properties>
+      <skipped />
+    </testcase>
+  </testsuite>
+</testsuites>

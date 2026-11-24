@@ -14,6 +14,7 @@ import subprocess
 import sys
 import tempfile
 import venv
+import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -74,6 +75,9 @@ def main():
             version = run(kind + "_console_entry", [entry, "--version"])
             if version.stdout.decode("utf-8").strip() != __version__:
                 raise ValueError("wrong_version")
+            module_version = run(kind + "_module_entry", [python, "-I", "-m", "windows_ai_doctor", "--version"])
+            if module_version.stdout != version.stdout:
+                raise ValueError("module_entry_version")
             home = task / ("home-" + kind)
             home.mkdir()
             clean = {k: v for k, v in env.items() if k.upper() in ("SYSTEMROOT", "SYSTEMDRIVE", "WINDIR")}
@@ -216,6 +220,40 @@ def main():
             invocation = json.loads(regression.stdout)["runs"][0]["invocations"][0]
             if invocation["exitCode"] != 1 or not invocation["properties"]["baseline"]["regressions"]:
                 raise ValueError("installed_baseline_regression")
+            empty = task / (kind + "empty-baseline.json")
+            empty.write_text(json.dumps({"schema_version": "1.0", "findings": []}) + "\n", encoding="utf-8")
+            for lang in ("zh", "en"):
+                no_baseline = run(kind + "_junit_" + lang, [entry, "--home", home, "--no-version", "--format", "junit", "--lang", lang], environment=clean)
+                junit = ET.fromstring(no_baseline.stdout)
+                if (junit.tag != "testsuites" or junit.get("failures") != "0"
+                        or not no_baseline.stdout.startswith(b'<?xml version="1.0" encoding="UTF-8"?>\n')
+                        or b"\r" in no_baseline.stdout):
+                    raise ValueError("installed_junit")
+                folder = task / (kind + "junit-file-" + lang)
+                saved = run(kind + "_junit_file_" + lang, [entry, "--home", home, "--no-version", "--format", "junit", "--lang", lang, "--output-dir", folder], environment=clean)
+                junit_file = folder / ("report." + lang + ".junit.xml")
+                if saved.stdout or junit_file.read_bytes() != no_baseline.stdout:
+                    raise ValueError("installed_junit_file")
+                run(kind + "_junit_collision_" + lang, [entry, "--home", home, "--no-version", "--format", "junit", "--lang", lang, "--output-dir", folder], environment=clean, expected=2)
+                if junit_file.read_bytes() != no_baseline.stdout:
+                    raise ValueError("installed_junit_collision")
+                for fmt in ("json", "sarif", "junit"):
+                    output = run(kind + "_new_" + fmt + "_" + lang, [entry, "--home", home, "--no-version", "--baseline", empty, "--fail-on", "new", "--format", fmt, "--lang", lang], environment=clean, expected=1)
+                    if fmt == "junit":
+                        root = ET.fromstring(output.stdout)
+                        if root.get("failures") != "2" or len(root.findall("testsuite/testcase/failure")) != 2:
+                            raise ValueError("installed_junit_new")
+                    else:
+                        document = json.loads(output.stdout)
+                        base = document["baseline"] if fmt == "json" else document["runs"][0]["invocations"][0]["properties"]["baseline"]
+                        if base["new_findings"] != ["claude.path", "codex.path"]:
+                            raise ValueError("installed_new_findings")
+                        if fmt == "sarif" and any(r["baselineState"] != "new" or r["partialFingerprints"] != {"windowsAIDoctorCheckId/v1": r["ruleId"]} for r in document["runs"][0]["results"]):
+                            raise ValueError("installed_sarif_baseline")
+                same = run(kind + "_new_same_" + lang, [entry, "--home", home, "--no-version", "--baseline", task / (kind + "zh/report.zh.json"), "--fail-on", "new", "--format", "junit", "--lang", lang], environment=clean)
+                if ET.fromstring(same.stdout).get("failures") != "0":
+                    raise ValueError("installed_junit_same")
+            run(kind + "_new_without_baseline", [entry, "--fail-on", "new"], environment=clean, expected=2)
             import zipfile
             with zipfile.ZipFile(task / (kind + "support/support-bundle.zip")) as archive:
                 if archive.testzip() is not None or json.loads(archive.read("support.json"))["report_type"] != "support":

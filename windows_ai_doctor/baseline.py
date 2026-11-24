@@ -30,6 +30,10 @@ def baseline_report(old, new, lang="zh"):
     return {"schema_version": "1.0", "summary": comparison["summary"],
             "unchanged": comparison["unchanged"], "changes": changes,
             "regressions": [c["id"] for c in changes if c["regression"]],
+            "new_findings": [c["id"] for c in changes
+                             if c["change"] == "added" and c["after"] in ("error", "warn")
+                             and not (c["id"].endswith(".path")
+                                      and new[c["id"]].get("scan_limited") is True)],
             "notice": NOTICE[lang]}
 
 
@@ -59,10 +63,10 @@ def diagnosis_csv(report):
 
 
 def baseline_counts(baseline, lang):
-    labels = {"zh": ("新增", "移除", "变化", "回归", "未变化"),
-              "en": ("Added", "Removed", "Changed", "Regressions", "Unchanged")}[lang]
+    labels = {"zh": ("新增", "移除", "变化", "回归", "未变化", "新发现"),
+              "en": ("Added", "Removed", "Changed", "Regressions", "Unchanged", "New findings")}[lang]
     values = [baseline["summary"][key] for key in ("added", "removed", "changed")]
-    values.extend((len(baseline["regressions"]), baseline["unchanged"]))
+    values.extend((len(baseline["regressions"]), baseline["unchanged"], len(baseline["new_findings"])))
     return " · ".join(f"{label}: {value}" for label, value in zip(labels, values))
 
 
