@@ -9,9 +9,9 @@ Authored synthetic observations were rendered in a real browser. The example gen
 - 固定 ID `baseline-comparison`、`baseline-heading`、`baseline-counts`、`baseline-changes` 各出现一次；基线段位于摘要之后、退出条件之前。
 - 合成计数：added 3、removed 1、changed 2、regressions 1、unchanged 2、**new findings 1**（`claude.path` 为基线缺失的 added error）。`codex.version` 为 pass→warn 固定规则回归。
 - 页面无脚本元素。浏览器报告了一个指向 www.google.com 的被阻止请求；未把浏览器日志当作抓包，也不据此声称完全没有网络行为。
-- 截图与 DOM 数值保存在 `D:\git work\Windows-AI-Doctor_v0.7_cursor联调_20261124\html\`。
+- 截图与 DOM 数值保存在本轮联调证据目录的 `html/` 子目录；该目录在仓库之外，不随发布包分发。
 
-Desktop ~1280 CSS px. Narrow layout used two 390×720 CSS px iframes. All four fixed IDs were unique. New-findings count 1 and the fixed-rule regression were checked.
+Desktop ~1280 CSS px. Narrow layout used two 390×720 CSS px iframes. All four fixed IDs were unique. New-findings count 1 and the fixed-rule regression were checked. Screenshots and recorded DOM values remain in the run's evidence folder outside this repository.
 
 本核验仅证明合成报告在桌面浏览器与 iframe 布局中的显示，不是物理手机、触摸、屏幕阅读器或网络抓包验收。Pages 上的 v0.6.0 SIMULATED 样例未改动。
 
