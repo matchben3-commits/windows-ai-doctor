@@ -13,7 +13,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from windows_ai_doctor import cli
+from windows_ai_doctor import __version__, cli
 from windows_ai_doctor.catalog import (ENTRIES, MAX_CATALOG_IDS, PROJECT_ONLY, catalog_markdown,
                                        catalog_report)
 from windows_ai_doctor.compare import IDS, STATES
@@ -47,7 +47,7 @@ class CatalogModuleTests(CatalogFixture):
         en = catalog_report(None, "en")
         self.assertEqual(zh["report_type"], "catalog")
         self.assertEqual(zh["schema_version"], "1.0")
-        self.assertEqual(zh["doctor_version"], "0.7.0")
+        self.assertEqual(zh["doctor_version"], __version__)
         self.assertNotIn("generated_at", zh)
         self.assertEqual(zh["status_vocabulary"], list(STATES))
         self.assertEqual([c["id"] for c in zh["checks"]], sorted(IDS))

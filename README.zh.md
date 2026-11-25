@@ -2,13 +2,13 @@
 
 **Claude Code / Codex 在 Windows 上跑不起来？用本地报告检查 PATH、安装组和启动入口。**
 
-[English](README.md) · v0.7.0 · Python 3.11+ · Windows 优先 · MIT
+[English](README.md) · v1.0.0 · Python 3.11+ · Windows 优先 · MIT
 
 [![Windows CI](https://github.com/matchben3-commits/windows-ai-doctor/actions/workflows/windows.yml/badge.svg)](https://github.com/matchben3-commits/windows-ai-doctor/actions/workflows/windows.yml)
 [![release](https://img.shields.io/github/v/release/matchben3-commits/windows-ai-doctor)](https://github.com/matchben3-commits/windows-ai-doctor/releases)
 [![license](https://img.shields.io/github/license/matchben3-commits/windows-ai-doctor)](LICENSE)
 
-[**在线演示**](https://matchben3-commits.github.io/windows-ai-doctor/) · [示例报告](https://matchben3-commits.github.io/windows-ai-doctor/report-zh.html) · [Discussions](https://github.com/matchben3-commits/windows-ai-doctor/discussions) · [Release](https://github.com/matchben3-commits/windows-ai-doctor/releases/tag/v0.7.0)
+[**在线演示**](https://matchben3-commits.github.io/windows-ai-doctor/) · [示例报告](https://matchben3-commits.github.io/windows-ai-doctor/report-zh.html) · [Discussions](https://github.com/matchben3-commits/windows-ai-doctor/discussions) · [Release](https://github.com/matchben3-commits/windows-ai-doctor/releases/tag/v1.0.0)
 
 ![Windows AI Doctor 报告截图](docs/assets/report-zh.png)
 
@@ -24,16 +24,34 @@ Windows AI Doctor 检查最容易出问题的几层：PATH/PATHEXT 解析、重�
 
 ```powershell
 python -m venv .wad-env
-.\.wad-env\Scripts\python.exe -m pip install https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v0.7.0/windows_ai_doctor-0.7.0-py3-none-any.whl
+.\.wad-env\Scripts\python.exe -m pip install https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v1.0.0/windows_ai_doctor-1.0.0-py3-none-any.whl
 .\.wad-env\Scripts\python.exe -m windows_ai_doctor --no-version --lang zh --format all --output-dir .\reports\first
 Start-Process .\reports\first\report.zh.html
 ```
 
 这里用 `--no-version` 跳过已安装 CLI 和 Node 的执行。需要版本探测时可去掉该参数；版本探测有边界，但不是完整的安全或网络沙箱。
 
-不想安装？下载[源码 ZIP](https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v0.7.0/windows-ai-doctor-v0.7.0-source.zip)，解压后在目录里运行 `python .\doctor.py --lang zh --format all --output-dir .\reports\first`。
+不想安装？下载[源码 ZIP](https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v1.0.0/windows-ai-doctor-v1.0.0-source.zip)，解压后在目录里运行 `python .\doctor.py --lang zh --format all --output-dir .\reports\first`。
 
 需要包含 pip 的 Python 3.11+ 发行版；隔离环境教程还需要 venv。运行时只用标准库，没有第三方依赖，也不需要模型密钥。wheel 还没上 PyPI，请用 Release 附件，并对照同页 `SHA256SUMS.txt` 校验。
+
+## 比较两个 PowerShell 会话
+
+先在包含 `.wad-env` 的目录下为当前 Windows 用户初始化一次本地比较密钥。然后在正常和故障 PowerShell 会话中分别采集 `codex` 快照。观察到原命令的实际结果后，再通过 `-CommandResult` 记录。该参数默认为 `unverified`。
+
+```powershell
+& .\.wad-env\Scripts\windows-ai-doctor.exe --compare-key init
+
+# 在正常会话采集
+& .\.wad-env\Scripts\Capture-WADSnapshot.ps1 -Command codex -SessionRole working -Symptom none -CommandResult success -OutputDirectory .\working
+
+# 在故障会话采集
+& .\.wad-env\Scripts\Capture-WADSnapshot.ps1 -Command codex -SessionRole failing -Symptom not_found -CommandResult failure -OutputDirectory .\before
+
+& .\.wad-env\Scripts\windows-ai-doctor.exe --compare-snapshots .\working\snapshot.json .\before\snapshot.json --lang zh
+```
+
+手动调整后，把新快照采集到 `after`，并记录当次原命令结果。随后运行 `--retest-snapshots .\working\snapshot.json .\before\snapshot.json .\after\snapshot.json --lang zh`。复测会保留原解释，并区分命令成功、仍失败和未验证。比较密钥保留在当前 Windows 用户的本机存储中。取证和隐私边界见 [v1.0 契约](docs/v10-contract.md)。
 
 ## 它能查什么
 
@@ -106,7 +124,7 @@ Start-Process .\reports\first\report.zh.html
 
 ## 文档
 
-- [v0.7 契约](docs/v07-contract.md) · [v0.6](docs/v06-contract.md) · [v0.5](docs/v05-contract.md) · [v0.4](docs/v04-contract.md)
+- [v1.0 快照契约](docs/v10-contract.md) · [v0.7 诊断契约](docs/v07-contract.md) · [v0.6](docs/v06-contract.md) · [v0.5](docs/v05-contract.md) · [v0.4](docs/v04-contract.md)
 - [规则依据与探测边界](docs/rules.md)
 - [比较与趋势](docs/comparison.md)
 - [更新日志](CHANGELOG.md)

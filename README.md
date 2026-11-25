@@ -2,13 +2,13 @@
 
 **Claude Code or Codex won't run on Windows? Inspect PATH, installation groups, and launcher clues in a local report.**
 
-[中文](README.zh.md) · v0.7.0 · Python 3.11+ · Windows-first · MIT
+[中文](README.zh.md) · v1.0.0 · Python 3.11+ · Windows-first · MIT
 
 [![Windows CI](https://github.com/matchben3-commits/windows-ai-doctor/actions/workflows/windows.yml/badge.svg)](https://github.com/matchben3-commits/windows-ai-doctor/actions/workflows/windows.yml)
 [![release](https://img.shields.io/github/v/release/matchben3-commits/windows-ai-doctor)](https://github.com/matchben3-commits/windows-ai-doctor/releases)
 [![license](https://img.shields.io/github/license/matchben3-commits/windows-ai-doctor)](LICENSE)
 
-[**Live demo**](https://matchben3-commits.github.io/windows-ai-doctor/) · [Sample report](https://matchben3-commits.github.io/windows-ai-doctor/report-en.html) · [Discussions](https://github.com/matchben3-commits/windows-ai-doctor/discussions) · [Release notes](https://github.com/matchben3-commits/windows-ai-doctor/releases/tag/v0.7.0)
+[**Live demo**](https://matchben3-commits.github.io/windows-ai-doctor/) · [Sample report](https://matchben3-commits.github.io/windows-ai-doctor/report-en.html) · [Discussions](https://github.com/matchben3-commits/windows-ai-doctor/discussions) · [Release notes](https://github.com/matchben3-commits/windows-ai-doctor/releases/tag/v1.0.0)
 
 ![Windows AI Doctor report](docs/assets/report-en.png)
 
@@ -24,16 +24,34 @@ The screenshot and online walkthrough use **SIMULATED** observations, not a real
 
 ```powershell
 python -m venv .wad-env
-.\.wad-env\Scripts\python.exe -m pip install https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v0.7.0/windows_ai_doctor-0.7.0-py3-none-any.whl
+.\.wad-env\Scripts\python.exe -m pip install https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v1.0.0/windows_ai_doctor-1.0.0-py3-none-any.whl
 .\.wad-env\Scripts\python.exe -m windows_ai_doctor --no-version --lang en --format all --output-dir .\reports\first
 Start-Process .\reports\first\report.en.html
 ```
 
 This quick start uses `--no-version` to skip execution of installed CLI and Node programs. Omit it to include supported version probes; those probes are bounded but are not a full security or network sandbox.
 
-Prefer not to install anything? Download the [source ZIP](https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v0.7.0/windows-ai-doctor-v0.7.0-source.zip), extract it, and run `python .\doctor.py --lang en --format all --output-dir .\reports\first` from the extracted folder.
+Prefer not to install anything? Download the [source ZIP](https://github.com/matchben3-commits/windows-ai-doctor/releases/download/v1.0.0/windows-ai-doctor-v1.0.0-source.zip), extract it, and run `python .\doctor.py --lang en --format all --output-dir .\reports\first` from the extracted folder.
 
 Use a Python 3.11+ distribution that includes pip (and venv for the isolated tutorial). The runtime uses the standard library; there are no third-party packages and no model keys. The wheel is not on PyPI yet; use the attached wheel and verify it against `SHA256SUMS.txt` on the release page.
+
+## Compare two PowerShell sessions
+
+From the directory containing `.wad-env`, initialize the local comparison key once for your Windows account. Run each capture command in the PowerShell session where `codex` works or fails. Set `-CommandResult` only when you observed the original command outcome. The default is `unverified`.
+
+```powershell
+& .\.wad-env\Scripts\windows-ai-doctor.exe --compare-key init
+
+# Run in the working session
+& .\.wad-env\Scripts\Capture-WADSnapshot.ps1 -Command codex -SessionRole working -Symptom none -CommandResult success -OutputDirectory .\working
+
+# Run in the failing session
+& .\.wad-env\Scripts\Capture-WADSnapshot.ps1 -Command codex -SessionRole failing -Symptom not_found -CommandResult failure -OutputDirectory .\before
+
+& .\.wad-env\Scripts\windows-ai-doctor.exe --compare-snapshots .\working\snapshot.json .\before\snapshot.json --lang en
+```
+
+After a manual change, capture the session again into `after` with the current command result. Then run `--retest-snapshots .\working\snapshot.json .\before\snapshot.json .\after\snapshot.json --lang en`. The report preserves the earlier explanation and records whether the command succeeded, still failed, or remains unverified. The comparison key stays on the computer under your Windows account. See the [v1.0 contract](docs/v10-contract.md) for the evidence and privacy boundaries.
 
 ## What it checks
 
@@ -106,7 +124,7 @@ The report uses opaque path references instead of real paths. It does not includ
 
 ## Docs
 
-- [v0.7 contract](docs/v07-contract.md) · [v0.6](docs/v06-contract.md) · [v0.5](docs/v05-contract.md) · [v0.4](docs/v04-contract.md)
+- [v1.0 snapshot contract](docs/v10-contract.md) · [v0.7 diagnosis contract](docs/v07-contract.md) · [v0.6](docs/v06-contract.md) · [v0.5](docs/v05-contract.md) · [v0.4](docs/v04-contract.md)
 - [Rules and probe boundaries](docs/rules.md)
 - [Comparison and history](docs/comparison.md)
 - [Changelog](CHANGELOG.md)

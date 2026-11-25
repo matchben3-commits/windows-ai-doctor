@@ -36,6 +36,19 @@ def parser():
     p.add_argument("--verify-support", type=Path, metavar="BUNDLE.zip", help="离线核验求助包结构/CRC/SHA/内部一致性，不证明来源或隐私 / offline bundle structure/CRC/SHA/consistency; no source or privacy assurance")
     p.add_argument("--catalog", nargs="*", metavar="CHECK_ID", help="导出固定19项检查目录，可选最多32个精确ID；默认md，不运行诊断 / export fixed 19-check catalog, up to 32 exact IDs; default md, no diagnosis")
     p.add_argument("--schema", action="store_true", help="导出确定性的诊断输入JSON Schema；仅允许output-dir / deterministic diagnosis input JSON Schema; only output-dir allowed; --validate remains authoritative")
+    p.add_argument("--snapshot-schema", action="store_true", help="导出独立快照结构 schema / separate snapshot schema")
+    p.add_argument("--validate-snapshot", type=Path, metavar="SNAPSHOT.json", help="有界只读校验快照 / bounded read-only snapshot validation")
+    p.add_argument("--compare-key", choices=("init", "status", "rotate", "delete"), help="显式管理当前用户比较密钥 / explicit current-user comparison key management")
+    p.add_argument("--capture", action="store_true", help="只读采集，不执行工具；须已有密钥 / capture without execution; requires existing key")
+    p.add_argument("--compare-snapshots", nargs=2, type=Path, metavar=("A.json", "B.json"), help="只读比较两个快照 / read-only snapshot comparison")
+    p.add_argument("--retest-snapshots", nargs=3, type=Path, metavar=("WORKING.json", "BEFORE.json", "AFTER.json"),
+                   help="只读复测三份快照 / read-only snapshot retest")
+    p.add_argument("--probe-version", action="store_true", help="显式查询原会话识别的启动器版本 / opt in to recognized launcher version query")
+    p.add_argument("--command", choices=("codex", "claude"))
+    p.add_argument("--session-role", choices=("working", "failing", "unspecified"))
+    p.add_argument("--symptom", choices=("none", "not_found", "wrong_version", "config_error", "other", "unspecified"))
+    p.add_argument("--command-result", choices=("success", "failure", "unverified"), help="仅录入用户自述，不执行命令 / user report only; does not execute command")
+    p.add_argument("--session-metadata-stdin", action="store_true", help="从原 PowerShell 辅助脚本读取有限解析元数据 / bounded original-runspace helper input")
     p.add_argument("--fail-on", nargs="+", choices=("error", "warn", "unknown", "new", "regression"), help="诊断退出条件，默认error；new/regression需baseline；new为新增error/warn（排除受限path），regression为固定状态转移 / diagnosis exit conditions, default error; new/regression require baseline; new: added error/warn excluding scan-limited paths; regression: fixed state transitions")
     p.add_argument("--output-dir", type=Path, help="新建报告目录 / report directory (existing reports are not overwritten)")
     p.add_argument("--home", type=Path, help="诊断目标用户目录 / diagnostic user home override")
@@ -73,6 +86,70 @@ def export_files(contents, directory):
         raise
 
 
+def snapshot_mode(args, explicit):
+    from .snapshot_schema import schema_json as snapshot_schema_json, load_snapshot
+    from .comparison_key import KeyStore
+    from .snapshot import capture, read_session, compare_snapshots, comparison_markdown
+    from .retest import retest_snapshots, retest_markdown
+    allowed = {"--output-dir"}
+    if args.snapshot_schema:
+        allowed |= {"--snapshot-schema"}
+    elif args.compare_key is not None:
+        allowed = {"--compare-key"}
+    elif args.validate_snapshot is not None:
+        allowed |= {"--validate-snapshot", "--format"}
+    elif args.capture:
+        allowed |= {"--capture", "--command", "--session-role", "--symptom", "--command-result", "--session-metadata-stdin",
+                    "--probe-version", "--format"}
+    else:
+        allowed |= {"--retest-snapshots" if args.retest_snapshots else "--compare-snapshots", "--format", "--lang"}
+    # Only option names are checked; imported or invalid values never reach errors.
+    if {v for v in explicit if v.startswith("--")} - allowed:
+        parser().error("")
+    if "--format" in explicit and args.format not in (("md", "json") if args.compare_snapshots or args.retest_snapshots else ("json",)):
+        parser().error("")
+    if args.snapshot_schema:
+        rendered, filename = snapshot_schema_json(), "schema.environment-snapshot.json"
+    elif args.compare_key is not None:
+        report = {"report_type": "comparison_key_status", **KeyStore().manage(args.compare_key),
+                  "notice": "轮换或删除影响旧快照的本地可比性，不删除历史产物。 / Rotation or deletion changes local comparability; historical artifacts remain."}
+        rendered, filename = json_report(report), "comparison-key-status.json"
+    elif args.validate_snapshot is not None:
+        load_snapshot(args.validate_snapshot)
+        rendered = json_report({"report_type": "snapshot_validation", "schema_version": "snapshot-validation-1.0", "valid": True,
+                                "notice": "仅接受已知结构和有界输入，不证明来源、隐私、采集真实性或当前状态。 / Known structure and bounds only; no source, privacy, capture authenticity or current-state assurance."})
+        filename = "snapshot-validation.json"
+    elif args.capture:
+        if args.command is None or (args.probe_version and not args.session_metadata_stdin):
+            parser().error("")
+        session = None
+        if args.session_metadata_stdin:
+            raw = sys.stdin.buffer.read(65537)
+            if len(raw) > 65536:
+                raise ValueError("session_limit")
+            session = read_session(raw, args.command)
+        report = capture(args.command, args.session_role or "unspecified", args.symptom or "unspecified",
+                         args.command_result or "unverified", session, probe_version=args.probe_version)
+        rendered, filename = json_report(report), "snapshot.json"
+    elif args.retest_snapshots:
+        working, before, after = [load_snapshot(path) for path in args.retest_snapshots]
+        report = retest_snapshots(working, before, after, args.lang)
+        fmt = args.format if "--format" in explicit else "md"
+        rendered = json_report(report) if fmt == "json" else retest_markdown(report)
+        filename = "snapshot-retest." + args.lang + "." + fmt
+    else:
+        a, b = [load_snapshot(path) for path in args.compare_snapshots]
+        report = compare_snapshots(a, b, args.lang)
+        fmt = args.format if "--format" in explicit else "md"
+        rendered = json_report(report) if fmt == "json" else comparison_markdown(report)
+        filename = "snapshot-comparison." + args.lang + "." + fmt
+    if args.output_dir is None:
+        print(rendered, end="")
+    else:
+        export_files({filename: rendered}, args.output_dir)
+    return 0
+
+
 def main(argv=None):
     # Consistent UTF-8 for Windows pipes as well as terminals.
     for stream in (sys.stdout, sys.stderr):
@@ -90,11 +167,20 @@ def main(argv=None):
         verifying = args.verify_support is not None
         catalog = args.catalog is not None
         schema = args.schema
+        explicit = {token.split("=", 1)[0] for token in raw_args}
+        snapshot_modes = (args.snapshot_schema, args.validate_snapshot is not None, args.compare_key is not None,
+                          args.capture, args.compare_snapshots is not None, args.retest_snapshots is not None)
+        snapshot_options = {"--command", "--session-role", "--symptom", "--command-result", "--session-metadata-stdin", "--probe-version"}
+        if any(snapshot_modes):
+            if sum(snapshot_modes) != 1 or any((comparison, history, support, validating, verifying, catalog, schema)):
+                parser().error("")
+            return snapshot_mode(args, explicit)
+        if explicit & snapshot_options:
+            parser().error("")
         offline = comparison or history or support or validating or verifying or catalog or schema
         if sum((comparison, history, support, validating, verifying, catalog, schema)) > 1:
             parser().error("")
         diagnostic_options = {"--tools", "--home", "--project", "--timeout", "--no-version", "--wsl-list"}
-        explicit = {token.split("=", 1)[0] for token in raw_args}
         if offline and explicit & (diagnostic_options | {"--fail-on", "--baseline"}):
             parser().error("")
         if {"new", "regression"} & set(args.fail_on or []) and args.baseline is None:

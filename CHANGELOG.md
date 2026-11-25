@@ -1,4 +1,12 @@
-# v0.7.0 — 2026-11-24 (local candidate; independent review and hosted CI pending)
+# v1.0.0
+
+- Compare snapshots from working and failing Windows sessions to identify differences in PATH, launcher priority, and PowerShell alias or function resolution.
+- Retest with working, before, and after snapshots. Keep the earlier explanation and show whether the original command succeeded, still failed, or remains unverified after the relevant differences disappeared.
+- Capture PowerShell command metadata in the original session. The optional version query records its result separately from the original command outcome.
+- Use a local comparison key protected by Windows DPAPI for same-user path matching. Key initialization, rotation, and deletion are explicit operations.
+- Ship the PowerShell capture helper in both Python distributions. Preserve the existing diagnosis schema, report formats, and exit policies.
+
+# v0.7.0 — 2026-11-24 (published)
 
 - Add diagnosis `--format junit`: deterministic UTF-8/LF policy XML; every testcase has non-empty `<properties>` (status → optional scan_limited → baseline_*); non-hit pass/warn/unknown are properties-only; failures express selected exit policy only.
 - Add `--fail-on new` (requires `--baseline`): added error/warn versus baseline, excluding scan-limited `.path`; JSON `baseline.new_findings`; MD/HTML “New findings” count; CSV stays ten columns.

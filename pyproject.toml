@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "windows-ai-doctor"
-version = "0.7.0"
+version = "1.0.0"
 description = "Offline, privacy-first Windows diagnostics for Codex and Claude Code CLI"
 readme = "README.en.md"
 requires-python = ">=3.11"
@@ -14,6 +14,9 @@ classifiers = ["Programming Language :: Python :: 3", "Operating System :: Micro
 
 [project.scripts]
 windows-ai-doctor = "windows_ai_doctor.cli:main"
+
+[tool.setuptools]
+script-files = ["scripts/Capture-WADSnapshot.ps1"]
 
 [tool.setuptools.packages.find]
 include = ["windows_ai_doctor*"]

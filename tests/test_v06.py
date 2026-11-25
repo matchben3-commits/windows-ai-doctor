@@ -232,7 +232,7 @@ class SarifTests(IntegrationFixture):
         run = sarif_document(report)["runs"][0]
         rules = run["tool"]["driver"]["rules"]
         self.assertEqual(len(rules), 19)
-        self.assertEqual(run["tool"]["driver"]["semanticVersion"], "0.7.0")
+        self.assertEqual(run["tool"]["driver"]["semanticVersion"], __version__)
         for rule, check in zip(rules, catalog_report()["checks"]):
             self.assertEqual(rule["id"], check["id"])
             self.assertEqual(rule["shortDescription"]["text"], check["purpose"]["zh"])

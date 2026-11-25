@@ -82,6 +82,34 @@ def main():
             home.mkdir()
             clean = {k: v for k, v in env.items() if k.upper() in ("SYSTEMROOT", "SYSTEMDRIVE", "WINDIR")}
             clean.update(PATH="", USERPROFILE=str(home), HOME=str(home))
+            if os.name == "nt":
+                helper = python.with_name("Capture-WADSnapshot.ps1")
+                if helper.read_bytes() != (ROOT / "scripts/Capture-WADSnapshot.ps1").read_bytes():
+                    raise ValueError("installed_capture_helper")
+                powershell = Path(clean["SYSTEMROOT"]) / "System32/WindowsPowerShell/v1.0/powershell.exe"
+                state = task / (kind + "-localappdata")
+                state.mkdir()
+                output = task / (kind + "-snapshot")
+                snapshot_env = dict(clean, LOCALAPPDATA=str(state), PATHEXT=".EXE;.CMD;.BAT;.COM",
+                                    WAD_CAPTURE_HELPER=str(helper), WAD_SNAPSHOT_OUTPUT=str(output))
+                run(kind + "_key_init", [entry, "--compare-key", "init"], environment=snapshot_env)
+                try:
+                    run(kind + "_capture_original_runspace", [powershell, "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command",
+                        "$global:fixtureInvoked = $false; function codex { $global:fixtureInvoked = $true }; "
+                        "& $env:WAD_CAPTURE_HELPER -Command codex -SessionRole failing -Symptom not_found "
+                        "-OutputDirectory $env:WAD_SNAPSHOT_OUTPUT; "
+                        "if ($global:fixtureInvoked) { exit 1 }; exit $LASTEXITCODE"], environment=snapshot_env)
+                    snapshot = output / "snapshot.json"
+                    observed = json.loads(snapshot.read_text(encoding="utf-8"))
+                    if (observed["resolution"]["kind"] != "function" or
+                            observed["observations"]["tool_execution"] != "not_performed" or
+                            observed["command_result"]["status"] != "unverified"):
+                        raise ValueError("installed_runspace_capture")
+                    run(kind + "_validate_snapshot", [entry, "--validate-snapshot", snapshot], environment=snapshot_env)
+                finally:
+                    run(kind + "_key_delete", [entry, "--compare-key", "delete"], environment=snapshot_env)
+                if (state / "WindowsAIDoctor/comparison/key.dat").exists():
+                    raise ValueError("installed_test_key_cleanup")
             for lang in ("zh", "en"):
                 output = task / (kind + lang)
                 run(kind + "_" + lang + "_all", [entry, "--home", home, "--no-version", "--format", "all", "--lang", lang, "--output-dir", output], environment=clean)
@@ -263,6 +291,8 @@ def main():
             run(kind + "_import_removed", [python, "-I", "-c", "import importlib.util; assert importlib.util.find_spec('windows_ai_doctor') is None"])
             if entry.exists():
                 raise ValueError("console_entry_not_removed")
+            if os.name == "nt" and helper.exists():
+                raise ValueError("capture_helper_not_removed")
         versions = run("build_dependency_versions", [builder, "-c", "import importlib.metadata as m,json; print(json.dumps({n:m.version(n) for n in ('build','setuptools','wheel')}))"])
         record = {"generated_at": datetime.now(timezone.utc).isoformat(), "python": sys.version.split()[0],
                   "exit_code": 0, "build": "sdist then wheel from sdist", "clean_working_directory": True,

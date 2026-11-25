@@ -113,7 +113,7 @@ class CursorSarifContract(IntegrationFixture):
         run = document["runs"][0]
         self.assertEqual(document["$schema"], SCHEMA_URI)
         self.assertEqual(run["tool"]["driver"]["semanticVersion"], __version__)
-        self.assertEqual(__version__, "0.7.0")
+        self.assertEqual(__version__, "1.0.0")
         self.assertTrue(HELP_URI.endswith("/docs/v07-contract.md"))
         self.assertTrue(all(r["helpUri"] == HELP_URI for r in run["tool"]["driver"]["rules"]))
         self.assertEqual(run["results"][0]["partialFingerprints"],
